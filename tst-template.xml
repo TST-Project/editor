@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="tei-to-html.xsl" ?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title></title>
+         </titleStmt>
+         <editionStmt>
+            <p></p>
+         </editionStmt>
+         <publicationStmt>
+            <publisher></publisher>
+            <date></date>
+         </publicationStmt>
+         <sourceDesc>
+            <msDesc>
+               <msIdentifier>
+                  <repository>
+                     <orgName>Bibliothèque nationale de France. Département des Manuscrits.</orgName>
+                  </repository>
+                  <idno type="cote"></idno>
+                  <idno type="ancienne cote"></idno>
+               </msIdentifier>
+               <msContents>
+                  <summary>
+                     <p></p>
+                  </summary>
+                  <msItem n="" defective="">
+                     <title xml:lang="tam"></title>
+                     <author xml:lang="tam"></author>
+                     <textLang mainLang=""></textLang>
+                     <filiation>
+                        <p></p>
+                     </filiation>
+                     <rubric xml:lang="tam"></rubric>
+                     <incipit xml:lang="tam"></incipit>
+                     <explicit xml:lang="tam"></explicit>
+                     <finalRubric xml:lang="tam"></finalRubric>
+                     <colophon xml:lang="tam"></colophon>
+                  </msItem>
+               </msContents>
+               <physDesc>
+                  <objectDesc form="">
+                     <supportDesc material="">
+                        <support>
+                           <measure unit="stringhole" quantity=""/>
+                        </support>
+                        <extent>
+                           <measure unit="folio" quantity=""></measure>
+                           <dimensions type="leaf" unit="mm">
+                              <width quantity=""/>
+                              <height quantity=""/>
+                           </dimensions>
+                        </extent>
+                        <foliation n=""></foliation>
+                        <condition></condition>
+                     </supportDesc>
+                     <layoutDesc>
+                        <layout columns="" writtenLines=""/>
+                     </layoutDesc>
+                  </objectDesc>
+                  <handDesc>
+                     <handNote n="" scope="" script="">
+                        <desc></desc>
+                     </handNote>
+                  </handDesc>
+                  <decoDesc>
+                    <decoNote type="">
+                        <desc></desc>
+                    </decoNote>
+                  </decoDesc>
+                  <additions>
+                     <p></p>
+                  </additions>
+                  <bindingDesc>
+                     <binding>
+                        <p></p>
+                     </binding>
+                  </bindingDesc>
+               </physDesc>
+               <history>
+                  <origin>
+                     <origDate calendar="gregorian" when=""></origDate>
+                     <origPlace></origPlace>
+                  </origin>
+                  <acquisition>
+                     <p></p>
+                  </acquisition>
+               </history>
+               <additional>
+                  <listBibl>
+                     <bibl></bibl>
+                  </listBibl>
+               </additional>
+            </msDesc>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <p></p>
+      </encodingDesc>
+      <revisionDesc>
+         <change when=""></change>
+      </revisionDesc>
+   </teiHeader>
+   <facsimile>
+   </facsimile>
+</TEI>

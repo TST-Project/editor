@@ -1,0 +1,594 @@
+/* initial open file dialog */
+
+#openform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    width: 100%;
+}
+
+#openform > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    border: 1px dashed grey;
+    padding: 1em;
+}
+
+#openform div :not(.autosaved) {
+    margin-bottom: 1em;
+}
+
+.autosaved {
+    height: 2rem;
+    font-size: 1.2rem;
+}
+
+#newfile {
+    cursor: pointer;
+}
+
+#newfile:hover {
+    text-decoration: underline;
+}
+
+#autosavebox {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1em;
+}
+
+.autosaved {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.autosaved:hover {
+    background: rgba(180,184,196,0.8);
+}
+
+.trash svg {
+    height: 25px;
+}
+
+.trash:hover path {
+    fill: red;
+}
+
+/* styles after file has been loaded */
+
+h2.warning {
+    background: red;
+    color: white;
+    text-align: center;
+    width: 55%;
+}
+
+hr {
+    border-color: grey;
+}
+
+#headeredit {
+    margin-top: 1em;
+}
+
+#headerviewer {
+    display: none;
+}
+
+.vsb-main {
+    margin-right: 0.7rem;
+    flex-grow: 1;
+}
+
+.vsb-main button:hover {
+    color: black;
+}
+
+.editbutton {
+    cursor: pointer;
+    float: right;
+    height: 2rem;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+
+.editbutton.offsetx {
+    margin-right: -80px;
+}
+
+.editbutton.offsety {
+    margin-top: -80px;
+}
+
+.editbutton:hover {
+    opacity: 1;
+}
+
+.buttoncontainer {
+    display: flex;
+    margin-left: 0;
+    width: 100%;
+}
+
+.row, #headereditor div.row {
+    justify-content: flex-end;
+}
+
+.justified-row {
+    justify-content: space-between;
+}
+
+.column {
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+button {
+    margin: 0.5em 0 0.5em 0.5em;
+    background-color: rgb(240,202,121);
+    border-color: rgb(240,202,121);
+    color: black;
+}
+
+button:hover {
+    color: white;
+}
+
+
+.wider_editor {
+    margin-left: -80px;
+    margin-right: -80px;
+}
+
+#topbuttons {
+    display: none;
+    top: 0px;
+    height: 80px;
+    position: sticky;
+    z-index: 100;
+    padding-bottom: 1.5em;
+    background: linear-gradient(white 60%, rgba(255,255,255,0));
+}
+
+#topbuttons .menu_left {
+    display: flex;
+    align-items: flex-start;
+}
+
+#topmenu {
+    margin-bottom: 0;
+    position: absolute;
+}
+
+#scriptselect {
+    width: 150px;
+    margin: 0.3em 0 0.5em 0.5em;
+}
+
+.menubox {
+    cursor: pointer;
+}
+/*
+#scriptselect .heading {
+    position: relative;
+    border: 0.1rem solid #d1d1d1;
+    border-radius: .4rem;
+    height: 3.8rem;
+    padding: 0.6rem 1.0rem;
+    line-height: 1.15;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 29 14" width="29"><path fill="%23d1d1d1" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>') center right no-repeat;
+}
+*/
+.menubox ul {
+    display: none;
+    list-style: none;
+    background: white;
+    border: 0.1rem solid #d1d1d1;
+    border-radius: .4rem;
+    padding: 0.5rem 0;
+}
+
+.menubox li {
+    padding-left: 0.5rem;
+}
+
+.menubox li:hover {
+    background: rgb(240,202,121);
+    color: white;
+}
+
+.menubox li.selected {
+    display: none;
+}
+/*
+#options_options {
+    display: none;
+    position: absolute;
+    top: 45px;
+    background-color: rgb(240,202,121);
+    border: 0.1rem solid rgb(240,202,121);
+    border-radius: .4rem;
+    padding: 0 1rem;
+    margin-left: 5px;
+    color: white;
+    list-style: none;
+}
+
+#options_options li {
+    margin-bottom: 0.5rem;
+}
+
+#options_options input {
+    margin-bottom: 0;
+}
+
+#options_options label {
+    display: inline;
+    cursor: pointer;
+}
+#options_options label:nth-child(2), input:nth-child(2) {
+    margin-left: 1rem;
+}
+*/
+#menu_width {
+    width: 100px;
+    position: relative;
+    top: 8px;
+}
+
+/* transcription rendering tags */
+
+del {
+    display: inline-block;
+    text-decoration-color: red;
+    color: grey;
+}
+
+ins {
+    display: inline-block;
+    color: red;
+    text-decoration: none;
+}
+
+span.gap {
+    background-color: rgba(132,132,10,0.3);
+    font-size: 85%;
+    color: rgb(84,84,84);
+}
+
+.right {
+    float: right;
+    clear: right;
+    position: relative;
+    margin-right: -80px;
+    width: 74px;
+    text-align: center;
+}
+
+.left {
+    float: left;
+    clear: left;
+    position: relative;
+    margin-left: -80px;
+    width: 74px;
+    text-align: center;
+}
+
+.gaiji {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: red;
+}
+
+/* header editor stuff */
+
+#headereditor {
+    display: none;
+    flex-direction: column;
+    width: 60%;
+    font-size: 1.2rem;
+}
+
+#headereditor section {
+    width: 65%;
+}
+
+#topbar {
+    background: linear-gradient(rgb(255,255,248) 60%, rgba(255,255,255,0));
+    height: auto;
+    top: 0;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+#transbutton {
+    top: auto;
+}
+
+#headereditor section > div :not(:last-child) {
+    margin-right: 1em;
+}
+
+#headereditor section > div .CodeMirror *, #headereditor .multi-item > div .CodeMirror * {
+    margin-right: 0;
+}
+
+#headereditor .multi-item > div {
+    margin-right: 1em;
+}
+
+#headereditor section > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#headereditor section div div.subrow {
+    display: flex;
+    margin-bottom: 0.8rem;
+    margin-right: 0;
+    align-items: center;
+}
+
+#headereditor div.subrow label:first-child {
+    min-width: 50px;
+}
+
+#headereditor .multi-item > div:not(.multi-kill) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+#headereditor label {
+    text-align: left;
+    hyphens: none;
+    /*margin-bottom: 1.5rem;*/
+}
+
+#headereditor label:first-child {
+    max-width: 80px;
+    min-width: 80px;
+}
+
+#headereditor label[title] {
+    cursor: help;
+    text-decoration: underline dotted black;
+}
+
+/*
+#headereditor form div label:first-of-type {
+    min-width: 80px;
+    max-width: 80px;
+}
+*/
+#headereditor input {
+    padding: 0.5rem;
+    /*margin-left: 1rem;*/
+}
+
+#headereditor input[type="number"], #hd_writtenLines {
+    max-width: 100px;
+}
+
+#headereditor input[type="text"] {
+    text-align: left;
+    flex-grow: 1;
+    font-size: 1.2rem;
+}
+
+#headereditor input.viaf[type="text"] {
+    min-width: 110px;
+    max-width: 110px;
+}
+
+.multiple {
+    display: flex;
+    flex-direction: column;
+}
+
+.multi-kill {
+    margin: 0 1em 1em 0;
+    align-self: flex-end;
+}
+
+.multi-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    outline: 0.1rem solid #ff9900;
+    padding: 0.5rem;
+}
+
+.multiple div.plusbutton {
+    width: 100%;
+    text-align: center;
+    display: block;
+    background: #ddd;
+    border: 0.1rem solid #ddd;
+    padding: 0 0.5rem 0 0.5rem;
+    margin-right: 1em;
+    margin-right: 1em;
+}
+
+.multiple div.plusbutton:hover {
+    background: #ff9900;
+    border: 0.1rem solid #ff9900;
+}
+
+/*
+.multiple div textarea {
+    flex-basis: 100%;
+}*/
+
+.flexbreak {
+    flex-basis: 100%;
+    height: 0;
+}
+
+#hd_extent_unit {
+    width: 150px;
+}
+
+#hd_calendar {
+    min-width: 165px;
+}
+
+#hd_iso-date {
+    min-width: 150px;
+    height: 3.8rem;
+    border: 0.1rem solid #d1d1d1;
+    border-radius: 0.4rem;
+}
+
+#hd_support_unit {
+    max-width: 100px;
+}
+
+#hd_complete {
+    max-width: 140px;
+}
+
+#hd_script {
+    max-width: 150px;
+}
+
+#headereditor div *[required] {
+    border-color: black;
+}
+
+select {
+    font-size: 1.2rem;
+    padding: 0.3rem;
+}
+
+#headereditor select.lang {
+    max-width: 120px;
+}
+
+#headereditor #hd_date {
+    margin-right: 0;
+}
+
+#headereditor .search {
+    margin-left: 0.2em;
+    min-width: 15px;
+    cursor: pointer; 
+}
+
+#headereditor input:invalid, select:invalid, textarea:invalid {
+    border: 1px dashed red;
+}
+
+.choices {
+    margin-bottom: inherit;
+    font-size: inherit;
+    align-self: start;
+    flex-grow: 1;
+}
+
+.choices__inner {
+    display: flex;
+    padding: 0;
+    background-color: #eee;
+    font-size: inherit;
+    min-height: inherit;
+    border-radius: 0.4rem;
+}
+/*
+.choices__list--multiple {
+    display: flex;
+    align-items: center;
+}
+*/
+.choices__item, .choices__list--multiple .choices__item {
+    font-size: inherit;
+    font-weight: inherit;
+    margin-right: 0.2em;
+    margin-left: 0.2em;
+    margin-bottom: 0;
+    color: inherit;
+/*    background-color: #f9f9f9;
+    border: 1px solid rgb(240,202,121); */
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    word-break: normal;
+}
+
+.choices__list--multiple .choices__item.is-highlighted {
+    background-color: grey;
+    border: 1px solid white;
+    color: white;
+}
+
+input.choices__input {
+    background-color: white;
+    font-size: inherit;
+    width: inherit !important;
+    margin-bottom: 0;
+    max-width: 100px;
+    margin: 2px 0 2px 0;
+ /*   height: 3.5rem; */
+}
+
+img.link {
+    width: 12px;
+    margin-left: 0.1em;
+    vertical-align: super;
+}
+
+textarea {
+    height: auto;
+    flex-grow: 1;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+span.heading {
+    font-weight: bold;
+}
+
+h4 {
+    margin-bottom: 0.5rem;
+}
+
+.CodeMirror {
+    flex-grow: 1;
+    display: block;
+    border: 1px solid #ddd;
+}
+.CodeMirror-empty { /*outline: 1px solid #c22;*/ }
+.CodeMirror-empty.CodeMirror-focused { outline: none; }
+.CodeMirror pre.CodeMirror-placeholder { color: #999; }
+.CodeMirror-required { outline: 1px dashed red; }
+/*
+.quillhidden {
+    display: none;
+}
+
+.quillcontainer {
+    flex-grow: 1;
+    height: 300px;
+    display: flex;
+    flex-direction: Column;
+    margin: 10px 0 10px 0;
+}
+
+.ql-container {
+    height: auto;
+    min-height: 85%;
+}
+*
+/

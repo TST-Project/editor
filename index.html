@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>TST Editor</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<link rel="stylesheet" href="sharedlib/tufte.css">
+<link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="lib/codemirror/addon/hint/show-hint.css">
+<link rel="stylesheet" href="lib/codemirror/addon/lint/lint.css">
+<link rel="stylesheet" href="lib/vanillaSelectBox.css">
+<!--link rel="stylesheet" href="lib/quill/quill.snow.css"-->
+
+<link rel="stylesheet" href="sharedlib/tst.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="lib/codemirror/lib/codemirror.js"></script>
+<script src="lib/codemirror/addon/hint/show-hint.js"></script>
+<script src="lib/codemirror/addon/hint/xml-hint.js"></script>
+<script src="lib/codemirror/addon/lint/htmlhint.js"></script>
+<script src="lib/codemirror/addon/lint/lint.js"></script>
+<script src="lib/codemirror/addon/lint/xml-lint.js"></script>
+<script src="lib/codemirror/mode/xml/xml.js"></script>
+<script src="lib/codemirror/addon/display/placeholder.js"></script>
+<!--script src="lib/quill/quill.min.js"></script-->
+
+<script src="lib/vanillaSelectBox.js"></script>
+
+<script src="sharedlib/hypher-nojquery.js"></script>
+<script src="sharedlib/sa.js"></script>
+<script src="sharedlib/ta.js"></script>
+<script src="sharedlib/sanscript.js"></script>
+
+<script src="lib/localforage.min.js"></script>
+<script src="lib/FileSaver.min.js"></script>
+
+<script src="lib/he.js"></script>
+
+<script src="script.js"></script>
+</head>
+
+<body lang="en">
+<div id="assets" style="position: absolute; visibility: hidden">
+<svg id="trash" enable-background="new 0 0 32 32" height="32px" id="Layer_1" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="trash"><path clip-rule="evenodd" d="M29.98,6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1V3.001   c0-1.657-1.344-3-3-3H11c-1.657,0-3,1.343-3,3v0.001v1H5c-1.595,0-2.885,1.246-2.981,2.816H2v1.183v1c0,1.104,0.896,2,2,2l0,0v17   c0,2.209,1.791,4,4,4h16c2.209,0,4-1.791,4-4v-17l0,0c1.104,0,2-0.896,2-2v-1V6.819H29.98z M10,3.002c0-0.553,0.447-1,1-1h10   c0.553,0,1,0.447,1,1v1H10V3.002z M26,28.002c0,1.102-0.898,2-2,2H8c-1.103,0-2-0.898-2-2v-17h20V28.002z M28,8.001v1H4v-1V7.002   c0-0.553,0.447-1,1-1h22c0.553,0,1,0.447,1,1V8.001z" fill="#333333" fill-rule="evenodd"/><path clip-rule="evenodd" d="M9,28.006h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1H9   c-0.553,0-1,0.447-1,1v13C8,27.559,8.447,28.006,9,28.006z M9,14.005h2v13H9V14.005z" fill="#333333" fill-rule="evenodd"/><path clip-rule="evenodd" d="M15,28.006h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1h-2   c-0.553,0-1,0.447-1,1v13C14,27.559,14.447,28.006,15,28.006z M15,14.005h2v13h-2V14.005z" fill="#333333" fill-rule="evenodd"/><path clip-rule="evenodd" d="M21,28.006h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1h-2   c-0.553,0-1,0.447-1,1v13C20,27.559,20.447,28.006,21,28.006z M21,14.005h2v13h-2V14.005z" fill="#333333" fill-rule="evenodd"/></g></svg>
+</div>
+<div id="headerviewer" class="recordcontainer">
+</div>
+
+<div id="headereditor" class="recordcontainer">
+<div class="record-fat">
+<article>
+<section>
+    <div>
+        <label for="hd_unitidcote">Shelfmark</label>
+        <input type="text" id="hd_unitidcote" name="cote" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='cote']" required placeholder="Indien XX">
+        <label for="hd_unitidanciennecote">Old shelfmark</label>
+        <input type="text" id="hd_unitidanciennecote" name="cote" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='ancienne cote']" placeholder="Tamoul XX">
+    </div>
+    <div>
+        <label for="hd_repository">Repository</label>
+        <input type="text" id="hd_repository" name="repository" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName" value="Bibliothèque nationale de France. Département des Manuscrits" readonly>
+    </div>
+    <div>
+        <label for="hd_title">Manuscript Title</label>
+        <textarea id="hd_title" name="title" data-select="fileDesc > titleStmt > title" data-schema="descriptive names" rows="1" required placeholder="title of manuscript"></textarea>
+    </div>
+    <div>
+        <label for="hd_editionStmt_persName">Researcher name</label>
+        <input type="text" id="hd_editionStmt_PersName" name="editionStmt_PersName" data-select="fileDesc > editionStmt > p > persName" autocomplete="name" required>
+    </div>
+    <div>
+        <label for="hd_editionStmt_orgName">Researcher affiliation</label>
+        <input type="text" id="hd_editionStmt_orgName" name="editionStmt_orgName" data-select="fileDesc > editionStmt > p > orgName" required>
+    </div>
+    <div>
+        <label for="hd_publisher">Publisher</label>
+        <input type="text" id="hd_publisher" name="publisher" data-select="fileDesc > publicationStmt > publisher" value="TST Project" readonly>
+        <label for="hd_publish_date">Publication date</label>
+        <input type="text" id="hd_publish_date" name="publish_date" data-select="fileDesc > publicationStmt > date" value="2020" readonly>
+    </div>
+    <div>
+        <label for="hd_summary">Summary</label>
+        <textarea rows="10" id="hd_summary" name="summary" data-select="fileDesc > sourceDesc > msDesc > msContents > summary" data-schema="descriptive names" placeholder="Summary description of the manuscript" required></textarea>
+    </div>
+    <h3>Physical description</h3>
+    <div>
+        <label for="hd_material">Material</label>
+        <select id="hd_material" name="material" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc" data-attr="material" required>
+            <option value="birch-bark">birch bark</option>
+            <option value="copper">copper</option>
+            <option value="palm-leaf" selected>palm leaf</option>
+            <option value="palm-leaf palmyra">palm leaf (palmyra)</option>
+            <option value="palm-leaf talipot">palm leaf (talipot)</option>
+            <option value="paper">paper</option>
+            <option value="paper handmade">paper (handmade)</option>
+            <option value="paper industrial">paper (industrial)</option>
+        </select>
+        <label for="hd_format">Format</label>
+        <select id="hd_format" name="format" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required>
+            <option value="codex">codex</option>
+            <option value="plate">plate</option>
+            <option value="pothi" selected>pothi</option>
+            <option value="roll">roll</option>
+        </select>
+        <label for="hd_stringholes">Stringholes</label>
+        <input type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
+    </div>
+    <div>
+        <label for="hd_extent_quantity" title="Give the full extent, including blank folios. In the description, you may be more specific.">Extent</label>
+        <input type="number" step="1" min="1" id="hd_extent_quantity" name="extent_quantity" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="quantity" required>
+        <!--label for="hd_extent_unit">Unit</label-->
+        <select id="hd_extent_unit" name="extent_unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" required>
+            <option value="folio" selected>folios</option>
+            <option value="page">pages</option>
+        </select>
+        <textarea rows="2" id="hd_extent" name="hd_extent" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-schema="descriptive" placeholder="X guard folios, XX numbered folios, X blank folios"></textarea>
+    </div>
+    <div>
+        <label title="Size of the object, including the cover.">Overall size</label>
+        <div>
+            <input type="text" step="any" id="hd_support_overall_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object']" data-attr="unit" hidden readonly value="mm">
+            <label for="hd_support_width">Width</label>
+            <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > width" data-attr="quantity">
+            <span>mm</span>
+        </div>
+        <div>
+            <label for="hd_support_height">Height</label>
+            <input type="number" step="any" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > height" data-attr="quantity">
+            <span>mm</span>
+        </div>
+        <div>
+            <label for="hd_support_depth">Depth</label>
+            <input type="number" step="any" id="hd_support_depth" name="depth" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > depth" data-attr="quantity">
+            <span>mm</span>
+        </div>
+    </div>
+    <div>
+        <label title="Dimensions of a single leaf.">Leaf size</label>
+        <div>
+            <div class="subrow">
+                <input type="text" id="hd_support_leaf_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
+                <label for="hd_support_width">Width</label>
+                <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity" required>
+                <span>mm</span>
+                <label for="hd_support_width_min">Min</label>
+                <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
+                <span>mm</span>
+                <label for="hd_support_width_max">Max</label>
+                <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
+                <span>mm</span> 
+            </div>
+            <div style="flex-basis: 100%; height:0"></div>
+            <div class="subrow">
+                <label for="hd_support_height">Height</label>
+                <input type="number" step="any" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity" required>
+                <span>mm</span>
+                <label for="hd_support_height_min">Min</label>
+                <input type="number" step="any" id="hd_support_height_min" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
+                <span>mm</span>
+                <label for="hd_support_height_max">Max</label>
+                <input type="number" step="any" id="hd_support_height_max" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
+                <span>mm</span> 
+            </div>
+        </div>
+    </div>
+    <div>
+        <span title="Dimensions of the written area of the leaf.">Written area</span>
+        <div>
+            <div class="subrow">
+                <input type="text" id="hd_support_written_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written']" data-attr="unit" hidden readonly value="mm">
+                <label for="hd_support_writtenWidth">Width</label>
+                <input type="number" step="any" id="hd_support_writtenWidth" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
+                <span>mm</span>
+                <label for="hd_support_writtenWidth_min">Min</label>
+                <input type="number" step="any" id="hd_support_writtenWidth" name="widthmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
+                <span>mm</span>
+                <label for="hd_support_writtenWidth_max">Max</label>
+                <input type="number" step="any" id="hd_support_writtenWidth_max" name="widthmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
+                <span>mm</span> 
+            </div>
+            <div style="flex-basis: 100%; height:0"></div>
+            <div class="subrow">
+                <label for="hd_support_writtenHeight">Height</label>
+                <input type="number" step="any" id="hd_support_writtenHeight" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
+                <span>mm</span>
+                <label for="hd_support_writtenHeight_min">Min</label>
+                <input type="number" step="any" id="hd_support_writtenHeight" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
+                <span>mm</span>
+                <label for="hd_support_writtenHeight_max">Max</label>
+                <input type="number" step="any" id="hd_support_writtenHeight" name="heightmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
+                <span>mm</span> 
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="hd_columns" title="One number, or two numbers separated by a space for a range.">Columns</label>
+        <input type="text" id="hd_columns" name="columns" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="columns" placeholder="1" pattern="\d+\s*\d*" size="8">
+        <label for="hd_writtenLines" title="One number, or two numbers separated by a space for a range.">Lines per page (written)</label>
+        <input type="text" id="hd_writtenLines" name="writtenLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="writtenLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
+        <label for="hd_ruledLines" title="One number, or two numbers separated by a space for a range.">Lines per page (ruled)</label>
+        <input type="text" id="hd_ruledLines" name="ruledLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="ruledLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
+    </div>
+    <div>
+        <label for="hd_condition">Condition</label>
+        <textarea rows="4" id="hd_condition" name="condition" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > condition" data-schema="descriptive" placeholder="Very good state of preservation, in spite of bore holes caused by insects."></textarea>
+    </div>
+    <div>
+        <label for="hd_binding">Binding</label>
+        <textarea rows="4" id="hd_binding" name="binding" data-select="fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > p" data-schema="descriptive" placeholder="Description of binding, cover, etc."></textarea>
+    </div>
+    <h4>Foliation (Codicological units)</h4>
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > foliation">
+        <div class="multi-item">
+            <div>
+                <label for="hd_foliation_n" title="A unique identifier. No spaces.">Unit name</label>
+                <input type="text"name="foliation_n" data-multi-attr="n" placeholder="U1" pattern="[^\s]+">
+            </div>
+            <div>
+            <textarea rows="4" data-multi-select=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
+            </div>
+        </div>
+    </div>
+    <!--div>
+        <label for="hd_script">Script</label>
+        <textarea rows="2" id="hd_script" name="script" data-select="did > physdesc > physfacet[type='écriture']" placeholder="Tamil script, northern Devanāgarī, Bengali, etc."></textarea>
+    </div-->
+    <h4>Scribal hand</h4>
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > handDesc > handNote">
+        <div class="multi-item">
+            <div>
+                <label for="hd_handNote_n" title="As defined in the 'Foliation' section.">Codicological unit(s)</label>
+                <select data-multi-attr="n" data-from="foliation_n" class="multiselect" multiple></select>
+                <!--input type="text" data-multi-attr="n" placeholder="U1 U2"-->
+                <label for="hd_handNote_scope">Scope</label>
+                <select name="handNote_scope" data-multi-attr="scope"> 
+                    <option value="" selected disabled></option>
+                    <option value="sole">sole</option>
+                    <option value="major">major</option>
+                    <option value="minor">minor</option>
+                </select>
+                <label for="hd_handNote_script">Script</label>
+                <select name="handNote_script" data-multi-attr="script">
+                    <option value="" selected disabled></option>
+                    <option value="bengali">Bengali</option>
+                    <option value="devanagari">Devanagari</option>
+                    <option value="grantha">Grantha</option>
+                    <option value="latin">Latin</option>
+                    <option value="malayalam">Malayalam</option>
+                    <option value="nandinagari">Nandinagari</option>
+                    <option value="telugu">Telugu</option>
+                    <option value="tamil">Tamil</option>
+                </select>
+            </div>
+            <div>
+                <textarea rows="4" data-multi-select="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
+            </div>
+        </div>
+    </div>
+    <h4>Decorations</h4>
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > decoDesc > decoNote">
+        <div class="multi-item">
+            <div>
+                <label for="hd_decoNote_type">Type</label>
+                <select data-multi-attr="type">
+                    <option value="marginal">Marginal</option>
+                    <option value="border">Border</option>
+                    <option value="illustration">Illustration</option>
+                    <option value="technical">Technical</option>
+                </select>
+            </div>
+            <div>
+                <textarea rows="4" data-multi-select="desc" data-schema="descriptive" placeholder="Description of decoration"></textarea>
+            </div>
+        </div>
+    </div>
+    <h4>Additions</h4>
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > additions > p">
+        <div class="multi-item">
+            <div>
+                <textarea rows="4" class="big" data-multi-select=":scope" data-schema="transcription descriptive names" placeholder="Marginalia, running titles, satellite stanzas, etc."></textarea>
+            </div>
+        </div>
+    </div>
+    <h3>Contents</h3>
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > msContents > msItem">
+        <div class="multi-item">
+            <div>
+                <div></div>
+                <div>
+                    <label for="hd_msItem_n" title="As defined in the 'Foliation' section.">Codicological unit</label>
+                    <select data-multi-attr="n" data-from="foliation_n"></select>
+                </div>
+                <select data-multi-attr="defective" required>
+                    <option value="false">Complete</option>
+                    <option value="true">Incomplete</option>
+                </select>
+            </div>
+            <div>
+                <label for="hd_msItem_title">Title</label>
+                <input type="text" data-multi-select="title" placeholder="title of text" required>
+            </div>
+            <div>
+                <label for="hd_msItem_author">Author</label>
+                <input type="text" data-multi-select="author" placeholder="author of text">
+            </div>
+            <div>
+                <label for="hd_msItem_mainLang">Main language</label>
+                <select id="hd_msItem_mainLang" data-multi-select="textLang" data-multi-attr="mainLang">
+                    <option value="" selected disabled></option>
+                    <option value="eng">English</option>
+                    <option value="fra">French</option>
+                    <option value="pal">Pali</option>
+                    <option value="por">Portuguese</option>
+                    <option value="pra">Prakrit</option>
+                    <option value="san">Sanskrit</option>
+                    <option value="tam">Tamil</option>
+                </select>
+                <label for="hd_msItem_otherLangs">Other languages</label>
+                <select id="hd_msItem_otherLangs" class="multiselect" name="msItem_otherLangs" data-multi-select="textLang" data-multi-attr="otherLangs" multiple>
+                    <option value="eng"> English</option>
+                    <option value="fra"> French</option>
+                    <option value="pal"> Pali</option>
+                    <option value="por"> Portuguese</option>
+                    <option value="pra"> Prakrit</option>
+                    <option value="san"> Sanskrit</option>
+                    <option value="tam"> Tamil</option>
+                </select>
+            </div>
+            <div>
+                <label for="hd_msItem_filiation">Filiation</label>
+                <textarea rows="4" data-multi-select="filiation > p" data-schema="descriptive names" placeholder="Other manuscript testimonies"></textarea>
+            </div>
+            <div>
+                <label for="hd_msItem_rubric">Rubric</label>
+                <textarea rows="4" class="big" data-schema="transcription" data-multi-select="rubric"></textarea>
+            </div>
+            <div>
+                <label for="hd_msItem_incipit">Incipit</label>
+                <textarea rows="4" class="big" data-schema="transcription" data-multi-select="incipit"></textarea>
+            </div>
+            <div>
+                <label for="hd_msItem_explicit">Explicit</label>
+                <textarea rows="4" class="big" data-schema="transcription" data-multi-select="explicit"></textarea>
+            </div>
+            <div>
+                <label for="hd_msItem_finalRubric">Final Rubric</label>
+                <textarea rows="4" class="big" data-schema="transcription" data-multi-select="finalRubric"></textarea>
+            </div>
+            <div>
+                <label for="hd_msItem_colophon">Colophon</label>
+                <textarea rows="4" class="big" data-schema="transcription" data-multi-select="colophon"></textarea>
+            </div>
+        </div>
+    </div>
+    <h3>History</h3>
+    <div>
+        <div>
+            <label for="hd_origDate_when">Date</label>
+            <input type="number" step="any" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when">
+        </div>
+        <div>
+            <label for="hd_origDate_notBefore">Not before</label>
+            <input type="number" step="any" id="hd_origDate_notBefore" name="origDate_notBefore" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notBefore">
+        </div>
+        <div>
+            <label for="hd_origDate_notAfter">Not after</label>
+            <input type="number" step="any" id="hd_origDate_notBefore" name="origDate_notAfter" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notAfter">
+        </div>
+    </div>
+    <div>
+        <textarea rows="4" id="hd_origDate" name="origDate" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-schema="descriptive names" placeholder="Description of date, dating source/methodology, etc."></textarea>
+    </div>
+    <div>
+        <label for="hd_origPlace">Place</label>
+        <input type="text" rows="1" id="hd_origPlace" name="origPlace" data-select="fileDesc > sourceDesc > msDesc > history > origin > origPlace" placeholder="Tamilnadu">
+    </div>
+    <div>
+        <label for="hd_acquisition">Acquisition</label>
+        <textarea rows="4" id="hd_acquisition" name="acquisition" data-select="fileDesc > sourceDesc > msDesc > history > acquisition > p" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
+    </div>
+    <h3>Bibliography</h3>
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > additional > listBibl > bibl">
+        <div class="multi-item">
+            <div>
+                <textarea rows="3" id="hd_bibliography" data-multi-select=":scope" data-schema="descriptive" name="bibliography"></textarea>
+            </div>
+        </div>
+    </div>
+    <h3>Encoding</h3>
+    <div class="multiple" data-select="encodingDesc > p">
+        <div class="multi-item">
+            <div>
+            <textarea rows="6" id="hd_encoding" name="encoding" data-multi-select=":scope" data-schema="descriptive" placeholder="Transcription conventions, abbreviations, etc." required></textarea>
+            </div>
+        </div>
+    </div>
+    <h3>Revision history</h3>
+    <div class="multiple" data-select="revisionDesc > change">
+        <div class="multi-item">
+            <div>
+                <input type="month" step="any" id="hd_change_when" data-multi-attr="when" size="8" placeholder="YYYY-MM" pattern="\d{4}-\d{2}">
+                <textarea rows="4" id="hd_change" name="change" data-multi-select=":scope" data-schema="names" placeholder="summary of changes"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="buttoncontainer row">
+        <button type="button" id="updateheader">preview</button>
+        <button type="button" id="cancelheader">cancel</button>
+    </div>
+</section>
+</article>
+</div>
+</div>
+<form id="openform">
+    <div>
+        <div id="newfile">new file</div>
+        <div>open file:
+            <input type="file" id="file" name="file" accept=".xml"/>
+        </div>
+        <div id="autosavebox">
+        </div>
+    </div>
+</form>
+</body>
+</html>
