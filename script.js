@@ -242,7 +242,7 @@
                 field.value = tounsanitize ?
                     xml.unsanitize(xmlEl.innerHTML) :
                     xml.innerXML(xmlEl);
-                    //document.importNode(xmlEl,true).innerHTML.trim();
+                //  document.importNode(xmlEl,true).innerHTML.trim();
                 return;
             }
 
@@ -420,6 +420,7 @@
                         attrs: {
                             n: null,
                             '/': null,
+                            break: ['no'],
                         }
                     },
                     milestone: {
