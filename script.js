@@ -34,7 +34,7 @@
     const state = {
         multiselect: [],
         cmirror: [],
-        filename: 'new.xml',
+        filename: '',
         xmlDoc: null,
         xStyle: null,
         xSheet: 'tei-to-html.xml',
@@ -176,7 +176,9 @@
             const s = new XMLSerializer();
             const serialized = s.serializeToString(state.xmlDoc);
             const file = new Blob([serialized], {type: 'text/xml;charset=utf-8'});
-            const fileURL = state.filename; 
+            const fileURL = state.filename.match(/^\[.+\]$/) ?
+                state.filename.replace(/^\[(.+)\]$/,'$1.xml').replace(/\s+/,'_') :
+                state.filename;
             FileSaver(file,fileURL);
         },
 
@@ -190,7 +192,7 @@
         },
         startnew: function() {
             document.getElementById('openform').style.display = 'none';
-            state.filename = 'new.xml';
+            state.filename = '[new file]';
             state.xmlDoc = file.syncLoad(state.template);
             //file.render(state.xmlDoc);
             editor.init();
@@ -378,7 +380,7 @@
             const allfields = state.heditor.querySelectorAll('input,select,textarea');
             for(const field of allfields) {
                 if(!field.validity.valid) {
-                    if(field.nextSibling && field.nextSibling.classList.contains('CodeMirror')) {
+                    if(field.nextElementSibling && field.nextElementSibling.classList.contains('CodeMirror')) {
                         if(field.classList.contains('CodeMirror-required'))
                             return field;
                     }
@@ -867,6 +869,13 @@
             }
             editor.updateFields(docclone,true);
             //editor.postProcess(toplevel);
+           
+            if(state.filename === '[new file]') {
+                const cote = docclone.querySelector('idno[type="cote"]');
+                if(cote && cote.textContent !== '')
+                    state.filename = `[${cote.textContent}]`;
+            }
+            
             const s = new XMLSerializer();
             lf.setItem(state.filename,s.serializeToString(docclone));
         },
