@@ -241,7 +241,8 @@
             if(!attr) {
                 field.value = tounsanitize ?
                     xml.unsanitize(xmlEl.innerHTML) :
-                    document.importNode(xmlEl,true).innerHTML.trim();
+                    xml.innerXML(xmlEl);
+                    //document.importNode(xmlEl,true).innerHTML.trim();
                 return;
             }
 
@@ -750,6 +751,15 @@
                 alert('XML errors');
             else
                 return newd;
+        },
+        innerXML: function(el) {
+            const s = new XMLSerializer();
+            const empty = el.cloneNode();
+            empty.innerHTML = '\u{FFFFD}';
+            const str = s.serializeToString(el);
+            const emptystr = s.serializeToString(empty);
+            const [starttag,endtag] = emptystr.split('\u{FFFFD}');
+            return str.slice(starttag.length).slice(0,-endtag.length);
         },
         unsanitize: function(str,attr) {
             return attr ?
