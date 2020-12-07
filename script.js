@@ -41,7 +41,6 @@
         template: 'tst-template.xml',
         toplevel: 'teiHeader',
         savedtext: new Map(),
-        curlang: 'en',
     };
 
     const lf = window.localforage || null;
@@ -49,7 +48,7 @@
     const FileSaver = window.FileSaver || null;
     const CodeMirror = window.CodeMirror || null;
     const he = window.he || null;
-    const Sanscript = window.Sanscript || null;
+    //const Sanscript = window.Sanscript || null;
 
     const init = function() {
         lf.length().then(n => {if(n>0) autosaved.fill();});
@@ -78,9 +77,11 @@
                 e.preventDefault();
                 file.saveAs();
                 return;
+            /*
             case 'transbutton':
                 script.transClick(e);
                 return;
+            */
             default:
                 break;
             }
@@ -170,7 +171,8 @@
             dom.clearEl(body);
             body.appendChild(result.querySelector('.record-fat'));
             body.style.display = 'block';
-            script.init();
+            //script.init();
+            window.Transliterate.init(body);
         },
         saveAs: function() {
             const s = new XMLSerializer();
@@ -918,7 +920,7 @@
             return button;
         },
     };
-
+    /*
     const script = {
         init: function() {
             const r = document.getElementById('headerviewer');
@@ -1025,10 +1027,10 @@
                 return Sanscript.t(text,f,'iast').replace(/^⁰|([^\d⁰])⁰/g,'$1¹⁰');
             },
             
-            tamil: function(text/*,placeholder*/) {
-                /*const pl = placeholder || '';
-                const txt = to.smush(text,pl);
-                return Sanscript.t(txt,'iast','tamil');*/
+            tamil: function(text) {
+                //const pl = placeholder || '';
+                //const txt = to.smush(text,pl);
+                //return Sanscript.t(txt,'iast','tamil');
                 const grv = new Map([
                     ['\u0B82','\u{11300}'],
                     ['\u0BBE','\u{1133E}'],
@@ -1055,5 +1057,6 @@
             },
         }
     };
+    */
     window.addEventListener('load',init);
 }());

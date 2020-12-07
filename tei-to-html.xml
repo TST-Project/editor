@@ -292,6 +292,7 @@
     <xsl:apply-templates select="x:physDesc"/>
     <section>
         <h3>Contents</h3>
+        <xsl:apply-templates select="x:msContents/@class"/>
         <xsl:apply-templates select="x:msContents/x:msItem"/>
     </section>
     <xsl:apply-templates select="x:history"/>
@@ -300,6 +301,20 @@
 
 <xsl:template match="x:msContents">
     <xsl:apply-templates select="x:summary"/>
+</xsl:template>
+
+<my:mstypes>
+    <my:entry key="#STM">Single-text manuscript</my:entry>
+    <my:entry key="#MTM">Multi-text manuscript</my:entry>
+    <my:entry key="#CM">Composite manuscript</my:entry>
+    <my:entry key="#MVM">Multi-volume manuscript</my:entry>
+</my:mstypes>
+
+<xsl:template match="x:msContents/@class">
+    <xsl:variable name="class" select="."/>
+    <xsl:element name="p">
+        <xsl:value-of select="document('')/*/my:mstypes/my:entry[@key=$class]"/>
+    </xsl:element>
 </xsl:template>
 
 <xsl:template match="x:msItem">
@@ -400,6 +415,9 @@
         <th>Language</th>
         <xsl:element name="td">
             <xsl:variable name="mainLang" select="@mainLang"/>
+            <xsl:attribute name="class">record_languages</xsl:attribute>
+            <xsl:attribute name="data-mainlang"><xsl:value-of select="$mainLang"/></xsl:attribute>
+            <xsl:attribute name="data-otherlangs"><xsl:value-of select="@otherLangs"/></xsl:attribute>
             <xsl:value-of select="document('')/*/my:langs/my:entry[@key=$mainLang]"/>
             <xsl:if test="@otherLangs and not(@otherLangs='')">
                 <xsl:text> (</xsl:text>
@@ -864,7 +882,7 @@
 
 <xsl:template match="x:additions">
   <tr>
-    <th>Additions</th>
+    <th>Paratexts</th>
     <td>
       <xsl:apply-templates />
     </td>
@@ -1106,6 +1124,71 @@
             </xsl:if>
         </xsl:attribute>
         <xsl:apply-templates />
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:pc">
+    <xsl:element name="span">
+        <xsl:attribute name="class">invisible</xsl:attribute>
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:space">
+    <xsl:element name="span">
+        <xsl:attribute name="lang">en</xsl:attribute>
+        <xsl:attribute name="class">space</xsl:attribute>
+        <xsl:attribute name="data-anno">
+            <xsl:text>space</xsl:text>
+            <xsl:if test="@quantity">
+                <xsl:text> of </xsl:text><xsl:value-of select="@quantity"/>
+                <xsl:choose>
+                <xsl:when test="@unit">
+                <xsl:text> </xsl:text><xsl:value-of select="@unit"/>
+                    <xsl:if test="@quantity &gt; '1'">
+                        <xsl:text>s</xsl:text>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:otherwise>
+                <xsl:text> akṣara</xsl:text>
+                    <xsl:if test="@quantity &gt; '1'">
+                        <xsl:text>s</xsl:text>
+                    </xsl:if>
+                </xsl:otherwise>
+                </xsl:choose>
+            </xsl:if>
+            <xsl:if test="@rend">
+                <xsl:text> (</xsl:text><xsl:value-of select="@rend"/><xsl:text>)</xsl:text>
+            </xsl:if>
+        </xsl:attribute>
+        <xsl:choose>
+            <xsl:when test="count(./*) &gt; 0">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="span">
+                <xsl:text>_</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="@quantity &gt; 1">
+                        <xsl:call-template name="repeat">
+                            <xsl:with-param name="output"><xsl:text>_&#x200B;</xsl:text></xsl:with-param>
+                            <xsl:with-param name="count" select="@quantity"/>
+                        </xsl:call-template>
+
+                    </xsl:when>
+                    <xsl:when test="@extent">
+                        <xsl:variable name="extentnum" select="translate(@extent,translate(@extent,'0123456789',''),'')"/>
+                        <xsl:if test="number($extentnum) &gt; 1">
+                            <xsl:call-template name="repeat">
+                                <xsl:with-param name="output"><xsl:text>_&#x200B;</xsl:text></xsl:with-param>
+                                <xsl:with-param name="count" select="$extentnum"/>
+                            </xsl:call-template>
+                        </xsl:if>
+                    </xsl:when>
+                </xsl:choose>
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:element>
 </xsl:template>
 
