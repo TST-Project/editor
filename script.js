@@ -175,8 +175,7 @@
             window.Transliterate.init(body);
         },
         saveAs: function() {
-            const s = new XMLSerializer();
-            const serialized = s.serializeToString(state.xmlDoc);
+            const serialized = xml.serialize(state.xmlDoc);
             const file = new Blob([serialized], {type: 'text/xml;charset=utf-8'});
             const fileURL = state.filename.match(/^\[.+\]$/) ?
                 state.filename.replace(/^\[(.+)\]$/,'$1.xml').replace(/\s+/,'_') :
@@ -398,7 +397,7 @@
             const getSchema = function(s) {
                 const schemae = {
                     transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied'], 
-                    descriptive: ['term','note','emph', 'title','locus','material','ref'],
+                    descriptive: ['p','term','note','emph', 'title','locus','material','ref'],
                     names: ['persName','orgName','geogName'],
                 };
                 const langs = ['ta','ta-Taml','en','fr','pt','pi','sa'];
@@ -440,7 +439,7 @@
                             '/': null,
                         }
                     },
-
+                    
                     // Text emendations
 
                     add: {
@@ -488,6 +487,12 @@
                     },
 
                     // descriptive
+                    p: {
+                        attrs: {
+                            'xml:lang': langs,
+                        },
+                        children: [...schemae.descriptive,...schemae.names],
+                    },
                     term: {
                         attrs: {
                             'xml:lang': langs,
@@ -502,6 +507,7 @@
                     title: {
                         attrs: {
                             'xml:lang': langs,
+                            'type': ['article'],
                         },
                         children: ['emph'],
                     },
@@ -621,8 +627,13 @@
             const toplevel = editor.updateFields(state.xmlDoc);
             
             editor.postProcess(toplevel);
+
+            // write to string to fix xml:lang attributes
+            const serialized = xml.serialize(state.xmlDoc);
+            state.xmlDoc = xml.parseString(serialized);
             file.render(state.xmlDoc);
-            autosaved.save();
+            
+            autosaved.saveStr(serialized);
         },
 
         updateFields(doc,sanitized) {
@@ -645,8 +656,9 @@
         },
 
         postProcess: function(toplevel) {
-            //update editionStmt
             const par = toplevel || state.xmlDoc;
+
+            // update editionStmt
             const editionStmt = par.querySelector('fileDesc > editionStmt > p');
             if(editionStmt) {
                 const persName = editionStmt.removeChild(editionStmt.querySelector('persName'));
@@ -657,6 +669,22 @@
                 editionStmt.appendChild(state.xmlDoc.createTextNode(' '));
                 editionStmt.appendChild(orgName);
                 editionStmt.appendChild(state.xmlDoc.createTextNode('.'));
+            }
+
+            // add xml:lang to rubric, incipit, etc.
+            const msItems = par.querySelectorAll('msContents > msItem');
+            for(const msItem of msItems) {
+                const textlang = msItem.querySelector('textLang');
+                const lang = textlang && textlang.getAttribute('mainLang');
+                if(!lang) continue;
+                
+                const langmap = new Map([['tam','ta'],['san','sa']]);
+                const els = [...msItem.children].filter(el => 
+                    el.matches('title,author,rubric,incipit,explicit,finalRubric,colophon')
+                );
+
+                for(const el of els)
+                    el.setAttribute('xml:lang',langmap.get(lang)); 
             }
         },
 
@@ -755,12 +783,15 @@
             else
                 return newd;
         },
-        innerXML: function(el) {
+        serialize: function(el) {
             const s = new XMLSerializer();
+            return s.serializeToString(el);
+        },
+        innerXML: function(el) {
             const empty = el.cloneNode();
             empty.innerHTML = '\u{FFFFD}';
-            const str = s.serializeToString(el);
-            const emptystr = s.serializeToString(empty);
+            const str = xml.serialize(el);
+            const emptystr = xml.serialize(empty);
             const [starttag,endtag] = emptystr.split('\u{FFFFD}');
             return str.slice(starttag.length).slice(0,-endtag.length);
         },
@@ -860,6 +891,15 @@
             lf.removeItem(k);
             document.querySelector(`#autosavebox .autosaved[data-storage-key='${k}']`).remove();
         },
+        
+        setFilename: function(doc) {
+            if(state.filename.match(/^\[.*\]$/)) {
+                const cote = doc.querySelector('idno[type="cote"]');
+                if(cote && cote.textContent && cote.textContent.trim() !== '')
+                    state.filename = `[${cote.textContent}]`;
+            }
+        },
+
         save: function() {
             const docclone = state.xmlDoc.cloneNode(true);
             /*
@@ -881,16 +921,14 @@
                 }
             }
             editor.updateFields(docclone,true);
-            //editor.postProcess(toplevel);
-           
-            if(state.filename === '[new file]') {
-                const cote = docclone.querySelector('idno[type="cote"]');
-                if(cote && cote.textContent !== '')
-                    state.filename = `[${cote.textContent}]`;
-            }
+          
+            autosaved.setFilename(docclone);
             
-            const s = new XMLSerializer();
-            lf.setItem(state.filename,s.serializeToString(docclone));
+            lf.setItem(state.filename,xml.serialize(docclone));
+        },
+        saveStr: function(str) {
+            autosaved.setFilename(state.xmlDoc);
+            lf.setItem(state.filename,str);
         },
     }; // end autosaved
     
