@@ -50,6 +50,18 @@
     </xsl:if>
 </xsl:template>
 
+<xsl:template name="repeat">
+    <xsl:param name="output" />
+    <xsl:param name="count" />
+    <xsl:if test="$count &gt; 0">
+        <xsl:value-of select="$output" />
+        <xsl:call-template name="repeat">
+            <xsl:with-param name="output" select="$output" />
+            <xsl:with-param name="count" select="$count - 1" />
+        </xsl:call-template>
+    </xsl:if>
+</xsl:template>
+
 <xsl:template match="x:teiHeader">
     <xsl:element name="section">
         <xsl:call-template name="lang"/>
@@ -314,6 +326,7 @@
     <xsl:variable name="class" select="."/>
     <xsl:element name="p">
         <xsl:value-of select="document('')/*/my:mstypes/my:entry[@key=$class]"/>
+        <xsl:text>.</xsl:text>
     </xsl:element>
 </xsl:template>
 
@@ -492,7 +505,7 @@
 
 <xsl:template match="x:filiation">
     <tr>
-        <th>Filiation</th>
+        <th>Other manuscript testimonies</th>
         <xsl:element name="td">
             <xsl:apply-templates/>
         </xsl:element>
@@ -503,7 +516,16 @@
     <xsl:element name="section">
         <xsl:attribute name="id">summary</xsl:attribute>
         <xsl:call-template name="lang"/>
-        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="x:p">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="p">
+                    <xsl:apply-templates/>
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:element>
 </xsl:template>
 
@@ -597,7 +619,7 @@
 </xsl:template>
 
 <xsl:template match="x:measure[@unit='stringhole' or @unit='folio' or @unit='page']">
-    <xsl:if test="not(. = '')">
+    <xsl:if test="not(@quantity = '')">
         <xsl:call-template name="units"/>
         <xsl:text>. </xsl:text>
         <xsl:apply-templates />
@@ -1190,6 +1212,21 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:g[@ref='#pcl']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji</xsl:attribute>
+            <xsl:attribute name="data-anno">piḷḷaiyār cuḻi (long)</xsl:attribute>
+            <xsl:text>&#xF8FF;</xsl:text>
+        </xsl:element>
+</xsl:template>
+<xsl:template match="x:g[@ref='#pcs']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji</xsl:attribute>
+            <xsl:attribute name="data-anno">piḷḷaiyār cuḻi (short)</xsl:attribute>
+            <xsl:text>&#x0BF3;</xsl:text>
+        </xsl:element>
 </xsl:template>
 
 <xsl:template match="@*|node()">
