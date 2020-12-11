@@ -31,6 +31,7 @@
 <script src="sharedlib/sa.js"></script>
 <script src="sharedlib/ta.js"></script>
 <script src="sharedlib/sanscript.js"></script>
+<script src="sharedlib/transliterate.js"></script>
 
 <script src="lib/localforage.min.js"></script>
 <script src="lib/FileSaver.min.js"></script>
@@ -85,6 +86,24 @@
     </div>
     <h3>Physical description</h3>
     <div>
+        <label for="MS_type">Type</label>
+        <select id="hd_MS_type" name="MS type" data-select="fileDesc > sourceDesc > msDesc > msContent" data-attr="class" required>
+            <option value="#STM" selected>single-text manuscript</option>
+            <option value="#MTM">multi-text manuscript</option>
+            <option value="#CM">composite manuscript</option>
+            <option value="#MVM">multi-volume manuscript</option>
+        </select>
+        <label for="hd_format">Format</label>
+        <select id="hd_format" name="format" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required>
+            <option value="codex">codex</option>
+            <option value="plate">plate</option>
+            <option value="pothi" selected>pothi</option>
+            <option value="roll">roll</option>
+        </select>
+        <label for="hd_stringholes">Stringholes</label>
+        <input type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
+    </div>
+    <div>
         <label for="hd_material">Material</label>
         <select id="hd_material" name="material" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc" data-attr="material" required>
             <option value="birch-bark">birch bark</option>
@@ -96,15 +115,7 @@
             <option value="paper handmade">paper (handmade)</option>
             <option value="paper industrial">paper (industrial)</option>
         </select>
-        <label for="hd_format">Format</label>
-        <select id="hd_format" name="format" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required>
-            <option value="codex">codex</option>
-            <option value="plate">plate</option>
-            <option value="pothi" selected>pothi</option>
-            <option value="roll">roll</option>
-        </select>
-        <label for="hd_stringholes">Stringholes</label>
-        <input type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
+        <textarea rows="2" name="support_p" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > p" data-schema="descriptive" placeholder="Further details about the support material"></textarea> 
     </div>
     <div>
         <label for="hd_extent_quantity" title="Give the full extent, including blank folios. In the description, you may be more specific.">Extent</label>
@@ -141,7 +152,7 @@
             <div class="subrow">
                 <input type="text" id="hd_support_leaf_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
                 <label for="hd_support_width">Width</label>
-                <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity" required>
+                <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
                 <span>mm</span>
                 <label for="hd_support_width_min">Min</label>
                 <input type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
@@ -153,7 +164,7 @@
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
                 <label for="hd_support_height">Height</label>
-                <input type="number" step="any" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity" required>
+                <input type="number" step="any" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
                 <span>mm</span>
                 <label for="hd_support_height_min">Min</label>
                 <input type="number" step="any" id="hd_support_height_min" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
@@ -274,7 +285,7 @@
             </div>
         </div>
     </div>
-    <h4>Additions</h4>
+    <h4>Paratexts</h4>
     <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > additions > p">
         <div class="multi-item">
             <div>
@@ -328,8 +339,8 @@
                 </select>
             </div>
             <div>
-                <label for="hd_msItem_filiation">Filiation</label>
-                <textarea rows="4" data-multi-select="filiation > p" data-schema="descriptive names" placeholder="Other manuscript testimonies"></textarea>
+                <label for="hd_msItem_filiation">Other manuscript testimonies</label>
+                <textarea rows="4" data-multi-select="filiation > p" data-schema="descriptive names" placeholder="Other manuscripts containing this text"></textarea>
             </div>
             <div>
                 <label for="hd_msItem_rubric">Rubric</label>
