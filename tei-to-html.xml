@@ -106,6 +106,10 @@
     <xsl:attribute name="data-loc">
         <xsl:value-of select="."/>
     </xsl:attribute>
+    <xsl:attribute name="data-anno">
+        <xsl:text>image </xsl:text>
+        <xsl:value-of select="."/>
+    </xsl:attribute>
 </xsl:template>
 
 <xsl:template match="x:lb">
