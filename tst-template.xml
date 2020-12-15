@@ -22,9 +22,8 @@
                   <idno type="cote"></idno>
                   <idno type="ancienne cote"></idno>
                </msIdentifier>
-               <msContents>
+               <msContents class="">
                   <summary>
-                     <p></p>
                   </summary>
                   <msItem n="" defective="">
                      <title xml:lang="tam"></title>
@@ -45,6 +44,7 @@
                      <supportDesc material="">
                         <support>
                            <measure unit="stringhole" quantity=""/>
+                           <p></p>
                         </support>
                         <extent>
                            <measure unit="folio" quantity=""></measure>
