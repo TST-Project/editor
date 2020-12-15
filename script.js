@@ -397,6 +397,7 @@
             const getSchema = function(s) {
                 const schemae = {
                     transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied'], 
+                    descriptive_restricted: ['term','note','emph', 'title','locus','material','ref'],
                     descriptive: ['p','term','note','emph', 'title','locus','material','ref'],
                     names: ['persName','orgName','geogName'],
                 };
