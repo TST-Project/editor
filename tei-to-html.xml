@@ -1160,6 +1160,15 @@
     </xsl:element>
 </xsl:template>
 
+<xsl:template match="x:sic">
+    <xsl:element name="span">
+        <xsl:attribute name="class">sic</xsl:attribute>
+        <xsl:call-template name="lang"/>
+        <xsl:attribute name="data-anno">sic</xsl:attribute>
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+
 <xsl:template match="x:space">
     <xsl:element name="span">
         <xsl:attribute name="lang">en</xsl:attribute>
