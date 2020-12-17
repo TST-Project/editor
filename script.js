@@ -188,7 +188,8 @@
             const f = e.target.files[0];
             state.filename = f.name;
             const reader = new FileReader();
-            reader.onload = file.parse.bind(null,editor.init.bind(null,false));
+            //reader.onload = file.parse.bind(null,editor.init.bind(null,false));
+            reader.onload = file.parse.bind(null,editor.init);
             reader.readAsText(f);
         },
         startnew: function() {
@@ -323,7 +324,13 @@
             state.multiselect.push(mbox);
         },
 
-        init: function(unsanitize) {
+        init: function() {
+            var unsanitize = false;
+            const f = state.xmlDoc.firstChild;
+            if(f.nodeType === 7 && f.target  === 'tst' && f.data === 'sanitized="true"') {
+                unsanitize = true;
+                f.remove();
+            }
 
             document.getElementById('headerviewer').style.display = 'none';
             
@@ -675,7 +682,7 @@
             // condition after last foliation
             const condition = par.querySelector('condition');
             const lastFoliation = par.querySelector('foliation:last-of-type');
-            lastFoliation.insertAdjacentElement('afterend',condition);
+            if(condition && lastFoliation) lastFoliation.insertAdjacentElement('afterend',condition);
 
             // add xml:lang to rubric, incipit, etc.
             const msItems = par.querySelectorAll('msContents > msItem');
@@ -888,7 +895,7 @@
                 return;
             lf.getItem(k).then(i => {
                 document.getElementById('openform').style.display = 'none';
-                file.parse(editor.init.bind(null,true),{target: {result: i}});
+                file.parse(editor.init,{target: {result: i}});
                 state.filename = k;
             });
         },
@@ -929,7 +936,11 @@
             editor.updateFields(docclone,true);
           
             autosaved.setFilename(docclone);
-            
+           
+            docclone.insertBefore(
+                docclone.createProcessingInstruction('tst','sanitized="true"'),
+                docclone.firstChild);
+
             lf.setItem(state.filename,xml.serialize(docclone));
         },
         saveStr: function(str) {
