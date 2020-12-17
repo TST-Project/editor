@@ -671,6 +671,11 @@
                 editionStmt.appendChild(orgName);
                 editionStmt.appendChild(state.xmlDoc.createTextNode('.'));
             }
+            
+            // condition after last foliation
+            const condition = par.querySelector('condition');
+            const lastFoliation = par.querySelector('foliation:last-of-type');
+            lastFoliation.insertAdjacentElement('afterend',condition);
 
             // add xml:lang to rubric, incipit, etc.
             const msItems = par.querySelectorAll('msContents > msItem');
