@@ -286,8 +286,10 @@
                     else if(f.value) return false;
                     else {
                         const opts = f.querySelectorAll('option');
-                        for(const o of opts)
-                            if(o.selected && !o.disabled) return false;
+                        for(const o of opts) {
+                            if(o.selected && !o.disabled && o.value)
+                                return false;
+                        }
                     }
                 }
                 return true;
