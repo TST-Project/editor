@@ -569,7 +569,7 @@
 
 <xsl:template match="x:objectDesc/@form">
   <tr>
-    <th>Format</th> <td><xsl:value-of select="."/></td>
+    <th>Format</th> <td><xsl:call-template name="capitalize"><xsl:with-param name="str" select="."/></xsl:call-template></td>
   </tr>
 </xsl:template>
 
@@ -767,10 +767,24 @@
             <xsl:text>: </xsl:text>
         </xsl:element>
       </xsl:if>
+      <xsl:if test="@style and not(@style='')">
+      <xsl:call-template name="capitalize">
+        <xsl:with-param name="str" select="@style"/>
+      </xsl:call-template>
+      <xsl:text>. </xsl:text>
+      </xsl:if>
       <xsl:if test="@columns and not(@columns='')">
         <xsl:variable name="q" select="translate(@columns,' ','-')"/>
         <xsl:call-template name="units">
             <xsl:with-param name="u">column</xsl:with-param>
+            <xsl:with-param name="q" select="$q"/>
+        </xsl:call-template>
+        <xsl:text>. </xsl:text>
+      </xsl:if>
+      <xsl:if test="@streams and not(@streams='')">
+        <xsl:variable name="q" select="translate(@streams,' ','-')"/>
+        <xsl:call-template name="units">
+            <xsl:with-param name="u">stream</xsl:with-param>
             <xsl:with-param name="q" select="$q"/>
         </xsl:call-template>
         <xsl:text>. </xsl:text>
