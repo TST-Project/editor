@@ -319,7 +319,7 @@ span.gap {
     background: linear-gradient(rgba(255,255,255,0), rgba(255,255,248) 60%);
 }
 
-#headereditor section > div :not(:last-child):not(li) {
+#headereditor section > div label,select:not(:last-child),input:not(:last-child),div:not(:last-child),span:not(:last-child) {
     margin-right: 1em;
 }
 
