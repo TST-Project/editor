@@ -731,12 +731,12 @@
                 </xsl:call-template>
             </xsl:element>
         </xsl:if>
-        <xsl:text>: </xsl:text>
 </xsl:template>
 
 <xsl:template match="x:objectDesc/x:supportDesc/x:foliation">
     <li>
         <xsl:call-template name="n-format"/>
+        <xsl:text>: </xsl:text>
         <xsl:apply-templates />
     </li>
 </xsl:template>
@@ -874,25 +874,82 @@
     <xsl:value-of select="substring($str,2,string-length($str)-1)"/>
 </xsl:template>
 
+<my:scriptRef>
+    <my:entry key="#modernRa">modern ra</my:entry>
+    <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
+    <my:entry key="#vaba">ba not distinguished</my:entry>
+    <my:entry key="#modernYa">modern ya</my:entry>
+    <my:entry key="#valapalagilaka">valapalagilaka</my:entry>
+    <my:entry key="#dotreph">dot reph</my:entry>
+</my:scriptRef>
+
+<my:media>
+    <my:entry key="ink">ink</my:entry>
+    <my:entry key="incised">incised</my:entry>
+    <my:entry key="black">black</my:entry>
+    <my:entry key="blue">blue</my:entry>
+    <my:entry key="red">red</my:entry>
+</my:media>
+
 <xsl:template match="x:handNote">
   <xsl:variable name="script" select="@script"/>
   <xsl:element name="li">  
     <xsl:attribute name="class">record_scripts</xsl:attribute>
     <xsl:attribute name="data-script"><xsl:value-of select="$script"/></xsl:attribute>
     <xsl:call-template name="n-format"/>
-    <xsl:text>(</xsl:text><xsl:value-of select="@scope"/><xsl:text>) </xsl:text>
-        <xsl:call-template name="splitlist">    
-            <xsl:with-param name="list" select="@script"/>
-        </xsl:call-template>
-    <xsl:text> script.</xsl:text>
-    <xsl:if test="@medium">
-        <xsl:text> </xsl:text>
-        <xsl:value-of select="@medium"/>
-        <xsl:text>. </xsl:text>
-    </xsl:if>
+    <xsl:text> (</xsl:text><xsl:value-of select="@scope"/><xsl:text>) </xsl:text>
+    <xsl:apply-templates select="@scribeRef"/>
+    
+    <xsl:element name="ul">
+        <xsl:element name="li">
+            <xsl:call-template name="splitlist">    
+                <xsl:with-param name="list" select="@script"/>
+            </xsl:call-template>
+            <xsl:text> script</xsl:text>
+            
+            <xsl:if test="@scriptRef and not(@scriptRef='')">
+                <xsl:text>: </xsl:text>
+                <xsl:call-template name="splitlist">
+                    <xsl:with-param name="list" select="@scriptRef"/>
+                    <xsl:with-param name="nocapitalize">true</xsl:with-param>
+                    <xsl:with-param name="map">my:scriptRef</xsl:with-param>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:text>.</xsl:text>
+
+            <xsl:if test="@medium and not(@medium='')">
+                <xsl:text> </xsl:text>
+                <xsl:variable name="donelist">
+                    <xsl:call-template name="splitlist">
+                        <xsl:with-param name="list" select="@medium"/>
+                        <xsl:with-param name="nocapitalize">true</xsl:with-param>
+                        <xsl:with-param name="map">my:media</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:call-template name="capitalize">
+                    <xsl:with-param name="str" select="$donelist"/>
+                </xsl:call-template>
+                <xsl:text>.</xsl:text>
+            </xsl:if>
+        </xsl:element>
+    </xsl:element>
     <xsl:apply-templates/>
   </xsl:element>
 </xsl:template>
+
+<my:scribes>
+    <my:entry key="#ArielTitleScribe">Ariel's title scribe</my:entry>
+    <my:entry key="#UmraosinghShergil">Umraosingh Sher-Gil</my:entry>
+</my:scribes>
+
+<xsl:template match="x:handNote/@scribeRef">
+    <xsl:if test="not(. = '')">
+        <xsl:variable name="scribe" select="."/>
+        <xsl:value-of select="document('')/*/my:scribes/my:entry[@key=$scribe]"/>
+        <xsl:text>. </xsl:text>
+    </xsl:if>
+</xsl:template>
+
 <xsl:template match="x:handNote/x:p">
     <ul><li><xsl:apply-templates/></li></ul>
 </xsl:template>

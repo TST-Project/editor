@@ -253,6 +253,14 @@
                     <option value="major">major</option>
                     <option value="minor">minor</option>
                 </select>
+                <label for="hd_handNote_scribeRef">Scribe</label>
+                <select name="handNote_scribeRef" id="hd_handNote_scribeRef" data-multi-attr="scribeRef">
+                    <option value="" selected></option>
+                    <option value="#ArielTitleScribe">Ariel's title scribe</option>
+                    <option value="#UmraosinghShergil">Umraosingh Sher-Gil</option>
+                </select>
+            </div>
+            <div>
                 <label for="hd_handNote_script">Script</label>
                 <select name="handNote_script" data-multi-attr="script">
                     <option value="" selected disabled></option>
@@ -264,6 +272,36 @@
                     <option value="nandinagari">Nandinagari</option>
                     <option value="telugu">Telugu</option>
                     <option value="tamil">Tamil</option>
+                </select>
+                <label for="#hd_handNote_scriptRef">Features</label>
+                <select name="handNote_scriptRef" class="multiselect" data-multi-attr="scriptRef" multiple>
+                    <optgroup label="Tamil">
+                        <option value="#modernRa"> modern ra</option>
+                    </optgroup>
+                    <optgroup label="Devanagari">
+                        <option value="#prsthamatra"> pṛṣṭhamātrā</option>
+                        <option value="#vaba"> no distinct ba</option>
+                    </optgroup>
+                    <optgroup label="Bengali">
+                        <option value="#modernRa"> modern ra</option>
+                        <option value="#modernYa"> modern ya</option>
+                    </optgroup>
+                    <optgroup label="Telugu">
+                        <option value="#valapalagilaka"> valapalagilaka</option>
+                    </optgroup>
+                    <optgroup label="Malayalam">
+                        <option value="#dotreph"> dot reph</option>
+                    </optgroup>
+                </select>
+                <label for="#hd_handNote_medium">Medium</label>
+                <select name="handNote_medium" class="multiselect" data-multi-attr="medium" multiple>
+                    <option value="ink"> ink</option>
+                    <optgroup label="colour">
+                        <option value="black"> black</option>
+                        <option value="blue"> blue</option>
+                        <option value="red"> red</option>
+                    </optgroup>
+                    <option value="incised"> incised</option>
                 </select>
             </div>
             <div>
