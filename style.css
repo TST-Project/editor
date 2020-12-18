@@ -319,8 +319,16 @@ span.gap {
     background: linear-gradient(rgba(255,255,255,0), rgba(255,255,248) 60%);
 }
 
-#headereditor section > div label,select:not(:last-child),input:not(:last-child),div:not(:last-child),span:not(:last-child) {
+.vsb-main:not(:last-child),
+#headereditor section > div select:not(:last-child),
+#headereditor section > div input:not(:last-child),
+#headereditor section > div > div:not(:last-child)
+{
     margin-right: 1em;
+}
+
+#headereditor section > div label {
+    margin-right: 0.5em;
 }
 
 #headereditor section > div .CodeMirror *, #headereditor .multi-item > div .CodeMirror * {
@@ -343,6 +351,12 @@ span.gap {
     margin-bottom: 0.8rem;
     margin-right: 0;
     align-items: center;
+    justify-content: space-between;
+}
+
+.rowpar {
+    flex-grow: 1;
+    margin-left: 1em;
 }
 
 #headereditor div.subrow label:first-child {
