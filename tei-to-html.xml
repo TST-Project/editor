@@ -875,10 +875,11 @@
 </xsl:template>
 
 <my:scriptRef>
-    <my:entry key="#modernRa">modern ra</my:entry>
+    <my:entry key="#tamilRa">modern ra</my:entry>
     <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
     <my:entry key="#vaba">ba not distinguished</my:entry>
-    <my:entry key="#modernYa">modern ya</my:entry>
+    <my:entry key="#bengaliRa">modern ra</my:entry>
+    <my:entry key="#bengaliYa">modern ya</my:entry>
     <my:entry key="#valapalagilaka">valapalagilaka</my:entry>
     <my:entry key="#dotreph">dot reph</my:entry>
 </my:scriptRef>

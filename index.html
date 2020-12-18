@@ -262,29 +262,28 @@
             </div>
             <div>
                 <label for="hd_handNote_script">Script</label>
-                <select name="handNote_script" data-multi-attr="script">
-                    <option value="" selected disabled></option>
-                    <option value="bengali">Bengali</option>
-                    <option value="devanagari">Devanagari</option>
-                    <option value="grantha">Grantha</option>
-                    <option value="latin">Latin</option>
-                    <option value="malayalam">Malayalam</option>
-                    <option value="nandinagari">Nandinagari</option>
-                    <option value="telugu">Telugu</option>
-                    <option value="tamil">Tamil</option>
+                <select name="handNote_script" class="multiselect" data-multi-attr="script" multiple>
+                    <option value="bengali"> Bengali</option>
+                    <option value="devanagari"> Devanagari</option>
+                    <option value="grantha"> Grantha</option>
+                    <option value="latin"> Latin</option>
+                    <option value="malayalam"> Malayalam</option>
+                    <option value="nandinagari"> Nandinagari</option>
+                    <option value="telugu"> Telugu</option>
+                    <option value="tamil"> Tamil</option>
                 </select>
                 <label for="#hd_handNote_scriptRef">Features</label>
                 <select name="handNote_scriptRef" class="multiselect" data-multi-attr="scriptRef" multiple>
                     <optgroup label="Tamil">
-                        <option value="#modernRa"> modern ra</option>
+                        <option value="#tamilRa"> modern ra</option>
                     </optgroup>
                     <optgroup label="Devanagari">
                         <option value="#prsthamatra"> pṛṣṭhamātrā</option>
                         <option value="#vaba"> no distinct ba</option>
                     </optgroup>
                     <optgroup label="Bengali">
-                        <option value="#modernRa"> modern ra</option>
-                        <option value="#modernYa"> modern ya</option>
+                        <option value="#bengaliRa"> modern ra</option>
+                        <option value="#bengaliYa"> modern ya</option>
                     </optgroup>
                     <optgroup label="Telugu">
                         <option value="#valapalagilaka"> valapalagilaka</option>

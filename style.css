@@ -585,6 +585,11 @@ h4 {
 .CodeMirror-empty.CodeMirror-focused { outline: none; }
 .CodeMirror pre.CodeMirror-placeholder { color: #999; }
 .CodeMirror-required { outline: 1px dashed red; }
+
+.caret {
+    right: 0;
+}
+
 /*
 .quillhidden {
     display: none;
