@@ -181,9 +181,9 @@
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="x:titleStmt/x:editor">
+<!--xsl:template match="x:titleStmt/x:editor">
     <h4>Edited by <xsl:apply-templates/></h4>
-</xsl:template>
+</xsl:template-->
 
 <xsl:template match="x:titleStmt/x:respStmt">
     <p><xsl:apply-templates/></p>
@@ -955,6 +955,7 @@
 
 <my:scribes>
     <my:entry key="#ArielTitleScribe">Ariel's title scribe</my:entry>
+    <my:entry key="#EdouardAriel">Edouard Ariel</my:entry>
     <my:entry key="#UmraosinghShergil">Umraosingh Sher-Gil</my:entry>
 </my:scribes>
 
@@ -1313,6 +1314,38 @@
             <xsl:attribute name="data-anno">piḷḷaiyār cuḻi (short)</xsl:attribute>
             <xsl:text>&#x0BF3;</xsl:text>
         </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:div1">
+    <xsl:element name="section">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="x:div2">
+    <xsl:element name="section">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="x:div3">
+    <xsl:element name="section">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:div1/x:head">
+    <xsl:element name="h2">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="x:div2/x:head">
+    <xsl:element name="h3">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="x:div3/x:head">
+    <xsl:element name="h4">
+        <xsl:apply-templates/>
+    </xsl:element>
 </xsl:template>
 
 <xsl:template match="@*|node()">
