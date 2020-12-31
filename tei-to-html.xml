@@ -1348,6 +1348,22 @@
     </xsl:element>
 </xsl:template>
 
+<xsl:template match="x:list">
+    <xsl:element name="ul">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="x:list[@rend='numbered']">
+    <xsl:element name="ol">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="x:item">
+    <xsl:element name="li">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+
 <xsl:template match="@*|node()">
     <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
