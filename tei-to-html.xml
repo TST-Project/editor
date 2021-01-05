@@ -156,6 +156,13 @@
     </xsl:element>
 </xsl:template>
 
+<xsl:template match="x:quote[@rend='block']">
+    <xsl:element name="blockquote">
+        <xsl:call-template name="lang"/>
+        <xsl:apply-templates />
+    </xsl:element>
+</xsl:template>
+
 <xsl:template match="x:foreign">
     <xsl:element name="em">
         <xsl:call-template name="lang"/>
@@ -828,6 +835,7 @@
 <my:subtype>
     <my:entry key="beginning">beginning</my:entry>
     <my:entry key="cover">cover</my:entry>
+    <my:entry key="detached">detached</my:entry>
     <my:entry key="end">end</my:entry>
     <my:entry key="intertextual">intertextual</my:entry>
     <my:entry key="marginal">marginal</my:entry>
