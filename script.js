@@ -406,8 +406,8 @@
             const getSchema = function(s) {
                 const schemae = {
                     transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied'], 
-                    descriptive_restricted: ['term','note','emph', 'title','locus','material','ref'],
-                    descriptive: ['p','term','note','emph', 'title','locus','material','ref'],
+                    descriptive_restricted: ['term','note','emph', 'title','locus','material','ref','q'],
+                    descriptive: ['p','term','note','emph', 'title','locus','material','ref','q','quote'],
                     names: ['persName','orgName','geogName'],
                 };
                 const langs = ['ta','ta-Taml','en','fr','pt','pi','sa'];
@@ -544,6 +544,22 @@
                             'target': null,
                         },
                     },
+
+                    q: {
+                        attrs: {
+                            'xml:lang': langs,
+                        },
+                        children: ['emph','persName']
+                    },
+
+                    quote: {
+                        attrs: {
+                            'xml:lang': langs,
+                            'rend': ['block'],
+                        },
+                        children: ['lg','emph','persName']
+                    },
+
                     // names
                     
                     persName: {
