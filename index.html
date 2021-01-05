@@ -325,12 +325,22 @@
         <div class="multi-item">
             <div>
                 <label for="hd_decoNote_type">Type</label>
-                <select data-multi-attr="type">
+                <select data-multi-attr="type" id="hd_decoNote_type" name="decoNote_type">
                     <option value="" selected disabled></option>
-                    <option value="marginal">Marginal</option>
-                    <option value="border">Border</option>
-                    <option value="illustration">Illustration</option>
-                    <option value="technical">Technical</option>
+                    <option value="diagram">diagram</option>
+                    <option value="doodle">doodle</option>
+                    <option value="drawing">drawing</option>
+                    <option value="painting">painting</option>
+                    <option value="table">table</option>
+                </select>
+                <label for="hd_decoNote_subtype">Placement</label>
+                <select data-multi-attr="subtype" id="hd_decoNote_subtype" name="decoNote_subtype">
+                    <option value="" selected disabled></option>
+                    <option value="beginning">beginning</option>
+                    <option value="cover">cover</option>
+                    <option value="end">end</option>
+                    <option value="intertextual">intertextual</option>
+                    <option value="marginal">marginal</option>
                 </select>
             </div>
             <div>
@@ -339,8 +349,46 @@
         </div>
     </div>
     <h4>Paratexts</h4>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > additions > p">
+    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > additions > desc">
         <div class="multi-item">
+            <div>
+                <label for="hd_addition_type">Type</label>
+                <select data-multi-attr="type" name="addition_type" id="hd_addition_type">
+                    <option value="" selected disabled></option>
+                    <optgroup label="structuring">
+                        <option value="chapter-heading">chapter heading</option>
+                        <option value="end-title">end title</option>
+                        <option value="heading">heading</option>
+                        <option value="intertitle">intertitle</option>
+                        <option value="register">register (index, glossary)</option>
+                        <option value="running-title">running title</option>
+                        <option value="table-of-contents">table of contents</option>
+                        <option value="title">title</option>
+                        <option value="verse-beginning">verse beginning</option>
+                    </optgroup>
+                    <optgroup label="commenting">
+                        <option value="gloss">gloss</option>
+                        <option value="note">text-related note</option>
+                    </optgroup>
+                    <optgroup label="documenting">
+                        <option value="blessing">blessing</option>
+                        <option value="dedication">dedication</option>
+                        <option value="invocation">invocation</option>
+                        <option value="preface">preface</option>
+                        <option value="satellite-stanza">satellite stanza</option>
+                        <option value="documenting-note">user-related note</option>
+                    </optgroup>
+                </select>
+                <label for="hd_addition_subtype">Placement</label>
+                <select data-multi-attr="subtype" id="hd_addition_subtype" name="addition_subtype">
+                    <option value="" selected disabled></option>
+                    <option value="beginning">beginning</option>
+                    <option value="cover">cover</option>
+                    <option value="end">end</option>
+                    <option value="intertextual">intertextual</option>
+                    <option value="marginal">marginal</option>
+                </select>
+            </div>
             <div>
                 <textarea rows="4" class="big" data-multi-select=":scope" data-schema="transcription descriptive names" placeholder="Marginalia, running titles, satellite stanzas, etc."></textarea>
             </div>

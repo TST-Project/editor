@@ -817,9 +817,34 @@
       </ul></td>
     </tr>
 </xsl:template>
+
+<my:decotype>
+    <my:entry key="diagram">diagram</my:entry>
+    <my:entry key="doodle">doodle</my:entry>
+    <my:entry key="drawing">drawing</my:entry>
+    <my:entry key="painting">painting</my:entry>
+    <my:entry key="table">table</my:entry>
+</my:decotype>
+<my:subtype>
+    <my:entry key="beginning">beginning</my:entry>
+    <my:entry key="cover">cover</my:entry>
+    <my:entry key="end">end</my:entry>
+    <my:entry key="intertextual">intertextual</my:entry>
+    <my:entry key="marginal">marginal</my:entry>
+</my:subtype>
+
 <xsl:template match="x:decoNote">
   <li>  
-    <xsl:text>(</xsl:text><xsl:value-of select="@type"/><xsl:text>) </xsl:text>
+    <xsl:element name="span">
+        <xsl:attribute name="class">type</xsl:attribute>
+        <xsl:variable name="type" select="@type"/>
+        <xsl:value-of select="document('')/*/my:decotype/my:entry[@key=$type]"/>
+        <xsl:if test="@subtype">
+            <xsl:text>, </xsl:text>
+            <xsl:variable name="subtype" select="@subtype"/>
+            <xsl:value-of select="document('')/*/my:subtype/my:entry[@key=$subtype]"/>
+        </xsl:if>
+    </xsl:element> 
     <xsl:apply-templates/>
   </li>
 </xsl:template>
@@ -990,6 +1015,40 @@
 </xsl:template>
 <xsl:template match="x:additions/x:p">
     <p><xsl:apply-templates /></p>
+</xsl:template>
+
+<my:additiontype>
+    <my:entry key="chapter-heading">chapter heading</my:entry>
+    <my:entry key="end-title">end title</my:entry>
+    <my:entry key="heading">heading</my:entry>
+    <my:entry key="intertitle">intertitle</my:entry>
+    <my:entry key="register">register</my:entry>
+    <my:entry key="running-title">running title</my:entry>
+    <my:entry key="title">title</my:entry>
+    <my:entry key="table-of-contents">table of contents</my:entry>
+    <my:entry key="verse-beginning">verse beginning</my:entry>
+    <my:entry key="gloss">gloss</my:entry>
+    <my:entry key="note">text-related note</my:entry>
+    <my:entry key="blessing">blessing</my:entry>
+    <my:entry key="dedication">dedication</my:entry>
+    <my:entry key="invocation">invocation</my:entry>
+    <my:entry key="preface">preface</my:entry>
+    <my:entry key="satellite-stanza">satellite stanza</my:entry>
+    <my:entry key="documenting-note">user-related note</my:entry>
+</my:additiontype>
+
+<xsl:template match="x:additions/x:desc">
+    <xsl:element name="span">
+        <xsl:attribute name="class">type</xsl:attribute>
+        <xsl:variable name="type" select="@type"/>
+        <xsl:value-of select="document('')/*/my:additiontype/my:entry[@key=$type]"/>
+        <xsl:if test="@subtype">
+            <xsl:text>, </xsl:text>
+            <xsl:variable name="subtype" select="@subtype"/>
+            <xsl:value-of select="document('')/*/my:subtype/my:entry[@key=$subtype]"/>
+        </xsl:if>
+    </xsl:element> 
+    <xsl:apply-templates/>
 </xsl:template>
 
 <xsl:template match="x:bindingDesc">
