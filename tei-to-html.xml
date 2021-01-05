@@ -848,8 +848,14 @@
                 <xsl:with-param name="map">my:subtype</xsl:with-param>
             </xsl:call-template>
         </xsl:if>
-    </xsl:element> 
-    <xsl:apply-templates/>
+    </xsl:element>
+    <xsl:if test="normalize-space(.) != ''">
+        <ul>
+            <li>
+                <xsl:apply-templates/>
+            </li>
+        </ul>
+    </xsl:if>
   </li>
 </xsl:template>
 <xsl:template match="x:decoNote/x:desc">
@@ -1035,12 +1041,16 @@
     <my:entry key="verse-beginning">verse beginning</my:entry>
     <my:entry key="correction">correction</my:entry>
     <my:entry key="gloss">gloss/commentary</my:entry>
-    <my:entry key="note">text-related note</my:entry>
+    <my:entry key="commenting-note">text-related note</my:entry>
     <my:entry key="blessing">blessing</my:entry>
     <my:entry key="dedication">dedication</my:entry>
     <my:entry key="invocation">invocation</my:entry>
+    <my:entry key="postface">postface</my:entry>
     <my:entry key="preface">preface</my:entry>
     <my:entry key="satellite-stanza">satellite stanza</my:entry>
+    <my:entry key="seal">seal</my:entry>
+    <my:entry key="shelfmark">shelfmark</my:entry>
+    <my:entry key="stamp">stamp</my:entry>
     <my:entry key="documenting-note">user-related note</my:entry>
 </my:additiontype>
 
