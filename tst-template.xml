@@ -23,8 +23,7 @@
                   <idno type="ancienne cote"></idno>
                </msIdentifier>
                <msContents class="">
-                  <summary>
-                  </summary>
+                  <summary></summary>
                   <msItem n="" defective="">
                      <title xml:lang="tam"></title>
                      <author xml:lang="tam"></author>
@@ -71,7 +70,6 @@
                     </decoNote>
                   </decoDesc>
                   <additions>
-                     <p></p>
                   </additions>
                   <bindingDesc>
                      <binding>
