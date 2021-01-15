@@ -129,7 +129,7 @@
                 tBoxDiv.myTarget = targ;
             }
 
-            tBoxDiv.appendChild(document.createTextNode(toolText));
+            tBoxDiv.append(toolText);
             tBoxDiv.myTarget = targ;
             tBox.appendChild(tBoxDiv);
             targ.addEventListener('mouseleave',toolTip.remove,{once: true});
@@ -269,7 +269,7 @@
                     else {
                         const newopt = document.createElement('option');
                         newopt.setAttribute('value',s);
-                        newopt.appendChild(document.createTextNode(s));
+                        newopt.append(s);
                         newopt.selected = true;
                         field.appendChild(newopt);
                     }
@@ -316,7 +316,7 @@
             const killbutton = dom.makeEl('button');
             killbutton.type = 'button';
             killbutton.classList.add('multi-kill');
-            killbutton.appendChild(document.createTextNode('X'));
+            killbutton.append('X');
             return killbutton;
         },
 
@@ -735,7 +735,7 @@
             const options = [...state.heditor.querySelectorAll(`[name=${sel}]`)].map(el => {
                 const opt = document.createElement('option');
                 opt.setAttribute('value',el.value);
-                opt.appendChild(document.createTextNode(el.value));
+                opt.append(el.value);
                 return opt;
             });
             const selects = state.heditor.querySelectorAll(`select[data-from=${sel}]`);
@@ -900,7 +900,7 @@
                 for(const k of ks) {
                     const newel = dom.makeEl('div');
                     newel.classList.add('autosaved');
-                    newel.appendChild(document.createTextNode(k));
+                    newel.append(k);
                     newel.dataset.storageKey = k;
                     const trashasset = document.querySelector('#assets #trash');
                     const trash = dom.makeEl('span');
@@ -1005,7 +1005,7 @@
             }
 
             button.classList.add('plusbutton');
-            button.appendChild(document.createTextNode('+'));
+            button.append('+');
             button.title = 'Add new section';
             button.myItem = emptyel;
             return button;
