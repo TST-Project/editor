@@ -25,6 +25,11 @@
     font-size: 1.2rem;
 }
 
+#footermessage {
+    position: absolute;
+    margin-top: 0.5em;
+}
+
 #newfile {
     cursor: pointer;
 }

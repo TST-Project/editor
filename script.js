@@ -220,12 +220,15 @@
             for(const t of ret.querySelectorAll('textarea'))
                 state.cmirror.push(editor.codeMirrorInit(t));
 
-            const dependentsel = [...state.heditor.querySelectorAll('[data-from]')].map(
-                el => el.dataset.from
+            const dependentsel = new Set(
+                [...state.heditor.querySelectorAll('[data-from]')].map(
+                    el => el.dataset.from
+                )
             );
-            for(const s of new Set(dependentsel)) editor.prepUpdate(s,ret);
-
-            return ret;
+            for(const s of dependentsel) {
+                editor.prepUpdate(s,ret);
+                editor.updateOptions(s);
+            }
         },
         destroy: function() {
             file.render(state.xmlDoc);
@@ -725,7 +728,7 @@
             const t = par || state.heditor;
             const field = t.querySelectorAll(`[name=${sel}]`);
             for(const f of field)
-                f.addEventListener('blur',function() {editor.updateOptions(sel);});
+                f.addEventListener('blur',editor.updateOptions.bind(null,sel));
         },
         
         updateOptions: function(sel) {
@@ -775,8 +778,10 @@
             if(!valtrim) {
                 if(!xmlEl) return;
                 else {
-                    if(attr)
-                        xmlEl.setAttribute(attr,'');
+                    if(attr && xmlEl.hasAttribute(attr)) {
+                        //xmlEl.setAttribute(attr,'');
+                        xmlEl.removeAttribute(attr);
+                    }
                     else
                         xmlEl.innerHTML = '';
                     return;
@@ -946,8 +951,9 @@
                 if(cm) cm.getTextArea().value = cm.getValue();
             for(const mb of state.multiselect) {
                 if(!mb) continue;
-                const vsbid = `btn-group-#${mb.origEl.id}`;
-                const selected = document.getElementById(vsbid).querySelectorAll('li.active');
+                const vsbel = document.getElementById(`btn-group-#${mb.origEl.id}`);
+                if(!vsbel) continue;
+                const selected = vsbel.querySelectorAll('li.active');
                 for(const s of selected) {
                     const o = mb.origEl.querySelector(`option[value='${CSS.escape(s.dataset.value)}']`);
                     if(o) o.selected = true;
@@ -961,7 +967,10 @@
                 docclone.createProcessingInstruction('tst','sanitized="true"'),
                 docclone.firstChild);
 
-            lf.setItem(state.filename,xml.serialize(docclone));
+            lf.setItem(state.filename,xml.serialize(docclone)).then( function() {
+                document.getElementById('footermessage').textContent =
+                `Autosaved: ${(new Date).toLocaleString()}.`;
+            });
         },
         saveStr: function(str) {
             autosaved.setFilename(state.xmlDoc);

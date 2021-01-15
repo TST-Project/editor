@@ -472,6 +472,7 @@
     <h3>History</h3>
     <div>
         <div>
+            <input autocomplete="off" type="text" step="any" id="hd_origDate_calendar" name="unit" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="calendar" hidden readonly value="gregorian">
             <label for="hd_origDate_when">Date</label>
             <input autocomplete="off" type="number" step="any" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when">
         </div>
@@ -523,6 +524,7 @@
 </section>
 </article>
 <article id="footer">
+    <div id="footermessage"></div>
     <div class="buttoncontainer row">
         <button type="button" id="updateheader">preview</button>
         <button type="button" id="cancelheader">cancel</button>
