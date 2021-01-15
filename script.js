@@ -41,6 +41,7 @@
         template: 'tst-template.xml',
         toplevel: 'teiHeader',
         savedtext: new Map(),
+        saveInterval: null,
     };
 
     const lf = window.localforage || null;
@@ -384,7 +385,8 @@
             heditor.querySelector('#hd_publisher').value = 'TST Project';
             heditor.querySelector('#hd_publish_date').value = new Date().getFullYear();
 
-            state.saveInterval = window.setInterval(autosaved.save,300000);
+            if(!state.saveInterval) 
+                state.saveInterval = window.setInterval(autosaved.save,300000);
         },
 
         checkInvalid: function() {
