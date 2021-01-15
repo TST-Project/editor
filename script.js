@@ -968,8 +968,15 @@
                 docclone.firstChild);
 
             lf.setItem(state.filename,xml.serialize(docclone)).then( function() {
-                document.getElementById('footermessage').textContent =
-                `Autosaved: ${(new Date).toLocaleString()}.`;
+                const footer = document.getElementById('footermessage');
+                footer.style.transition = 'unset';
+                footer.style.opacity = 0;
+                window.getComputedStyle(footer).opacity;
+                footer.style.transition = 'opacity 1s ease-in';
+                footer.textContent = `Autosaved ${(new Date).toLocaleString()}.`;
+                window.setTimeout(function() {
+                    footer.style.opacity = 1;
+                },1000);
             });
         },
         saveStr: function(str) {
