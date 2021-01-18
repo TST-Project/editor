@@ -454,6 +454,10 @@ span.gap {
     font-size: 1.2rem;
 }
 
+#headereditor input[readonly] {
+    background: #ddd;
+}
+
 .multiple {
     display: flex;
     flex-direction: column;
