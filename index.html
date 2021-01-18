@@ -122,30 +122,31 @@
     </div>
     <div>
         <label for="hd_extent_quantity" title="Give the full extent, including blank folios. In the description, you may be more specific.">Extent</label>
-        <input autocomplete="off" type="number" step="1" min="1" id="hd_extent_quantity" name="extent_quantity" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="quantity" required>
+        <input autocomplete="off" type="number" step="1" min="1" id="hd_extent_quantity" name="extent_quantity" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="quantity"  data-tip="Give the full extent, including blank folios." required>
         <!--label for="hd_extent_unit">Unit</label-->
         <select id="hd_extent_unit" name="extent_unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" required>
             <option value="folio" selected>folios</option>
             <option value="page">pages</option>
         </select>
         <textarea rows="2" id="hd_extent" name="hd_extent" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-schema="descriptive_restricted" placeholder="X guard folios, XX numbered folios, X blank folios"></textarea>
+        
     </div>
     <div>
         <label title="Size of the object, including the cover.">Overall size</label>
         <div>
             <input autocomplete="off" type="text" step="any" id="hd_support_overall_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object']" data-attr="unit" hidden readonly value="mm">
             <label for="hd_support_width">Width</label>
-            <input autocomplete="off" type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > width" data-attr="quantity">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > width" data-attr="quantity" data-tip="Width of the object, including cover.">
             <label>mm</label>
         </div>
         <div>
             <label for="hd_support_height">Height</label>
-            <input autocomplete="off" type="number" step="any" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > height" data-attr="quantity">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > height" data-attr="quantity" data-tip="Height of the object, including cover.">
             <label>mm</label>
         </div>
         <div>
             <label for="hd_support_depth">Depth</label>
-            <input autocomplete="off" type="number" step="any" id="hd_support_depth" name="depth" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > depth" data-attr="quantity">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_depth" name="depth" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > depth" data-attr="quantity" data-tip="Depth of the object, including cover.">
             <label>mm</label>
         </div>
     </div>
@@ -155,25 +156,25 @@
             <div class="subrow">
                 <input autocomplete="off" type="text" id="hd_support_leaf_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
                 <label for="hd_support_width">Width</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_width_min">Min</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_width_max">Max</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
                 <label>mm</label> 
             </div>
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
                 <label for="hd_support_height">Height</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_height_min">Min</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_height_min" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_min" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_height_max">Max</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_height_max" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_max" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
                 <label>mm</label> 
             </div>
         </div>
@@ -184,25 +185,25 @@
             <div class="subrow">
                 <input autocomplete="off" type="text" id="hd_support_written_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written']" data-attr="unit" hidden readonly value="mm">
                 <label for="hd_support_writtenWidth">Width</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_writtenWidth" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_writtenWidth_min">Min</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_writtenWidth" name="widthmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="widthmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_writtenWidth_max">Max</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_writtenWidth_max" name="widthmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth_max" name="widthmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
                 <label>mm</label> 
             </div>
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
                 <label for="hd_support_writtenHeight">Height</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_writtenHeight" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_writtenHeight_min">Min</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_writtenHeight" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_writtenHeight_max">Max</label>
-                <input autocomplete="off" type="number" step="any" id="hd_support_writtenHeight" name="heightmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
                 <label>mm</label> 
             </div>
         </div>
@@ -211,14 +212,14 @@
         <label for="hd_columns" title="One number, or two numbers separated by a space for a range.">Columns</label>
         <input autocomplete="off" type="text" id="hd_columns" name="columns" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="columns" placeholder="1" pattern="\d+\s*\d*" size="8">
         <label for="hd_streams" title="Number of textual streams per page">Streams</label>
-        <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8">
+        <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
     </div>
     <div>
         <label for="hd_layout_style">Style</label>
         <select autocomplete="off" id="hd_layout_style" name="style" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="style">
             <option value="" selected></option>
-            <option value="tripatha">Tripatha</option>
-            <option value="pancapatha">Pancapatha</option>
+            <option value="tripatha">Tripāṭha</option>
+            <option value="pancapatha">Pañcapāṭha</option>
         </select>
         <label for="hd_writtenLines" title="One number, or two numbers separated by a space for a range.">Lines per page (written)</label>
         <input autocomplete="off" type="text" id="hd_writtenLines" name="writtenLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="writtenLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
@@ -238,7 +239,7 @@
         <div class="multi-item">
             <div>
                 <label for="hd_foliation_n" title="A unique identifier. No spaces.">Unit name</label>
-                <input autocomplete="off" type="text"name="foliation_n" data-multi-attr="n" placeholder="U1" pattern="[^\s]+">
+                <input autocomplete="off" type="text"name="foliation_n" data-multi-attr="n" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
             </div>
             <div>
             <textarea rows="4" data-multi-select=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
@@ -320,7 +321,7 @@
             </div>
         </div>
     </div>
-    <h4>Decorations</h4>
+    <h4>Decorations &amp; Illustrations</h4>
     <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > decoDesc > decoNote">
         <div class="multi-item">
             <div>
@@ -460,7 +461,7 @@
                 <textarea rows="4" class="big" data-schema="transcription" data-multi-select="explicit"></textarea>
             </div>
             <div>
-                <label for="hd_msItem_finalRubric">Final Rubric</label>
+                <label for="hd_msItem_finalRubric" title="TEI finalRubric">Completion statement</label>
                 <textarea rows="4" class="big" data-schema="transcription" data-multi-select="finalRubric"></textarea>
             </div>
             <div>
@@ -474,15 +475,15 @@
         <div>
             <input autocomplete="off" type="text" step="any" id="hd_origDate_calendar" name="unit" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="calendar" hidden readonly value="gregorian">
             <label for="hd_origDate_when">Date</label>
-            <input autocomplete="off" type="number" step="any" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when">
         </div>
         <div>
             <label for="hd_origDate_notBefore">Not before</label>
-            <input autocomplete="off" type="number" step="any" id="hd_origDate_notBefore" name="origDate_notBefore" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notBefore">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_notBefore" name="origDate_notBefore" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notBefore">
         </div>
         <div>
             <label for="hd_origDate_notAfter">Not after</label>
-            <input autocomplete="off" type="number" step="any" id="hd_origDate_notBefore" name="origDate_notAfter" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notAfter">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_notBefore" name="origDate_notAfter" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notAfter">
         </div>
     </div>
     <div>

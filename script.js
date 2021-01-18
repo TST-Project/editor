@@ -101,6 +101,34 @@
                 targ = targ.parentNode;
             }
         },
+        tipShow: function(e) {
+            const el = e.target;
+            const tiptxt = el.dataset.tip;
+            const tipel = document.createElement('span');
+            tipel.classList.add('marginnote');
+            tipel.id = 'margintip';
+            tipel.style.position = 'absolute';
+            tipel.style.paddingLeft = '2rem';
+            tipel.style.width = '300px';
+            tipel.append(tiptxt);
+
+            const section = state.heditor.querySelector('section');
+            var y = 0;
+            var par = el;
+            while(par && par !== state.heditor && !isNaN(par.offsetTop)) {
+                y += par.offsetTop;
+                par = par.offsetParent;
+            }
+            const x = section.getBoundingClientRect().right;
+            tipel.style.top = y + 'px';
+            tipel.style.left = x + 'px';
+            state.heditor.appendChild(tipel);
+            el.myMarginnote = tipel;
+        },
+        tipRemove: function(e) {
+            const el = document.getElementById('margintip');
+            if(el) el.remove();
+        },
     };
 
     const toolTip = {
@@ -384,6 +412,11 @@
            
             for(const t of heditor.querySelectorAll('textarea'))
                 state.cmirror.push(editor.codeMirrorInit(t));
+
+            for(const t of heditor.querySelectorAll('[data-tip]')) {
+                t.addEventListener('focus',events.tipShow);
+                t.addEventListener('blur',events.tipRemove);
+            }
 
             heditor.querySelector('#hd_publisher').value = 'TST Project';
             heditor.querySelector('#hd_publish_date').value = new Date().getFullYear();

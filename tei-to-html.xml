@@ -846,7 +846,7 @@
 </xsl:template>
 <xsl:template match="x:decoDesc">
     <tr>
-      <th>Decorations</th>
+      <th>Decorations &amp; Illustrations</th>
       <td><ul>
         <xsl:apply-templates select="x:decoNote"/>
       </ul></td>
