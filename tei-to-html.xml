@@ -1503,6 +1503,15 @@
     </xsl:element>
 </xsl:template>
 
+<xsl:template match="x:interp">
+    <xsl:element name="span">
+        <xsl:attribute name="class">interp</xsl:attribute>
+        <xsl:attribute name="data-anno">
+            <xsl:value-of select="@type"/>
+        </xsl:attribute>
+    </xsl:element>
+</xsl:template>
+
 <xsl:template match="@*|node()">
     <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
