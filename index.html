@@ -211,8 +211,10 @@
     <div>
         <label for="hd_columns" title="One number, or two numbers separated by a space for a range.">Columns</label>
         <input autocomplete="off" type="text" id="hd_columns" name="columns" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="columns" placeholder="1" pattern="\d+\s*\d*" size="8">
-        <label for="hd_streams" title="Number of textual streams per page">Streams</label>
-        <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
+        <label for="hd_writtenLines" title="One number, or two numbers separated by a space for a range.">Lines per page (written)</label>
+        <input autocomplete="off" type="text" id="hd_writtenLines" name="writtenLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="writtenLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
+        <label for="hd_ruledLines" title="One number, or two numbers separated by a space for a range.">Lines per page (ruled)</label>
+        <input autocomplete="off" type="text" id="hd_ruledLines" name="ruledLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="ruledLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
     </div>
     <div>
         <label for="hd_layout_style">Style</label>
@@ -221,10 +223,8 @@
             <option value="tripatha">Tripāṭha</option>
             <option value="pancapatha">Pañcapāṭha</option>
         </select>
-        <label for="hd_writtenLines" title="One number, or two numbers separated by a space for a range.">Lines per page (written)</label>
-        <input autocomplete="off" type="text" id="hd_writtenLines" name="writtenLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="writtenLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
-        <label for="hd_ruledLines" title="One number, or two numbers separated by a space for a range.">Lines per page (ruled)</label>
-        <input autocomplete="off" type="text" id="hd_ruledLines" name="ruledLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="ruledLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
+        <label for="hd_streams" title="Number of textual streams per page">Streams</label>
+        <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
     </div>
     <div>
         <label for="hd_condition">Condition</label>

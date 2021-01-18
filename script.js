@@ -717,7 +717,7 @@
                 lineWrapping: true,
             });
             if(textarea.rows)
-                cm.setSize(null,`${textarea.rows * 2.1}rem`);
+                cm.setSize(null,`${textarea.rows * 2.4}rem`);
             //cm.performLint();
             return cm;
         },
