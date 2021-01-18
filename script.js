@@ -93,6 +93,12 @@
             else if(e.target.classList.contains('multi-kill')) {
                 editor.killMultiItem(e.target);
             }
+            else if(e.target.classList.contains('multi-up')) {
+                editor.upMultiItem(e.target);
+            }
+            else if(e.target.classList.contains('multi-down')) {
+                editor.downMultiItem(e.target);
+            }
         },
         bodyMouseover: function(e) {
             var targ = e.target.closest('[data-anno]');
@@ -257,6 +263,7 @@
                 editor.prepUpdate(s,ret);
                 editor.updateOptions(s);
             }
+            editor.updateButtonrows(par);
         },
         destroy: function() {
             file.render(state.xmlDoc);
@@ -338,14 +345,61 @@
                 );
                 for(const s of new Set(dependentsel)) editor.updateOptions(s);
             }
+            editor.updateButtonrows(multiItem.closest('.multiple'));
         },
-        
-        makeKillButton: function() {
+        upMultiItem: function(button) {
+            const multiItem = button.closest('.multi-item');
+            if(multiItem.previousElementSibling)
+                multiItem.parentNode.insertBefore(multiItem,multiItem.previousElementSibling);
+            editor.updateButtonrows(multiItem.parentNode);
+        },
+        downMultiItem: function(button) {
+            const multiItem = button.closest('.multi-item');
+            if(multiItem.nextElementSibling && !multiItem.nextElementSibling.classList.contains('plusbutton'))
+                multiItem.parentNode.insertBefore(multiItem.nextElementSibling,multiItem);
+            editor.updateButtonrows(multiItem.parentNode);
+        },
+       
+        makeButtonrow: function() {
+            const row = dom.makeEl('div');
+            row.classList.add('buttonrow');
             const killbutton = dom.makeEl('button');
             killbutton.type = 'button';
             killbutton.classList.add('multi-kill');
             killbutton.append('X');
-            return killbutton;
+            const upbutton = dom.makeEl('button');
+            upbutton.type = 'button';
+            upbutton.classList.add('multi-up');
+            upbutton.append('∧');
+            const downbutton = dom.makeEl('button');
+            downbutton.type = 'button';
+            downbutton.classList.add('multi-down');
+            downbutton.append('∨');
+            row.appendChild(upbutton);
+            row.appendChild(downbutton);
+            row.appendChild(killbutton);
+            return row;
+        },
+        
+        updateButtonrows: function(el) {
+            const items = [...el.querySelectorAll('.multi-item')];
+            if(items.length === 0) return;
+            const first = items.shift();
+            first.querySelector('.multi-up').disabled = true;
+            
+            const last = items.pop();
+            if(last) {
+                first.querySelector('.multi-down').disabled = false;
+                last.querySelector('.multi-up').disabled = false;
+                last.querySelector('.multi-down').disabled = true;
+            }
+            else
+                first.querySelector('.multi-down').disabled = true;
+
+            for(const i of items) {
+                i.querySelector('.multi-up').disabled = false;
+                i.querySelector('.multi-down').disabled = false;
+            }
         },
 
         makeMultiselect: function(el) {
@@ -380,8 +434,8 @@
                     
                     if(!field.hasOwnProperty('myItem')) {
                         field.myItem = field.removeChild(field.querySelector('.multi-item'));
-                        const killbutton = editor.makeKillButton();
-                        field.myItem.insertBefore(killbutton,field.myItem.firstChild);
+                        const buttonrow = editor.makeButtonrow();
+                        field.myItem.insertBefore(buttonrow,field.myItem.firstChild);
                     }
 
                     while(field.firstChild) field.firstChild.remove();
@@ -395,6 +449,7 @@
                         field.appendChild(newitem);
                     }
                     field.appendChild(dom.makePlusButton(field.myItem));
+                    editor.updateButtonrows(field);
                 }
                 else editor.fillFormField(field,toplevel,unsanitize);
             }

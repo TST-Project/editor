@@ -137,7 +137,13 @@ button {
     margin: 0.5em 0 0.5em 0.5em;
     background-color: rgb(240,202,121);
     border-color: rgb(240,202,121);
+    border-radius: 0.3rem;
     color: black;
+}
+
+button:disabled {
+    background-color: rgb(180,164,196);
+    border-color: rgb(180,164,196);
 }
 
 button:hover {
@@ -368,7 +374,7 @@ span.gap {
     min-width: 50px;
 }
 
-#headereditor .multi-item > div:not(.multi-kill) {
+#headereditor .multi-item > div:not(.buttonrow) {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -424,7 +430,7 @@ span.gap {
     flex-direction: column;
 }
 
-.multi-kill {
+.buttonrow {
     margin: 0 1em 1em 0;
     align-self: flex-end;
 }
@@ -437,7 +443,8 @@ span.gap {
     align-items: center;
     flex-grow: 1;
     width: 100%;
-    outline: 0.1rem solid #ff9900;
+    border: 0.1rem solid #ff9900;
+    border-radius: 0.3rem;
     padding: 0.5rem;
 }
 
@@ -450,6 +457,7 @@ span.gap {
     padding: 0 0.5rem 0 0.5rem;
     margin-right: 1em;
     margin-right: 1em;
+    border-radius: 0.3rem;
 }
 
 .multiple div.plusbutton:hover {
