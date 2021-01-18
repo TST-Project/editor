@@ -131,7 +131,7 @@
             state.heditor.appendChild(tipel);
             el.myMarginnote = tipel;
         },
-        tipRemove: function(e) {
+        tipRemove: function() {
             const el = document.getElementById('margintip');
             if(el) el.remove();
         },
@@ -227,6 +227,35 @@
             reader.onload = file.parse.bind(null,editor.init);
             reader.readAsText(f);
         },
+        
+        selectPart: function(e) {
+            const f = e.target.files[0];
+            const par = e.target.parentNode;
+            const reader = new FileReader();
+            const parse = function(par,e) {
+                const parsed = xml.parseString(e.target.result);
+                if(parsed) {
+                    const head = parsed.querySelector('titleStmt');
+                    const msDesc = parsed.querySelector('msDesc');
+                    if(msDesc) {
+                        const headEl = parsed.createElement('head');
+                        if(head) {
+                            headEl.innerHTML = head.innerHTML;
+                        }
+                        else
+                            headEl.textContent = 'MS part';
+                        msDesc.insertBefore(headEl,msDesc.firstChild);
+                        par.querySelector('textarea[data-multi-select=":scope"]').value = msDesc.innerHTML;
+                        par.querySelector('.msPart_head').textContent = headEl.textContent;
+                        par.querySelector('input[type="file"]').remove();
+                    }
+                }
+            };
+            reader.onload = parse.bind(null,par);
+            reader.readAsText(f);
+
+        },
+
         startnew: function() {
             document.getElementById('openform').style.display = 'none';
             state.filename = '[new file]';
@@ -251,7 +280,7 @@
             for(const m of ret.querySelectorAll('.multiselect'))
                 editor.makeMultiselect(m);
             
-            for(const t of ret.querySelectorAll('textarea'))
+            for(const t of ret.querySelectorAll('textarea:not(.noCodeMirror)'))
                 state.cmirror.push(editor.codeMirrorInit(t));
 
             const dependentsel = new Set(
@@ -263,11 +292,26 @@
                 editor.prepUpdate(s,ret);
                 editor.updateOptions(s);
             }
+            for(const f of ret.querySelectorAll('input[type="file"]'))
+                f.addEventListener('change',file.selectPart,false);
+
             editor.updateButtonrows(par);
         },
         destroy: function() {
             file.render(state.xmlDoc);
         },
+        
+        fillFixedField: function(field,toplevel) {
+            const selector = field.dataset.fixedSelect;
+            const xmlEl = (selector && selector !== ':scope') ?
+                toplevel.querySelector(selector) :
+                toplevel;
+            const attr = field.dataset.fixedAttr;
+            if(!xmlEl) return;
+            if(!attr) field.textContent = xmlEl.textContent;
+            else field.textContent = xmlEl.getAttribute(attr);
+        },
+
         fillFormField: function(field,toplevel,unsanitize) {
             const tounsanitize = unsanitize || field.tagName !== 'TEXTAREA';
             const selector = field.dataset.select || field.dataset.multiSelect;
@@ -382,6 +426,7 @@
         },
         
         updateButtonrows: function(el) {
+            if(!el) return;
             const items = [...el.querySelectorAll('.multi-item')];
             if(items.length === 0) return;
             const first = items.shift();
@@ -443,9 +488,17 @@
                     const els = state.xmlDoc.querySelectorAll(field.dataset.select);
                     for(const el of els) {
                         const newitem = field.myItem.cloneNode(true);
-                        const subfields = newitem.querySelectorAll('input,textarea,select');
+                        const subfields = newitem.querySelectorAll('input:not([type=file]),textarea,select');
                         for(const subfield of subfields) 
                             editor.fillFormField(subfield,el,unsanitize);
+
+                        if(field.classList.contains('file')) {
+                            for(const subfixed of newitem.querySelectorAll('[data-fixed-select]'))
+                                editor.fillFixedField(subfixed,el);
+                            const fileselector = newitem.querySelector('input[type="file"]');
+                            if(fileselector) fileselector.remove();
+                        }
+
                         field.appendChild(newitem);
                     }
                     field.appendChild(dom.makePlusButton(field.myItem));
@@ -465,7 +518,7 @@
             for(const m of heditor.querySelectorAll('.multiselect'))
                 editor.makeMultiselect(m);
            
-            for(const t of heditor.querySelectorAll('textarea'))
+            for(const t of heditor.querySelectorAll('textarea:not(.noCodeMirror)'))
                 state.cmirror.push(editor.codeMirrorInit(t));
 
             for(const t of heditor.querySelectorAll('[data-tip]')) {
@@ -506,7 +559,7 @@
                 const langs = ['ta','ta-Taml','en','fr','pt','pi','sa'];
                 const selected = s ? 
                     s.split(' ').map(str => schemae[str]) : 
-                    schemae.values();
+                    Object.values(schemae);
                 const tags = {
                     '!top': Array.prototype.concat(...selected),
                     '!attrs': {

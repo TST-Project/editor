@@ -220,8 +220,8 @@
         <label for="hd_layout_style">Style</label>
         <select autocomplete="off" id="hd_layout_style" name="style" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="style">
             <option value="" selected></option>
-            <option value="tripatha">Tripāṭha</option>
-            <option value="pancapatha">Pañcapāṭha</option>
+            <option value="tripāṭha">Tripāṭha</option>
+            <option value="pañcpāṭha">Pañcapāṭha</option>
         </select>
         <label for="hd_streams" title="Number of textual streams per page">Streams</label>
         <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
@@ -239,7 +239,7 @@
         <div class="multi-item">
             <div>
                 <label for="hd_foliation_n" title="A unique identifier. No spaces.">Unit name</label>
-                <input autocomplete="off" type="text"name="foliation_n" data-multi-attr="n" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
+                <input autocomplete="off" type="text" name="foliation_n" data-multi-attr="n" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
             </div>
             <div>
             <textarea rows="4" data-multi-select=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
@@ -470,12 +470,20 @@
             </div>
         </div>
     </div>
+    <h4>Import part/volume</h4>
+    <div class="multiple file" data-select="fileDesc > sourceDesc > msDesc > msPart">
+        <div class="multi-item">
+            <textarea autocomplete="off" type="text" class="noCodeMirror" data-multi-select=":scope" hidden readonly></textarea>
+            <div class="msPart_head" data-fixed-select="head"></div>
+            <input class="hd_msPart" autocomplete="off" type="file" name="msPart" accept=".xml">
+        </div>
+    </div>
     <h3>History</h3>
     <div>
         <div>
             <input autocomplete="off" type="text" step="any" id="hd_origDate_calendar" name="unit" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="calendar" hidden readonly value="gregorian">
             <label for="hd_origDate_when">Date</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when" data-tip="Year in the Gregorian calendar.">
         </div>
         <div>
             <label for="hd_origDate_notBefore">Not before</label>

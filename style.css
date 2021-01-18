@@ -450,6 +450,10 @@ span.gap {
     max-width: 110px;
 }
 
+#headereditor input[type="file"] {
+    font-size: 1.2rem;
+}
+
 .multiple {
     display: flex;
     flex-direction: column;
