@@ -94,6 +94,14 @@ hr {
     color: black;
 }
 
+.vsb-menu .multi li {
+    font-size: 1.2rem;
+}
+
+.vsb-menu .multi li.grouped-option {
+    font-size: 1.2rem;
+}
+
 .editbutton {
     cursor: pointer;
     float: right;
@@ -401,6 +409,7 @@ span.gap {
 #headereditor label[title] {
     cursor: help;
     text-decoration: underline dotted black;
+    text-decoration-thickness: 1px;
 }
 
 /*
@@ -410,9 +419,11 @@ span.gap {
 }
 */
 #headereditor input {
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-radius: 0.3rem;
     /*margin-left: 1rem;*/
+    font-size: 1.4rem;
+    font-family: brill, et-book, serif;
 }
 
 #headereditor input[type="number"], #hd_writtenLines {
@@ -422,7 +433,6 @@ span.gap {
 #headereditor input[type="text"] {
     text-align: left;
     flex-grow: 1;
-    font-size: 1.2rem;
 }
 
 #headereditor input.viaf[type="text"] {
@@ -512,9 +522,11 @@ span.gap {
 }
 
 select {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-family: brill, et-book, serif;
     padding: 0.3rem;
     border-radius: 0.3rem;
+    background: white;
 }
 
 #headereditor select.lang {
@@ -614,6 +626,8 @@ h4 {
     border: 1px solid #ddd;
     resize: vertical;
     border-radius: 0.3rem;
+    font-family: brill, et-book, serif;
+    font-size: 1.4rem;
 }
 
 .CodeMirror-empty { /*outline: 1px solid #c22;*/ }
