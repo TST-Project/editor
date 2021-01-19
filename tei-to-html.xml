@@ -961,6 +961,8 @@
 
 <my:scriptRef>
     <my:entry key="#tamilRa">modern ra</my:entry>
+    <my:entry key="#tamilO">long ō</my:entry>
+    <my:entry key="#tamilE">long ē</my:entry>
     <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
     <my:entry key="#vaba">ba not distinguished</my:entry>
     <my:entry key="#sthascha">stha written as scha</my:entry>
