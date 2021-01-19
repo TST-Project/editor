@@ -1,6 +1,6 @@
 # TST editor
 
-This repository contains an editing interface for the TST project. It has been tested on the latest versions of Firefox and Chrome. To use the editor, go to https://tst-project.github.io/Tamil/tst-editor/
+This repository contains an editing interface for the TST project. It has been tested on the latest versions of Firefox and Chrome. To use the editor, go to https://tst-project.github.io/editor/
 
 ## How to create a manuscript record
 
