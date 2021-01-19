@@ -62,7 +62,12 @@
     </div>
     <div>
         <label for="hd_repository">Repository</label>
-        <input autocomplete="off" type="text" id="hd_repository" name="repository" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName" value="Bibliothèque nationale de France. Département des Manuscrits" readonly>
+        <select required autocomplete="off" type="text" id="hd_repository" name="repository" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName">
+            <option value="Bibliothèque nationale de France. Département des Manuscrits" selected>Bibliothèque nationale de France. Département des Manuscrits</option>
+            <option value="Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky">Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky</option>
+            <option value="Bodleian Library, University of Oxford">Bodleian Library, University of Oxford</option>
+            <option value="Cambridge University Library">Cambridge University Library</option>
+        </select>
     </div>
     <div>
         <label for="hd_title">Manuscript Title</label>
@@ -335,13 +340,16 @@
                     <option value="doodle">doodle</option>
                     <option value="drawing">drawing</option>
                     <option value="painting">painting</option>
+                    <option value="paraph">paraph</option>
                     <option value="table">table</option>
                 </select>
                 <label for="hd_decoNote_subtype">Placement</label>
                 <select data-multi-attr="subtype" id="hd_decoNote_subtype" name="decoNote_subtype" class="multiselect" multiple>
                     <option value="beginning"> beginning</option>
                     <option value="cover"> cover</option>
+                    <option value="detached"> detached</option>
                     <option value="end"> end</option>
+                    <option value="inserted"> inserted</option>
                     <option value="intertextual"> intertextual</option>
                     <option value="marginal"> marginal</option>
                 </select>
@@ -394,6 +402,7 @@
                     <option value="cover"> cover</option>
                     <option value="detached"> detached</option>
                     <option value="end"> end</option>
+                    <option value="inserted"> inserted</option>
                     <option value="intertextual"> intertextual</option>
                     <option value="marginal"> marginal</option>
                 </select>
@@ -407,12 +416,11 @@
     <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > msContents > msItem">
         <div class="multi-item">
             <div>
-                <div></div>
                 <div>
                     <label for="hd_msItem_n" title="As defined in the 'Foliation' section.">Codicological unit</label>
                     <select data-multi-attr="n" data-from="foliation_n"></select>
                 </div>
-                <select data-multi-attr="defective" required>
+                <select data-multi-attr="defective" style="flex-grow: 0.5" required>
                     <option value="false">Complete</option>
                     <option value="true">Incomplete</option>
                 </select>
