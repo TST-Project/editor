@@ -565,10 +565,11 @@
             const getSchema = function(s) {
                 const schemae = {
                     transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied','interp','g'], 
-                    descriptive_restricted: ['term','note','emph', 'title','locus','material','ref','q'],
-                    descriptive: ['p','term','note','emph', 'title','locus','material','ref','q','quote'],
+                    descriptive_restricted: ['term','note','emph', 'title','locus','material','ref','q','date'],
                     names: ['persName','orgName','geogName'],
                 };
+                schemae.descriptive = ['p',...schemae.descriptive_restricted,'quote'];
+
                 const langs = ['ta','ta-Taml','en','fr','pt','pi','sa'];
                 const selected = s ? 
                     s.split(' ').map(str => schemae[str]) : 
@@ -667,6 +668,11 @@
                     },
 
                     // descriptive
+                    date: {
+                        attrs: {
+                            'when': null,
+                        },
+                    },
                     p: {
                         attrs: {
                             'xml:lang': langs,
