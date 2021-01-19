@@ -324,10 +324,23 @@
             if(!xmlEl) return;
 
             if(!attr) {
-                field.value = tounsanitize ?
+                const value = tounsanitize ?
                     xml.unsanitize(xmlEl.innerHTML) :
                     xml.innerXML(xmlEl);
                 //  document.importNode(xmlEl,true).innerHTML.trim();
+                if(field.tagName === 'SELECT') {
+                    const opt = field.querySelector(`option[value='${CSS.escape(value)}']`);
+                    if(opt) opt.selected = true;
+                    else {
+                        const newopt = document.createElement('option');
+                        newopt.setAttribute('value',value);
+                        newopt.append(value);
+                        newopt.selected = true;
+                        field.appendChild(newopt);
+                    }
+                }
+                else
+                    field.value = value;
                 return;
             }
 
