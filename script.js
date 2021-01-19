@@ -551,7 +551,7 @@
         codeMirrorInit: function(textarea) {
             const getSchema = function(s) {
                 const schemae = {
-                    transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied','interp'], 
+                    transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied','interp','g'], 
                     descriptive_restricted: ['term','note','emph', 'title','locus','material','ref','q'],
                     descriptive: ['p','term','note','emph', 'title','locus','material','ref','q','quote'],
                     names: ['persName','orgName','geogName'],
@@ -600,6 +600,11 @@
                             type: ['chapter-heading','end-title','heading','intertitle','register','running-title','title','table-of-contents','verse-beginning','correction','gloss','commenting-note','blessing','dedication','invocation','postface','preface','satellite-stanza','shelfmark','stamp','documenting-note'],
                         },
                         children: [...schemae.transcription,...schemae.names],
+                    },
+                    g: {
+                        attrs: {
+                            ref: ['#pcl','#pcs'],
+                        },
                     },
                     
                     // Text emendations
