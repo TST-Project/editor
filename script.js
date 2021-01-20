@@ -309,7 +309,7 @@
             const attr = field.dataset.fixedAttr;
             if(!xmlEl) return;
             if(!attr) field.textContent = xmlEl.textContent;
-            else field.textContent = xmlEl.getAttribute(attr);
+            else field.textContent = xmlEl.getAttribute(attr) || '';
         },
 
         fillFormField: function(field,toplevel,unsanitize) {
@@ -322,7 +322,46 @@
             const prefix = field.dataset.prefix;
 
             if(!xmlEl) return;
+            
+            const getVal = function(el,attr,tounsanitize) {
+                if(!attr) {
+                    return tounsanitize ?
+                        xml.unsanitize(el.innerHTML) :
+                        xml.innerXML(el);
+                }
+                else {
+                    const vv = el.getAttribute(attr);
+                    return vv ? (tounsanitize ? xml.unsanitize(vv,true).trim() : vv.trim()) : '';
+                }
+            };
 
+            const value = getVal(xmlEl,attr,tounsanitize);
+            if(value === '' && !prefix) return;
+            if(field.tagName !== 'SELECT') {
+                field.value = prefix ? 
+                    value.replace(new RegExp('^'+prefix),'') :
+                    value;
+                return;
+            }
+            else {
+                const split = field.multiple ?
+                    value.split(' ') : [value];    
+                const selected = prefix ?
+                    split.map(s => s.replace(new RegExp('^'+prefix),'')) :
+                    split;
+                for(const s of selected) {
+                    const opt = field.querySelector(`option[value='${CSS.escape(s)}']`);
+                    if(opt) opt.selected = true;
+                    else {
+                        const newopt = document.createElement('option');
+                        newopt.setAttribute('value',s);
+                        newopt.append(s);
+                        newopt.selected = true;
+                        field.appendChild(newopt);
+                    }
+                }
+            }
+            /*
             if(!attr) {
                 const value = tounsanitize ?
                     xml.unsanitize(xmlEl.innerHTML) :
@@ -372,6 +411,7 @@
                     value.replace(new RegExp('^'+prefix),'') :
                     value;
             }
+            */
         },
 
         hideEmpty: function() {
@@ -935,42 +975,49 @@
         },
         updateXMLField: function(field,toplevel,sanitized) {
             const tosanitize = sanitized || field.tagName !== 'TEXTAREA' || false;
-            let value = field.type === 'text' ? 
-                field.value.trim() : 
-                field.value;
             const selector = field.dataset.select || field.dataset.multiSelect;
-            let xmlEl = (selector && selector !== ':scope') ?
+            const selected = (selector && selector !== ':scope') ?
                 toplevel.querySelector(selector) :
                 toplevel;
             const attr = field.dataset.attr || field.dataset.multiAttr;
             const prefix = field.dataset.prefix;
+            const valtrimmed = field.value.trim();
 
-            const valtrim = value.trim();
-            if(!valtrim) {
-                if(!xmlEl) return;
-                else {
-                    if(attr && xmlEl.hasAttribute(attr)) {
-                        //xmlEl.setAttribute(attr,'');
-                        xmlEl.removeAttribute(attr);
+            if(!valtrimmed) {
+                if(selected) {
+                    if(attr && selected.hasAttribute(attr)) {
+                        selected.removeAttribute(attr);
+                        // should we make empty attributes?
                     }
                     else
-                        xmlEl.innerHTML = '';
-                    return;
+                        selected.innerHTML = '';
+                        // should we save just spaces?
                 }
-            }
-            if(!xmlEl) xmlEl = xml.makeElDeep(selector,toplevel);
-            if(field.multiple) {
-                const selected = [];
-                for(const opt of field.querySelectorAll('option'))
-                    if(opt.selected) selected.push(opt.value);
-                value = selected.join(' ');
+                return;
             }
 
-            if(prefix) 
-                value = prefix + value;
+            const xmlEl = selected || xml.makeElDeep(selector,toplevel);
+            
+            const getVal = function(field) {
+                let val = field.type === 'text' ? 
+                    valtrimmed : 
+                    field.value;
+
+                if(field.multiple) {
+                    const selected = [];
+                    for(const opt of field.querySelectorAll('option'))
+                        if(opt.selected) selected.push(opt.value);
+                    val = selected.join(' ');
+                }
+
+                if(prefix) 
+                    val = prefix + val;
+                return val;
+            };
+            
+            const value = getVal(field);
+
             if(attr) {
-                //tosanitize ? 
-                //    xmlEl.setAttribute(attr,xml.sanitize(value)) :
                 // no need to sanitize attributes
                 xmlEl.setAttribute(attr,value);
             }
