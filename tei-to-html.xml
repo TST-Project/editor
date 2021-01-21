@@ -960,7 +960,10 @@
 </xsl:template>
 
 <my:scriptRef>
-    <my:entry key="#tamilRa">modern ra</my:entry>
+    <my:entry key="#tamilPulliNone">no puḷḷi</my:entry>
+    <my:entry key="#tamilPulliSporadic">sporadic puḷḷi</my:entry>
+    <my:entry key="#tamilPulliRegular">regular puḷḷi</my:entry>
+    <my:entry key="#tamilRa">closed kāl</my:entry>
     <my:entry key="#tamilO">long ō</my:entry>
     <my:entry key="#tamilE">long ē</my:entry>
     <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
