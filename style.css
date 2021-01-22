@@ -102,6 +102,7 @@ hr {
 .vsb-menu {
     margin-left: 10px;
     margin-top: -10px;
+    width: 100%;
 }
 
 .vsb-menu .multi li {
@@ -545,6 +546,7 @@ select {
     padding: 0.3rem;
     border-radius: 0.3rem;
     background: white;
+    flex-grow: 1;
 }
 
 #headereditor select.lang {
