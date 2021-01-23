@@ -1083,7 +1083,7 @@
     <my:entry key="correction">correction</my:entry>
     <my:entry key="gloss">gloss/commentary</my:entry>
     <my:entry key="commenting-note">text-related note</my:entry>
-    <my:entry key="blessing">blessing</my:entry>
+    <my:entry key="blessing">blessing/benediction</my:entry>
     <my:entry key="dedication">dedication</my:entry>
     <my:entry key="invocation">invocation</my:entry>
     <my:entry key="postface">postface</my:entry>
