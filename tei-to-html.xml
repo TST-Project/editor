@@ -115,13 +115,29 @@
 <xsl:template match="x:lb">
     <xsl:element name="span">
         <xsl:attribute name="class">lb</xsl:attribute>
-        <xsl:apply-templates select="x:lb/@n"/>
+        <xsl:attribute name="lang">en</xsl:attribute>
+        <xsl:apply-templates select="@n"/>
         <xsl:text>&#x2424;</xsl:text>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="x:lb/@n | x:pb/@n">
+<xsl:template match="x:lb/@n">
     <xsl:attribute name="data-anno">
+        <xsl:text>line </xsl:text>
+        <xsl:value-of select="."/>
+    </xsl:attribute>
+</xsl:template>
+<xsl:template match="x:pb/@n">
+    <xsl:attribute name="data-anno">
+        <xsl:variable name="unit" select="//x:extent/x:measure/@unit"/>
+        <xsl:choose>
+            <xsl:when test="$unit">
+                <xsl:value-of select="$unit"/><xsl:text> </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>page </xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:value-of select="."/>
     </xsl:attribute>
 </xsl:template>
@@ -129,7 +145,8 @@
 <xsl:template match="x:pb">
 <xsl:element name="span">
     <xsl:attribute name="class">pb</xsl:attribute>
-    <xsl:apply-templates select="x:pb/@n"/>
+    <xsl:attribute name="lang">en</xsl:attribute>
+    <xsl:apply-templates select="@n"/>
     <xsl:text>&#x2424;</xsl:text>
 </xsl:element>
 </xsl:template>
