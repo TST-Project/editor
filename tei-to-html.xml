@@ -72,7 +72,7 @@
 <xsl:template match="x:milestone">
     <xsl:element name="span">
         <xsl:attribute name="class">milestone</xsl:attribute>
-        <xsl:attribute name="lang">eng</xsl:attribute>
+        <xsl:attribute name="lang">en</xsl:attribute>
         <xsl:apply-templates select="@facs"/>
         <xsl:choose>
         <xsl:when test="@unit">
@@ -884,8 +884,10 @@
     <my:entry key="end">end</my:entry>
     <my:entry key="flyleaf">flyleaf</my:entry>
     <my:entry key="guard-folio">guard folio</my:entry>
+    <my:entry key="inserted">inserted</my:entry>
     <my:entry key="intertextual">intertextual</my:entry>
     <my:entry key="marginal">marginal</my:entry>
+    <my:entry key="spine">spine</my:entry>
     <my:entry key="title-page">title page</my:entry>
 </my:subtype>
 
@@ -1097,13 +1099,14 @@
     <my:entry key="intertitle">intertitle</my:entry>
     <my:entry key="register">register</my:entry>
     <my:entry key="running-title">running title</my:entry>
-    <my:entry key="title">title</my:entry>
     <my:entry key="table-of-contents">table of contents</my:entry>
+    <my:entry key="title">title</my:entry>
     <my:entry key="verse-beginning">verse beginning</my:entry>
     <my:entry key="correction">correction</my:entry>
     <my:entry key="gloss">gloss/commentary</my:entry>
     <my:entry key="commenting-note">text-related note</my:entry>
     <my:entry key="blessing">blessing/benediction</my:entry>
+    <my:entry key="completion-statement">completion statement</my:entry>
     <my:entry key="dedication">dedication</my:entry>
     <my:entry key="invocation">invocation</my:entry>
     <my:entry key="postface">postface</my:entry>
@@ -1272,7 +1275,7 @@
 
 <xsl:template match="x:text/@n">
     <xsl:element name="h2">
-        <xsl:attribute name="lang">eng</xsl:attribute>
+        <xsl:attribute name="lang">en</xsl:attribute>
         <xsl:value-of select="."/>
     </xsl:element>
 </xsl:template>
@@ -1534,6 +1537,16 @@
         <xsl:attribute name="data-anno">
             <xsl:value-of select="@type"/>
         </xsl:attribute>
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:caesura">
+<xsl:variable name="pretext" select="preceding::text()[1]"/>
+<xsl:if test="normalize-space(substring($pretext,string-length($pretext))) != ''">
+    <span class="caesura">-</span>
+</xsl:if>
+    <xsl:element name="br">
+    <xsl:attribute name="class">caesura</xsl:attribute>
     </xsl:element>
 </xsl:template>
 

@@ -356,6 +356,7 @@
                     <option value="inserted"> inserted</option>
                     <option value="intertextual"> intertextual</option>
                     <option value="marginal"> marginal</option>
+                    <option value="spine"> spine</option>
                     <option value="title-page"> title page</option>
                 </select>
             </div>
@@ -370,35 +371,35 @@
         <div class="multi-item">
             <div>
                 <label for="hd_addition_type">Type</label>
-                <select data-multi-attr="type" name="addition_type" id="hd_addition_type">
-                    <option value="" selected disabled></option>
+                <select data-multi-attr="type" name="addition_type" id="hd_addition_type" class="multiselect" multiple>
                     <optgroup label="structuring">
-                        <option value="chapter-heading">chapter heading</option>
-                        <option value="end-title">end title</option>
-                        <option value="heading">heading</option>
-                        <option value="intertitle">intertitle</option>
-                        <option value="register">register (index, glossary)</option>
-                        <option value="running-title">running title</option>
-                        <option value="table-of-contents">table of contents</option>
-                        <option value="title">title</option>
-                        <option value="verse-beginning">verse beginning</option>
+                        <option value="chapter-heading"> chapter heading</option>
+                        <option value="end-title"> end title</option>
+                        <option value="heading"> heading</option>
+                        <option value="intertitle"> intertitle</option>
+                        <option value="register"> register (index, glossary)</option>
+                        <option value="running-title"> running title</option>
+                        <option value="table-of-contents"> table of contents</option>
+                        <option value="title"> title</option>
+                        <option value="verse-beginning"> verse beginning</option>
                     </optgroup>
                     <optgroup label="commenting">
-                        <option value="correction">correction</option>
-                        <option value="gloss">gloss/commentary</option>
-                        <option value="commenting-note">text-related note</option>
+                        <option value="correction"> correction</option>
+                        <option value="gloss"> gloss/commentary</option>
+                        <option value="commenting-note"> text-related note</option>
                     </optgroup>
                     <optgroup label="documenting">
-                        <option value="blessing">blessing/benediction</option>
-                        <option value="dedication">dedication</option>
-                        <option value="invocation">invocation</option>
-                        <option value="postface">postface</option>
-                        <option value="preface">preface</option>
-                        <option value="satellite-stanza">satellite stanza</option>
-                        <option value="seal">seal</option>
-                        <option value="shelfmark">shelfmark</option>
-                        <option value="stamp">stamp</option>
-                        <option value="documenting-note">user-related note</option>
+                        <option value="blessing"> blessing/benediction</option>
+                        <option value="completion-statement"> completion statement</option>
+                        <option value="dedication"> dedication</option>
+                        <option value="invocation"> invocation</option>
+                        <option value="postface"> postface</option>
+                        <option value="preface"> preface</option>
+                        <option value="satellite-stanza"> satellite stanza</option>
+                        <option value="seal"> seal</option>
+                        <option value="shelfmark"> shelfmark</option>
+                        <option value="stamp"> stamp</option>
+                        <option value="documenting-note"> user-related note</option>
                     </optgroup>
                 </select>
                 <label for="hd_addition_subtype">Placement</label>
@@ -407,9 +408,14 @@
                     <option value="cover"> cover</option>
                     <option value="detached"> detached</option>
                     <option value="end"> end</option>
+                    <option value="flyleaf"> flyleaf</option>
+                    <option value="guard-folio"> guard folio</option>
                     <option value="inserted"> inserted</option>
                     <option value="intertextual"> intertextual</option>
                     <option value="marginal"> marginal</option>
+                    <option value="spine"> spine</option>
+                    <option value="title-page"> title page</option>
+
                 </select>
             </div>
             <div>
