@@ -1006,7 +1006,9 @@
 <my:media>
     <my:entry key="ink">ink</my:entry>
     <my:entry key="incised">incised</my:entry>
+    <my:entry key="pencil">pencil</my:entry>
     <my:entry key="black">black</my:entry>
+    <my:entry key="brown">brown</my:entry>
     <my:entry key="blue">blue</my:entry>
     <my:entry key="red">red</my:entry>
 </my:media>
