@@ -605,7 +605,7 @@
             const getSchema = function(s) {
                 const schemae = {
                     transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied','interp','g'], 
-                    descriptive_restricted: ['term','note','emph', 'title','locus','material','ref','q','date','watermark'],
+                    descriptive_restricted: ['term','note','emph','ex','expan','title','locus','material','ref','q','date','watermark','list','item'],
                     names: ['persName','orgName','geogName'],
                 };
                 schemae.descriptive = ['p',...schemae.descriptive_restricted,'quote'];
@@ -712,6 +712,25 @@
                         attrs: {
                             'when': null,
                         },
+                    },
+                    ex: {
+                        attrs: {
+                            'xml:lang': langs,
+                        }
+                    },
+                    expan: {
+                        attrs: {
+                            'xml:lang': langs,
+                        }
+                    },
+                    item: {
+                        children: ['emph','del','add','expan','subst','title','locus']
+                    },
+                    list: {
+                        attrs: {
+                            'rend': ['numbered']
+                        },
+                        children: ['item']
                     },
                     p: {
                         attrs: {
