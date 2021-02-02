@@ -787,8 +787,10 @@
 
 <xsl:template match="x:objectDesc/x:supportDesc/x:foliation">
     <li>
-        <xsl:call-template name="n-format"/>
-        <xsl:text>: </xsl:text>
+        <xsl:if test="@n">
+            <xsl:call-template name="n-format"/>
+            <xsl:text>: </xsl:text>
+        </xsl:if>
         <xsl:apply-templates />
     </li>
 </xsl:template>
@@ -1558,6 +1560,24 @@
 </xsl:if>
     <xsl:element name="br">
     <xsl:attribute name="class">caesura</xsl:attribute>
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:expan">
+    <xsl:element name="span">
+        <xsl:call-template name="lang"/>
+        <xsl:attribute name="class">expan</xsl:attribute>
+        <xsl:attribute name="data-anno">abbreviation</xsl:attribute>
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:ex">
+    <xsl:element name="span">
+        <xsl:call-template name="lang"/>
+        <xsl:attribute name="class">ex</xsl:attribute>
+        <xsl:attribute name="data-anno">editorial expansion</xsl:attribute>
+        <xsl:apply-templates/>
     </xsl:element>
 </xsl:template>
 
