@@ -147,6 +147,7 @@
     <xsl:attribute name="class">pb</xsl:attribute>
     <xsl:attribute name="lang">en</xsl:attribute>
     <xsl:apply-templates select="@n"/>
+    <xsl:apply-templates select="@facs"/>
     <xsl:text>&#x2424;</xsl:text>
 </xsl:element>
 </xsl:template>
