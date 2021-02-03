@@ -102,7 +102,7 @@ hr {
 .vsb-menu {
     margin-left: 10px;
     margin-top: -10px;
-    width: 100%;
+    min-width: 100%;
 }
 
 .vsb-menu .multi li {
