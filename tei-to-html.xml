@@ -993,10 +993,12 @@
     <my:entry key="#tamilPulliRegular">regular puḷḷi</my:entry>
     <my:entry key="#tamilRa">closed kāl</my:entry>
     <my:entry key="#tamilOE">long ō/ē (double-curled kōmpu)</my:entry>
+    <my:entry key="#tamilRRa"> modern ṟa</my:entry>
     <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
     <my:entry key="#vaba">ba not distinguished</my:entry>
     <my:entry key="#sthascha">stha written as scha</my:entry>
-    <my:entry key="#bengaliRaMiddot">ra with middot</my:entry>
+    <my:entry key="#bengaliRaBarBelow">ra with bar below</my:entry>
+    <my:entry key="#bengaliRaCrossbar">ra with cross-bar</my:entry>
     <my:entry key="#bengaliRa">modern ra</my:entry>
     <my:entry key="#bengaliYa">modern ya</my:entry>
     <my:entry key="#valapalagilaka">valapalagilaka</my:entry>
