@@ -546,6 +546,13 @@
    </tr>
 </xsl:template>
 
+<xsl:template match="x:msItem//x:note">
+    <xsl:element name="p">
+        <xsl:call-template name="lang"/>
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
+
 <xsl:template match="x:span">
     <xsl:element name="span">
         <xsl:call-template name="lang"/>
@@ -715,7 +722,7 @@
     <xsl:apply-templates select="x:note"/>
 </xsl:template>
 
-<xsl:template match="x:note">
+<xsl:template match="x:dimensions/x:note">
     <xsl:element name="p">
         <xsl:call-template name="lang"/>
         <xsl:apply-templates/>
@@ -1585,6 +1592,24 @@
         <xsl:attribute name="data-anno">editorial expansion</xsl:attribute>
         <xsl:apply-templates/>
     </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:note">
+<xsl:element name="span">
+    <xsl:call-template name="lang"/>
+    <xsl:attribute name="class">note
+        <xsl:choose>
+            <xsl:when test="@place='above' or @place='top-margin' or @place='left-margin'"> super</xsl:when>
+            <xsl:when test="@place='below' or @place='bottom-margin' or @place='right-margin'"> sub</xsl:when>
+            <xsl:otherwise> inline</xsl:otherwise>
+        </xsl:choose>
+    </xsl:attribute>
+    <xsl:attribute name="data-anno">note
+        <xsl:if test="@place"> (<xsl:value-of select="@place"/>)</xsl:if>
+        <xsl:if test="@resp"> (by <xsl:value-of select="@resp"/>)</xsl:if>
+    </xsl:attribute>
+    <xsl:apply-templates />
+</xsl:element>
 </xsl:template>
 
 <xsl:template match="@*|node()">
