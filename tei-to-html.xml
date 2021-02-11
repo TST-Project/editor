@@ -885,6 +885,7 @@
 </xsl:template>
 
 <my:decotype>
+    <my:entry key="decorative">decorative</my:entry>
     <my:entry key="diagram">diagram</my:entry>
     <my:entry key="doodle">doodle</my:entry>
     <my:entry key="drawing">drawing</my:entry>
