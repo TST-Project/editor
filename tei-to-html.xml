@@ -1002,7 +1002,7 @@
     <my:entry key="#tamilPulliSporadic">sporadic puḷḷi</my:entry>
     <my:entry key="#tamilPulliRegular">regular puḷḷi</my:entry>
     <my:entry key="#tamilRa">closed kāl</my:entry>
-    <my:entry key="#tamilOE">long ō/ē (double-curled kōmpu)</my:entry>
+    <my:entry key="#tamilOE">long ō/ē (double-curled kompu)</my:entry>
     <my:entry key="#tamilRRa"> modern ṟa</my:entry>
     <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
     <my:entry key="#vaba">ba not distinguished</my:entry>
@@ -1559,7 +1559,7 @@
 <xsl:template match="x:g[@ref='#kompu']">
         <xsl:element name="span">
             <xsl:attribute name="class">gaiji aalt</xsl:attribute>
-            <xsl:attribute name="data-anno">kōmpu</xsl:attribute>
+            <xsl:attribute name="data-anno">kompu</xsl:attribute>
             <xsl:text>&#x0B8E;</xsl:text>
         </xsl:element>
 </xsl:template>
@@ -1573,7 +1573,7 @@
 <xsl:template match="x:g[@ref='#nna=m']">
         <xsl:element name="span">
             <xsl:attribute name="class">gaiji alig</xsl:attribute>
-            <xsl:attribute name="data-anno">ṇam</xsl:attribute>
+            <xsl:attribute name="data-anno">ṇam ligature</xsl:attribute>
             <xsl:if test="not(node())">
                 <xsl:text>&#xBA3;&#xBAE;&#xBCD;</xsl:text>
             </xsl:if>
