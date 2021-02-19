@@ -1556,6 +1556,30 @@
             <xsl:text>&#x0BF3;</xsl:text>
         </xsl:element>
 </xsl:template>
+<xsl:template match="x:g[@ref='#kompu']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji aalt</xsl:attribute>
+            <xsl:attribute name="data-anno">kōmpu</xsl:attribute>
+            <xsl:text>&#x0B8E;</xsl:text>
+        </xsl:element>
+</xsl:template>
+<xsl:template match="x:g[@ref='#ra_r_kal']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji aalt</xsl:attribute>
+            <xsl:attribute name="data-anno">ra, r, or kāl</xsl:attribute>
+            <xsl:text>&#xB86;</xsl:text>
+        </xsl:element>
+</xsl:template>
+<xsl:template match="x:g[@ref='#nna=m']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji alig</xsl:attribute>
+            <xsl:attribute name="data-anno">ṇam</xsl:attribute>
+            <xsl:if test="not(node())">
+                <xsl:text>&#xBA3;&#xBAE;&#xBCD;</xsl:text>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+</xsl:template>
 
 <xsl:template match="x:div1">
     <xsl:element name="section">
