@@ -1541,18 +1541,148 @@
     </xsl:element>
 </xsl:template>
 
+<my:entities>
+    <my:entry key="#pcs">&#x0BF3;</my:entry>
+    <my:entry key="#maatham">௴</my:entry>
+    <my:entry key="#varudam">௵</my:entry>
+    <my:entry key="#patru">௶</my:entry>
+    <my:entry key="#eduppu">௷</my:entry>
+    <my:entry key="#merpadi">௸</my:entry>
+    <my:entry key="#rupai">௹</my:entry>
+    <my:entry key="#niluvai">௺</my:entry>
+    <my:entry key="#munthiri">𑿀</my:entry>
+    <my:entry key="#araikkaani">𑿁</my:entry>
+    <my:entry key="#kaani">𑿂</my:entry>
+    <my:entry key="#kaal_viisam">𑿃</my:entry>
+    <my:entry key="#arai_maa">𑿄</my:entry>
+    <my:entry key="#arai_viisam">𑿅</my:entry>
+    <my:entry key="#mukkaani">𑿆</my:entry>
+    <my:entry key="#mukkaal_viisam">𑿇</my:entry>
+    <my:entry key="#maa">𑿈</my:entry>
+    <my:entry key="#viisam">𑿉</my:entry>
+    <my:entry key="#viisam_alt">𑿊</my:entry>
+    <my:entry key="#irumaa">𑿋</my:entry>
+    <my:entry key="#araikkaal">𑿌</my:entry>
+    <my:entry key="#mumaa">𑿍</my:entry>
+    <my:entry key="#muuviisam">𑿎</my:entry>
+    <my:entry key="#naangu_maa">𑿏</my:entry>
+    <my:entry key="#kaal">𑿐</my:entry>
+    <my:entry key="#arai">𑿑</my:entry>
+    <my:entry key="#arai_alt">𑿒</my:entry>
+    <my:entry key="#mukkaal">𑿓</my:entry>
+    <my:entry key="#kiizh">𑿔</my:entry>
+    <my:entry key="#nel">𑿕</my:entry>
+    <my:entry key="#cevitu">𑿖</my:entry>
+    <my:entry key="#aazhaakku">𑿗</my:entry>
+    <my:entry key="#uzhakku">𑿘</my:entry>
+    <my:entry key="#muuvuzhakku">𑿙</my:entry>
+    <my:entry key="#kuruni">𑿚</my:entry>
+    <my:entry key="#pathakku">𑿛</my:entry>
+    <my:entry key="#mukkuruni">𑿜</my:entry>
+    <my:entry key="#kaacu">𑿝</my:entry>
+    <my:entry key="#panam">𑿞</my:entry>
+    <my:entry key="#pon">𑿟</my:entry>
+    <my:entry key="#varaakan">𑿠</my:entry>
+    <my:entry key="#paaram">𑿡</my:entry>
+    <my:entry key="#kuzhi">𑿢</my:entry>
+    <my:entry key="#veli">𑿣</my:entry>
+    <my:entry key="#nansey">𑿤</my:entry>
+    <my:entry key="#punsey">𑿥</my:entry>
+    <my:entry key="#nilam">𑿦</my:entry>
+    <my:entry key="#uppalam">𑿧</my:entry>
+    <my:entry key="#varavu">𑿨</my:entry>
+    <my:entry key="#enn">𑿩</my:entry>
+    <my:entry key="#naalathu">𑿪</my:entry>
+    <my:entry key="#silvaanam">𑿫</my:entry>
+    <my:entry key="#poga">𑿬</my:entry>
+    <my:entry key="#aaga">𑿭</my:entry>
+    <my:entry key="#vasam">𑿮</my:entry>
+    <my:entry key="#muthal">𑿯</my:entry>
+    <my:entry key="#muthaliya">𑿰</my:entry>
+    <my:entry key="#vakaiyaraa">𑿱</my:entry>
+    <my:entry key="#end_of_text">𑿿</my:entry>
+</my:entities>
+<my:entitynames>
+    <my:entry key="#pcs">piḷḷaiyār cuḻi (short)</my:entry>
+    <my:entry key="#maatham">month</my:entry>
+    <my:entry key="#varudam">year</my:entry>
+    <my:entry key="#patru">debit</my:entry>
+    <my:entry key="#eduppu">credit</my:entry>
+    <my:entry key="#merpadi">as above</my:entry>
+    <my:entry key="#rupai">rupee</my:entry>
+    <my:entry key="#niluvai">balance</my:entry>
+    <my:entry key="#munthiri">1/320</my:entry>
+    <my:entry key="araikkaani">1/160</my:entry>
+    <my:entry key="#kaani">1/80</my:entry>
+    <my:entry key="#kaal_viisam">1/64</my:entry>
+    <my:entry key="#arai_maa">1/40</my:entry>
+    <my:entry key="#arai_viisam">1/32</my:entry>
+    <my:entry key="#mukkaal_viisam">3/64</my:entry>
+    <my:entry key="#mukkaani">3/80</my:entry>
+    <my:entry key="#maa">1/20</my:entry>
+    <my:entry key="#viisam">1/16</my:entry>
+    <my:entry key="#viisam_alt">1/16</my:entry>
+    <my:entry key="#irumaa">1/10</my:entry>
+    <my:entry key="#araikkaal">1/8</my:entry>
+    <my:entry key="#mumaa">3/20</my:entry>
+    <my:entry key="#muuviisam">3/16</my:entry>
+    <my:entry key="#naangu_maa">1/5</my:entry>
+    <my:entry key="#kaal">1/4</my:entry>
+    <my:entry key="#arai">1/2</my:entry>
+    <my:entry key="#arai_alt">1/2</my:entry>
+    <my:entry key="#mukkaal">3/4</my:entry>
+    <my:entry key="#kiizh">less 1/320</my:entry>
+    <my:entry key="#nel">nel</my:entry>
+    <my:entry key="#cevitu">cevitu</my:entry>
+    <my:entry key="#aazhaakku">āḻākku</my:entry>
+    <my:entry key="#uzhakku">uḻakku</my:entry>
+    <my:entry key="#muuvuzhakku">mūvuḻakku</my:entry>
+    <my:entry key="#kuruni">kuṟuṇi</my:entry>
+    <my:entry key="#pathakku">patakku</my:entry>
+    <my:entry key="#mukkuruni">mukkuṟuṇi</my:entry>
+    <my:entry key="#kaacu">kācu</my:entry>
+    <my:entry key="#panam">paṇam</my:entry>
+    <my:entry key="#pon">poṉ</my:entry>
+    <my:entry key="#varaakan">varākaṉ</my:entry>
+    <my:entry key="#paaram">pāram</my:entry>
+    <my:entry key="#kuzhi">kuḻi</my:entry>
+    <my:entry key="#veli">vēļi</my:entry>
+    <my:entry key="#nansey">wet cultivation</my:entry>
+    <my:entry key="#nilam">land</my:entry>
+    <my:entry key="#uppalam">salt pan</my:entry>
+    <my:entry key="#varavu">credit</my:entry>
+    <my:entry key="#enn">number</my:entry>
+    <my:entry key="#naalathu">current</my:entry>
+    <my:entry key="#silvaanam">and odd</my:entry>
+    <my:entry key="#poga">spent</my:entry>
+    <my:entry key="#aaga">total</my:entry>
+    <my:entry key="#vasam">in possession</my:entry>
+    <my:entry key="#muthal">starting from</my:entry>
+    <my:entry key="#muthaliya">et cetera (in a series)</my:entry>
+    <my:entry key="#vakaiyaraa">et cetera (of a kind)</my:entry>
+    <my:entry key="#end_of_text">end of text</my:entry>
+</my:entitynames>
+
+<xsl:template match="x:g">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji</xsl:attribute>
+            <xsl:variable name="ref" select="@ref"/>
+            <xsl:variable name="ename" select="document('')/*/my:entitynames/my:entry[@key=$ref]"/>
+            <xsl:if test="$ename">
+                <xsl:attribute name="data-anno"><xsl:value-of select="$ename"/></xsl:attribute>
+            </xsl:if>
+            <xsl:variable name="txt" select="document('')/*/my:entities/my:entry[@key=$ref]"/>
+
+            <xsl:if test="$txt">
+                <xsl:value-of select="$txt"/>
+            </xsl:if>
+        </xsl:element>
+</xsl:template>
 <xsl:template match="x:g[@ref='#pcl']">
         <xsl:element name="span">
             <xsl:attribute name="class">gaiji aalt</xsl:attribute>
             <xsl:attribute name="data-anno">piḷḷaiyār cuḻi (long)</xsl:attribute>
             <!--xsl:text>&#xF8FF;</xsl:text-->
-            <xsl:text>&#x0BF3;</xsl:text>
-        </xsl:element>
-</xsl:template>
-<xsl:template match="x:g[@ref='#pcs']">
-        <xsl:element name="span">
-            <xsl:attribute name="class">gaiji</xsl:attribute>
-            <xsl:attribute name="data-anno">piḷḷaiyār cuḻi (short)</xsl:attribute>
             <xsl:text>&#x0BF3;</xsl:text>
         </xsl:element>
 </xsl:template>
