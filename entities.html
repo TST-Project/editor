@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>TST: Tamil transcription</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<link rel="stylesheet" href="../lib/tufte.css">
+<link rel="stylesheet" href="../lib/tst.css">
+<link rel="stylesheet" href="../lib/prism.css">
+
+<style type="text/css">
+    body {
+        display: inherit;
+        padding-left: 12.5%;
+        margin: auto;
+        width: unset;
+        height: unset;
+        max-width: unset;
+    }
+
+    th {
+        text-align: left;
+    }
+
+</style>
+</head>
+
+<body lang="en">
+    <article>
+        <h1>Tamil transcription</h1>
+        <h2>Vowel signs</h2>
+        <section>
+            <p>Although normally, vowel signs are attached to a consonant, there are cases where you may want to input a vowel sign independent of a consonant. If you are transcribing in Tamil script, this can be achieved by typing a space followed by the vowel sign.</p>
+            <p>Alternatively, there are two named glyphs, for kāl and kompu, which can be entered as XML tags.</p>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#ra_r_kal"/&gt;</code></td><td>→</td><td class="aalt">ஆ</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kompu"/&gt;</code></td><td>→</td><td class="aalt">எ</td></tr>
+            </table>
+            <p>When you are transcribing in Roman transliteration, and wish to indicate that a vowel sign has been added or deleted, you can use the following pattern:</p>
+            <table>
+                <tr><td></td><td></td><th>Roman</th><th>Tamil</th></tr>
+                <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;ā&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">ā</ins></td><td><del class="aalt">எ</del>க<ins class="aalt add">ஆ</ins></td></tr>
+                <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;a&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">a</ins></td><td><del class="aalt">எ</del>க</td></tr>
+            </table>
+        </section>
+        <h2>final -m ligature</h2>
+        <section>
+            <p>In manuscripts, a final -m may be combined with the previous consonant as a conjunct character. See <a href="https://tst.hypotheses.org/final-m">https://tst.hypotheses.org/final-m</a> for examples.</p>
+            <p>When transcribing in Tamil script, this ligature can be produced by inserting a zero-width joiner (U+200D) between the consonant and the final -m. Alternatively, this can be transcribed using an XML tag.</p>
+            <table>
+                <tr><td></td><td></td><th>Roman</th><th>Tamil</th></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#nna=m"/&gt;</code></td><td>→</td><td></td><td class="alig">ணம்</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#nna=m"&gt;ṇam&lt;/g&gt;</code></td><td>→</td><td>ṇam</td><td class="alig">ணம்</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#ya=m"/&gt;</code></td><td>→</td><td></td><td class="alig">யம்</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#ya=m"&gt;yam&lt;/g&gt;</code></td><td>→</td><td>yam</td><td class="alig">யம்</td></tr>
+            </table>
+                
+        </section>
+        <h2>Tamil oṃkāra</h2>
+        <section>
+            <p>To differentiate the oṃkāra symbol from the o vowel with an anusvāra, you can transliterate it as <span class="quote">oṁ</span>.</p>
+            <table>
+                <tr><td>oṁ</td><td>→</td><td>ௐ</td></tr>
+                <tr><td>oṃ</td><td>→</td><td>ஒஂ</td></tr>
+                <tr><td>om</td><td>→</td><td>ஒம்</td></tr>
+            </table>
+        </section>
+        <h2>Named symbols</h2>
+        <section>
+            <p>The Tamil and Tamil Supplement Unicode blocks offer a number of symbols that are difficult to type without resorting to Unicode code points. For convenience, they can be input as XML tags.</p>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#pcs"/&gt;</code></td><td>→</td><td>௳</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#pcl"/&gt;</code></td><td>→</td><td class="aalt">௳</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#maatham"/&gt;</code></td><td>→</td><td>௴</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#varudam"/&gt;</code></td><td>→</td><td>௵</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#patru"/&gt;</code></td><td>→</td><td>௶</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#eduppu"/&gt;</code></td><td>→</td><td>௷</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#merpadi"/&gt;</code></td><td>→</td><td>௸</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#rupai"/&gt;</code></td><td>→</td><td>௹</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#niluvai"/&gt;</code></td><td>→</td><td>௺</td></tr>
+            </table>
+            <h3>Fractions</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#munthiri"/&gt;</code></td><td>→</td><td>𑿀</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#araikkaani"/&gt;</code></td><td>→</td><td>𑿁</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kaani"/&gt;</code></td><td>→</td><td>𑿂</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kaal_viisam"/&gt;</code></td><td>→</td><td>𑿃</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#arai_maa"/&gt;</code></td><td>→</td><td>𑿄</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#arai_viisam"/&gt;</code></td><td>→</td><td>𑿅</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#mukkaani"/&gt;</code></td><td>→</td><td>𑿆</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#mukkaal_viisam"/&gt;</code></td><td>→</td><td>𑿇</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#maa"/&gt;</code></td><td>→</td><td>𑿈</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#viisam"/&gt;</code></td><td>→</td><td>𑿉</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#viisam_alt"/&gt;</code></td><td>→</td><td>𑿊</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#irumaa"/&gt;</code></td><td>→</td><td>𑿋</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#araikkaal"/&gt;</code></td><td>→</td><td>𑿌</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#mummaa"/&gt;</code></td><td>→</td><td>𑿍</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#muuviisam"/&gt;</code></td><td>→</td><td>𑿎</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#naangu_maa"/&gt;</code></td><td>→</td><td>𑿏</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kaal"/&gt;</code></td><td>→</td><td>𑿐</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#arai"/&gt;</code></td><td>→</td><td>𑿑</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#arai_alt"/&gt;</code></td><td>→</td><td>𑿒</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#mukkaal"/&gt;</code></td><td>→</td><td>𑿓</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kiizh"/&gt;</code></td><td>→</td><td>𑿔</td></tr>
+            </table>
+            <h3>Measures of grain</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#nel"/&gt;</code></td><td>→</td><td>𑿕</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#cevitu"/&gt;</code></td><td>→</td><td>𑿖</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#aazhaakku"/&gt;</code></td><td>→</td><td>𑿗</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#uzhakku"/&gt;</code></td><td>→</td><td>𑿘</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#muuvuzhakku"/&gt;</code></td><td>→</td><td>𑿙</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kuruni"/&gt;</code></td><td>→</td><td>𑿚</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#pathakku"/&gt;</code></td><td>→</td><td>𑿛</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#mukkuruni"/&gt;</code></td><td>→</td><td>𑿜</td></tr>
+            </table>
+            <h3>Old currency symbols</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#kaacu"/&gt;</code></td><td>→</td><td>𑿝</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#panam"/&gt;</code></td><td>→</td><td>𑿞</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#pon"/&gt;</code></td><td>→</td><td>𑿟</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#varaakan"/&gt;</code></td><td>→</td><td>𑿠</td></tr>
+            </table>
+            <h3>Symbols of weight, length, and area</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#paaram"/&gt;</code></td><td>→</td><td>𑿡</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#kuzhi"/&gt;</code></td><td>→</td><td>𑿢</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#veli"/&gt;</code></td><td>→</td><td>𑿣</td></tr>
+            </table>
+            <h3>Agricultural symbols</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#nansey"/&gt;</code></td><td>→</td><td>𑿤</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#punsey"/&gt;</code></td><td>→</td><td>𑿥</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#nilam"/&gt;</code></td><td>→</td><td>𑿦</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#uppalam"/&gt;</code></td><td>→</td><td>𑿧</td></tr>
+            </table>
+            <h3>Clerical symbols</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#varavu"/&gt;</code></td><td>→</td><td>𑿨</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#enn"/&gt;</code></td><td>→</td><td>𑿩</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#naalathu"/&gt;</code></td><td>→</td><td>𑿪</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#silvaanam"/&gt;</code></td><td>→</td><td>𑿫</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#poga"/&gt;</code></td><td>→</td><td>𑿬</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#aaga"/&gt;</code></td><td>→</td><td>𑿭</td></tr>
+            </table>
+            <h3>Other symbols &amp; abbreviations</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#vasam"/&gt;</code></td><td>→</td><td>𑿮</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#muthal"/&gt;</code></td><td>→</td><td>𑿯</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#muthaliya"/&gt;</code></td><td>→</td><td>𑿰</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#vakaiyaraa"/&gt;</code></td><td>→</td><td>𑿱</td></tr>
+            </table>
+            <h3>Punctuation</h3>
+            <table>
+                <tr><td><code class="language-xml">&lt;g ref="#end_of_text"/&gt;</code></td><td>→</td><td>𑿿</td></tr>
+            </table>
+        </section>
+    </article>
+    <script src="../lib/prism.js"></script>
+</body>
+</html>
