@@ -1617,8 +1617,9 @@
 </my:entities>
 <my:entitynames>
     <my:entry key="#pcs">piḷḷaiyār cuḻi (short)</my:entry>
-    <my:entry key="#maatham">month</my:entry>
-    <my:entry key="#varudam">year</my:entry>
+    <my:entry key="#teti">tēti</my:entry>
+    <my:entry key="#maatham">mācam</my:entry>
+    <my:entry key="#varudam">varuṣam</my:entry>
     <my:entry key="#patru">debit</my:entry>
     <my:entry key="#eduppu">credit</my:entry>
     <my:entry key="#merpadi">as above</my:entry>
@@ -1723,7 +1724,16 @@
             <xsl:apply-templates/>
         </xsl:element>
 </xsl:template>
-
+<xsl:template match="x:g[@ref='#ya=m']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">gaiji alig</xsl:attribute>
+            <xsl:attribute name="data-anno">yam ligature</xsl:attribute>
+            <xsl:if test="not(node())">
+                <xsl:text>&#xBAF;&#xBAE;&#xBCD;</xsl:text>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+</xsl:template>
 <xsl:template match="x:div1">
     <xsl:element name="section">
         <xsl:apply-templates/>
