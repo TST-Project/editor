@@ -272,15 +272,15 @@
         <xsl:attribute name="id">recordcontainer</xsl:attribute>
         <xsl:attribute name="lang">en</xsl:attribute>
         <xsl:element name="div">
-            <!--xsl:choose>
+            <xsl:choose>
                 <xsl:when test="x:facsimile/x:graphic">
                     <xsl:attribute name="id">record-thin</xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="id">record-fat</xsl:attribute>
                 </xsl:otherwise>
-            </xsl:choose-->
-            <xsl:attribute name="class">record-fat</xsl:attribute>
+            </xsl:choose>
+            <!--xsl:attribute name="class">record-fat</xsl:attribute-->
             <div id="topbar">
                 <div id="transbutton" title="change script">A</div>
                 <form>
@@ -297,14 +297,14 @@
             </xsl:element>
         </xsl:element>
     </xsl:element>
-    <!--xsl:if test="x:facsimile/x:graphic">
+    <xsl:if test="x:facsimile/x:graphic">
         <xsl:element name="div">
             <xsl:attribute name="id">viewer</xsl:attribute>
             <xsl:attribute name="data-manifest">
                 <xsl:value-of select="x:facsimile/x:graphic/@url"/>
             </xsl:attribute>
         </xsl:element>
-    </xsl:if-->
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="x:teiHeader">
