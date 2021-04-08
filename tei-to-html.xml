@@ -623,17 +623,16 @@
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="x:msItem">
-  <table class="msItem">
-    <xsl:variable name="thisid" select="@xml:id"/>
+<xsl:template name="msItemHeader">
     <xsl:element name="thead">
         <xsl:element name="tr">
             <xsl:element name="th">
                 <xsl:attribute name="colspan">2</xsl:attribute>
                 <xsl:attribute name="class">left-align</xsl:attribute>
                 <xsl:value-of select="@n"/>
+                <xsl:variable name="thisid" select="@xml:id"/>
                 <xsl:choose>
-                    <xsl:when test="@xml:id">
+                    <xsl:when test="$thisid">
                         <xsl:if test="@n">
                             <xsl:text>, </xsl:text>
                         </xsl:if>
@@ -680,47 +679,95 @@
             </xsl:element>
         </xsl:element>
     </xsl:element>
-    <xsl:apply-templates/>
-    <xsl:variable name="mainlang" select="x:textLang/@mainLang"/>
-    <xsl:for-each select="//x:text[@corresp=concat('#',$thisid)]//x:seg[@function='rubric']">
-       <tr>
-         <th>Rubric</th>
-         <xsl:call-template name="excerpt">
-            <xsl:with-param name="lang" select="substring($mainlang,1,2)"/>
+</xsl:template>
+
+<xsl:template name="itemrow">
+    <xsl:param name="header"/>
+    <tr>
+      <th><xsl:value-of select="$header"/></th>
+        <xsl:element name="td">
+            <xsl:call-template name="lang"/>
+            <xsl:apply-templates select="."/>
+        </xsl:element>
+    </tr>
+</xsl:template>
+
+<xsl:template name="excerpt">
+     <xsl:param name="mainlang"/>
+     <xsl:param name="xmllang"/>
+     <xsl:param name="header"/>    
+     <tr>
+        <th><xsl:value-of select="$header"/></th>
+        <td>
+            <xsl:attribute name="class">excerpt</xsl:attribute>
+            <xsl:attribute name="lang">
+                <xsl:choose>
+                    <xsl:when test="$xmllang">
+                        <xsl:value-of select="$xmllang"/>
+                    </xsl:when>
+                    <xsl:when test="$mainlang">
+                        <xsl:value-of select="$mainlang"/>
+                    </xsl:when>
+                    <xsl:otherwise/>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </td>
+     </tr>
+</xsl:template>
+
+<xsl:template match="x:msItem">
+  <table class="msItem">
+    <xsl:variable name="thisid" select="@xml:id"/>
+    <xsl:call-template name="msItemHeader"/>
+    <!--xsl:apply-templates/-->
+    <xsl:for-each select="x:title">
+        <xsl:call-template name="itemrow">
+            <xsl:with-param name="header">Title</xsl:with-param>
         </xsl:call-template>
-       </tr>
     </xsl:for-each>
-    <xsl:for-each select="//x:text[@corresp=concat('#',$thisid)]//x:seg[@function='incipit']">
-       <tr>
-         <th>Incipit</th>
-         <xsl:call-template name="excerpt">
-            <xsl:with-param name="lang" select="substring($mainlang,1,2)"/>
+    <xsl:for-each select="x:author">
+        <xsl:call-template name="itemrow">
+            <xsl:with-param name="header">Author</xsl:with-param>
         </xsl:call-template>
-       </tr>
     </xsl:for-each>
-    <xsl:for-each select="//x:text[@corresp=concat('#',$thisid)]//x:seg[@function='explicit']">
-       <tr>
-         <th>Explicit</th>
+    <xsl:apply-templates select="x:textLang"/>
+    <xsl:apply-templates select="x:filiation"/>
+    <xsl:variable name="mainlang" select="substring(x:textLang/@mainLang,1,2)"/>
+    <xsl:for-each select="x:rubric | //x:text[@corresp=concat('#',$thisid)]//x:seg[@function='rubric']">
          <xsl:call-template name="excerpt">
-            <xsl:with-param name="lang" select="substring($mainlang,1,2)"/>
+            <xsl:with-param name="header">Rubric</xsl:with-param>
+            <xsl:with-param name="xmllang" select="@xml:lang"/>
+            <xsl:with-param name="mainlang" select="$mainlang"/>
         </xsl:call-template>
-       </tr>
     </xsl:for-each>
-    <xsl:for-each select="//x:text[@corresp=concat('#',$thisid)]//x:seg[@function='completion-statement']">
-       <tr>
-         <th>Completion Statement</th>
+    <xsl:for-each select="x:incipit | //x:text[@corresp=concat('#',$thisid)]//x:seg[@function='incipit']">
          <xsl:call-template name="excerpt">
-            <xsl:with-param name="lang" select="substring($mainlang,1,2)"/>
+            <xsl:with-param name="header">Incipit</xsl:with-param>
+            <xsl:with-param name="xmllang" select="@xml:lang"/>
+            <xsl:with-param name="mainlang" select="$mainlang"/>
+        </xsl:call-template>
+    </xsl:for-each>
+    <xsl:for-each select="x:explicit | //x:text[@corresp=concat('#',$thisid)]//x:seg[@function='explicit']">
+         <xsl:call-template name="excerpt">
+            <xsl:with-param name="header">Explicit</xsl:with-param>
+            <xsl:with-param name="xmllang" select="@xml:lang"/>
+            <xsl:with-param name="mainlang" select="$mainlang"/>
+        </xsl:call-template>
+    </xsl:for-each>
+    <xsl:for-each select="x:finalRubric | //x:text[@corresp=concat('#',$thisid)]//x:seg[@function='completion-statement']">
+         <xsl:call-template name="excerpt">
+            <xsl:with-param name="header">Completion statement</xsl:with-param>
+            <xsl:with-param name="xmllang" select="@xml:lang"/>
+            <xsl:with-param name="mainlang" select="$mainlang"/>
          </xsl:call-template>
-       </tr>
     </xsl:for-each>
-    <xsl:for-each select="//x:text[@corresp=concat('#',$thisid)]//x:seg[@function='colophon']">
-       <tr>
-         <th>Colophon</th>
+    <xsl:for-each select="x:colophon | //x:text[@corresp=concat('#',$thisid)]//x:seg[@function='colophon']">
          <xsl:call-template name="excerpt">
-            <xsl:with-param name="lang" select="substring($mainlang,1,2)"/>
+            <xsl:with-param name="header">Colophon</xsl:with-param>
+            <xsl:with-param name="xmllang" select="@xml:lang"/>
+            <xsl:with-param name="mainlang" select="$mainlang"/>
          </xsl:call-template>
-       </tr>
     </xsl:for-each>
   </table>
   <xsl:if test="not(position() = last())">
@@ -728,7 +775,10 @@
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="x:msItem/x:title[not(@type)]">
+<xsl:template match="x:msItem/x:title">
+    <xsl:apply-templates/>
+</xsl:template>
+<!--xsl:template match="x:msItem/x:title[not(@type)]">
     <tr>
       <th>Title</th>
         <xsl:element name="td">
@@ -738,7 +788,7 @@
     </tr>
 </xsl:template>
 
-<!--xsl:template match="x:msItem/x:title[@type='commentary']">
+<xsl:template match="x:msItem/x:title[@type='commentary']">
   <tr>
     <th>Commentary</th>
     <xsl:element name="td">
@@ -746,7 +796,7 @@
         <xsl:apply-templates />
     </xsl:element>
   </tr>
-</xsl:template-->
+</xsl:template>
 
 <xsl:template match="x:msItem/x:author">
   <tr>
@@ -757,7 +807,7 @@
     </xsl:element>
   </tr>
 </xsl:template>
-<!--xsl:template match="x:msItem/x:author[@role='commentator']">
+<xsl:template match="x:msItem/x:author[@role='commentator']">
   <tr>
     <th>Commentator</th>
     <xsl:element name="td">
@@ -787,53 +837,6 @@
             </xsl:if>
         </xsl:element>
     </tr>
-</xsl:template>
-
-<xsl:template name="excerpt">
-     <xsl:param name="lang"/>    
-     <xsl:element name="td">
-        <xsl:attribute name="class">excerpt</xsl:attribute>
-        <xsl:choose>
-            <xsl:when test="$lang">
-                <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:call-template name="lang"/>
-            </xsl:otherwise>
-        </xsl:choose>
-        <xsl:apply-templates/>
-     </xsl:element>
-</xsl:template>
-
-<xsl:template match="x:rubric">
-   <tr>
-     <th>Rubric</th>
-     <xsl:call-template name="excerpt"/>
-   </tr>
-</xsl:template> 
-<xsl:template match="x:finalRubric">
-   <tr>
-     <th>Completion Statement</th>
-     <xsl:call-template name="excerpt"/>
-   </tr>
-</xsl:template>
-<xsl:template match="x:incipit">
-   <tr>
-     <th>Incipit</th>
-     <xsl:call-template name="excerpt"/>
-   </tr>
-</xsl:template>
-<xsl:template match="x:explicit">
-   <tr>
-     <th>Explicit</th>
-     <xsl:call-template name="excerpt"/>
-   </tr>
-</xsl:template>
-<xsl:template match="x:colophon">
-   <tr>
-     <th>Colophon</th>
-     <xsl:call-template name="excerpt"/>
-   </tr>
 </xsl:template>
 
 <xsl:template match="x:msItem//x:note">
@@ -1497,7 +1500,7 @@
                 <xsl:element name="td">
                     <xsl:variable name="title" select="//x:msItem[@xml:id=$textid]/x:title"/>
                     <xsl:attribute name="lang"><xsl:value-of select="$title/@xml:lang"/></xsl:attribute>
-                    <xsl:value-of select="$title"/>
+                    <xsl:apply-templates select="$title"/>
                 </xsl:element>
                 <xsl:element name="td">
                     <xsl:attribute name="style">text-align: right;</xsl:attribute>
