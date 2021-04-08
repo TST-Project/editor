@@ -39,7 +39,7 @@
         xStyle: null,
         xSheet: 'tei-to-html.xml',
         template: 'tst-template.xml',
-        toplevel: 'teiHeader',
+        toplevel: 'TEI',
         savedtext: new Map(),
         saveInterval: null,
     };
@@ -245,7 +245,7 @@
                         else
                             headEl.textContent = 'MS part';
                         msDesc.insertBefore(headEl,msDesc.firstChild);
-                        par.querySelector('textarea[data-multi-select=":scope"]').value = msDesc.innerHTML;
+                        par.querySelector('textarea[data-subselect=":scope"]').value = msDesc.innerHTML;
                         par.querySelector('.msPart_head').textContent = headEl.textContent;
                         par.querySelector('input[type="file"]').remove();
                     }
@@ -314,11 +314,11 @@
 
         fillFormField: function(field,toplevel,unsanitize) {
             const tounsanitize = unsanitize || field.tagName !== 'TEXTAREA';
-            const selector = field.dataset.select || field.dataset.multiSelect;
+            const selector = field.dataset.select || field.dataset.subselect;
             const xmlEl = (selector && selector !== ':scope') ?
                 toplevel.querySelector(selector) :
                 toplevel;
-            const attr = field.dataset.attr || field.dataset.multiAttr;
+            const attr = field.dataset.attr || field.dataset.subattr;
             const prefix = field.dataset.prefix;
 
             if(!xmlEl) return;
@@ -604,13 +604,17 @@
         codeMirrorInit: function(textarea) {
             const getSchema = function(s) {
                 const schemae = {
-                    transcription: ['milestone','lb','pb','add','del','subst','space','unclear','gap', 'damage','supplied','interp','g'], 
+                    transcription: ['milestone','lb','pb','add','del','seg','subst','supplied','surplus','space','unclear','gap', 'damage','supplied','g'], 
                     descriptive_restricted: ['term','note','emph','ex','expan','title','locus','material','ref','q','date','watermark','list','item'],
                     names: ['persName','orgName','geogName'],
                 };
-                schemae.descriptive = ['p',...schemae.descriptive_restricted,'quote'];
+                schemae.descriptive = ['p','lg',...schemae.descriptive_restricted,'quote'];
+                
+                const attrs = {
+                    units: ['akṣara','character'],
+                    langs: ['ta','ta-Taml','en','fr','de','pt','pi','sa']
+                };
 
-                const langs = ['ta','ta-Taml','en','fr','pt','pi','sa'];
                 const selected = s ? 
                     s.split(' ').map(str => schemae[str]) : 
                     Object.values(schemae);
@@ -649,12 +653,6 @@
                             '/': null,
                         }
                     },
-                    interp: {
-                        attrs: {
-                            type: ['chapter-heading','end-title','heading','intertitle','register','running-title','title','table-of-contents','verse-beginning','correction','gloss','commenting-note','blessing','dedication','invocation','postface','preface','satellite-stanza','shelfmark','stamp','documenting-note'],
-                        },
-                        children: [...schemae.transcription,...schemae.names],
-                    },
                     g: {
                         attrs: {
                             ref: ['#pcl','#pcs'],
@@ -674,13 +672,13 @@
                         attrs: {
                             rend: ['overstrike','understrike','strikethrough','scribble','line above', 'two lines above'],
                         },
-                        children: ['unclear','space'],
+                        children: ['gap','unclear']
                     },
                     subst: {
                         attrs: {
                             rend: ['arrow','caret','kākapāda'],
                         },
-                        children: ['add','del'],
+                        children: ['add','del']
                     },
 
                     // Difficult or missing text
@@ -692,19 +690,36 @@
                     damage: {
                         attrs: {
                             agent: ['worms','rubbing','smoke'],
-                            unit: ['akṣara'],
+                            unit: attrs.units,
                             quantity: null,
                         },
                         children: ['supplied'],
                     },
-                    supplied: {
-                    },
                     gap: {
                         attrs: {
                             reason: ['illegible','damaged'],
-                            unit: ['akṣara'],
+                            unit: attrs.units,
                             quantity: null,
                         },
+                    },
+                    
+                    // editorial
+                    supplied: {
+                        attrs: {
+                            reason: ['illegible','damaged','omitted'],
+                        },
+                    },
+                    surplus: {
+                        attrs: {
+                            reason: ['repeated'],
+                        },
+                        children: ['unclear']
+                    },
+                    seg: {
+                        attrs: {
+                            'function': ['blessing','colophon','commenting-note','completion-statement','chapter-heading','correction','dedication','documenting-note','end-title','explicit','gloss','heading','incipit','intertitle','invocation','postface','preface','register','rubric','running-title','satellite-stanza','shelfmark','stamp','title','table-of-contents','verse-beginning'],
+                        },
+                        children: [...schemae.transcription,...schemae.names]
                     },
 
                     // descriptive
@@ -715,16 +730,28 @@
                     },
                     ex: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         }
                     },
                     expan: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         }
                     },
                     item: {
                         children: ['emph','del','add','expan','subst','title','locus']
+                    },
+                    l: {
+                        children: [...schemae.transcription,...schemae.descriptive,...schemae.names],
+                        attrs: {
+                            'xml:lang': attrs.langs
+                        }
+                    },
+                    lg: {
+                        children: ['l'],
+                        attrs: {
+                            'xml:lang': attrs.langs
+                        }
                     },
                     list: {
                         attrs: {
@@ -734,24 +761,24 @@
                     },
                     p: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         },
-                        children: [...schemae.descriptive,...schemae.names],
+                        children: [...schemae.transcription,...schemae.descriptive,...schemae.names],
                     },
                     term: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         },
                     },
                     note: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         },
                         children: ['locus','title','emph','term'],
                     },
                     title: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                             'type': ['article'],
                         },
                         children: ['emph'],
@@ -759,7 +786,7 @@
                     emph: {
                         attrs: {
                             'rend': ['bold','italic'],
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         },
                     },
                     locus: {
@@ -770,7 +797,7 @@
                     },
                     material: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         },
                     },
                     
@@ -782,17 +809,17 @@
 
                     q: {
                         attrs: {
-                            'xml:lang': langs,
+                            'xml:lang': attrs.langs,
                         },
                         children: ['emph','persName']
                     },
 
                     quote: {
                         attrs: {
-                            'xml:lang': langs,
-                            'rend': ['block'],
+                            'xml:lang': attrs.langs,
+                            'rend': ['block']
                         },
-                        children: ['lg','emph','persName']
+                        children: ['lg','emph',...schemae.names]
                     },
                     
                     watermark: {
@@ -910,7 +937,7 @@
                     const items = field.querySelectorAll('.multi-item');
                     for(const item of items) {
                         const newXml = xml.makeElDeep(field.dataset.select,toplevel,true);
-                        const subfields = item.querySelectorAll('[data-multi-select],[data-multi-attr]');
+                        const subfields = item.querySelectorAll('[data-subselect],[data-subattr]');
                         for(const subfield of subfields) 
                             editor.updateXMLField(subfield,newXml,sanitized);
                     }
@@ -945,6 +972,7 @@
             const msItems = par.querySelectorAll('msContents > msItem');
             for(const msItem of msItems) {
                 const textlang = msItem.querySelector('textLang');
+                const textid = msItem.getAttribute('xml:id');
                 const lang = textlang && textlang.getAttribute('mainLang');
                 if(!lang) continue;
                 
@@ -955,6 +983,9 @@
 
                 for(const el of els)
                     el.setAttribute('xml:lang',langmap.get(lang)); 
+
+                const transcr = par.querySelector(`text[corresp="#${textid}"]`);
+                if(transcr) transcr.setAttribute('xml:lang',langmap.get(lang));
             }
         },
 
@@ -998,11 +1029,11 @@
         },
         updateXMLField: function(field,toplevel,sanitized) {
             const tosanitize = sanitized || field.tagName !== 'TEXTAREA' || false;
-            const selector = field.dataset.select || field.dataset.multiSelect;
+            const selector = field.dataset.select || field.dataset.subselect;
             const selected = (selector && selector !== ':scope') ?
                 toplevel.querySelector(selector) :
                 toplevel;
-            const attr = field.dataset.attr || field.dataset.multiAttr;
+            const attr = field.dataset.attr || field.dataset.subattr;
             const prefix = field.dataset.prefix;
             const valtrimmed = field.value.trim();
 

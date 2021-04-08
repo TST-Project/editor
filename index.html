@@ -58,13 +58,13 @@
 <section>
     <div>
         <label for="hd_unitidcote">Shelfmark</label>
-        <input autocomplete="off" type="text" id="hd_unitidcote" name="cote" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='cote']" required placeholder="Indien XX">
+        <input autocomplete="off" type="text" id="hd_unitidcote" name="cote" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='cote']" required placeholder="Indien XX">
         <label for="hd_unitidanciennecote">Old shelfmark</label>
-        <input autocomplete="off" type="text" id="hd_unitidanciennecote" name="cote" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='ancienne cote']" placeholder="Tamoul XX">
+        <input autocomplete="off" type="text" id="hd_unitidanciennecote" name="cote" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='ancienne cote']" placeholder="Tamoul XX">
     </div>
     <div>
         <label for="hd_repository">Repository</label>
-        <select required autocomplete="off" type="text" id="hd_repository" name="repository" data-select="fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName">
+        <select required autocomplete="off" type="text" id="hd_repository" name="repository" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName">
             <option value="Bibliothèque nationale de France. Département des Manuscrits" selected>Bibliothèque nationale de France. Département des Manuscrits</option>
             <option value="Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky">Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky</option>
             <option value="Bodleian Library, University of Oxford">Bodleian Library, University of Oxford</option>
@@ -73,48 +73,48 @@
     </div>
     <div>
         <label for="hd_title">Manuscript Title</label>
-        <textarea autocomplete="off" id="hd_title" name="title" data-select="fileDesc > titleStmt > title" data-schema="descriptive names" rows="1" required placeholder="title of manuscript"></textarea>
+        <textarea autocomplete="off" id="hd_title" name="title" data-select="teiHeader > fileDesc > titleStmt > title" data-schema="descriptive names" rows="1" required placeholder="title of manuscript"></textarea>
     </div>
     <div>
         <label for="hd_editionStmt_persName">Researcher name</label>
-        <input autocomplete="name" type="text" id="hd_editionStmt_PersName" name="editionStmt_PersName" data-select="fileDesc > editionStmt > p > persName" autocomplete="name" required>
+        <input autocomplete="name" type="text" id="hd_editionStmt_PersName" name="editionStmt_PersName" data-select="teiHeader > fileDesc > editionStmt > p > persName" autocomplete="name" required>
     </div>
     <div>
         <label for="hd_editionStmt_orgName">Researcher affiliation</label>
-        <input autocomplete="organization" type="text" id="hd_editionStmt_orgName" name="editionStmt_orgName" data-select="fileDesc > editionStmt > p > orgName" required>
+        <input autocomplete="organization" type="text" id="hd_editionStmt_orgName" name="editionStmt_orgName" data-select="teiHeader > fileDesc > editionStmt > p > orgName" required>
     </div>
     <div>
         <label for="hd_publisher">Publisher</label>
-        <input autocomplete="off" type="text" id="hd_publisher" name="publisher" data-select="fileDesc > publicationStmt > publisher" value="TST Project" readonly>
+        <input autocomplete="off" type="text" id="hd_publisher" name="publisher" data-select="teiHeader > fileDesc > publicationStmt > publisher" value="TST Project" readonly>
         <label for="hd_publish_date">Publication date</label>
-        <input autocomplete="off" type="text" id="hd_publish_date" name="publish_date" data-select="fileDesc > publicationStmt > date" value="2020" readonly>
+        <input autocomplete="off" type="text" id="hd_publish_date" name="publish_date" data-select="teiHeader > fileDesc > publicationStmt > date" value="2020" readonly>
     </div>
     <div>
         <label for="hd_summary">Summary</label>
-        <textarea autocomplete="off" rows="10" id="hd_summary" name="summary" data-select="fileDesc > sourceDesc > msDesc > msContents > summary" data-schema="descriptive names" placeholder="Summary description of the manuscript" required></textarea>
+        <textarea autocomplete="off" rows="10" id="hd_summary" name="summary" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents > summary" data-schema="descriptive names" placeholder="Summary description of the manuscript" required></textarea>
     </div>
     <h3>Physical description</h3>
     <div>
         <label for="MS_type">Type</label>
-        <select autocomplete="off" id="hd_MS_type" name="MS type" data-select="fileDesc > sourceDesc > msDesc > msContents" data-attr="class" required>
+        <select autocomplete="off" id="hd_MS_type" name="MS type" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents" data-attr="class" required>
             <option value="#STM" selected>single-text manuscript</option>
             <option value="#MTM">multi-text manuscript</option>
             <option value="#CM">composite manuscript</option>
             <option value="#MVM">multi-volume manuscript</option>
         </select>
         <label for="hd_format">Format</label>
-        <select autocomplete="off" id="hd_format" name="format" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required>
+        <select autocomplete="off" id="hd_format" name="format" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required>
             <option value="codex">codex</option>
             <option value="plate">plate</option>
             <option value="pothi" selected>pothi</option>
             <option value="roll">roll</option>
         </select>
         <label for="hd_stringholes">Stringholes</label>
-        <input autocomplete="off" type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
+        <input autocomplete="off" type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
     </div>
     <div>
         <label for="hd_material">Material</label>
-        <select autocomplete="off" id="hd_material" name="material" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc" data-attr="material" required>
+        <select autocomplete="off" id="hd_material" name="material" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc" data-attr="material" required>
             <option value="birch-bark">birch bark</option>
             <option value="copper">copper</option>
             <option value="palm-leaf" selected>palm leaf</option>
@@ -125,35 +125,35 @@
             <option value="paper industrial">paper (industrial)</option>
             <option value="paper laid">paper (laid)</option>
         </select>
-        <textarea autocomplete="off" rows="2" name="support_p" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > p" data-schema="descriptive" placeholder="Further details about the support material"></textarea> 
+        <textarea autocomplete="off" rows="2" name="support_p" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > p" data-schema="descriptive" placeholder="Further details about the support material"></textarea> 
     </div>
     <div>
         <label for="hd_extent_quantity" title="Give the full extent, including blank folios. In the description, you may be more specific.">Extent</label>
-        <input autocomplete="off" type="number" step="1" min="1" id="hd_extent_quantity" name="extent_quantity" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="quantity"  data-tip="Give the full extent, including blank folios." required>
+        <input autocomplete="off" type="number" step="1" min="1" id="hd_extent_quantity" name="extent_quantity" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="quantity"  data-tip="Give the full extent, including blank folios." required>
         <!--label for="hd_extent_unit">Unit</label-->
-        <select autocomplete="off" id="hd_extent_unit" name="extent_unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" required>
+        <select autocomplete="off" id="hd_extent_unit" name="extent_unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" required>
             <option value="folio" selected>folios</option>
             <option value="page">pages</option>
         </select>
-        <textarea autocomplete="off" rows="2" id="hd_extent" name="hd_extent" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-schema="descriptive_restricted" placeholder="X guard folios, XX numbered folios, X blank folios"></textarea>
+        <textarea autocomplete="off" rows="2" id="hd_extent" name="hd_extent" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-schema="descriptive_restricted" placeholder="X guard folios, XX numbered folios, X blank folios"></textarea>
         
     </div>
     <div>
         <label title="Size of the object, including the cover.">Overall size</label>
         <div>
-            <input autocomplete="off" type="text" step="any" id="hd_support_overall_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object']" data-attr="unit" hidden readonly value="mm">
+            <input autocomplete="off" type="text" step="any" id="hd_support_overall_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object']" data-attr="unit" hidden readonly value="mm">
             <label for="hd_support_width">Width</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > width" data-attr="quantity" data-tip="Width of the object, including cover.">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > width" data-attr="quantity" data-tip="Width of the object, including cover.">
             <label>mm</label>
         </div>
         <div>
             <label for="hd_support_height">Height</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > height" data-attr="quantity" data-tip="Height of the object, including cover.">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > height" data-attr="quantity" data-tip="Height of the object, including cover.">
             <label>mm</label>
         </div>
         <div>
             <label for="hd_support_depth">Depth</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_depth" name="depth" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > depth" data-attr="quantity" data-tip="Depth of the object, including cover.">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_support_depth" name="depth" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='object'] > depth" data-attr="quantity" data-tip="Depth of the object, including cover.">
             <label>mm</label>
         </div>
     </div>
@@ -161,27 +161,27 @@
         <label title="Dimensions of a single leaf.">Leaf size</label>
         <div class="rowpar">
             <div class="subrow">
-                <input autocomplete="off" type="text" id="hd_support_leaf_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
+                <input autocomplete="off" type="text" id="hd_support_leaf_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
                 <label for="hd_support_width">Width</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_width_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_width_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
                 <label>mm</label> 
             </div>
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
                 <label for="hd_support_height">Height</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_height_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_min" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_min" name="heightmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_height_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_max" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_max" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
                 <label>mm</label> 
             </div>
         </div>
@@ -190,89 +190,89 @@
         <span title="Dimensions of the written area of the leaf.">Written area</span>
         <div class="rowpar">
             <div class="subrow">
-                <input autocomplete="off" type="text" id="hd_support_written_unit" name="unit" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written']" data-attr="unit" hidden readonly value="mm">
+                <input autocomplete="off" type="text" id="hd_support_written_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written']" data-attr="unit" hidden readonly value="mm">
                 <label for="hd_support_writtenWidth">Width</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="width" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_writtenWidth_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="widthmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="widthmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_writtenWidth_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth_max" name="widthmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth_max" name="widthmax" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
                 <label>mm</label> 
             </div>
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
                 <label for="hd_support_writtenHeight">Height</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="height" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
                 <label>mm</label>
                 <label for="hd_support_writtenHeight_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmin" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
                 <label>mm</label>
                 <label for="hd_support_writtenHeight_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmax" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
+                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmax" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
                 <label>mm</label> 
             </div>
         </div>
     </div>
     <div>
         <label for="hd_columns" title="One number, or two numbers separated by a space for a range.">Columns</label>
-        <input autocomplete="off" type="text" id="hd_columns" name="columns" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="columns" placeholder="1" pattern="\d+\s*\d*" size="8">
+        <input autocomplete="off" type="text" id="hd_columns" name="columns" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="columns" placeholder="1" pattern="\d+\s*\d*" size="8">
         <label for="hd_writtenLines" title="One number, or two numbers separated by a space for a range.">Lines per page (written)</label>
-        <input autocomplete="off" type="text" id="hd_writtenLines" name="writtenLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="writtenLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
+        <input autocomplete="off" type="text" id="hd_writtenLines" name="writtenLines" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="writtenLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
         <label for="hd_ruledLines" title="One number, or two numbers separated by a space for a range.">Lines per page (ruled)</label>
-        <input autocomplete="off" type="text" id="hd_ruledLines" name="ruledLines" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="ruledLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
+        <input autocomplete="off" type="text" id="hd_ruledLines" name="ruledLines" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="ruledLines" placeholder="XX or XX XX" pattern="\d+\s*\d*" size="8"> 
     </div>
     <div>
         <label for="hd_layout_style">Style</label>
-        <select autocomplete="off" id="hd_layout_style" name="style" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="style">
+        <select autocomplete="off" id="hd_layout_style" name="style" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="style">
             <option value="" selected></option>
             <option value="tripāṭha">Tripāṭha</option>
             <option value="pañcpāṭha">Pañcapāṭha</option>
         </select>
         <label for="hd_streams" title="Number of textual streams per page">Streams</label>
-        <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
+        <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
     </div>
     <div>
         <label for="hd_condition">Condition</label>
-        <textarea autocomplete="off" rows="4" id="hd_condition" name="condition" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > condition" data-schema="descriptive" placeholder="Very good state of preservation, in spite of bore holes caused by insects."></textarea>
+        <textarea autocomplete="off" rows="4" id="hd_condition" name="condition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > condition" data-schema="descriptive" placeholder="Very good state of preservation, in spite of bore holes caused by insects."></textarea>
     </div>
     <div>
         <label for="hd_binding">Binding</label>
-        <textarea autocomplete="off" rows="4" id="hd_binding" name="binding" data-select="fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > p" data-schema="descriptive" placeholder="Description of binding, cover, etc."></textarea>
+        <textarea autocomplete="off" rows="4" id="hd_binding" name="binding" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > p" data-schema="descriptive" placeholder="Description of binding, cover, etc."></textarea>
     </div>
     <h4>Foliation (Codicological units)</h4>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > foliation">
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > foliation">
         <div class="multi-item">
             <div>
-                <label for="hd_foliation_n" title="A unique identifier. No spaces.">Unit name</label>
-                <input autocomplete="off" type="text" name="foliation_n" data-multi-attr="n" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
+                <label for="hd_foliation_n" title="A unique identifier. No spaces.">Unit ID</label>
+                <input autocomplete="off" type="text" name="foliation_n" data-subattr="n" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
             </div>
             <div>
-            <textarea autocomplete="off" rows="4" data-multi-select=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
+            <textarea autocomplete="off" rows="4" data-subselect=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
             </div>
         </div>
     </div>
     <!--div>
         <label for="hd_script">Script</label>
-        <textarea rows="2" id="hd_script" name="script" data-select="did > physdesc > physfacet[type='écriture']" placeholder="Tamil script, northern Devanāgarī, Bengali, etc."></textarea>
+        <textarea rows="2" id="hd_script" name="script" data-select="teiHeader > did > physdesc > physfacet[type='écriture']" placeholder="Tamil script, northern Devanāgarī, Bengali, etc."></textarea>
     </div-->
     <h4>Scribal hand</h4>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > handDesc > handNote">
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > handDesc > handNote">
         <div class="multi-item">
             <div>
                 <label for="hd_handNote_n" title="As defined in the 'Foliation' section.">Codicological unit(s)</label>
-                <select autocomplete="off" data-multi-attr="n" data-from="foliation_n" class="multiselect" multiple></select>
-                <!--input type="text" data-multi-attr="n" placeholder="U1 U2"-->
+                <select autocomplete="off" data-subattr="n" data-from="foliation_n" class="multiselect" multiple></select>
+                <!--input type="text" data-subattr="n" placeholder="U1 U2"-->
                 <label for="hd_handNote_scope">Scope</label>
-                <select autocomplete="off" name="handNote_scope" data-multi-attr="scope"> 
+                <select autocomplete="off" name="handNote_scope" data-subattr="scope"> 
                     <option value="" selected disabled></option>
                     <option value="sole">sole</option>
                     <option value="major">major</option>
                     <option value="minor">minor</option>
                 </select>
                 <label for="hd_handNote_scribeRef">Scribe</label>
-                <select autocomplete="off" name="handNote_scribeRef" id="hd_handNote_scribeRef" data-multi-attr="scribeRef">
+                <select autocomplete="off" name="handNote_scribeRef" id="hd_handNote_scribeRef" data-subattr="scribeRef">
                     <option value="" selected></option>
                     <option value="#EdouardAriel">Edouard Ariel</option>
                     <option value="#ArielTitleScribe">Ariel's title scribe</option>
@@ -281,7 +281,7 @@
             </div>
             <div>
                 <label for="hd_handNote_script">Script</label>
-                <select autocomplete="off" name="handNote_script" class="multiselect" data-multi-attr="script" multiple>
+                <select autocomplete="off" name="handNote_script" class="multiselect" data-subattr="script" multiple>
                     <option value="bengali"> Bengali</option>
                     <option value="devanagari"> Devanagari</option>
                     <option value="grantha"> Grantha</option>
@@ -292,7 +292,7 @@
                     <option value="tamil"> Tamil</option>
                 </select>
                 <label for="#hd_handNote_scriptRef">Features</label>
-                <select autocomplete="off" name="handNote_scriptRef" class="multiselect" data-multi-attr="scriptRef" multiple>
+                <select autocomplete="off" name="handNote_scriptRef" class="multiselect" data-subattr="scriptRef" multiple>
                     <optgroup label="Tamil">
                         <option value="#tamilPulliNone"> no puḷḷi</option>
                         <option value="#tamilPulliSporadic"> sporadic puḷḷi</option>
@@ -320,7 +320,7 @@
                     </optgroup>
                 </select>
                 <label for="#hd_handNote_medium">Medium</label>
-                <select autocomplete="off" name="handNote_medium" class="multiselect" data-multi-attr="medium" multiple>
+                <select autocomplete="off" name="handNote_medium" class="multiselect" data-subattr="medium" multiple>
                     <option value="ink"> ink</option>
                     <optgroup label="colour">
                         <option value="black"> black</option>
@@ -333,16 +333,16 @@
                 </select>
             </div>
             <div>
-                <textarea autocomplete="off" rows="4" data-multi-select="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
+                <textarea autocomplete="off" rows="4" data-subselect="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
             </div>
         </div>
     </div>
     <h4>Decorations &amp; Illustrations</h4>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > decoDesc > decoNote">
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > decoDesc > decoNote">
         <div class="multi-item">
             <div>
                 <label for="hd_decoNote_type">Type</label>
-                <select autocomplete="off" data-multi-attr="type" id="hd_decoNote_type" name="decoNote_type">
+                <select autocomplete="off" data-subattr="type" id="hd_decoNote_type" name="decoNote_type">
                     <option value="" selected disabled></option>
                     <option value="decorative">decorative</option>
                     <option value="diagram">diagram</option>
@@ -353,7 +353,7 @@
                     <option value="table">table</option>
                 </select>
                 <label for="hd_decoNote_subtype">Placement</label>
-                <select autocomplete="off" data-multi-attr="subtype" id="hd_decoNote_subtype" name="decoNote_subtype" class="multiselect" multiple>
+                <select autocomplete="off" data-subattr="subtype" id="hd_decoNote_subtype" name="decoNote_subtype" class="multiselect" multiple>
                     <option value="beginning"> beginning</option>
                     <option value="cover"> cover</option>
                     <option value="detached"> detached</option>
@@ -368,17 +368,17 @@
                 </select>
             </div>
             <div>
-                <textarea autocomplete="off" rows="4" data-multi-select="desc" data-schema="descriptive" placeholder="Description of decoration"></textarea>
+                <textarea autocomplete="off" rows="4" data-subselect="desc" data-schema="descriptive" placeholder="Description of decoration"></textarea>
             </div>
         </div>
     </div>
     <h4>Paratexts</h4>
     <p>For examples, see <a href="https://tst.hypotheses.org/paratexts">https://tst.hypotheses.org/paratexts</a>.</p>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > physDesc > additions > desc">
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > additions > desc">
         <div class="multi-item">
             <div>
                 <label for="hd_addition_type">Type</label>
-                <select autocomplete="off" data-multi-attr="type" name="addition_type" id="hd_addition_type" class="multiselect" multiple>
+                <select autocomplete="off" data-subattr="type" name="addition_type" id="hd_addition_type" class="multiselect" multiple>
                     <optgroup label="structuring">
                         <option value="chapter-heading"> chapter heading</option>
                         <option value="end-title"> end title</option>
@@ -410,7 +410,7 @@
                     </optgroup>
                 </select>
                 <label for="hd_addition_subtype">Placement</label>
-                <select autocomplete="off" data-multi-attr="subtype" id="hd_addition_subtype" name="addition_subtype" class="multiselect" multiple>
+                <select autocomplete="off" data-subattr="subtype" id="hd_addition_subtype" name="addition_subtype" class="multiselect" multiple>
                     <option value="beginning"> beginning</option>
                     <option value="cover"> cover</option>
                     <option value="detached"> detached</option>
@@ -426,37 +426,42 @@
                 </select>
             </div>
             <div>
-                <textarea autocomplete="off" rows="4" class="big" data-multi-select=":scope" data-schema="transcription descriptive names" placeholder="Marginalia, running titles, satellite stanzas, etc."></textarea>
+                <textarea autocomplete="off" rows="4" class="big" data-subselect=":scope" data-schema="transcription descriptive names" placeholder="Marginalia, running titles, satellite stanzas, etc."></textarea>
             </div>
         </div>
     </div>
     <h3>Contents</h3>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > msContents > msItem">
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents > msItem">
         <div class="multi-item">
             <div>
                 <div>
                     <label for="hd_msItem_n" title="As defined in the 'Foliation' section.">Codicological unit</label>
-                    <select autocomplete="off" data-multi-attr="n" data-from="foliation_n"></select>
+                    <select autocomplete="off" data-subattr="n" data-from="foliation_n"></select>
                 </div>
-                <select autocomplete="off" data-multi-attr="defective" style="flex-grow: 0.5" required>
+                <div>
+                <label for="hd_text_id" title="A unique identifier. No spaces.">Text ID</label>
+                <input autocomplete="off" type="text" name="text_id" data-subattr="xml:id" placeholder="T1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
+                </div>
+                <select autocomplete="off" data-subattr="defective" style="flex-grow: 0.5" required>
                     <option value="false">Complete</option>
                     <option value="true">Incomplete</option>
                 </select>
             </div>
             <div>
                 <label for="hd_msItem_title">Title</label>
-                <input autocomplete="off" type="text" data-multi-select="title" placeholder="title of text" required>
+                <input autocomplete="off" type="text" name="text_title" data-subselect="title" placeholder="title of text" required>
             </div>
             <div>
                 <label for="hd_msItem_author">Author</label>
-                <input autocomplete="off" type="text" data-multi-select="author" placeholder="author of text">
+                <input autocomplete="off" type="text" data-subselect="author" placeholder="author of text">
             </div>
             <div>
                 <label for="hd_msItem_mainLang">Main language</label>
-                <select autocomplete="off" id="hd_msItem_mainLang" data-multi-select="textLang" data-multi-attr="mainLang">
+                <select autocomplete="off" id="hd_msItem_mainLang" data-subselect="textLang" data-subattr="mainLang">
                     <option value="" selected disabled></option>
                     <option value="eng">English</option>
                     <option value="fra">French</option>
+                    <option value="deu">German</option>
                     <option value="pal">Pali</option>
                     <option value="por">Portuguese</option>
                     <option value="pra">Prakrit</option>
@@ -464,9 +469,10 @@
                     <option value="tam">Tamil</option>
                 </select>
                 <label for="hd_msItem_otherLangs">Other languages</label>
-                <select autocomplete="off" id="hd_msItem_otherLangs" class="multiselect" name="msItem_otherLangs" data-multi-select="textLang" data-multi-attr="otherLangs" multiple>
+                <select autocomplete="off" id="hd_msItem_otherLangs" class="multiselect" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" multiple>
                     <option value="eng"> English</option>
                     <option value="fra"> French</option>
+                    <option value="deu">German</option>
                     <option value="pal"> Pali</option>
                     <option value="por"> Portuguese</option>
                     <option value="pra"> Prakrit</option>
@@ -476,34 +482,34 @@
             </div>
             <div>
                 <label for="hd_msItem_filiation">Other manuscript testimonies</label>
-                <textarea autocomplete="off" rows="4" data-multi-select="filiation > p" data-schema="descriptive names" placeholder="Other manuscripts containing this text"></textarea>
+                <textarea autocomplete="off" rows="4" data-subselect="filiation > p" data-schema="descriptive names" placeholder="Other manuscripts containing this text"></textarea>
             </div>
             <div>
                 <label for="hd_msItem_rubric">Rubric</label>
-                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-multi-select="rubric"></textarea>
+                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-subselect="rubric"></textarea>
             </div>
             <div>
                 <label for="hd_msItem_incipit">Incipit</label>
-                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-multi-select="incipit"></textarea>
+                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-subselect="incipit"></textarea>
             </div>
             <div>
                 <label for="hd_msItem_explicit">Explicit</label>
-                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-multi-select="explicit"></textarea>
+                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-subselect="explicit"></textarea>
             </div>
             <div>
                 <label for="hd_msItem_finalRubric" title="TEI finalRubric">Completion statement</label>
-                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-multi-select="finalRubric"></textarea>
+                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-subselect="finalRubric"></textarea>
             </div>
             <div>
                 <label for="hd_msItem_colophon">Colophon</label>
-                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-multi-select="colophon"></textarea>
+                <textarea autocomplete="off" rows="4" class="big" data-schema="transcription" data-subselect="colophon"></textarea>
             </div>
         </div>
     </div>
     <h4>Import part/volume</h4>
-    <div class="multiple file" data-select="fileDesc > sourceDesc > msDesc > msPart">
+    <div class="multiple file" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msPart">
         <div class="multi-item">
-            <textarea autocomplete="off" type="text" class="noCodeMirror" data-multi-select=":scope" hidden readonly></textarea>
+            <textarea autocomplete="off" type="text" class="noCodeMirror" data-subselect=":scope" hidden readonly></textarea>
             <div class="msPart_head" data-fixed-select="head"></div>
             <input class="hd_msPart" autocomplete="off" type="file" name="msPart" accept=".xml">
         </div>
@@ -511,52 +517,76 @@
     <h3>History</h3>
     <div>
         <div>
-            <input autocomplete="off" type="text" step="any" id="hd_origDate_calendar" name="unit" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="calendar" hidden readonly value="gregorian">
+            <input autocomplete="off" type="text" step="any" id="hd_origDate_calendar" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="calendar" hidden readonly value="gregorian">
             <label for="hd_origDate_when">Date</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_when" name="origDate_when" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when" data-tip="Year in the Gregorian calendar.">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_when" name="origDate_when" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="when" data-tip="Year in the Gregorian calendar.">
         </div>
         <div>
             <label for="hd_origDate_notBefore">Not before</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_notBefore" name="origDate_notBefore" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notBefore">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_notBefore" name="origDate_notBefore" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notBefore">
         </div>
         <div>
             <label for="hd_origDate_notAfter">Not after</label>
-            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_notBefore" name="origDate_notAfter" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notAfter">
+            <input autocomplete="off" type="number" step="any" min="0" id="hd_origDate_notBefore" name="origDate_notAfter" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-attr="notAfter">
         </div>
     </div>
     <div>
-        <textarea autocomplete="off" rows="4" id="hd_origDate" name="origDate" data-select="fileDesc > sourceDesc > msDesc > history > origin > origDate" data-schema="descriptive names" placeholder="Description of date, dating source/methodology, etc."></textarea>
+        <textarea autocomplete="off" rows="4" id="hd_origDate" name="origDate" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-schema="descriptive names" placeholder="Description of date, dating source/methodology, etc."></textarea>
     </div>
     <div>
-        <label for="hd_origPlace">Place</label>
-        <input autocomplete="off" type="text" rows="1" id="hd_origPlace" name="origPlace" data-select="fileDesc > sourceDesc > msDesc > history > origin > origPlace" placeholder="Tamilnadu">
+        <label for="hd_origPlace">Place of origin</label>
+        <input autocomplete="off" type="text" rows="1" id="hd_origPlace" name="origPlace" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origPlace" placeholder="Tamilnadu">
+    </div>
+    <div>
+        <label for="hd_provenance">Provenance</label>
+        <textarea autocomplete="off" rows="4" id="hd_provenance" name="provenance" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > provenance > p" data-schema="descriptive names" placeholder="History of the object between creation and acquisition"></textarea>
     </div>
     <div>
         <label for="hd_acquisition">Acquisition</label>
-        <textarea autocomplete="off" rows="4" id="hd_acquisition" name="acquisition" data-select="fileDesc > sourceDesc > msDesc > history > acquisition > p" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
+        <textarea autocomplete="off" rows="4" id="hd_acquisition" name="acquisition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > acquisition > p" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
     </div>
     <h3>Bibliography</h3>
-    <div class="multiple" data-select="fileDesc > sourceDesc > msDesc > additional > listBibl > bibl">
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > additional > listBibl > bibl">
         <div class="multi-item">
             <div>
-                <textarea autocomplete="off" rows="3" id="hd_bibliography" data-multi-select=":scope" data-schema="descriptive" name="bibliography"></textarea>
+                <textarea autocomplete="off" rows="3" id="hd_bibliography" data-subselect=":scope" data-schema="descriptive" name="bibliography"></textarea>
             </div>
         </div>
     </div>
     <h3>Encoding</h3>
-    <div class="multiple" data-select="encodingDesc > p">
+    <div class="multiple" data-select="teiHeader > encodingDesc > p">
         <div class="multi-item">
             <div>
-            <textarea autocomplete="off" rows="6" id="hd_encoding" name="encoding" data-multi-select=":scope" data-schema="descriptive" placeholder="Transcription conventions, abbreviations, etc." required></textarea>
+            <textarea autocomplete="off" rows="6" id="hd_encoding" name="encoding" data-subselect=":scope" data-schema="descriptive" placeholder="Transcription conventions, abbreviations, etc." required></textarea>
             </div>
         </div>
     </div>
     <h3>Revision history</h3>
-    <div class="multiple" data-select="revisionDesc > change">
+    <div class="multiple" data-select="teiHeader > revisionDesc > change">
         <div class="multi-item">
             <div>
-                <input autocomplete="off" type="month" step="any" id="hd_change_when" data-multi-attr="when" size="8" placeholder="YYYY-MM" pattern="\d{4}-\d{2}">
-                <textarea autocomplete="off" rows="4" id="hd_change" name="change" data-multi-select=":scope" data-schema="names" placeholder="summary of changes"></textarea>
+                <input autocomplete="off" type="month" step="any" id="hd_change_when" data-subattr="when" size="8" placeholder="YYYY-MM" pattern="\d{4}-\d{2}">
+                <textarea autocomplete="off" rows="4" id="hd_change" name="change" data-subselect=":scope" data-schema="names" placeholder="summary of changes"></textarea>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h3>Text transcription</h3>
+    <div class="multiple" data-select="text">
+        <div class="multi-item">
+            <div>
+                <div>
+                    <label for="hd_transcr_n" title="As defined in the 'Foliation' section.">Codicological unit</label>
+                    <select autocomplete="off" data-subattr="n" id="hd_trancsr_n" data-from="foliation_n"></select>
+                </div>
+                <div>
+                    <label for="hd_transcr_corresp" title="As defined in the 'Contents' section">Textual unit</label>
+                    <select autocomplete="off" data-subattr="corresp" id="hd_text_corresp" data-from="text_id" data-prefix="#"></select>
+                </div>
+            </div>
+            <div>
+            <textarea autocomplete="off" rows="10" id="hd_text" name="text" data-subselect=":scope" data-schema="transcription" placeholder="text transcription"></textarea>
             </div>
         </div>
     </div>

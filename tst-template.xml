@@ -82,6 +82,9 @@
                      <origDate calendar="gregorian" when=""></origDate>
                      <origPlace></origPlace>
                   </origin>
+                  <provenance>
+                     <p></p>
+                  </provenance>
                   <acquisition>
                      <p></p>
                   </acquisition>
