@@ -244,6 +244,10 @@
     <my:entry key="shelfmark">shelfmark</my:entry>
     <my:entry key="stamp">stamp</my:entry>
     <my:entry key="documenting-note">user-related note</my:entry>
+    <my:entry key="rubric">rubric</my:entry>
+    <my:entry key="incipit">incipit</my:entry>
+    <my:entry key="explicit">explicit</my:entry>
+    <my:entry key="colophon">colophon</my:entry>
 </my:additiontype>
 
 <!-- functions -->
@@ -1925,6 +1929,26 @@
     </xsl:attribute>
     <xsl:apply-templates />
 </xsl:element>
+</xsl:template>
+
+<xsl:template match="x:seg">
+    <xsl:element name="span">
+        <xsl:variable name="func" select="@function"/>
+        <xsl:if test="$func">
+            <xsl:attribute name="data-anno">
+                <xsl:variable name="funcname" select="document('')/*/my:additiontype/my:entry[@key=$func]"/>
+                <xsl:choose>
+                    <xsl:when test="$funcname">
+                        <xsl:value-of select="$funcname"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$func"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </xsl:element>
 </xsl:template>
 
 <xsl:template match="@*|node()">
