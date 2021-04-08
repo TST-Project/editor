@@ -1502,8 +1502,8 @@
                 <xsl:element name="td">
                     <xsl:attribute name="style">text-align: right;</xsl:attribute>
                     <xsl:attribute name="lang">en</xsl:attribute>
-                    <xsl:if test="@n">
-                        <xsl:value-of select="@n"/>
+                    <xsl:value-of select="@n"/>
+                    <xsl:if test="@n and $textid">
                         <xsl:text>, </xsl:text>
                     </xsl:if>
                     <xsl:value-of select="$textid"/>
