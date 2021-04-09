@@ -202,12 +202,22 @@
             if(!state.xStyle)
                 state.xStyle = file.syncLoad(state.xSheet);
             const result = xml.XSLTransform(state.xStyle,xstr);
-            const body = document.querySelector('#headerviewer');
-            dom.clearEl(body);
-            body.appendChild(result.querySelector('.record-fat'));
-            body.style.display = 'block';
+            const body = document.getElementById('headerviewer');
+            
+            const rec = document.getElementById('recordcontainer');
+            if(rec) rec.remove();
+
+            body.prepend(result.querySelector('#recordcontainer'));
+
+            if(!document.getElementById('viewer')) {
+                const facs = result.querySelector('#viewer');
+                if(facs) body.appendChild(facs);
+            }
+
+            body.style.display = 'flex';
             //script.init();
-            window.Transliterate.init(body);
+            //window.Transliterate.init(body);
+            window.TSTViewer.init();
         },
         saveAs: function() {
             const serialized = xml.serialize(state.xmlDoc);
@@ -519,7 +529,7 @@
             }
 
             document.getElementById('headerviewer').style.display = 'none';
-            
+
             const heditor = document.getElementById('headereditor');
             state.heditor = heditor;
             heditor.style.display = 'flex';

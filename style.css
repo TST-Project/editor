@@ -83,6 +83,7 @@ hr {
 
 #headerviewer {
     display: none;
+    flex-direction: row-reverse;
 }
 
 .vsb-main {
