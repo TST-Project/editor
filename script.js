@@ -256,16 +256,17 @@
                     // add header
                     const msDesc = parsed.querySelector('msDesc');
                     if(msDesc) {
-                        const headEl = parsed.createElement('head');
+                        const ns = state.xmlDoc.documentElement.namespaceURI;
+                        const headEl = parsed.createElementNS(ns,'head');
                         const head = parsed.querySelector('titleStmt');
                         if(head) {
-                            headEl.innerHTML = head.innerHTML;
+                            headEl.innerHTML = xml.innerXML(head);
                         }
                         else
                             headEl.textContent = 'MS part';
 
                         msDesc.insertBefore(headEl,msDesc.firstChild);
-                        par.querySelector('textarea[data-subselect=":scope"]').value = msDesc.innerHTML;
+                        par.querySelector('textarea[data-subselect=":scope"]').value = xml.innerXML(msDesc);
                         par.querySelector('.msPart_head').textContent = headEl.textContent;
                         par.querySelector('input[type="file"]').remove();
                     }
@@ -975,7 +976,7 @@
             autosaved.saveStr(serialized);
         },
 
-        updateFields(doc,sanitized) {
+        updateFields(doc,sanitize) {
             const fields = state.heditor.querySelectorAll('[data-select]');
             const toplevel = doc.querySelector(state.toplevel);
             for(const field of fields) {
@@ -986,10 +987,10 @@
                         const newXml = xml.makeElDeep(field.dataset.select,toplevel,true);
                         const subfields = item.querySelectorAll('[data-subselect],[data-subattr]');
                         for(const subfield of subfields) 
-                            editor.updateXMLField(subfield,newXml,sanitized);
+                            editor.updateXMLField(subfield,newXml,sanitize);
                     }
                 }
-                else editor.updateXMLField(field,toplevel,sanitized);
+                else editor.updateXMLField(field,toplevel,sanitize);
             }
             return toplevel;
         },
@@ -1055,7 +1056,7 @@
         },
         
         updateOptions: function(sel) {
-            const options = [...state.heditor.querySelectorAll(`[name=${sel}]`)].map(el => {
+            const options = [{value:''},...state.heditor.querySelectorAll(`[name=${sel}]`)].map(el => {
                 const opt = document.createElement('option');
                 opt.setAttribute('value',el.value);
                 opt.append(el.value);
@@ -1090,8 +1091,15 @@
             if(!node.hasAttributes() && !node.hasChildNodes()) node.remove();
         },
 
-        updateXMLField: function(field,toplevel,sanitized) {
-            const tosanitize = sanitized || field.tagName !== 'TEXTAREA' || false;
+        updateXMLField: function(field,toplevel,sanitize) {
+            // class="nosanitize": tosanitize = false 
+            // sanitize = true: tosanitize = true
+            // not textarea: tosanitize = true
+            // otherwise: tosanitize = false
+            const tosanitize = !field.classList.contains('nosanitize') &&
+                               sanitize || 
+                               field.tagName !== 'TEXTAREA' || 
+                               false;
             const selector = field.dataset.select || field.dataset.subselect;
             const selected = (selector && selector !== ':scope') ?
                 toplevel.querySelector(selector) :

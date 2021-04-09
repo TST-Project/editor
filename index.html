@@ -515,11 +515,12 @@
     <h4>Import part/volume</h4>
     <div class="multiple file" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msPart">
         <div class="multi-item">
-            <textarea autocomplete="off" type="text" class="noCodeMirror" data-subselect=":scope" hidden readonly></textarea>
+            <textarea autocomplete="off" type="text" class="noCodeMirror nosanitize" data-subselect=":scope" hidden readonly></textarea>
+            <div class="msPart_cote" data-fixed-select="msIdentifier > idno[type='cote']"></div>
             <div class="msPart_head" data-fixed-select="head"></div>
             <input class="hd_msPart" autocomplete="off" type="file" name="msPart" accept=".xml">
-            <div class="msPart_cunit invisible"></div>
-            <div class="msPart_tunit invisible"></div>
+            <div class="msPart_cunit" style="display: none"></div>
+            <div class="msPart_tunit" style="display: none"></div>
         </div>
     </div>
     <h3>History</h3>
