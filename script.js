@@ -265,6 +265,9 @@
                         par.querySelector('textarea[data-subselect=":scope"]').value = msDesc.innerHTML;
                         par.querySelector('.msPart_head').textContent = headEl.textContent;
                         par.querySelector('input[type="file"]').remove();
+                        // TODO: import <text>s into main document
+                        //       expose Codicological/Textual units (hidden)
+                        //       allow multiple fields for data-depends
                     }
                 }
             };
@@ -1057,6 +1060,11 @@
                 }
             }
         },
+
+        removeXMLField: function(field) {
+            if(!field.hasAttributes() && field.innerHTML === '') field.remove();
+        },
+
         updateXMLField: function(field,toplevel,sanitized) {
             const tosanitize = sanitized || field.tagName !== 'TEXTAREA' || false;
             const selector = field.dataset.select || field.dataset.subselect;
@@ -1076,6 +1084,7 @@
                     else
                         selected.innerHTML = '';
                         // should we save just spaces?
+                    editor.removeXMLField(selected);
                 }
                 return;
             }
