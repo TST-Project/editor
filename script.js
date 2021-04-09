@@ -204,11 +204,6 @@
             const result = xml.XSLTransform(state.xStyle,xstr);
             const body = document.getElementById('headerviewer');
             
-            const rec = document.getElementById('recordcontainer');
-            if(rec) rec.remove();
-
-            body.prepend(result.querySelector('#recordcontainer'));
-
             const viewer = document.getElementById('viewer');
             const facs = result.querySelector('#viewer');
             if(facs) {
@@ -220,6 +215,12 @@
             else {
                 if(viewer) viewer.remove();
             }
+
+            const rec = document.getElementById('recordcontainer');
+            if(rec) rec.remove();
+
+            body.appendChild(result.querySelector('#recordcontainer'));
+
 
             body.style.display = 'flex';
             //script.init();
@@ -252,24 +253,38 @@
             const parse = function(par,e) {
                 const parsed = xml.parseString(e.target.result);
                 if(parsed) {
-                    const head = parsed.querySelector('titleStmt');
+                    // add header
                     const msDesc = parsed.querySelector('msDesc');
                     if(msDesc) {
                         const headEl = parsed.createElement('head');
+                        const head = parsed.querySelector('titleStmt');
                         if(head) {
                             headEl.innerHTML = head.innerHTML;
                         }
                         else
                             headEl.textContent = 'MS part';
+
                         msDesc.insertBefore(headEl,msDesc.firstChild);
                         par.querySelector('textarea[data-subselect=":scope"]').value = msDesc.innerHTML;
                         par.querySelector('.msPart_head').textContent = headEl.textContent;
                         par.querySelector('input[type="file"]').remove();
-                        // TODO: import <text>s into main document
+                    }
+                    
+                    // add any transcriptions
+                    const textel = parsed.querySelector('text');
+                    if(textel) {
+                        const textbutton = document.querySelector('[data-select="text"] .plusbutton');
+                        const ret = editor.makeMultiItem(textbutton);
+                        ret.querySelector('[name="text"]').value = textel.innerHTML;
+                        ret.querySelector('[name="transcr_n"]').value = textel.getAttribute('n');
+                        ret.querySelector('[name="text_corresp"]').value = textel.getAttribute('corresp');
+                        editor.prepMultiItem(ret);
                         //       expose Codicological/Textual units (hidden)
                         //       allow multiple fields for data-depends
                     }
                 }
+                else
+                    par.querySelector('.msPart_head').textContent = 'Error importing file.';
             };
             reader.onload = parse.bind(null,par);
             reader.readAsText(f);
@@ -293,10 +308,17 @@
     
     const editor = {
         addMultiItem: function(button) {
-            const par = button.parentNode;
-            const ret = button.myItem.cloneNode(true);
-            par.insertBefore(ret,button);
             
+            editor.prepMultiItem(
+                editor.makeMultiItem(button)
+            );
+        },
+        makeMultiItem: function(button) {
+            const ret = button.myItem.cloneNode(true);
+            button.parentNode.insertBefore(ret,button);
+            return ret;
+        },
+        prepMultiItem: function(ret) {
             for(const m of ret.querySelectorAll('.multiselect'))
                 editor.makeMultiselect(m);
             
@@ -315,7 +337,7 @@
             for(const f of ret.querySelectorAll('input[type="file"]'))
                 f.addEventListener('change',file.selectPart,false);
 
-            editor.updateButtonrows(par);
+            editor.updateButtonrows(ret.parentNode);
         },
         destroy: function() {
             editor.destroyJS();

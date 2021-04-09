@@ -517,6 +517,8 @@
             <textarea autocomplete="off" type="text" class="noCodeMirror" data-subselect=":scope" hidden readonly></textarea>
             <div class="msPart_head" data-fixed-select="head"></div>
             <input class="hd_msPart" autocomplete="off" type="file" name="msPart" accept=".xml">
+            <div class="msPart_cunit invisible"></div>
+            <div class="msPart_tunit invisible"></div>
         </div>
     </div>
     <h3>History</h3>
@@ -583,15 +585,15 @@
             <div>
                 <div>
                     <label for="hd_transcr_n" title="As defined in the 'Foliation' section.">Codicological unit</label>
-                    <select autocomplete="off" data-subattr="n" id="hd_trancsr_n" data-from="foliation_n"></select>
+                    <select autocomplete="off" data-subattr="n" name="transcr_n" data-from="foliation_n"></select>
                 </div>
                 <div>
                     <label for="hd_transcr_corresp" title="As defined in the 'Contents' section">Textual unit</label>
-                    <select autocomplete="off" data-subattr="corresp" id="hd_text_corresp" data-from="text_id" data-prefix="#"></select>
+                    <select autocomplete="off" data-subattr="corresp" name="text_corresp" data-from="text_id" data-prefix="#"></select>
                 </div>
             </div>
             <div>
-            <textarea autocomplete="off" rows="10" id="hd_text" name="text" data-subselect=":scope" data-schema="transcription" placeholder="text transcription"></textarea>
+            <textarea autocomplete="off" rows="10" name="text" data-subselect=":scope" data-schema="transcription" placeholder="text transcription"></textarea>
             </div>
         </div>
     </div>

@@ -84,7 +84,6 @@ hr {
 #headerviewer {
     display: none;
     overflow-y: visible;
-    flex-direction: row-reverse;
 }
 
 .vsb-main {
