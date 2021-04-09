@@ -167,28 +167,40 @@
         <label title="Dimensions of a single leaf.">Leaf size</label>
         <div class="rowpar">
             <div class="subrow">
-                <input autocomplete="off" type="text" id="hd_support_leaf_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
-                <label for="hd_support_width">Width</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
-                <label>mm</label>
-                <label for="hd_support_width_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
-                <label>mm</label>
-                <label for="hd_support_width_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
-                <label>mm</label> 
+                <div>
+                    <input autocomplete="off" type="text" id="hd_support_leaf_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf']" data-attr="unit" hidden readonly value="mm">
+                    <label for="hd_support_width">Width</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="quantity">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_width_min">Min</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="min">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_width_max">Max</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_width" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > width" data-attr="max">
+                    <label>mm</label> 
+                </div>
             </div>
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
-                <label for="hd_support_height">Height</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
-                <label>mm</label>
-                <label for="hd_support_height_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_min" name="heightmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
-                <label>mm</label>
-                <label for="hd_support_height_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_max" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
-                <label>mm</label> 
+                <div>
+                    <label for="hd_support_height">Height</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="quantity">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_height_min">Min</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_min" name="heightmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="min">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_height_max">Max</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_height_max" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='leaf'] > height" data-attr="max">
+                    <label>mm</label> 
+                </div>
             </div>
         </div>
     </div>
@@ -196,28 +208,40 @@
         <span title="Dimensions of the written area of the leaf.">Written area</span>
         <div class="rowpar">
             <div class="subrow">
-                <input autocomplete="off" type="text" id="hd_support_written_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written']" data-attr="unit" hidden readonly value="mm">
-                <label for="hd_support_writtenWidth">Width</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
-                <label>mm</label>
-                <label for="hd_support_writtenWidth_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="widthmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
-                <label>mm</label>
-                <label for="hd_support_writtenWidth_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth_max" name="widthmax" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
-                <label>mm</label> 
+                <div>
+                    <input autocomplete="off" type="text" id="hd_support_written_unit" name="unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written']" data-attr="unit" hidden readonly value="mm">
+                    <label for="hd_support_writtenWidth">Width</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="width" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="quantity">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_writtenWidth_min">Min</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth" name="widthmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="min">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_writtenWidth_max">Max</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenWidth_max" name="widthmax" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > width" data-attr="max">
+                    <label>mm</label> 
+                </div>
             </div>
             <div style="flex-basis: 100%; height:0"></div>
             <div class="subrow">
-                <label for="hd_support_writtenHeight">Height</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
-                <label>mm</label>
-                <label for="hd_support_writtenHeight_min">Min</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
-                <label>mm</label>
-                <label for="hd_support_writtenHeight_max">Max</label>
-                <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmax" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
-                <label>mm</label> 
+                <div>
+                    <label for="hd_support_writtenHeight">Height</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="height" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="quantity">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_writtenHeight_min">Min</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmin" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="min">
+                    <label>mm</label>
+                </div>
+                <div>
+                    <label for="hd_support_writtenHeight_max">Max</label>
+                    <input autocomplete="off" type="number" step="any" min="0" id="hd_support_writtenHeight" name="heightmax" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > dimensions[type='written'] > height" data-attr="max">
+                    <label>mm</label> 
+                </div>
             </div>
         </div>
     </div>
@@ -548,11 +572,11 @@
     </div>
     <div>
         <label for="hd_provenance">Provenance</label>
-        <textarea autocomplete="off" rows="2" id="hd_provenance" name="provenance" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > provenance > p" data-schema="descriptive names" placeholder="History of the object between creation and acquisition"></textarea>
+        <textarea autocomplete="off" rows="2" id="hd_provenance" name="provenance" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > provenance" data-schema="descriptive names" placeholder="History of the object between creation and acquisition"></textarea>
     </div>
     <div>
         <label for="hd_acquisition">Acquisition</label>
-        <textarea autocomplete="off" rows="2" id="hd_acquisition" name="acquisition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > acquisition > p" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
+        <textarea autocomplete="off" rows="2" id="hd_acquisition" name="acquisition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > acquisition" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
     </div>
     <h3>Bibliography</h3>
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > additional > listBibl > bibl">
