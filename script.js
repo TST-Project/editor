@@ -279,7 +279,7 @@
                         ret.querySelector('[name="transcr_n"]').value = textel.getAttribute('n');
                         ret.querySelector('[name="text_corresp"]').value = textel.getAttribute('corresp');
                         editor.prepMultiItem(ret);
-                        //       expose Codicological/Textual units (hidden)
+                        // TODO: expose Codicological/Textual units (hidden)
                         //       allow multiple fields for data-depends
                     }
                 }
@@ -1106,7 +1106,7 @@
                     else
                         selected.innerHTML = '';
                         // should we save just spaces?
-                    editor.removeXMLField(selected);
+                    //editor.removeXMLField(selected);
                 }
                 return;
             }
