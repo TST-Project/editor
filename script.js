@@ -275,11 +275,11 @@
                     if(textel) {
                         const textbutton = document.querySelector('[data-select="text"] .plusbutton');
                         const ret = editor.makeMultiItem(textbutton);
-                        ret.querySelector('[name="text"]').value = textel.innerHTML;
+                        ret.querySelector('[name="text"]').value = xml.innerXML(textel);
                         ret.querySelector('[name="transcr_n"]').value = textel.getAttribute('n');
                         ret.querySelector('[name="text_corresp"]').value = textel.getAttribute('corresp');
                         editor.prepMultiItem(ret);
-                        // TODO: expose Codicological/Textual units (hidden)
+                        // TODO: expose Codicological/Textual units (hidden, prefixed)
                         //       allow multiple fields for data-depends
                     }
                 }
@@ -1010,10 +1010,13 @@
                 editionStmt.appendChild(state.xmlDoc.createTextNode('.'));
             }
             
-            // condition after last foliation
-            const condition = par.querySelector('condition');
-            const lastFoliation = par.querySelector('foliation:last-of-type');
-            if(condition && lastFoliation) lastFoliation.insertAdjacentElement('afterend',condition);
+            const supportDescs = par.querySelectorAll('supportDesc');
+            for(const supportDesc of supportDescs) {
+                // condition after last foliation
+                const condition = supportDesc.querySelector('condition');
+                const lastFoliation = supportDesc.querySelector('foliation:last-of-type');
+                if(condition && lastFoliation) lastFoliation.insertAdjacentElement('afterend',condition);
+            }
 
             // add xml:lang to rubric, incipit, etc.
             const msItems = par.querySelectorAll('msContents > msItem');
@@ -1036,12 +1039,12 @@
             }
 
             // remove facsimile if empty
-            const facs = par.querySelectorAll('facsimile');
+            /*const facs = par.querySelectorAll('facsimile');
             for(const fac of facs) {
                 const graphic = fac.querySelector('graphic');
                 if(graphic && !graphic.hasAttribute('url'))
                     fac.remove();
-            }
+            }*/
         },
 
         prepUpdate: function(sel,par) {
@@ -1083,8 +1086,8 @@
             }
         },
 
-        removeXMLField: function(field) {
-            if(!field.hasAttributes() && field.innerHTML === '') field.remove();
+        removeXMLField: function(node) {
+            if(!node.hasAttributes() && !node.hasChildNodes()) node.remove();
         },
 
         updateXMLField: function(field,toplevel,sanitized) {
@@ -1106,11 +1109,12 @@
                     else
                         selected.innerHTML = '';
                         // should we save just spaces?
-                    //editor.removeXMLField(selected);
+                    if(!field.dataset.hasOwnProperty('subattr') && 
+                        !field.dataset.hasOwnProperty('subselect'))
+                        editor.removeXMLField(selected);
                 }
                 return;
             }
-
             const xmlEl = selected || xml.makeElDeep(selector,toplevel);
             
             const getVal = function(field) {
