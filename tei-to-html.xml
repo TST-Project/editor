@@ -957,7 +957,7 @@
 </xsl:template>
 
 <xsl:template match="x:measure[@unit='stringhole' or @unit='folio' or @unit='page']">
-    <xsl:if test="not(@quantity = '') and not(@quantity = '0')">
+    <xsl:if test="@quantity and not(@quantity = '') and not(@quantity = '0')">
         <xsl:call-template name="units"/>
         <xsl:text>. </xsl:text>
         <xsl:apply-templates />
