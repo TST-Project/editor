@@ -209,9 +209,16 @@
 
             body.prepend(result.querySelector('#recordcontainer'));
 
-            if(!document.getElementById('viewer')) {
-                const facs = result.querySelector('#viewer');
-                if(facs) body.appendChild(facs);
+            const viewer = document.getElementById('viewer');
+            const facs = result.querySelector('#viewer');
+            if(facs) {
+                if(!viewer) 
+                    body.appendChild(facs);
+                else
+                    viewer.dataset.manifest = facs.dataset.manifest;
+            }
+            else {
+                if(viewer) viewer.remove();
             }
 
             body.style.display = 'flex';
@@ -308,6 +315,7 @@
             editor.updateButtonrows(par);
         },
         destroy: function() {
+            editor.destroyJS();
             file.render(state.xmlDoc);
         },
         
@@ -904,7 +912,15 @@
             //cm.performLint();
             return cm;
         },
-        
+       
+        destroyJS: function() {
+            while(state.multiselect.length > 0) {
+                const el = state.multiselect.pop();
+                if(el) el.destroy();
+            }
+            while(state.cmirror.length > 0) state.cmirror.pop().toTextArea();
+        },
+
         update: function() {
             const invalid = editor.checkInvalid();
             if(invalid) {
@@ -920,12 +936,8 @@
                 return;
             }
             
-            while(state.multiselect.length > 0) {
-                const el = state.multiselect.pop();
-                if(el) el.destroy();
-            }
-            while(state.cmirror.length > 0) state.cmirror.pop().toTextArea();
-            
+            editor.destroyJS();
+
             const toplevel = editor.updateFields(state.xmlDoc);
             
             editor.postProcess(toplevel);
@@ -996,6 +1008,14 @@
 
                 const transcr = par.querySelector(`text[corresp="#${textid}"]`);
                 if(transcr) transcr.setAttribute('xml:lang',langmap.get(lang));
+            }
+
+            // remove facsimile if empty
+            const facs = par.querySelectorAll('facsimile');
+            for(const fac of facs) {
+                const graphic = fac.querySelector('graphic');
+                if(graphic && !graphic.hasAttribute('url'))
+                    fac.remove();
             }
         },
 

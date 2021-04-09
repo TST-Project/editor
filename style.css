@@ -83,6 +83,7 @@ hr {
 
 #headerviewer {
     display: none;
+    overflow-y: visible;
     flex-direction: row-reverse;
 }
 
@@ -436,7 +437,7 @@ span.gap {
     max-width: 100px;
 }
 
-#headereditor input[type="text"] {
+#headereditor input[type="text"], #headereditor input[type="url"] {
     text-align: left;
     flex-grow: 1;
 }

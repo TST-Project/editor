@@ -92,6 +92,9 @@
         <input autocomplete="off" type="text" id="hd_publish_date" name="publish_date" data-select="teiHeader > fileDesc > publicationStmt > date" value="2020" readonly>
     </div>
     <div>
+        <label for="hd_facsimile">IIIF manifest</label>
+        <input autocomplete="off" type="url" id="hd_facsimile" name="facsimile" data-select="facsimile > graphic" data-attr="url" placeholder="https://..." pattern="https://.*">
+    </div><div>
         <label for="hd_summary">Summary</label>
         <textarea autocomplete="off" rows="10" id="hd_summary" name="summary" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents > summary" data-schema="descriptive names" placeholder="Summary description of the manuscript" required></textarea>
     </div>
