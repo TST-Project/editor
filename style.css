@@ -460,7 +460,7 @@ span.gap {
 }
 
 .buttonrow {
-    margin: 0 1em 1em 0;
+    /*margin: 0 1em 1em 0;*/
     align-self: flex-end;
 }
 
@@ -472,7 +472,9 @@ span.gap {
     align-items: center;
     flex-grow: 1;
     width: 100%;
-    border: 0.1rem solid #ff9900;
+    /*border: 0.1rem solid #ff9900;*/
+    background: rgba(0,0,0,0.1);
+    margin-bottom: 0.5rem;
     border-radius: 0.3rem;
     padding: 0.5rem;
 }
