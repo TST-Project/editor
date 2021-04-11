@@ -3,7 +3,13 @@
                 xmlns:my="https://github.com/tst-project"
                 exclude-result-prefixes="x my">
 
-<xsl:import href="../lib/xslt/tei-to-html.xsl"/>
+<xsl:import href="../lib/xslt/functions.xsl"/>
+<!--xsl:import href="../lib/xslt/definitions.xsl"/-->
+<xsl:import href="../lib/xslt/common.xsl"/>
+<xsl:import href="../lib/xslt/teiheader.xsl"/>
+<xsl:import href="../lib/xslt/transcription.xsl"/>
+<!--xsl:import href="../lib/xslt/tei-to-html.xsl"/-->
+
 <xsl:param name="defRoot" select="document('')"/>
 
 <!-- Chrome's XSLTProcessor() doesn't play well with XSLT document() in imported files; the definitions.xsl file has been copied here, and $defRoot has been redefined to point to this document -->
