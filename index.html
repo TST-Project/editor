@@ -512,27 +512,48 @@
             </div>
             <div>
                 <label>Other manuscript testimonies</label>
-                <textarea autocomplete="off" rows="4" name="filiation" data-subselect="filiation > p" data-schema="descriptive names" placeholder="Other manuscripts containing this text"></textarea>
+                <textarea autocomplete="off" rows="3" name="filiation" data-subselect="filiation > p" data-schema="descriptive names" placeholder="Other manuscripts containing this text"></textarea>
             </div>
             <div>
                 <label>Rubric</label>
-                <textarea autocomplete="off" name="msItem_rubric" rows="4" class="big" data-schema="transcription" data-subselect="rubric"></textarea>
+                <div class="multiple w89" data-subselect="rubric">
+                    <div class="multi-item">
+                        <textarea autocomplete="off" name="msItem_rubric" rows="4" class="big" data-schema="transcription" data-subselect=":scope"></textarea>
+                    </div>
+                </div>
+                <!--textarea autocomplete="off" name="msItem_rubric" rows="4" class="big" data-schema="transcription" data-subselect="rubric"></textarea-->
             </div>
             <div>
                 <label>Incipit</label>
-                <textarea autocomplete="off" rows="4" name="msItem_incipit" class="big" data-schema="transcription" data-subselect="incipit"></textarea>
+                <div class="multiple w89" data-subselect="incipit">
+                    <div class="multi-item">
+                        <textarea autocomplete="off" rows="4" name="msItem_incipit" class="big" data-schema="transcription" data-subselect=":scope"></textarea>
+                    </div>
+                </div>
             </div>
             <div>
                 <label>Explicit</label>
-                <textarea autocomplete="off" rows="4" name="msItem_explicit" class="big" data-schema="transcription" data-subselect="explicit"></textarea>
+                <div class="multiple w89" data-subselect="explicit">
+                    <div class="multi-item">
+                        <textarea autocomplete="off" rows="4" name="msItem_explicit" class="big" data-schema="transcription" data-subselect=":scope"></textarea>
+                    </div>
+                </div>
             </div>
             <div>
                 <label title="TEI finalRubric">Completion statement</label>
-                <textarea autocomplete="off" rows="4" name="msItem_completion_statement" class="big" data-schema="transcription" data-subselect="finalRubric"></textarea>
+                <div class="multiple w89" data-subselect="finalRubric">
+                    <div class="multi-item">
+                        <textarea autocomplete="off" rows="4" name="msItem_completion_statement" class="big" data-schema="transcription" data-subselect=":scope"></textarea>
+                    </div>
+                </div>
             </div>
             <div>
                 <label>Colophon</label>
-                <textarea autocomplete="off" rows="4" class="big" name="msItem_colophon" data-schema="transcription" data-subselect="colophon"></textarea>
+                <div class="multiple w89" data-subselect="colophon">
+                    <div class="multi-item">
+                        <textarea autocomplete="off" rows="4" class="big" name="msItem_colophon" data-schema="transcription" data-subselect=":scope"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -566,7 +587,7 @@
         </div>
     </div>
     <div>
-        <textarea autocomplete="off" rows="2" name="origDate" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-schema="descriptive names" placeholder="Description of date, dating source/methodology, etc."></textarea>
+        <textarea autocomplete="off" rows="3" name="origDate" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > origin > origDate" data-schema="descriptive names" placeholder="Description of date, dating source/methodology, etc."></textarea>
     </div>
     <div>
         <label for="hd_origPlace">Place of origin</label>
@@ -574,12 +595,13 @@
     </div>
     <div>
         <label for="hd_provenance">Provenance</label>
-        <textarea autocomplete="off" rows="2" id="hd_provenance" name="provenance" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > provenance" data-schema="descriptive names" placeholder="History of the object between creation and acquisition"></textarea>
+        <textarea autocomplete="off" rows="3" id="hd_provenance" name="provenance" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > provenance" data-schema="descriptive names" placeholder="History of the object between creation and acquisition"></textarea>
     </div>
     <div>
         <label for="hd_acquisition">Acquisition</label>
-        <textarea autocomplete="off" rows="2" id="hd_acquisition" name="acquisition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > acquisition" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
+        <textarea autocomplete="off" rows="3" id="hd_acquisition" name="acquisition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > history > acquisition" data-schema="descriptive names" placeholder="How the item was acquired by the repository"></textarea>
     </div>
+    
     <h3>Bibliography</h3>
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > additional > listBibl > bibl">
         <div class="multi-item">
@@ -588,6 +610,7 @@
             </div>
         </div>
     </div>
+    
     <h3>Encoding</h3>
     <div class="multiple" data-select="teiHeader > encodingDesc > p">
         <div class="multi-item">
@@ -596,6 +619,7 @@
             </div>
         </div>
     </div>
+
     <h3>Revision history</h3>
     <div class="multiple" data-select="teiHeader > revisionDesc > change">
         <div class="multi-item">
@@ -606,6 +630,7 @@
         </div>
     </div>
 </section>
+
 <section>
     <h3>Text transcription</h3>
     <div class="multiple" data-select="text">
@@ -627,6 +652,7 @@
     </div>
 </section>
 </article>
+
 <article id="footer">
     <div id="footermessage"></div>
     <div class="buttoncontainer row">
@@ -634,8 +660,10 @@
         <button type="button" id="cancelheader">cancel</button>
     </div>
 </article>
-</div>
-</div>
+
+</div><!-- .record-fat -->
+</div><!-- #headereditor -->
+
 <form id="openform">
     <div>
         <div id="newfile">new file</div>

@@ -320,6 +320,12 @@
             return ret;
         },
         prepMultiItem: function(ret) {
+
+            for(const m of ret.querySelectorAll('.multiple')) {
+                if(!m) continue;
+                editor.collapseMultiField(m);
+            }
+
             for(const m of ret.querySelectorAll('.multiselect'))
                 editor.makeMultiselect(m);
             
@@ -458,8 +464,9 @@
             */
         },
 
-        hideEmpty: function() {
-            const list = [...state.heditor.querySelectorAll('.multi-item')];
+        hideEmpty: function(el) {
+            const par = el || state.heditor;
+            const list = [...par.querySelectorAll('.multi-item')];
             const removelist = list.filter(m => {
                 for(const f of m.querySelectorAll('input,select,textarea')) {
                     if(f.required) return false;
@@ -544,7 +551,7 @@
             }
         },
 
-        makeMultiselect: function(el) {
+        makeMultiselect: (el) => {
             el.id = 'box' + Math.random().toString(36).substr(2,9);
             const mbox = new vanillaSelectBox(`#${el.id}`,{placeHolder: 'Choose...',disableSelectAll: true});
             mbox.setValue(
@@ -573,34 +580,7 @@
             
             for(const field of fields) {
                 if(field.classList.contains('multiple')) {
-                    
-                    if(!field.hasOwnProperty('myItem')) {
-                        field.myItem = field.removeChild(field.querySelector('.multi-item'));
-                        const buttonrow = editor.makeButtonrow();
-                        field.myItem.insertBefore(buttonrow,field.myItem.firstChild);
-                    }
-
-                    while(field.firstChild) field.firstChild.remove();
-
-                    const els = state.xmlDoc.querySelectorAll(field.dataset.select);
-                    for(const el of els) {
-                        const newitem = field.myItem.cloneNode(true);
-                        //const subfields = newitem.querySelectorAll('input:not([type=file]),textarea,select');
-                        const subfields = newitem.querySelectorAll('[data-subselect],[data-subattr]');
-                        for(const subfield of subfields) 
-                            editor.fillFormField(subfield,el,unsanitize);
-
-                        if(field.classList.contains('file')) {
-                            for(const subfixed of newitem.querySelectorAll('[data-fixed-select]'))
-                                editor.fillFixedField(subfixed,el);
-                            const fileselector = newitem.querySelector('input[type="file"]');
-                            if(fileselector) fileselector.remove();
-                        }
-
-                        field.appendChild(newitem);
-                    }
-                    field.appendChild(dom.makePlusButton(field.myItem));
-                    editor.updateButtonrows(field);
+                    editor.fillFormMultiField(field,toplevel,unsanitize);
                 }
                 else editor.fillFormField(field,toplevel,unsanitize);
             }
@@ -631,6 +611,73 @@
                 state.saveInterval = window.setInterval(autosaved.save,300000);
         },
 
+        fillFormMultiField: (field,toplevel,unsanitize) => {
+
+            const plusbutton = editor.collapseMultiField(field);
+
+            //const els = state.xmlDoc.querySelectorAll(field.dataset.select);
+            const selector = field.dataset.select || field.dataset.subselect;
+            const els = toplevel.querySelectorAll(selector);
+            for(const el of els) {
+                const newitem = field.myItem.cloneNode(true);
+
+                const subfields = editor.getSubFields2(newitem);
+                for(const subfield of subfields) {
+                    if(subfield.classList.contains('multiple'))
+                        editor.fillFormMultiField(subfield,el,unsanitize);
+                    else
+                        editor.fillFormField(subfield,el,unsanitize);
+                }
+
+                if(field.classList.contains('file')) {
+                    for(const subfixed of newitem.querySelectorAll('[data-fixed-select]'))
+                        editor.fillFixedField(subfixed,el);
+                    const fileselector = newitem.querySelector('input[type="file"]');
+                    if(fileselector) fileselector.remove();
+                }
+
+                field.insertBefore(newitem,plusbutton);
+            }
+
+            editor.updateButtonrows(field);
+        },
+
+        collapseMultiField: (field) => {
+            if(!field.hasOwnProperty('myItem')) {
+                field.myItem = field.removeChild(field.querySelector('.multi-item'));
+                const buttonrow = editor.makeButtonrow();
+                field.myItem.insertBefore(buttonrow,field.myItem.firstChild);
+            }
+
+            while(field.firstChild) field.firstChild.remove();
+            const b = dom.makePlusButton(field.myItem);
+            field.appendChild(b);
+            return b;
+        },
+
+        /*getSubFields: (el) => {
+            // returns subfields that are not children of a multiple field
+            const walker = document.createTreeWalker(el,NodeFilter.SHOW_ELEMENT,
+                {acceptNode: (node) => {
+                    if(node.classList.contains('multiple'))
+                        return NodeFilter.FILTER_REJECT;
+                    else
+                        return NodeFilter.FILTER_ACCEPT;}
+                });
+            var curnode = walker.currentNode;
+            const ret = [];
+            while(curnode) {
+                if(curnode.dataset.subselect || curnode.dataset.subattr) {
+                    ret.push(curnode);
+                }
+                curnode = walker.nextNode();
+            }
+            return ret;
+        },*/
+        
+        matchChildren: (el,sel) => {
+            return [...el.children].filter(e => e.matches(sel));
+        },
         checkInvalid: function() {
             const allfields = state.heditor.querySelectorAll('input,select,textarea');
             for(const field of allfields) {
@@ -986,18 +1033,53 @@
             const toplevel = doc.querySelector(state.toplevel);
             for(const field of fields) {
                 if(field.classList.contains('multiple')) {
-                    xml.clearAllEls(field.dataset.select,toplevel);
-                    const items = field.querySelectorAll('.multi-item');
-                    for(const item of items) {
-                        const newXml = xml.makeElDeep(field.dataset.select,toplevel,true);
-                        const subfields = item.querySelectorAll('[data-subselect],[data-subattr]');
-                        for(const subfield of subfields) 
-                            editor.updateXMLField(subfield,newXml,sanitize);
-                    }
+                    editor.updateMultiFields(field,toplevel,sanitize);
                 }
                 else editor.updateXMLField(field,toplevel,sanitize);
             }
             return toplevel;
+        },
+        updateMultiFields(field,toplevel,sanitize) {
+            const selector = field.dataset.select || field.dataset.subselect;
+            xml.clearAllEls(selector,toplevel);
+            //const items = field.querySelectorAll('.multi-item');
+            const items = editor.matchChildren(field,'.multi-item');
+            for(const item of items) {
+                const newXml = xml.makeElDeep(selector,toplevel,true);
+
+                const subfields = editor.getSubFields2(item);
+                for(const subfield of subfields)  {
+                    if(subfield.classList.contains('multiple')) {
+                        editor.updateMultiFields(subfield,newXml,sanitize);
+                    }
+                    else
+                        editor.updateXMLField(subfield,newXml,sanitize);
+                }
+            }
+        },
+            
+        getSubFields2: (el) => {
+            const nextNode = (node,skipKids = false) => {
+                if(node.firstElementChild && !skipKids)
+                    return node.firstElementChild;
+                while(node) {
+                    if(node.nextElementSibling) return node.nextElementSibling;
+                    node = node.parentNode;
+                    if(node === el) return null;
+                }
+                return null;
+            };
+            const ret = [];
+            let nxt = nextNode(el);
+            while(nxt) {
+                if(nxt.dataset.subselect || nxt.dataset.subattr)
+                    ret.push(nxt);
+                if(nxt.classList.contains('multiple'))
+                    nxt = nextNode(nxt,true);
+                else
+                    nxt = nextNode(nxt,false);
+            }
+            return ret;
         },
 
         postProcess: function(toplevel) {
@@ -1115,15 +1197,16 @@
 
             if(!valtrimmed) {
                 if(selected) {
-                    if(attr && selected.hasAttribute(attr)) {
-                        selected.removeAttribute(attr);
-                        // should we make empty attributes?
+                    if(attr) {
+                        if(selected.hasAttribute(attr))
+                            selected.removeAttribute(attr);
+                            // should we make empty attributes?
                     }
                     else
                         selected.innerHTML = '';
                         // should we save just spaces?
                     if(!field.dataset.hasOwnProperty('subattr') && 
-                        !field.dataset.hasOwnProperty('subselect'))
+                       !field.dataset.hasOwnProperty('subselect'))
                         editor.removeXMLField(selected);
                 }
                 return;

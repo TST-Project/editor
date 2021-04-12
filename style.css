@@ -154,7 +154,7 @@ hr {
 }
 
 button {
-    margin: 0.5em 0 0.5em 0.5em;
+    margin: 0.3em 0 0.3em 0.5em;
     background-color: rgb(240,202,121);
     border-color: rgb(240,202,121);
     border-radius: 0.3rem;
@@ -392,7 +392,7 @@ span.gap {
     min-width: 50px;
 }
 
-#headereditor .multi-item > div:not(.buttonrow) {
+#headereditor .multi-item > div:not(.buttonrow):not(.CodeMirror) {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -457,11 +457,18 @@ span.gap {
 .multiple {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    margin-right: 1rem;
+}
+
+.multiple.w89 {
+    width: 89%;
 }
 
 .buttonrow {
     /*margin: 0 1em 1em 0;*/
     align-self: flex-end;
+    padding-right: 0.2em;
 }
 
 .multi-item {
@@ -645,6 +652,7 @@ h4 {
     border-radius: 0.3rem;
     font-family: brill, et-book, serif;
     font-size: 1.4rem;
+    width: 100%;
 }
 
 .CodeMirror-empty { /*outline: 1px solid #c22;*/ }
