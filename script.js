@@ -250,6 +250,7 @@
             const f = e.target.files[0];
             const par = e.target.parentNode;
             const reader = new FileReader();
+            const toplevel = state.xmlDoc.querySelector(state.toplevel);
             const parse = function(par,e) {
                 const parsed = xml.parseString(e.target.result);
                 if(parsed) {
@@ -266,22 +267,31 @@
                             headEl.textContent = 'MS part';
 
                         msDesc.insertBefore(headEl,msDesc.firstChild);
-                        par.querySelector('textarea[data-subselect=":scope"]').value = xml.innerXML(msDesc);
-                        par.querySelector('.msPart_head').textContent = headEl.textContent;
-                        par.querySelector('input[type="file"]').remove();
+                        
+                        const selector = par.closest('.multiple').dataset.select;
+
+                        const newXml = xml.makeElDeep(selector,toplevel,true);
+                        newXml.appendChild(msDesc);
+
+                        const fields = par.querySelectorAll('[data-subselect]','[data-subattr]');
+                        for(const field of fields)
+                            editor.fillFormField(field,msDesc,false);
+                        
+                        editor.fillAllFixedFields(par,msDesc);
                     }
                     
                     // add any transcriptions
-                    const textel = parsed.querySelector('text');
-                    if(textel) {
-                        const textbutton = document.querySelector('[data-select="text"] .plusbutton');
+                    const textels = parsed.querySelectorAll('text');
+                    const textbutton = document.querySelector('[data-select="text"] .plusbutton');
+                    for(const textel of textels) {
+                        toplevel.appendChild(textel);
+
                         const ret = editor.makeMultiItem(textbutton);
-                        ret.querySelector('[name="text"]').value = xml.innerXML(textel);
-                        ret.querySelector('[name="transcr_n"]').value = textel.getAttribute('n');
-                        ret.querySelector('[name="text_corresp"]').value = textel.getAttribute('corresp');
+                        const fields = ret.querySelectorAll('[data-subselect],[data-subattr]');
+                        for(const field of fields)
+                            editor.fillFormField(field,textel,false);
+                        
                         editor.prepMultiItem(ret);
-                        // TODO: expose Codicological/Textual units (hidden, prefixed)
-                        //       allow multiple fields for data-depends
                     }
                 }
                 else
@@ -351,6 +361,16 @@
             file.render(state.xmlDoc);
         },
         
+        fillAllFixedFields: (par,toplevel) => {
+            for(const subfixed of par.querySelectorAll('[data-fixed-select]'))
+                editor.fillFixedField(subfixed,toplevel);
+            for(const multifixed of par.querySelectorAll('[data-fixed-multiselect]')) {
+                editor.fillFixedMultiField(multifixed,toplevel);
+            }
+            const fileselector = par.querySelector('input[type="file"]');
+            if(fileselector) fileselector.remove();
+        },
+
         fillFixedField: function(field,toplevel) {
             const selector = field.dataset.fixedSelect;
             const xmlEl = (selector && selector !== ':scope') ?
@@ -360,6 +380,24 @@
             if(!xmlEl) return;
             if(!attr) field.textContent = xmlEl.textContent;
             else field.textContent = xmlEl.getAttribute(attr) || '';
+        },
+
+        fillFixedMultiField: (field,toplevel) => {
+            field.innerHTML = '';
+            const sel = field.dataset.fixedMultiselect;
+            const els = toplevel.querySelectorAll(sel);
+            const attr = field.dataset.fixedAttr;
+            const name = field.dataset.fixedName;
+            for(const el of els) {
+                const newchild = document.createElement('input');
+                newchild.name = name;
+                if(!attr)
+                    newchild.value = el.textContent;
+                else
+                    newchild.value = el.getAttribute(attr);
+                field.appendChild(newchild);
+            }
+            editor.updateOptions(name);
         },
 
         fillFormField: function(field,toplevel,unsanitize) {
@@ -621,7 +659,7 @@
             for(const el of els) {
                 const newitem = field.myItem.cloneNode(true);
 
-                const subfields = editor.getSubFields2(newitem);
+                const subfields = editor.getSubFields(newitem);
                 for(const subfield of subfields) {
                     if(subfield.classList.contains('multiple'))
                         editor.fillFormMultiField(subfield,el,unsanitize);
@@ -630,10 +668,7 @@
                 }
 
                 if(field.classList.contains('file')) {
-                    for(const subfixed of newitem.querySelectorAll('[data-fixed-select]'))
-                        editor.fillFixedField(subfixed,el);
-                    const fileselector = newitem.querySelector('input[type="file"]');
-                    if(fileselector) fileselector.remove();
+                    editor.fillAllFixedFields(newitem,el);
                 }
 
                 field.insertBefore(newitem,plusbutton);
@@ -1047,7 +1082,7 @@
             for(const item of items) {
                 const newXml = xml.makeElDeep(selector,toplevel,true);
 
-                const subfields = editor.getSubFields2(item);
+                const subfields = editor.getSubFields(item);
                 for(const subfield of subfields)  {
                     if(subfield.classList.contains('multiple')) {
                         editor.updateMultiFields(subfield,newXml,sanitize);
@@ -1058,7 +1093,7 @@
             }
         },
             
-        getSubFields2: (el) => {
+        getSubFields: (el) => {
             const nextNode = (node,skipKids = false) => {
                 if(node.firstElementChild && !skipKids)
                     return node.firstElementChild;
