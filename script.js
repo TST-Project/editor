@@ -585,7 +585,8 @@
                     const els = state.xmlDoc.querySelectorAll(field.dataset.select);
                     for(const el of els) {
                         const newitem = field.myItem.cloneNode(true);
-                        const subfields = newitem.querySelectorAll('input:not([type=file]),textarea,select');
+                        //const subfields = newitem.querySelectorAll('input:not([type=file]),textarea,select');
+                        const subfields = newitem.querySelectorAll('[data-subselect],[data-subattr]');
                         for(const subfield of subfields) 
                             editor.fillFormField(subfield,el,unsanitize);
 
@@ -951,8 +952,12 @@
             const invalid = editor.checkInvalid();
             if(invalid) {
                 invalid.scrollIntoView({behavior: 'smooth', block: 'center'});
-                if(invalid.validity && !invalid.validity.valid)
-                    alert(`Missing or incomplete ${invalid.name || 'field'}`);
+                if(invalid.validity && !invalid.validity.valid) {
+                    const errorname = invalid.name ? 
+                        invalid.name.replaceAll('_',' ') :
+                        'field';
+                    alert(`Missing or incomplete ${errorname}`);
+                }
                 else {
                     const txt = invalid.textContent;
                     if(txt.trim() != '')
