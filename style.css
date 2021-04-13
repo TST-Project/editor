@@ -471,6 +471,27 @@ span.gap {
     padding-right: 0.2em;
 }
 
+.buttonrow button {
+    background: rgba(0,0,0,0);
+    border: none;
+}
+.buttonrow button[disabled] svg {
+    fill: rgba(1,1,1,0.2);
+}
+
+.buttonrow button svg {
+    fill: rgba(1,1,1,0.4);
+}
+
+.buttonrow button[disabled]:hover svg {
+    fill: rgba(1,1,1,0.2);
+}
+
+.buttonrow button:hover svg {
+    /*fill: black;*/
+    fill: #ff9900;
+}
+
 .multi-item {
     display: flex;
     flex-direction: column;

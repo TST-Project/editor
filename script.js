@@ -491,7 +491,10 @@
                 field.appendChild(b);
                 return b;
             },
-            
+            get: (par) => {
+                return [...par.children].filter(el => el.matches('.multi-item'));
+            },
+
             hideEmpty: (el) => {
                 const par = el || state.heditor;
                 const list = [...par.querySelectorAll('.multi-item')];
@@ -575,6 +578,13 @@
                 button.myItem = emptyel;
                 return button;
             },
+            
+            makeIcon: (id) => {
+                const asset = document.querySelector(`#assets ${id}`).cloneNode(true);
+                asset.style.width = '15px';
+                asset.style.height = '15px';
+                return asset;
+            },
 
             makeButtonrow: () => {
                 const row = dom.makeEl('div');
@@ -582,15 +592,15 @@
                 const killbutton = dom.makeEl('button');
                 killbutton.type = 'button';
                 killbutton.classList.add('multi-kill');
-                killbutton.append('X');
+                killbutton.append(editor.multiItem.makeIcon('#closeicon'));
                 const upbutton = dom.makeEl('button');
                 upbutton.type = 'button';
                 upbutton.classList.add('multi-up');
-                upbutton.append('∧');
+                upbutton.append(editor.multiItem.makeIcon('#upicon'));
                 const downbutton = dom.makeEl('button');
                 downbutton.type = 'button';
                 downbutton.classList.add('multi-down');
-                downbutton.append('∨');
+                downbutton.append(editor.multiItem.makeIcon('#downicon'));
                 row.appendChild(upbutton);
                 row.appendChild(downbutton);
                 row.appendChild(killbutton);
@@ -599,7 +609,8 @@
             
             updateButtonrows: (el) => {
                 if(!el) return;
-                const items = [...el.querySelectorAll('.multi-item')];
+                //const items = [...el.querySelectorAll('.multi-item')];
+                const items = editor.multiItem.get(el);
                 if(items.length === 0) return;
                 const first = items.shift();
                 first.querySelector('.multi-up').disabled = true;
@@ -700,7 +711,8 @@
                 xml.removeAllEls(selector,toplevel);
                 //const items = field.querySelectorAll('.multi-item');
                 //const items = editor.matchChildren(field,'.multi-item');
-                const items= [...field.children].filter(e => e.matches('.multi-item'));
+                //const items= [...field.children].filter(e => e.matches('.multi-item'));
+                const items = editor.multiItem.get(field);
                 for(const item of items) {
                     const newXml = xml.makeElDeep(selector,toplevel,true);
 
