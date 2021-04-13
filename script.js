@@ -879,7 +879,7 @@
             update: (sel) => {
                 const values = [...state.heditor.querySelectorAll(`[name=${sel}]`)].map(el => el.value.trim());
                 const valueset = new Set(['',...values]);
-                const options = [...valueset].map(str => {
+                const alloptions = [...valueset].map(str => {
                     const opt = document.createElement('option');
                     opt.setAttribute('value',str);
                     opt.append(str);
@@ -887,6 +887,8 @@
                 });
                 const selects = state.heditor.querySelectorAll(`select[data-from=${sel}]`);
                 for(const select of selects) {
+                    const options = select.multiple ?  alloptions.slice(1) : alloptions;
+
                     const selected = [...select.querySelectorAll('option:checked')].map(
                         el => el.value
                     );
