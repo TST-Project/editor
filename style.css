@@ -45,6 +45,11 @@
     padding: 1em;
 }
 
+#autosaveentries {
+    max-height: 35vh;
+    overflow-y: scroll;
+}
+
 .autosaved {
     display: flex;
     flex-direction: row;

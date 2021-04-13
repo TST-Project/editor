@@ -1011,8 +1011,9 @@
 
     const autosaved = {
         fill: () => {
-            const box = document.getElementById('autosavebox');
-            box.style.display = 'flex';
+            const par = document.getElementById('autosavebox');
+            par.style.display = 'flex';
+            const box = document.getElementById('autosaveentries');
             lf.keys().then(ks => {
                 for(const k of ks) {
                     const newel = dom.makeEl('div');
