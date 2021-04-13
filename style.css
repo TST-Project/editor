@@ -61,12 +61,17 @@
     background: rgba(180,184,196,0.8);
 }
 
-.trash svg {
-    height: 25px;
+.trash {
+    padding-top: 0.4rem;
+    padding-right: 0.4rem;
 }
 
-.trash:hover path {
-    fill: red;
+.trash svg {
+    fill: rgba(255,255,248,0.8);
+}
+
+.trash:hover svg {
+    fill: #ff9900;
 }
 
 /* styles after file has been loaded */

@@ -11,6 +11,7 @@
         toplevel: 'TEI',
         savedtext: new Map(),
         saveInterval: null,
+        autosaveprefix: '',
     };
 
     const lf = window.localforage || null;
@@ -1020,14 +1021,17 @@
             const box = document.getElementById('autosaveentries');
             lf.keys().then(ks => {
                 for(const k of ks) {
+                    if(!k.startsWith(state.autosaveprefix)) continue;
+                    const fname = k.slice(state.autosaveprefix.length);
                     const newel = dom.makeEl('div');
                     newel.classList.add('autosaved');
-                    newel.append(k);
+                    newel.append(fname);
                     newel.dataset.storageKey = k;
-                    const trashasset = document.querySelector('#assets #trash');
+                    const trashasset = editor.multiItem.makeIcon('#closeicon');
                     const trash = dom.makeEl('span');
+                    trash.title = `delete autosaved ${fname}`;
                     trash.classList.add('trash');
-                    trash.appendChild(trashasset.cloneNode(true));
+                    trash.appendChild(trashasset);
                     trash.height = 20;
                     newel.appendChild(trash);
                     newel.addEventListener('click',autosaved.load.bind(null,k));
@@ -1043,13 +1047,16 @@
             lf.getItem(k).then(i => {
                 document.getElementById('openform').style.display = 'none';
                 file.parse(editor.init,{target: {result: i}});
-                state.filename = k;
+                //state.filename = k;
+                state.filename = k.slice(state.autosaveprefix.length);
             });
         },
 
         remove: (k) => {
-            lf.removeItem(k);
-            document.querySelector(`#autosavebox .autosaved[data-storage-key='${k}']`).remove();
+            if(window.confirm('Do you want to delete this autosaved file?')) {
+                lf.removeItem(k);
+                document.querySelector(`#autosavebox .autosaved[data-storage-key='${k}']`).remove();
+            }
         },
         
         setFilename: (doc) => {
@@ -1089,7 +1096,7 @@
                 docclone.createProcessingInstruction('tst','sanitized="true"'),
                 docclone.firstChild);
 
-            lf.setItem(state.filename,xml.serialize(docclone)).then( () => {
+            lf.setItem(state.autosaveprefix+state.filename,xml.serialize(docclone)).then( () => {
                 const footer = document.getElementById('footermessage');
                 footer.style.transition = 'unset';
                 footer.style.opacity = 0;
@@ -1103,7 +1110,7 @@
         },
         saveStr: (str) => {
             autosaved.setFilename(state.xmlDoc);
-            lf.setItem(state.filename,str);
+            lf.setItem(state.autosaveprefix+state.filename,str);
         },
     }; // end autosaved
     
