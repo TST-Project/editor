@@ -17,12 +17,14 @@
 }
 
 #openform div :not(.autosaved) {
-    margin-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 .autosaved {
     height: 2rem;
     font-size: 1.2rem;
+    padding-top: 0.3rem;
+    padding-left: 0.3rem;
 }
 
 #footermessage {
@@ -62,7 +64,7 @@
 }
 
 .trash {
-    padding-top: 0.4rem;
+    padding-top: 0.3rem;
     padding-right: 0.4rem;
 }
 

@@ -1053,7 +1053,8 @@
         },
 
         remove: (k) => {
-            if(window.confirm('Do you want to delete this autosaved file?')) {
+            const name = k.slice(state.autosaveprefix.length);
+            if(window.confirm(`Do you want to delete ${name}?`)) {
                 lf.removeItem(k);
                 document.querySelector(`#autosavebox .autosaved[data-storage-key='${k}']`).remove();
             }
