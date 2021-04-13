@@ -208,17 +208,7 @@ button:disabled:hover {
 .menubox {
     cursor: pointer;
 }
-/*
-#scriptselect .heading {
-    position: relative;
-    border: 0.1rem solid #d1d1d1;
-    border-radius: .4rem;
-    height: 3.8rem;
-    padding: 0.6rem 1.0rem;
-    line-height: 1.15;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 29 14" width="29"><path fill="%23d1d1d1" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>') center right no-repeat;
-}
-*/
+
 .menubox ul {
     display: none;
     list-style: none;
@@ -240,44 +230,20 @@ button:disabled:hover {
 .menubox li.selected {
     display: none;
 }
-/*
-#options_options {
-    display: none;
-    position: absolute;
-    top: 45px;
-    background-color: rgb(240,202,121);
-    border: 0.1rem solid rgb(240,202,121);
-    border-radius: .4rem;
-    padding: 0 1rem;
-    margin-left: 5px;
-    color: white;
-    list-style: none;
-}
 
-#options_options li {
-    margin-bottom: 0.5rem;
-}
-
-#options_options input {
-    margin-bottom: 0;
-}
-
-#options_options label {
-    display: inline;
-    cursor: pointer;
-}
-#options_options label:nth-child(2), input:nth-child(2) {
-    margin-left: 1rem;
-}
-*/
 #menu_width {
     width: 100px;
     position: relative;
     top: 8px;
 }
 
-/* transcription rendering tags */
+p:empty {
+    margin: 0;
+    padding: 0;
+}
 
+/* transcription rendering tags */
+/*
 del {
     display: inline-block;
     text-decoration-color: red;
@@ -295,7 +261,7 @@ span.gap {
     font-size: 85%;
     color: rgb(84,84,84);
 }
-
+*/
 .right {
     float: right;
     clear: right;
