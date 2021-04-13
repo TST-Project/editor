@@ -476,7 +476,7 @@ span.gap {
     border: none;
 }
 .buttonrow button[disabled] svg {
-    fill: rgba(1,1,1,0.2);
+    fill: rgba(1,1,1,0.1);
 }
 
 .buttonrow button svg {
@@ -484,7 +484,7 @@ span.gap {
 }
 
 .buttonrow button[disabled]:hover svg {
-    fill: rgba(1,1,1,0.2);
+    fill: rgba(1,1,1,0.1);
 }
 
 .buttonrow button:hover svg {

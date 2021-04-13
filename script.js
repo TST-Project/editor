@@ -53,13 +53,13 @@
             if(e.target.classList.contains('plusbutton')) {
                 editor.multiItem.add(e.target);
             }
-            else if(e.target.classList.contains('multi-kill')) {
+            else if(e.target.closest('.multi-kill')) {
                 editor.multiItem.kill(e.target);
             }
-            else if(e.target.classList.contains('multi-up')) {
+            else if(e.target.closest('.multi-up')) {
                 editor.multiItem.up(e.target);
             }
-            else if(e.target.classList.contains('multi-down')) {
+            else if(e.target.closest('.multi-down')) {
                 editor.multiItem.down(e.target);
             }
         },
