@@ -491,6 +491,12 @@ span.gap {
     font-weight: bold;
     font-family: et-book;
 }
+.multiple div.plusbutton svg {
+    fill: rgba(1,1,1,0.4);
+}
+.multiple div.plusbutton:hover svg {
+    fill: #ddd;
+}
 
 .multiple div.plusbutton:hover {
     background: #ff9900;

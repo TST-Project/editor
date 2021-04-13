@@ -573,16 +573,17 @@
                 }
 
                 button.classList.add('plusbutton');
-                button.append('+');
+                button.append(editor.multiItem.makeIcon('#plusicon','20px'));
                 button.title = 'add new section';
                 button.myItem = emptyel;
                 return button;
             },
             
-            makeIcon: (id) => {
+            makeIcon: (id,size) => {
+                const wh = size || '15px';
                 const asset = document.querySelector(`#assets ${id}`).cloneNode(true);
-                asset.style.width = '15px';
-                asset.style.height = '15px';
+                asset.style.width = wh;
+                asset.style.height = wh;
                 return asset;
             },
 
