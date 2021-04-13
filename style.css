@@ -488,11 +488,14 @@ span.gap {
     margin-right: 1em;
     margin-right: 1em;
     border-radius: 0.3rem;
+    font-weight: bold;
+    font-family: et-book;
 }
 
 .multiple div.plusbutton:hover {
     background: #ff9900;
     border: 0.1rem solid #ff9900;
+    color: #ddd;
 }
 
 /*

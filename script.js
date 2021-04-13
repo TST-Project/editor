@@ -574,7 +574,7 @@
 
                 button.classList.add('plusbutton');
                 button.append('+');
-                button.title = 'Add new section';
+                button.title = 'add new section';
                 button.myItem = emptyel;
                 return button;
             },
@@ -593,14 +593,17 @@
                 killbutton.type = 'button';
                 killbutton.classList.add('multi-kill');
                 killbutton.append(editor.multiItem.makeIcon('#closeicon'));
+                killbutton.title = 'delete item';
                 const upbutton = dom.makeEl('button');
                 upbutton.type = 'button';
                 upbutton.classList.add('multi-up');
                 upbutton.append(editor.multiItem.makeIcon('#upicon'));
+                upbutton.title = 'move up';
                 const downbutton = dom.makeEl('button');
                 downbutton.type = 'button';
                 downbutton.classList.add('multi-down');
                 downbutton.append(editor.multiItem.makeIcon('#downicon'));
+                downbutton.title = 'move down';
                 row.appendChild(upbutton);
                 row.appendChild(downbutton);
                 row.appendChild(killbutton);
