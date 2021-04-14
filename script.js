@@ -51,7 +51,7 @@
                 break;
             }
             
-            if(e.target.classList.contains('plusbutton')) {
+            if(e.target.closest('plusbutton')) {
                 editor.multiItem.add(e.target);
             }
             else if(e.target.closest('.multi-kill')) {
