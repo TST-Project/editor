@@ -1,5 +1,13 @@
 # Changelog
 
+## 15 April 2021
+
+* puḷḷi in italics
+* style updates
+* text title is an XML field
+* Latin added as a language
+* styling updates and bug fixes
+
 ## 8 April 2021
 
 * added German as a text languge
