@@ -59,22 +59,13 @@
                         <layout columns="" writtenLines=""/>
                      </layoutDesc>
                   </objectDesc>
-                  <handDesc>
-                     <handNote n="" scope="" script="">
-                        <desc></desc>
-                     </handNote>
-                  </handDesc>
-                  <decoDesc>
-                    <decoNote type="">
-                        <desc></desc>
-                    </decoNote>
+                  <handDesc><handNote n="" scope="" script=""><desc></desc></handNote></handDesc>
+                  <decoDesc><decoNote type=""><desc></desc></decoNote>
                   </decoDesc>
                   <additions>
                   </additions>
                   <bindingDesc>
-                     <binding>
-                        <p></p>
-                     </binding>
+                     <binding><p></p></binding>
                   </bindingDesc>
                </physDesc>
                <history>
