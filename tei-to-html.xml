@@ -14,6 +14,10 @@
 
 <!-- Chrome's XSLTProcessor() doesn't play well with XSLT document() in imported files; the definitions.xsl file has been copied here, and $defRoot has been redefined to point to this document -->
 
+<xsl:template match="my:entry">
+    <xsl:apply-templates/>
+</xsl:template>
+
 <!-- definitions -->
 
 <my:mstypes>
@@ -60,19 +64,19 @@
 </my:subtype>
 
 <my:scriptRef>
-    <my:entry key="#tamilPulliNone">no puḷḷi</my:entry>
-    <my:entry key="#tamilPulliSporadic">sporadic puḷḷi</my:entry>
-    <my:entry key="#tamilPulliRegular">regular puḷḷi</my:entry>
-    <my:entry key="#tamilRa">closed kāl</my:entry>
-    <my:entry key="#tamilOE">long ō/ē (double-curled kompu)</my:entry>
-    <my:entry key="#tamilRRa"> modern ṟa</my:entry>
-    <my:entry key="#prsthamatra">pṛṣṭhamātrā</my:entry>
-    <my:entry key="#vaba">ba not distinguished</my:entry>
-    <my:entry key="#sthascha">stha written as scha</my:entry>
-    <my:entry key="#bengaliRaBarBelow">ra with bar below</my:entry>
-    <my:entry key="#bengaliRaCrossbar">ra with cross-bar</my:entry>
-    <my:entry key="#bengaliRa">modern ra</my:entry>
-    <my:entry key="#bengaliYa">modern ya</my:entry>
+    <my:entry key="#tamilPulliNone">no <x:emph xml:lang="ta" rend="italic">puḷḷi</x:emph></my:entry>
+    <my:entry key="#tamilPulliSporadic">sporadic <x:emph xml:lang="ta" rend="italic">puḷḷi</x:emph></my:entry>
+    <my:entry key="#tamilPulliRegular">regular <x:emph xml:lang="ta" rend="italic">puḷḷi</x:emph></my:entry>
+    <my:entry key="#tamilRa">closed <x:emph xml:lang="ta" rend="italic">kāl</x:emph></my:entry>
+    <my:entry key="#tamilOE">long <x:emph xml:lang="ta">ō/ē</x:emph> (double-curled <x:emph xml:lang="ta" rend="italic">kompu</x:emph>)</my:entry>
+    <my:entry key="#tamilRRa">modern <x:emph xml:lang="ta" rend="italic">ṟa</x:emph></my:entry>
+    <my:entry key="#prsthamatra"><x:emph xml:lang="sa">pṛṣṭhamātrā</x:emph></my:entry>
+    <my:entry key="#vaba"><x:emph xml:lang="sa">ba</x:emph> not distinguished</my:entry>
+    <my:entry key="#sthascha"><x:emph xml:lang="sa">stha</x:emph> written as <x:emph xml:lang="sa">scha</x:emph></my:entry>
+    <my:entry key="#bengaliRaBarBelow"><x:emph xml:lang="sa">ra</x:emph> with bar below</my:entry>
+    <my:entry key="#bengaliRaCrossbar"><x:emph xml:lang="sa">ra</x:emph> with cross-bar</my:entry>
+    <my:entry key="#bengaliRa"><x:emph xml:lang="sa">ra</x:emph> with dot below</my:entry>
+    <my:entry key="#bengaliYa"><x:emph xml:lang="sa">ya</x:emph> with dot below</my:entry>
     <my:entry key="#valapalagilaka">valapalagilaka</my:entry>
     <my:entry key="#dotreph">dot reph</my:entry>
 </my:scriptRef>
@@ -97,6 +101,7 @@
     <my:entry key="eng">English</my:entry>
     <my:entry key="fra">French</my:entry>
     <my:entry key="deu">German</my:entry>
+    <my:entry key="lat">Latin</my:entry>
     <my:entry key="pal">Pali</my:entry>
     <my:entry key="por">Portuguese</my:entry>
     <my:entry key="pra">Prakrit</my:entry>
