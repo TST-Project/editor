@@ -64,10 +64,8 @@
 <article>
 <section>
     <div>
-        <label for="hd_unitidcote">Shelfmark</label>
-        <input autocomplete="off" type="text" id="hd_unitidcote" name="cote" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='cote']" required placeholder="Indien XX">
-        <label for="hd_unitidanciennecote">Old shelfmark</label>
-        <input autocomplete="off" type="text" id="hd_unitidanciennecote" name="cote" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='ancienne cote']" placeholder="Tamoul XX">
+        <label for="hd_shelfmark">Shelfmark</label>
+        <input autocomplete="off" type="text" id="hd_shelfmark" name="shelfmark" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='shelfmark']" required placeholder="Indien XX">
     </div>
     <div>
         <label for="hd_repository">Repository</label>
@@ -77,6 +75,16 @@
             <option value="Bodleian Library, University of Oxford">Bodleian Library, University of Oxford</option>
             <option value="Cambridge University Library">Cambridge University Library</option>
         </select>
+    </div>
+    <div>
+        <label for="hd_other_identifiers">Other identifiers</label>
+        <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='alternate'] > idno">
+            <div class="multi-item">
+                <div>
+                    <input autocomplete="off" type="text" name="other_identifier" data-subselect=":scope" placeholder="Tamoul XX">
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         <label for="hd_title">Manuscript Title</label>
