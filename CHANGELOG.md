@@ -1,5 +1,9 @@
 # Changelog
 
+## 16 April 2021
+
+* "Old shelfmark" changed to "Other identifiers"
+
 ## 15 April 2021
 
 * puḷḷi in italics
