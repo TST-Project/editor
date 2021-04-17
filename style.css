@@ -14,6 +14,7 @@
     justify-content: left;
     border: 1px dashed grey;
     padding: 1em;
+    border-radius: 0.3rem;
 }
 
 #openform div :not(.autosaved) {
@@ -25,6 +26,7 @@
     font-size: 1.2rem;
     padding-top: 0.3rem;
     padding-left: 0.3rem;
+    border-radius: 0.2rem;
 }
 
 #footermessage {
@@ -60,7 +62,7 @@
 }
 
 .autosaved:hover {
-    background: rgba(180,184,196,0.8);
+    background: rgba(180,184,196,0.6);
 }
 
 .trash {
@@ -447,6 +449,11 @@ span.gap {
     /*margin: 0 1em 1em 0;*/
     align-self: flex-end;
     padding-right: 0.2em;
+    visibility: hidden;
+}
+
+.multi-item:hover .buttonrow {
+    visibility: visible;
 }
 
 .buttonrow button {
