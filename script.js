@@ -1062,9 +1062,9 @@
         
         setFilename: (doc) => {
             if(state.filename.match(/^\[.*\]$/)) {
-                const cote = doc.querySelector('idno[type="cote"]');
-                if(cote && cote.textContent && cote.textContent.trim() !== '')
-                    state.filename = `[${cote.textContent}]`;
+                const shelfmark = doc.querySelector('idno[type="shelfmark"]');
+                if(shelfmark && shelfmark.textContent && shelfmark.textContent.trim() !== '')
+                    state.filename = `[${shelfmark.textContent}]`;
             }
         },
 
