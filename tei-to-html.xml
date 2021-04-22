@@ -253,6 +253,7 @@
 </my:entitynames>
 
 <my:additiontype>
+    <my:entry key="catchword">catchword</my:entry>
     <my:entry key="chapter-heading">chapter heading</my:entry>
     <my:entry key="end-title">end title</my:entry>
     <my:entry key="heading">heading</my:entry>
