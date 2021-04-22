@@ -19,8 +19,8 @@
                   <repository>
                      <orgName>Bibliothèque nationale de France. Département des Manuscrits</orgName>
                   </repository>
-                  <idno type="cote"></idno>
-                  <idno type="ancienne cote"></idno>
+                  <idno type="shelfmark"></idno>
+                  <idno type="alternate"></idno>
                </msIdentifier>
                <msContents class="">
                   <summary></summary>
@@ -52,6 +52,7 @@
                               <height quantity=""/>
                            </dimensions>
                         </extent>
+                        <collation></collation>
                         <foliation n=""></foliation>
                         <condition></condition>
                      </supportDesc>

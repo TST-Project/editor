@@ -111,7 +111,8 @@
         <label for="hd_summary">Summary</label>
         <textarea autocomplete="off" rows="10" id="hd_summary" name="summary" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents > summary" data-schema="descriptive names" placeholder="Summary description of the manuscript" required></textarea>
     </div>
-    
+  </section>
+  <section>
     <h3>Physical description</h3>
     <div>
         <label for="hd_MS_type">Type</label>
@@ -284,12 +285,25 @@
         <textarea autocomplete="off" rows="2" id="hd_binding" name="binding" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > p" data-schema="descriptive" placeholder="Description of binding, cover, etc."></textarea>
     </div>
     
-    <h4>Foliation (Codicological units)</h4>
+    <h4>Collation (Codicological units)</h4>
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > collation > desc">
+        <div class="multi-item">
+            <div>
+                <label title="A unique identifier. No spaces.">Unit ID</label>
+                <input autocomplete="off" type="text" name="collation_id" data-subattr="xml:id" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces."></input>
+            </div>
+            <div>
+            <textarea autocomplete="off" rows="4" name="collation" data-subselect=":scope" data-schema="descriptive" placeholder="Description of how the leaves are arranged."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <h4>Foliation</h4>
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > foliation">
         <div class="multi-item">
             <div>
                 <label title="A unique identifier. No spaces.">Unit ID</label>
-                <input autocomplete="off" type="text" name="foliation_n" data-subattr="n" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces."></input>
+                <input autocomplete="off" type="text" name="foliation_n" data-subattr="n" placeholder="No longer used. See Collation above." pattern="[^\s]+" data-tip="No longer used. See Collation above."></input>
             </div>
             <div>
             <textarea autocomplete="off" rows="4" name="foliation" data-subselect=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
@@ -301,8 +315,8 @@
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > handDesc > handNote">
         <div class="multi-item">
             <div>
-                <label title="As defined in the 'Foliation' section.">Codicological unit(s)</label>
-                <select autocomplete="off" name="hand_foliation_n" data-subattr="n" data-from="foliation_n" class="multiselect" multiple></select>
+                <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
+                <select autocomplete="off" name="hand_collation_id" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple></select>
                 <!--input type="text" data-subattr="n" placeholder="U1 U2"-->
                 <label>Scope</label>
                 <select autocomplete="off" name="handNote_scope" data-subattr="scope"> 
@@ -478,8 +492,8 @@
         <div class="multi-item">
             <div>
                 <div>
-                    <label title="As defined in the 'Foliation' section.">Codicological unit(s)</label>
-                    <select autocomplete="off" data-subattr="n" data-from="foliation_n" class="multiselect" multiple></select>
+                    <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
+                    <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple></select>
                 </div>
                 <div>
                 <label title="A unique identifier. No spaces.">Text ID</label>
@@ -579,7 +593,7 @@
             <textarea autocomplete="off" type="text" name="msPart" class="noCodeMirror nosanitize" data-subselect=":scope" hidden readonly></textarea>
             <p class="msPart_cote" data-fixed-select="msIdentifier > idno[type='cote']"></p>
             <p class="msPart_head" data-fixed-select="head"></p>
-            <p class="msPart_cunit" data-fixed-name="foliation_n" data-fixed-multiselect="foliation" data-fixed-attr="n" style="display: none"></p>
+            <p class="msPart_cunit" data-fixed-name="collation_id" data-fixed-multiselect="collation > desc" data-fixed-attr="xml:id" style="display: none"></p>
             <p class="msPart_tunit" data-fixed-name="text_id" data-fixed-multiselect="msItem" data-fixed-attr="xml:id" style="display: none"></p>
 
             <input class="hd_msPart" name="msPart_file" autocomplete="off" type="file" name="msPart" accept=".xml">
@@ -653,8 +667,8 @@
         <div class="multi-item">
             <div>
                 <div>
-                    <label title="As defined in the 'Foliation' section.">Codicological unit(s)</label>
-                    <select autocomplete="off" class="multiselect" data-subattr="n" name="transcr_n" data-from="foliation_n" multiple></select>
+                    <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
+                    <select autocomplete="off" class="multiselect" data-subattr="synch" name="transcr_n" data-from="collation_id" data-prefix="#" multiple></select>
                 </div>
                 <div>
                     <label title="As defined in the 'Contents' section">Textual unit</label>
