@@ -24,7 +24,7 @@
                </msIdentifier>
                <msContents class="">
                   <summary></summary>
-                  <msItem n="" defective="">
+                  <msItem defective="">
                      <title xml:lang="tam"></title>
                      <author xml:lang="tam"></author>
                      <textLang mainLang=""></textLang>
@@ -53,14 +53,14 @@
                            </dimensions>
                         </extent>
                         <collation></collation>
-                        <foliation n=""></foliation>
+                        <foliation></foliation>
                         <condition></condition>
                      </supportDesc>
                      <layoutDesc>
                         <layout columns="" writtenLines=""/>
                      </layoutDesc>
                   </objectDesc>
-                  <handDesc><handNote n="" scope="" script=""><desc></desc></handNote></handDesc>
+                  <handDesc><handNote scope="" script=""><desc></desc></handNote></handDesc>
                   <decoDesc><decoNote type=""><desc></desc></decoNote>
                   </decoDesc>
                   <additions>
