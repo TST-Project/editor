@@ -74,6 +74,9 @@
     fill: rgba(255,255,248,0.8);
 }
 
+.trash:hover {
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.3));
+}
 .trash:hover svg {
     fill: #ff9900;
 }
@@ -476,6 +479,9 @@ span.gap {
     /*fill: black;*/
     fill: #ff9900;
 }
+.buttonrow button:not([disabled]):hover {
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.3));
+}
 
 .multi-item {
     display: flex;
@@ -510,6 +516,7 @@ span.gap {
 }
 .multiple div.plusbutton:hover svg {
     fill: #ddd;
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.3));
 }
 
 .multiple div.plusbutton:hover {
