@@ -84,6 +84,7 @@
 <tst:media>
     <tst:entry key="ink">ink</tst:entry>
     <tst:entry key="incised">incised</tst:entry>
+    <tst:entry key="soot">soot</tst:entry>
     <tst:entry key="pencil">pencil</tst:entry>
     <tst:entry key="black">black</tst:entry>
     <tst:entry key="brown">brown</tst:entry>
