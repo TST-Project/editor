@@ -91,13 +91,28 @@
         <textarea autocomplete="off" id="hd_title" name="title" data-select="teiHeader > fileDesc > titleStmt > title" data-schema="descriptive names" rows="1" required placeholder="title of manuscript"></textarea>
     </div>
     <div>
+        <label for="hd_titleStmt_editor">Researcher</label>
+        <div class="multiple" data-select="teiHeader > fileDesc > titleStmt > editor">
+            <div class="multi-item">
+                <div>
+                    <label>Name</label>
+                    <input autocomplete="name" type="text" name="researcher_name" data-subselect="persName" required>
+                </div>
+                <div>
+                    <label>Affiliation</label>
+                    <input autocomplete="organization" type="text" name="researcher_affiliation" data-subselect="orgName" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--div>
         <label for="hd_editionStmt_persName">Researcher name</label>
         <input autocomplete="name" type="text" id="hd_editionStmt_persName" name="editionStmt_persName" data-select="teiHeader > fileDesc > editionStmt > p > persName" required>
     </div>
     <div>
         <label for="hd_editionStmt_orgName">Researcher affiliation</label>
         <input autocomplete="organization" type="text" id="hd_editionStmt_orgName" name="editionStmt_orgName" data-select="teiHeader > fileDesc > editionStmt > p > orgName" required>
-    </div>
+    </div-->
     <div>
         <label for="hd_publisher">Publisher</label>
         <input autocomplete="off" type="text" id="hd_publisher" name="publisher" data-select="teiHeader > fileDesc > publicationStmt > publisher" value="TST Project" readonly>

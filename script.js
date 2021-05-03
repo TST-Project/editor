@@ -935,9 +935,10 @@
 
         upgrade: (doc) => {
             const tests = [
-                {name: 'shelfmark',select: 'idno[type="cote"]'},
-                {name: 'old_shelfmark',select: 'idno[type="ancienne cote"]'},
-                {name: 'foliation',select: 'foliation[n]'},
+                {name: 'shelfmark', select: 'idno[type="cote"]'},
+                {name: 'old_shelfmark', select: 'idno[type="ancienne cote"]'},
+                {name: 'foliation', select: 'foliation[n]'},
+                {name: 'editor', select: 'editionStmt'}
             ];
             const funcs = {
                 shelfmark: (doc) => {
@@ -972,6 +973,21 @@
                         f.remove();
                     }
                 },
+                editor: (doc) => {
+                    const eStmt = doc.querySelector('editionStmt');
+                    const pNames = eStmt.querySelectorAll('persName');
+                    const oNames = eStmt.querySelectorAll('orgName');
+                    const tStmt = doc.querySelector('titleStmt');
+                    const zip = (a, b) => Array.from(Array(Math.max(b.length, a.length)), (_, i) => [a[i], b[i]]);
+                    const names = zip(pNames,oNames);
+                    for(const name of names) {
+                        const e = xml.makeEl(doc,'editor');
+                        e.appendChild(name[0]);
+                        e.appendChild(name[1]);
+                        tStmt.appendChild(e);
+                    }
+                    eStmt.remove();
+                }
             };
             
             const found = [];
