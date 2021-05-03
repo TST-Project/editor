@@ -1,5 +1,12 @@
 # Changelog
 
+## 3 May 2021
+
+* Added upgrade function so that old files get upgraded upon load
+* removed editionStmt, added titleStmt/editor
+* multiple editor people are supported
+* added "vowel\_unclear" and "erratic\_ductus" as reasons for \<unclear\>
+
 ## 16 April 2021
 
 * "Old shelfmark" changed to "Other identifiers"
