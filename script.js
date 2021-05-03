@@ -834,7 +834,8 @@
 
         postProcess: (toplevel) => {
             const par = toplevel || state.xmlDoc;
-
+            
+            /*
             // update editionStmt
             const editionStmt = par.querySelector('fileDesc > editionStmt > p');
             if(editionStmt) {
@@ -848,7 +849,8 @@
                 editionStmt.appendChild(orgName);
                 editionStmt.appendChild(state.xmlDoc.createTextNode('.'));
             }
-            
+            */
+
             const supportDescs = par.querySelectorAll('supportDesc');
             for(const supportDesc of supportDescs) {
                 // condition after last foliation
