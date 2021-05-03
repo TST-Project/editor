@@ -5,7 +5,7 @@
 * Added upgrade function so that old files get upgraded upon load
 * removed editionStmt, added titleStmt/editor
 * multiple editor people are supported
-* added "vowel\_unclear" and "erratic\_ductus" as reasons for \<unclear\>
+* added "vowel\_unclear" and "eccentric\_ductus" as reasons for \<unclear\>
 
 ## 16 April 2021
 
