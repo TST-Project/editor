@@ -937,6 +937,7 @@
             const tests = [
                 {name: 'shelfmark',select: 'idno[type="cote"]'},
                 {name: 'old_shelfmark',select: 'idno[type="ancienne cote"]'},
+                {name: 'foliation',select: 'foliation[n]'},
             ];
             const funcs = {
                 shelfmark: (doc) => {
@@ -950,6 +951,26 @@
                     alternate.setAttribute('type','alternate');
                     acote.insertAdjacentElement('beforebegin',alternate);
                     alternate.appendChild(acote);
+                },
+                foliation: (doc) => {
+                    const fs = doc.querySelectorAll('foliation[n]');
+                    const collation = (() => {
+                        const c = document.querySelector('collation');
+                        if(c) return c;
+                        const newc = xml.makeEl(doc,'collation');
+                        fs[0].insertAdjacentElement('beforebegin',newc);
+                        return newc;
+                    })();
+                    for(const f of fs) {
+                        const n = f.getAttribute('n');
+                        if(!n) continue;
+                        const desc = xml.makeEl(doc,'desc');
+                        desc.setAttribute('xml:id',n);
+                        while(f.firstChild)
+                            desc.appendChild(f.firstChild);
+                        collation.appendChild(desc);
+                        f.remove();
+                    }
                 },
             };
             
