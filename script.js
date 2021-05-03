@@ -297,6 +297,8 @@
                 f.remove();
             }
 
+            editor.upgrade(state.xmlDoc);
+
             editor.fill.all(heditor,unsanitize);
 
             const dependentsel = [...heditor.querySelectorAll('[data-from]')].map(el => el.dataset.from);
@@ -470,6 +472,7 @@
 
                 editor.multiItem.updateButtonrows(field);
             },
+        
         },
         
         multiItem: {
@@ -930,6 +933,38 @@
             },
         },
 
+        upgrade: (doc) => {
+            const tests = [
+                {name: 'shelfmark',select: 'idno[type="cote"]'},
+                {name: 'old_shelfmark',select: 'idno[type="ancienne cote"]'},
+            ];
+            const funcs = {
+                shelfmark: (doc) => {
+                    const cote = doc.querySelector('idno[type="cote"]');
+                    cote.setAttribute('type','shelfmark');
+                },
+                old_shelfmark: (doc) => {
+                    const acote = doc.querySelector('idno[type="ancienne cote"]');
+                    acote.removeAttribute('type');
+                    const alternate = xml.makeEl(doc,'idno');
+                    alternate.setAttribute('type','alternate');
+                    acote.insertAdjacentElement('beforebegin',alternate);
+                    alternate.appendChild(acote);
+                },
+            };
+            
+            const found = [];
+            for(const test of tests) {
+                const el = doc.querySelector(test.select);
+                if(el) found.push(test.name);
+            }
+            if(found.length > 0) {
+                const fs = found.join(', ');
+                alert('This file was created with an older version of the editor. The following elements will be updated:\r\n' + fs);
+                for(const f of found)
+                    funcs[f](doc);
+            }
+        },
     }; // end editor
 
     const xml = {
@@ -977,6 +1012,10 @@
             const els = toplevel.querySelectorAll(path);
             for(const el of els)
                 el.remove();
+        },
+        makeEl: (doc,name) => {
+            const ns = doc.documentElement.namespaceURI;
+            return doc.createElementNS(ns,name);
         },
 
         makeElDeep: (path,toplevel,duplicate) => {
