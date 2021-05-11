@@ -59,6 +59,7 @@
     <tst:entry key="inserted">inserted</tst:entry>
     <tst:entry key="intertextual">intertextual</tst:entry>
     <tst:entry key="marginal">marginal</tst:entry>
+    <tst:entry key="running">running</tst:entry>
     <tst:entry key="spine">spine</tst:entry>
     <tst:entry key="title-page">title page</tst:entry>
 </tst:subtype>
@@ -68,6 +69,7 @@
     <tst:entry key="#tamilPulliSporadic">sporadic <x:emph xml:lang="ta" rend="italic">puḷḷi</x:emph></tst:entry>
     <tst:entry key="#tamilPulliRegular">regular <x:emph xml:lang="ta" rend="italic">puḷḷi</x:emph></tst:entry>
     <tst:entry key="#tamilRa">closed <x:emph xml:lang="ta" rend="italic">kāl</x:emph></tst:entry>
+    <tst:entry key="#tamilMacron">disambiguating macron (-a vocalisation)</tst:entry>
     <tst:entry key="#tamilOE">long <x:emph xml:lang="ta">ō/ē</x:emph> (double-curled <x:emph xml:lang="ta" rend="italic">kompu</x:emph>)</tst:entry>
     <tst:entry key="#tamilRRa">modern <x:emph xml:lang="ta" rend="italic">ṟa</x:emph></tst:entry>
     <tst:entry key="#prsthamatra"><x:emph xml:lang="sa">pṛṣṭhamātrā</x:emph></tst:entry>
@@ -260,7 +262,6 @@
     <tst:entry key="heading">heading</tst:entry>
     <tst:entry key="intertitle">intertitle</tst:entry>
     <tst:entry key="register">register</tst:entry>
-    <tst:entry key="running-title">running title</tst:entry>
     <tst:entry key="table-of-contents">table of contents</tst:entry>
     <tst:entry key="title">title</tst:entry>
     <tst:entry key="verse-beginning">verse beginning</tst:entry>
