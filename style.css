@@ -480,7 +480,7 @@ span.gap {
     fill: #ff9900;
 }
 .buttonrow button:not([disabled]):hover {
-    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.3));
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.2));
 }
 
 .multi-item {
@@ -516,7 +516,7 @@ span.gap {
 }
 .multiple div.plusbutton:hover svg {
     fill: #ddd;
-    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.3));
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.2));
 }
 
 .multiple div.plusbutton:hover {
