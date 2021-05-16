@@ -163,33 +163,41 @@
         },
         render: (xstr) => {
             document.getElementById('headereditor').style.display = 'none';
-            if(!state.xStyle)
-                state.xStyle = file.syncLoad(state.xSheet);
-            const result = xml.XSLTransform(state.xStyle,xstr);
-            const body = document.getElementById('headerviewer');
+            /*if(!state.xStyle)
+                state.xStyle = file.syncLoad(state.xSheet);*/
             
-            const viewer = document.getElementById('viewer');
-            const facs = result.querySelector('#viewer');
-            if(facs) {
-                if(!viewer) 
-                    body.appendChild(facs);
-                else
-                    viewer.dataset.manifest = facs.dataset.manifest;
-            }
-            else {
-                if(viewer) viewer.remove();
-            }
+            const go = (xslt) => {
+                if(xslt) state.xStyle = xslt;
 
-            const rec = document.getElementById('recordcontainer');
-            if(rec) rec.remove();
+                const result = xml.XSLTransform(state.xStyle,xstr);
+                const body = document.getElementById('headerviewer');
+                
+                const viewer = document.getElementById('viewer');
+                const facs = result.querySelector('#viewer');
+                if(facs) {
+                    if(!viewer) 
+                        body.appendChild(facs);
+                    else
+                        viewer.dataset.manifest = facs.dataset.manifest;
+                }
+                else {
+                    if(viewer) viewer.remove();
+                }
 
-            body.appendChild(result.querySelector('#recordcontainer'));
+                const rec = document.getElementById('recordcontainer');
+                if(rec) rec.remove();
+
+                body.appendChild(result.querySelector('#recordcontainer'));
 
 
-            body.style.display = 'flex';
-            //script.init();
-            //window.Transliterate.init(body);
-            window.TSTViewer.init();
+                body.style.display = 'flex';
+
+                window.TSTViewer.init();
+            };
+
+            if(!state.xStyle)
+                file.asyncLoad(state.xSheet,go);
+            else go(state.xStyle);
         },
         saveAs: () => {
             const serialized = xml.serialize(state.xmlDoc);
@@ -278,6 +286,22 @@
             xhr.open('GET',fname,false);
             xhr.send(null);
             return xhr.responseXML;
+        },
+        asyncLoad: (fname,func) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET',fname,true);
+            xhr.timeout = 2000;
+            xhr.onload = () => {
+                if(xhr.readyState === 4) {
+                    if(xhr.status === 200)
+                        func(xhr.responseXML);
+                    else
+                        alert(xhr.statusText);
+                }
+            };
+            xhr.ontimeout = () => {alert(`Unable to load ${fname}: timed out.`);};
+            xhr.onerror = () => {alert(xhr.statusText);};
+            xhr.send(null);
         },
     };
     
