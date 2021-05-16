@@ -47,6 +47,10 @@
                 e.preventDefault();
                 file.saveAs();
                 return;
+            case 'saveas2':
+                e.preventDefault();
+                autosaved.save(true);
+                return;
             default:
                 break;
             }
@@ -165,7 +169,6 @@
             document.getElementById('headereditor').style.display = 'none';
             /*if(!state.xStyle)
                 state.xStyle = file.syncLoad(state.xSheet);*/
-            
             const go = (xslt) => {
                 if(xslt) state.xStyle = xslt;
                 const result = xml.XSLTransform(state.xStyle,xstr);
@@ -198,8 +201,8 @@
                 file.asyncLoad(state.xSheet,go);
             else go();
         },
-        saveAs: () => {
-            const serialized = xml.serialize(state.xmlDoc);
+        saveAs: (doc) => {
+            const serialized = xml.serialize(doc || state.xmlDoc);
             const file = new Blob([serialized], {type: 'text/xml;charset=utf-8'});
             const fileURL = state.filename.match(/^\[.+\]$/) ?
                 state.filename.replace(/^\[(.+)\]$/,'$1.xml').replace(/\s+/,'_') :
@@ -1169,7 +1172,7 @@
             }
         },
 
-        save: () => {
+        save: (saveas = false) => {
             const docclone = state.xmlDoc.cloneNode(true);
             /*
             while(state.multiselect.length > 0) {
@@ -1209,6 +1212,8 @@
                     footer.style.opacity = 1;
                 },1000);
             });
+
+            if(saveas) file.saveAs(docclone);
         },
         saveStr: (str) => {
             autosaved.setFilename(state.xmlDoc);
