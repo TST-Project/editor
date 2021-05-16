@@ -168,7 +168,7 @@
             
             const go = (xslt) => {
                 if(xslt) state.xStyle = xslt;
-
+                console.log(state.xStyle);
                 const result = xml.XSLTransform(state.xStyle,xstr);
                 const body = document.getElementById('headerviewer');
                 
