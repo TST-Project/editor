@@ -1,6 +1,6 @@
 # TST editor
 
-This repository contains an editing interface for the TST project. It has been tested on the latest versions of __Firefox__ and __Chrome__ (Safari is currently not tested). To use the editor, go to https://tst-project.github.io/editor/
+This repository contains an editing interface for the TST project. It has been tested on the latest versions of __Firefox__, __Chrome__, and __Edge__ (Safari is currently not supported). To use the editor, go to https://tst-project.github.io/editor/
 
 ## How to create a manuscript record
 
