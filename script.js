@@ -283,11 +283,11 @@
             //file.render(state.xmlDoc);
             editor.init();
         },
-        syncLoad: (fname) => {
+        syncLoad: (fname,text = false) => {
             const xhr = new XMLHttpRequest();
             xhr.open('GET',fname,false);
             xhr.send(null);
-            return xhr.responseXML;
+            return text ? xhr.responseText : xhr.responseXML;
         },
         asyncLoad: (fname,func) => {
             const xhr = new XMLHttpRequest();
@@ -1062,6 +1062,17 @@
             return he.escape(str);
         },
         XSLTransform: (xslsheet,doc) => {
+            // compile all xsl:imports to avoid browser incompatibilities
+            for(const x of xslsheet.querySelectorAll('import')) {
+                const i = xml.parseString(
+                    file.syncLoad(
+                        x.getAttribute('href'),true)
+                );
+                while(i.documentElement.firstChild)
+                    x.after(i.documentElement.firstChild);
+                x.remove();
+            }
+
             const xproc = new XSLTProcessor();
             xproc.importStylesheet(xslsheet);
             return xproc.transformToDocument(doc);
