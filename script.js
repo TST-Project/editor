@@ -35,10 +35,12 @@
                 e.preventDefault();
                 editor.apply.update();
                 return;
+            /*
             case 'cancelheader':
                 e.preventDefault();
                 editor.destroy();
                 return;
+            */
             case 'editbutton':
                 e.preventDefault();
                 editor.init();
@@ -371,11 +373,13 @@
             if(!state.saveInterval) 
                 state.saveInterval = window.setInterval(autosaved.save,300000);
         },
-
+        
+        /*
         destroy: () => {
             editor.destroyJS();
             file.render(state.xmlDoc);
         },
+        */
 
         destroyJS: () => {
             while(state.multiselect.length > 0) {
