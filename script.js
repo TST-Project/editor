@@ -169,9 +169,9 @@
             document.getElementById('headereditor').style.display = 'none';
             /*if(!state.xStyle)
                 state.xStyle = file.syncLoad(state.xSheet);*/
-            const go = (xslt) => {
+            const go = async (xslt) => {
                 if(xslt) state.xStyle = xslt;
-                const result = xml.XSLTransform(state.xStyle,xstr);
+                const result = await xml.XSLTransform(state.xStyle,xstr);
                 const body = document.getElementById('headerviewer');
                 
                 const viewer = document.getElementById('viewer');
@@ -279,9 +279,15 @@
         startnew: () => {
             document.getElementById('openform').style.display = 'none';
             state.filename = '[new file]';
-            state.xmlDoc = file.syncLoad(state.template);
+            //state.xmlDoc = file.syncLoad(state.template);
             //file.render(state.xmlDoc);
-            editor.init();
+            //editor.init();
+            fetch(state.template).then((resp) => {
+                return resp.text();
+            }).then((str) => {
+                state.xmlDoc = xml.parseString(str);
+                editor.init();
+            });
         },
         syncLoad: (fname,text = false) => {
             const xhr = new XMLHttpRequest();
@@ -1061,13 +1067,15 @@
         sanitize: (str) => {
             return he.escape(str);
         },
-        XSLTransform: (xslsheet,doc) => {
+        XSLTransform: async (xslsheet,doc) => {
             // compile all xsl:imports to avoid browser incompatibilities
             for(const x of xslsheet.querySelectorAll('import')) {
-                const i = xml.parseString(
+                const resp = await fetch(x.getAttribute('href'));
+                const i = xml.parseString(await resp.text());
+                /*const i = xml.parseString(
                     file.syncLoad(
                         x.getAttribute('href'),true)
-                );
+                );*/
                 while(i.documentElement.firstChild)
                     x.after(i.documentElement.firstChild);
                 x.remove();
