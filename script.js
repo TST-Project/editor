@@ -6,7 +6,7 @@
         filename: '',
         xmlDoc: null,
         xStyle: null,
-        xSheet: 'tei-to-html.xml',
+        xSheet: 'tei-to-html.xsl',
         template: 'tst-template.xml',
         toplevel: 'TEI',
         savedtext: new Map(),
@@ -282,10 +282,16 @@
             //state.xmlDoc = file.syncLoad(state.template);
             //file.render(state.xmlDoc);
             //editor.init();
+            /*
             fetch(state.template).then((resp) => {
                 return resp.text();
             }).then((str) => {
                 state.xmlDoc = xml.parseString(str);
+                editor.init();
+            });
+            */
+            file.asyncLoad(state.template,(f) => {
+                state.xmlDoc = f;
                 editor.init();
             });
         },
@@ -296,6 +302,12 @@
             return text ? xhr.responseText : xhr.responseXML;
         },
         asyncLoad: (fname,func) => {
+            fetch(fname).then((resp) => {
+                return resp.text();
+            }).then((str) => {
+                func(xml.parseString(str));
+            });
+            /*
             const xhr = new XMLHttpRequest();
             xhr.open('GET',fname,true);
             xhr.timeout = 2000;
@@ -310,6 +322,7 @@
             xhr.ontimeout = () => {alert(`Unable to load ${fname}: timed out.`);};
             xhr.onerror = () => {alert(xhr.statusText);};
             xhr.send(null);
+            */
         },
     };
     
