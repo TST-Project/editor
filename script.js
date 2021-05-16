@@ -197,7 +197,7 @@
 
             if(!state.xStyle)
                 file.asyncLoad(state.xSheet,go);
-            else go(state.xStyle);
+            else go();
         },
         saveAs: () => {
             const serialized = xml.serialize(state.xmlDoc);
