@@ -1,16 +1,17 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                xmlns:exsl="http://exslt.org/common"
                 xmlns:x="http://www.tei-c.org/ns/1.0"
                 xmlns:tst="https://github.com/tst-project"
                 exclude-result-prefixes="x tst">
 
-<xsl:import href="../lib/xslt/functions.xsl"/>
 <xsl:import href="../lib/xslt/definitions.xsl"/>
+<xsl:import href="../lib/xslt/functions.xsl"/>
 <xsl:import href="../lib/xslt/common.xsl"/>
 <xsl:import href="../lib/xslt/teiheader.xsl"/>
 <xsl:import href="../lib/xslt/transcription.xsl"/>
 <!--xsl:import href="../lib/xslt/tei-to-html.xsl"/-->
 
-<!-- these imports are compiled by Javascript, since both Chrome and Safari's XSLTProcessor() don't play well with it -->
+<!-- these imports are compiled by Javascript, since WebKit's XSLTProcessor() don't play well with it -->
 
 <xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes"/>
 <xsl:template match="x:TEI">

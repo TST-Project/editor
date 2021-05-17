@@ -304,11 +304,10 @@
             return text ? xhr.responseText : xhr.responseXML;
         },
         asyncLoad: (fname,func) => {
-            fetch(fname).then((resp) => {
-                return resp.text();
-            }).then((str) => {
-                func(xml.parseString(str));
-            });
+            fetch(fname).then(resp => resp.text())
+                .then((str) => {
+                    func(xml.parseString(str));
+                });
             /*
             const xhr = new XMLHttpRequest();
             xhr.open('GET',fname,true);
@@ -1086,18 +1085,16 @@
         },
         XSLTransform: async (xslsheet,doc) => {
             // compile all xsl:imports to avoid browser incompatibilities
+            
             for(const x of xslsheet.querySelectorAll('import')) {
                 const resp = await fetch(x.getAttribute('href'));
                 const i = xml.parseString(await resp.text());
-                /*const i = xml.parseString(
-                    file.syncLoad(
-                        x.getAttribute('href'),true)
-                );*/
+
                 while(i.documentElement.firstChild)
-                    x.after(i.documentElement.firstChild);
+                    x.before(i.documentElement.firstChild);
                 x.remove();
             }
-
+            //console.log(xslsheet);
             const xproc = new XSLTProcessor();
             xproc.importStylesheet(xslsheet);
             return xproc.transformToDocument(doc);
