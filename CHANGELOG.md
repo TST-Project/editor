@@ -1,8 +1,18 @@
 # Changelog
 
+## 17 May 2021
+
+* testing on Edge and WebKit browsers
+* new paratext types: verse numbering, total stanzas, and total chapters
+* paratexts and decorations can have an associated Text ID
+* new paratext placement: top, bottom, left, and right
+* author field is XML-enabled
+* editor hints added for \<placeName\>,\<foreign\>, \<unclear reason="consonant\_unclear"\>
+* editor hints added for seg @function: "verse\_numbering", "total\_stanzas", "total\_chapters"
+
 ## 3 May 2021
 
-* Added upgrade function so that old files get upgraded upon load
+* added upgrade function so that old files get upgraded upon load
 * removed editionStmt, added titleStmt/editor
 * multiple editor people are supported
 * added "vowel\_unclear" and "eccentric\_ductus" as reasons for \<unclear\>

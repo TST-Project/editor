@@ -414,6 +414,10 @@
             <div>
                 <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
                 <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple></select>
+                <label title="As defined in the 'Contents' section">Textual unit</label>
+                <select autocomplete="off" data-subattr="corresp" name="text_corresp" data-from="text_id" data-prefix="#"></select>
+            </div>
+            <div>
                 <label>Type</label>
                 <select autocomplete="off" data-subattr="type" name="decoNote_type">
                     <option value="" selected disabled></option>
@@ -439,6 +443,12 @@
                     <option value="running">running</option>
                     <option value="spine">spine</option>
                     <option value="title-page">title page</option>
+                    <optgroup label="position">
+                        <option value="top">top</option>
+                        <option value="bottom">bottom</option>
+                        <option value="left">left</option>
+                        <option value="right">right</option>
+                    </optgroup>
                 </select>
             </div>
             <div>
@@ -454,6 +464,10 @@
             <div>
                 <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
                 <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple></select>
+                <label title="As defined in the 'Contents' section">Textual unit</label>
+                <select autocomplete="off" data-subattr="corresp" name="text_corresp" data-from="text_id" data-prefix="#"></select>
+            </div>
+            <div>
                 <label>Type</label>
                 <select autocomplete="off" data-subattr="type" name="addition_type" class="multiselect" multiple>
                     <optgroup label="structuring">
@@ -466,6 +480,7 @@
                         <option value="table-of-contents">table of contents</option>
                         <option value="title">title</option>
                         <option value="verse-beginning">verse beginning</option>
+                        <option value="verse-numbering">verse numbering</option>
                     </optgroup>
                     <optgroup label="commenting">
                         <option value="correction">correction</option>
@@ -484,6 +499,8 @@
                         <option value="seal">seal</option>
                         <option value="shelfmark">shelfmark</option>
                         <option value="stamp">stamp</option>
+                        <option value="total-chapters">total chapters</option>
+                        <option value="total-stanzas">total stanzas</option>
                         <option value="documenting-note">user-related note</option>
                     </optgroup>
                 </select>
@@ -500,6 +517,12 @@
                     <option value="marginal">marginal</option>
                     <option value="spine">spine</option>
                     <option value="title-page">title page</option>
+                    <optgroup label="position">
+                        <option value="top">top</option>
+                        <option value="bottom">bottom</option>
+                        <option value="left">left</option>
+                        <option value="right">right</option>
+                    </optgroup>
                 </select>
             </div>
             <div>
@@ -546,7 +569,7 @@
             </div>
             <div>
                 <label>Author</label>
-                <input autocomplete="off" type="text" data-subselect="author" placeholder="author of text">
+                <textarea autocomplete="off" rows="1" name="text_author" data-subselect="author" data-schema="descriptive" placeholder="author of text"></textarea>
             </div>
             <div>
                 <label>Main language</label>

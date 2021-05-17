@@ -129,6 +129,7 @@ hr {
 
 .vsb-menu .multi li.grouped-option {
     font-size: 1.2rem;
+    padding-left: 1.5em;
 }
 
 .editbutton {
@@ -686,22 +687,3 @@ h4 {
     right: 0;
 }
 
-/*
-.quillhidden {
-    display: none;
-}
-
-.quillcontainer {
-    flex-grow: 1;
-    height: 300px;
-    display: flex;
-    flex-direction: Column;
-    margin: 10px 0 10px 0;
-}
-
-.ql-container {
-    height: auto;
-    min-height: 85%;
-}
-*
-/
