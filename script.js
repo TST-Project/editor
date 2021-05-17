@@ -29,7 +29,7 @@
     };
     
     const events = {
-        bodyClick: (e) => {
+        bodyClick(e) {
             switch(e.target.id) {
             case 'updateheader':
                 e.preventDefault();
@@ -70,14 +70,14 @@
                 editor.multiItem.down(e.target);
             }
         },
-        bodyMouseover: (e) => {
+        bodyMouseover(e) {
             var targ = e.target.closest('[data-anno]');
             while(targ && targ.hasAttribute('data-anno')) {
                 toolTip.make(e,targ);
                 targ = targ.parentNode;
             }
         },
-        tipShow: (e) => {
+        tipShow(e) {
             const el = e.target;
             const tiptxt = el.dataset.tip;
             const tipel = document.createElement('span');
@@ -101,14 +101,14 @@
             state.heditor.appendChild(tipel);
             el.myMarginnote = tipel;
         },
-        tipRemove: () => {
+        tipRemove() {
             const el = document.getElementById('margintip');
             if(el) el.remove();
         },
     };
 
     const toolTip = {
-        make: (e,targ) => {
+        make(e,targ) {
             const toolText = targ.dataset.anno;
             if(!toolText) return;
 
@@ -140,7 +140,7 @@
             window.getComputedStyle(tBox).opacity;
             tBox.style.opacity = 1;
         },
-        remove: (e) => {
+        remove(e) {
             const tBox = document.getElementById('tooltip');
             if(tBox.children.length === 1) {
                 tBox.remove();
@@ -163,11 +163,11 @@
     };
 
     const file = {
-        parse: (func,e) => {
+        parse(func,e) {
             state.xmlDoc = xml.parseString(e.target.result);
             func(state.xmlDoc);
         },
-        render: (xstr) => {
+        render(xstr) {
             document.getElementById('headereditor').style.display = 'none';
             /*if(!state.xStyle)
                 state.xStyle = file.syncLoad(state.xSheet);*/
@@ -203,7 +203,7 @@
                 file.asyncLoad(state.xSheet,go);
             else go();
         },
-        saveAs: (doc) => {
+        saveAs(doc) {
             const serialized = xml.serialize(doc || state.xmlDoc);
             const file = new Blob([serialized], {type: 'text/xml;charset=utf-8'});
             const fileURL = state.filename.match(/^\[.+\]$/) ?
@@ -212,7 +212,7 @@
             FileSaver(file,fileURL);
         },
 
-        select: (e) => {
+        select(e) {
             document.getElementById('openform').style.display = 'none';
             const f = e.target.files[0];
             state.filename = f.name;
@@ -222,7 +222,7 @@
             reader.readAsText(f);
         },
         
-        selectPart: (e) => {
+        selectPart(e) {
             const f = e.target.files[0];
             const par = e.target.parentNode;
             const reader = new FileReader();
@@ -278,32 +278,26 @@
 
         },
 
-        startnew: () => {
+        startnew() {
             document.getElementById('openform').style.display = 'none';
             state.filename = '[new file]';
             //state.xmlDoc = file.syncLoad(state.template);
             //file.render(state.xmlDoc);
             //editor.init();
-            /*
-            fetch(state.template).then((resp) => {
-                return resp.text();
-            }).then((str) => {
-                state.xmlDoc = xml.parseString(str);
-                editor.init();
-            });
-            */
             file.asyncLoad(state.template,(f) => {
                 state.xmlDoc = f;
                 editor.init();
             });
         },
-        syncLoad: (fname,text = false) => {
+        /*
+        syncLoad(fname,text = false) {
             const xhr = new XMLHttpRequest();
             xhr.open('GET',fname,false);
             xhr.send(null);
             return text ? xhr.responseText : xhr.responseXML;
         },
-        asyncLoad: (fname,func) => {
+        */
+        asyncLoad(fname,func) {
             fetch(fname).then(resp => resp.text())
                 .then((str) => {
                     func(xml.parseString(str));
@@ -329,19 +323,22 @@
     
     const editor = {
 
-        init: () => {
+        init() {
             document.getElementById('headerviewer').style.display = 'none';
 
             const heditor = document.getElementById('headereditor');
             state.heditor = heditor;
             heditor.style.display = 'flex';
             
-            var unsanitize = false;
-            const f = state.xmlDoc.firstChild;
-            if(f.nodeType === 7 && f.target  === 'tst' && f.data === 'sanitized="true"') {
-                unsanitize = true;
-                f.remove();
-            }
+            const unsanitize = (() => {
+                const f = state.xmlDoc.firstChild;
+                if(f.nodeType === 7 && 
+                   f.target  === 'tst' && 
+                   f.data === 'sanitized="true"') {
+                    f.remove();
+                    return true;
+                }
+                return false;})();
 
             editor.upgrade(state.xmlDoc);
 
@@ -380,7 +377,7 @@
         },
         */
 
-        destroyJS: () => {
+        destroyJS() {
             while(state.multiselect.length > 0) {
                 const el = state.multiselect.pop();
                 if(el) el.destroy();
@@ -389,7 +386,7 @@
         },
 
         fill: {
-            all: (el,unsanitize) => {
+            all(el,unsanitize) {
                 const par = el || state.heditor;
 
                 const fields = par.querySelectorAll('[data-select]');
@@ -403,8 +400,7 @@
                 }
             },
 
-            fixed: (par,toplevel) => {
-
+            fixed(par,toplevel) {
                 const fillFixedField = (field,toplevel) => {
                     const selector = field.dataset.fixedSelect;
                     const xmlEl = (selector && selector !== ':scope') ?
@@ -443,7 +439,7 @@
                 if(fileselector) fileselector.remove();
             },
 
-            simpleField: (field,toplevel,unsanitize) => {
+            simpleField(field,toplevel,unsanitize) {
                 const tounsanitize = unsanitize || field.tagName !== 'TEXTAREA';
                 const selector = field.dataset.select || field.dataset.subselect;
                 const xmlEl = (selector && selector !== ':scope') ?
@@ -493,7 +489,7 @@
                     }
                 }
             },
-            multiField: (field,toplevel,unsanitize) => {
+            multiField(field,toplevel,unsanitize) {
 
                 const plusbutton = editor.multiItem.collapse(field);
 
@@ -524,13 +520,13 @@
         },
         
         multiItem: {
-            add: (button) => {
+            add(button) {
                 editor.multiItem.prep(
                     editor.multiItem.make(button)
                 );
             },
 
-            collapse: (field) => {
+            collapse(field) {
                 if(!field.hasOwnProperty('myItem')) {
                     field.myItem = field.removeChild(field.querySelector('.multi-item'));
                     const buttonrow = editor.multiItem.makeButtonrow();
@@ -543,11 +539,11 @@
                 field.appendChild(b);
                 return b;
             },
-            get: (par) => {
+            get(par) {
                 return [...par.children].filter(el => el.matches('.multi-item'));
             },
 
-            hideEmpty: (el) => {
+            hideEmpty(el) {
                 const par = el || state.heditor;
                 const list = [...par.querySelectorAll('.multi-item')];
                 const removelist = list.filter(m => {
@@ -567,7 +563,7 @@
                 for(const r of removelist) r.remove();
             },
 
-            kill: (button) => {
+            kill(button) {
                 const multiItem = button.closest('.multi-item');
                 if(window.confirm('Do you want to delete this item?')) {
                     multiItem.remove();
@@ -579,13 +575,13 @@
                 editor.multiItem.updateButtonrows(multiItem.closest('.multiple'));
             },
 
-            make: (button) => {
+            make(button) {
                 const ret = button.myItem.cloneNode(true);
                 button.parentNode.insertBefore(ret,button);
                 return ret;
             },
 
-            prep: (ret) => {
+            prep(ret) {
 
                 for(const m of ret.querySelectorAll('.multiple')) {
                     if(!m) continue;
@@ -614,7 +610,7 @@
             },
             
             // button functions
-            makePlus: (el) => {
+            makePlus(el) {
                 const button = dom.makeEl('div');
                 const emptyel = el.cloneNode(true);
                 for(const i of emptyel.querySelectorAll('input,textarea')) {
@@ -631,7 +627,7 @@
                 return button;
             },
             
-            makeIcon: (id,size) => {
+            makeIcon(id,size) {
                 const wh = size || '15px';
                 const asset = document.querySelector(`#assets ${id}`).cloneNode(true);
                 asset.style.width = wh;
@@ -639,7 +635,7 @@
                 return asset;
             },
 
-            makeButtonrow: () => {
+            makeButtonrow() {
                 const row = dom.makeEl('div');
                 row.classList.add('buttonrow');
                 const killbutton = dom.makeEl('button');
@@ -663,7 +659,7 @@
                 return row;
             },
             
-            updateButtonrows: (el) => {
+            updateButtonrows(el) {
                 if(!el) return;
                 //const items = [...el.querySelectorAll('.multi-item')];
                 const items = editor.multiItem.get(el);
@@ -686,14 +682,14 @@
                 }
             },
 
-            up: (button) => {
+            up(button) {
                 const multiItem = button.closest('.multi-item');
                 if(multiItem.previousElementSibling)
                     multiItem.parentNode.insertBefore(multiItem,multiItem.previousElementSibling);
                 editor.multiItem.updateButtonrows(multiItem.parentNode);
             },
             
-            down: (button) => {
+            down(button) {
                 const multiItem = button.closest('.multi-item');
                 if(multiItem.nextElementSibling && !multiItem.nextElementSibling.classList.contains('plusbutton'))
                     multiItem.parentNode.insertBefore(multiItem.nextElementSibling,multiItem);
@@ -702,11 +698,12 @@
         },
 
         apply: {
-            update: () => {
+            update() {
                 const invalid = editor.apply.checkInvalid();
                 if(invalid) {
                     invalid.scrollIntoView({behavior: 'smooth', block: 'center'});
-                    if(invalid.validity && !invalid.validity.valid) {
+                    if(invalid.classList.contains('CodeMirror-required') ||
+                       (invalid.validity && !invalid.validity.valid) ) {
                         const errorname = invalid.name ? 
                             invalid.name.replaceAll('_',' ') :
                             'field';
@@ -714,16 +711,16 @@
                     }
                     else {
                         const txt = invalid.textContent;
-                        if(txt.trim() != '')
-                            alert(`XML error: '${txt}'`);
-                        else alert('XML error');
+                        const quoted = txt.trim() != '' ?
+                            `: '${txt}'` : '';
+                        alert(`XML error${quoted}`);
                     }
                     return;
                 }
                 
                 editor.destroyJS();
 
-                const toplevel = editor.apply.simpleFields(state.xmlDoc);
+                const toplevel = editor.apply.fields(state.xmlDoc);
                 
                 editor.postProcess(toplevel);
 
@@ -735,7 +732,7 @@
                 autosaved.saveStr(serialized);
             },
         
-            checkInvalid: () => {
+            checkInvalid() {
                 const allfields = state.heditor.querySelectorAll('input,select,textarea');
                 for(const field of allfields) {
                     if(!field.validity.valid) {
@@ -750,7 +747,7 @@
                 return state.heditor.querySelector('.CodeMirror-required,.cm-error,.CodeMirror-lint-mark-error') || state.heditor.querySelector('.CodeMirror-lint-marker-error,.CodeMirror-lint-marker-warning');
             },
       
-            simpleFields: (doc,sanitize) => {
+            fields(doc,sanitize) {
                 const fields = state.heditor.querySelectorAll('[data-select]');
                 const toplevel = doc.querySelector(state.toplevel);
                 for(const field of fields) {
@@ -762,7 +759,7 @@
                 return toplevel;
             },
 
-            multiFields: (field,toplevel,sanitize) => {
+            multiFields(field,toplevel,sanitize) {
                 const selector = field.dataset.select || field.dataset.subselect;
                 xml.removeAllEls(selector,toplevel);
                 //const items = field.querySelectorAll('.multi-item');
@@ -783,7 +780,7 @@
                 }
             },
                 
-            getSubFields: (el) => {
+            getSubFields(el) {
                 const nextNode = (node,skipKids = false) => {
                     if(node.firstElementChild && !skipKids)
                         return node.firstElementChild;
@@ -807,11 +804,11 @@
                 return ret;
             },
 
-            removeXML: (node) => {
+            removeXML(node) {
                 if(!node.hasAttributes() && !node.hasChildNodes()) node.remove();
             },
 
-            updateXML: (field,toplevel,sanitize) => {
+            updateXML(field,toplevel,sanitize) {
                 // class="nosanitize": tosanitize = false 
                 // sanitize = true: tosanitize = true
                 // not textarea: tosanitize = true
@@ -880,24 +877,8 @@
             },
         },
 
-        postProcess: (toplevel) => {
+        postProcess(toplevel) {
             const par = toplevel || state.xmlDoc;
-            
-            /*
-            // update editionStmt
-            const editionStmt = par.querySelector('fileDesc > editionStmt > p');
-            if(editionStmt) {
-                const persName = editionStmt.removeChild(editionStmt.querySelector('persName'));
-                const orgName = editionStmt.removeChild(editionStmt.querySelector('orgName'));
-                //while(editionStmt.firstChild) editionStmt.firstChild.remove();
-                dom.clearEl(editionStmt);
-                editionStmt.appendChild(state.xmlDoc.createTextNode('Record edited by '));
-                editionStmt.appendChild(persName);
-                editionStmt.appendChild(state.xmlDoc.createTextNode(' '));
-                editionStmt.appendChild(orgName);
-                editionStmt.appendChild(state.xmlDoc.createTextNode('.'));
-            }
-            */
 
             const supportDescs = par.querySelectorAll('supportDesc');
             for(const supportDesc of supportDescs) {
@@ -929,7 +910,7 @@
         },
 
         selects: {
-            make: (el) => {
+            make(el) {
                 el.id = 'box' + Math.random().toString(36).substr(2,9);
                 const mbox = new vanillaSelectBox(`#${el.id}`,{placeHolder: 'Choose...',disableSelectAll: true});
                 mbox.setValue(
@@ -939,14 +920,14 @@
                 state.multiselect.push(mbox);
             },
 
-            listen: (sel,par) => {
+            listen(sel,par) {
                 const t = par || state.heditor;
                 const field = t.querySelectorAll(`[name=${sel}]`);
                 for(const f of field)
                     f.addEventListener('blur',editor.selects.update.bind(null,sel));
             },
             
-            update: (sel) => {
+            update(sel) {
                 const values = [...state.heditor.querySelectorAll(`[name=${sel}]`)].map(el => el.value.trim());
                 const valueset = new Set(['',...values]);
                 const alloptions = [...valueset].map(str => {
@@ -983,7 +964,7 @@
             },
         },
 
-        upgrade: (doc) => {
+        upgrade(doc) {
             const tests = [
                 {name: 'shelfmark', select: 'idno[type="cote"]'},
                 {name: 'old_shelfmark', select: 'idno[type="ancienne cote"]'},
@@ -991,11 +972,11 @@
                 {name: 'editor', select: 'editionStmt'}
             ];
             const funcs = {
-                shelfmark: (doc) => {
+                shelfmark(doc) {
                     const cote = doc.querySelector('idno[type="cote"]');
                     cote.setAttribute('type','shelfmark');
                 },
-                old_shelfmark: (doc) => {
+                old_shelfmark(doc) {
                     const acote = doc.querySelector('idno[type="ancienne cote"]');
                     acote.removeAttribute('type');
                     const alternate = xml.makeEl(doc,'idno');
@@ -1003,7 +984,7 @@
                     acote.insertAdjacentElement('beforebegin',alternate);
                     alternate.appendChild(acote);
                 },
-                foliation: (doc) => {
+                foliation(doc) {
                     const fs = doc.querySelectorAll('foliation[n]');
                     const collation = (() => {
                         const c = document.querySelector('collation');
@@ -1023,7 +1004,7 @@
                         f.remove();
                     }
                 },
-                editor: (doc) => {
+                editor(doc) {
                     const eStmt = doc.querySelector('editionStmt');
                     const pNames = eStmt.querySelectorAll('persName');
                     const oNames = eStmt.querySelectorAll('orgName');
@@ -1055,7 +1036,7 @@
     }; // end editor
 
     const xml = {
-        parseString: (str) => {
+        parseString(str) {
             const parser = new DOMParser();
             const newd = parser.parseFromString(str,'text/xml');
             if(newd.documentElement.nodeName === 'parsererror')
@@ -1063,11 +1044,11 @@
             else
                 return newd;
         },
-        serialize: (el) => {
+        serialize(el) {
             const s = new XMLSerializer();
             return s.serializeToString(el);
         },
-        innerXML: (el) => {
+        innerXML(el) {
             const empty = el.cloneNode();
             empty.innerHTML = '\u{FFFFD}';
             const str = xml.serialize(el);
@@ -1075,15 +1056,15 @@
             const [starttag,endtag] = emptystr.split('\u{FFFFD}');
             return str.slice(starttag.length).slice(0,-endtag.length);
         },
-        unsanitize: (str,attr) => {
+        unsanitize(str,attr) {
             return attr ?
                 he.unescape(str,{isAttributeValue: true}) :
                 he.unescape(str);
         },
-        sanitize: (str) => {
+        sanitize(str) {
             return he.escape(str);
         },
-        XSLTransform: async (xslsheet,doc) => {
+        async XSLTransform(xslsheet,doc) {
             // compile all xsl:imports to avoid browser incompatibilities
             
             for(const x of xslsheet.querySelectorAll('import')) {
@@ -1094,7 +1075,6 @@
                     x.before(i.documentElement.firstChild);
                 x.remove();
             }
-            //console.log(xslsheet);
             const xproc = new XSLTProcessor();
             xproc.importStylesheet(xslsheet);
             return xproc.transformToDocument(doc);
@@ -1106,17 +1086,17 @@
             if(el) el.remove();
         },*/
 
-        removeAllEls: (path,toplevel) => {
+        removeAllEls(path,toplevel) {
             const els = toplevel.querySelectorAll(path);
             for(const el of els)
                 el.remove();
         },
-        makeEl: (doc,name) => {
+        makeEl(doc,name) {
             const ns = doc.documentElement.namespaceURI;
             return doc.createElementNS(ns,name);
         },
 
-        makeElDeep: (path,toplevel,duplicate) => {
+        makeElDeep(path,toplevel,duplicate) {
             const thisdoc = toplevel.ownerDocument;
             const ns = thisdoc.documentElement.namespaceURI;
             const children = path.split(/\s*>\s*/g).filter(x => x);
@@ -1152,7 +1132,7 @@
     }; // end xml
 
     const autosaved = {
-        fill: () => {
+        fill() {
             const par = document.getElementById('autosavebox');
             par.style.display = 'flex';
             const box = document.getElementById('autosaveentries');
@@ -1178,7 +1158,7 @@
             });
         },
 
-        load: (k,e) => {
+        load(k,e) {
             if(e.target.closest('.trash'))
                 return;
             lf.getItem(k).then(i => {
@@ -1189,7 +1169,7 @@
             });
         },
 
-        remove: (k) => {
+        remove(k) {
             const name = k.slice(state.autosaveprefix.length);
             if(window.confirm(`Do you want to delete ${name}?`)) {
                 lf.removeItem(k);
@@ -1197,7 +1177,7 @@
             }
         },
         
-        setFilename: (doc) => {
+        setFilename(doc) {
             if(state.filename.match(/^\[.*\]$/)) {
                 const shelfmark = doc.querySelector('idno[type="shelfmark"]');
                 if(shelfmark && shelfmark.textContent && shelfmark.textContent.trim() !== '')
@@ -1205,7 +1185,7 @@
             }
         },
 
-        save: (saveas = false) => {
+        save(saveas = false) {
             const docclone = state.xmlDoc.cloneNode(true);
             /*
             while(state.multiselect.length > 0) {
@@ -1226,7 +1206,7 @@
                     if(o) o.selected = true;
                 }
             }
-            editor.apply.simpleFields(docclone,true);
+            editor.apply.fields(docclone,true);
           
             autosaved.setFilename(docclone);
            
@@ -1248,18 +1228,18 @@
 
             if(saveas) file.saveAs(docclone);
         },
-        saveStr: (str) => {
+        saveStr(str) {
             autosaved.setFilename(state.xmlDoc);
             lf.setItem(state.autosaveprefix+state.filename,str);
         },
     }; // end autosaved
     
     const dom = {
-        clearEl: (el) => {
+        clearEl(el) {
             while(el.firstChild)
                 el.removeChild(el.firstChild);
         },
-        makeEl: (name,doc) => {
+        makeEl(name,doc) {
             const d = doc ? doc : document;
             return d.createElement(name);
         },
