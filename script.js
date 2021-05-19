@@ -896,16 +896,29 @@
                 const lang = textlang && textlang.getAttribute('mainLang');
                 if(!lang) continue;
                 
-                const langmap = new Map([['tam','ta'],['san','sa']]);
+                const langmap = new Map([
+                    ['tam','ta'],
+                    ['san','sa'],
+                    ['fra','fr'],
+                    ['eng','en'],
+                    ['ara','ar'],
+                    ['deu','de'],
+                    ['pli','pi'],
+                    ['por','pt'],
+                    ['lat','la']
+                ]);
+
+                const lang2 = langmap.get(lang) || lang;
+
                 const els = [...msItem.children].filter(el => 
                     el.matches('title,author,rubric,incipit,explicit,finalRubric,colophon')
                 );
 
                 for(const el of els)
-                    el.setAttribute('xml:lang',langmap.get(lang)); 
+                    el.setAttribute('xml:lang',lang2); 
 
                 const transcr = par.querySelector(`text[corresp="#${textid}"]`);
-                if(transcr) transcr.setAttribute('xml:lang',langmap.get(lang));
+                if(transcr) transcr.setAttribute('xml:lang',lang2);
             }
         },
 
