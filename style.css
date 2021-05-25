@@ -322,7 +322,36 @@ span.gap {
     top: auto;
 }
 
-#footer {
+header {
+    position: fixed;
+    right: 3rem;
+    top: 2rem;
+    z-index: 6;
+}
+
+header li {
+    list-style-type: none;
+}
+
+header a:link {
+    background: none;
+}
+
+header .list1 {
+}
+
+header .list2 {
+    margin-left: 1.5rem;
+}
+
+header .list3 {
+    margin-left: 2.5rem;
+}
+
+header .list4 {
+    margin-left: 3.5rem;
+}
+footer {
     position: fixed;
     bottom: 0;
     z-index: 6;

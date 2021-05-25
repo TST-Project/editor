@@ -105,6 +105,21 @@
             const el = document.getElementById('margintip');
             if(el) el.remove();
         },
+        tocClick(e) {
+            if(e.target.tagName !== 'A') return;
+            const href = e.target.href.split('#').pop();
+            if(href === 'top') {
+                state.heditor.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            else {
+                const el = document.getElementById(href);
+                el.scrollIntoView({behavior: 'smooth', block: 'center'});
+            }
+            e.preventDefault();
+        },
     };
 
     const toolTip = {
@@ -365,11 +380,42 @@
 
             heditor.querySelector('#hd_publisher').value = 'TST Project';
             heditor.querySelector('#hd_publish_date').value = new Date().getFullYear();
+            
+            editor.toc();
 
             if(!state.saveInterval) 
                 state.saveInterval = window.setInterval(autosaved.save,300000);
         },
         
+        toc() {
+            const header = state.heditor.querySelector('header');
+            const hs = state.heditor.querySelectorAll('h1,h2,h3,h4');
+            const ul = document.createElement('ul');
+            
+            const t = document.createElement('li');
+            const ta = document.createElement('a');
+            ta.className = 'local';
+            ta.href = '#top';
+            ta.append('^Top');
+            t.append(ta);
+            ul.append(t);
+           
+            for(const [i,h] of hs.entries()) {
+                const n = document.createElement('li');
+                const cname = `list${h.tagName.slice(-1)}`;
+                n.className = cname;
+                const na = document.createElement('a');
+                na.className = 'local';
+                if(!h.id) h.id = `toc${i}`;
+                na.href = `#${h.id}`;
+                na.append(h.textContent);
+                n.appendChild(na);
+                ul.appendChild(n);
+            }
+            header.appendChild(ul);
+            header.addEventListener('click',events.tocClick);
+        },
+
         /*
         destroy: () => {
             editor.destroyJS();
