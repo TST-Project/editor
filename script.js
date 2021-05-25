@@ -106,8 +106,10 @@
             if(el) el.remove();
         },
         tocClick(e) {
-            if(e.target.tagName !== 'A') return;
-            const href = e.target.href.split('#').pop();
+            const li = e.target.closest('li');
+            if(!li) return;
+
+            const href = li.querySelector('a').href.split('#').pop();
             if(href === 'top') {
                 state.heditor.scrollTo({
                     top: 0,
@@ -119,6 +121,31 @@
                 el.scrollIntoView({behavior: 'smooth', block: 'center'});
             }
             e.preventDefault();
+        },
+        
+        tocUpdate() {
+            const light = (id) => {
+                const el = state.toc.get(id);
+                if(!el.classList.contains('current')) {
+                    const cur = (() => {
+                        for(const t of state.toc.values()) {
+                            if(t.classList.contains('current')) return t;
+                        }
+                        return null;
+                    })();
+                    if(cur) cur.classList.remove('current');
+                    el.classList.add('current');
+                }
+            };
+
+            for(const h of state.headers) {
+                const scrollpos = window.innerHeight/2;
+                if(h.getBoundingClientRect().top <= scrollpos) {
+                    light(h.id);
+                    return;
+                }
+            }
+            light('top');
         },
     };
 
@@ -400,6 +427,8 @@
             t.append(ta);
             ul.append(t);
            
+            const tocmap = [['top',t]];
+
             for(const [i,h] of hs.entries()) {
                 const n = document.createElement('li');
                 const cname = `list${h.tagName.slice(-1)}`;
@@ -411,9 +440,14 @@
                 na.append(h.textContent);
                 n.appendChild(na);
                 ul.appendChild(n);
+                
+                tocmap.push([h.id,n]);
             }
             header.appendChild(ul);
             header.addEventListener('click',events.tocClick);
+            state.heditor.addEventListener('scroll',events.tocUpdate);
+            state.toc = new Map(tocmap);
+            state.headers = [...hs].reverse();
         },
 
         /*
