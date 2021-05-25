@@ -333,6 +333,7 @@ header {
 header li {
     list-style-type: none;
     background: rgba(0,0,0,0.1);
+    border-radius: 0.2rem;
     padding-right: 1rem;
     cursor: pointer;
 }
@@ -365,15 +366,15 @@ header .list1 {
 }
 
 header .list2 {
-    padding-left: 1.5rem;
+    padding-left: 0.5rem;
 }
 
 header .list3 {
-    padding-left: 2.5rem;
+    padding-left: 1.5rem;
 }
 
 header .list4 {
-    padding-left: 3.5rem;
+    padding-left: 2.5rem;
 }
 footer {
     position: fixed;
