@@ -4,22 +4,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    /*height: 80vh;*/
     width: 100%;
+    background-color: rgba(1,1,1,0.4);
 }
 
 #openform > div {
     display: flex;
     flex-direction: column;
     justify-content: left;
-    border: 1px dashed grey;
+    /*border: 1px dashed grey; */
     padding: 1em;
     border-radius: 0.3rem;
+    background-color: #fffff8;
 }
 
+/*
 #openform div :not(.autosaved) {
     padding-bottom: 1em;
 }
+*/
 
 .autosaved {
     height: 2rem;
@@ -34,12 +38,25 @@
     margin-top: 0.5em;
 }
 
-#newfile {
+#newfile, #openfile {
+    display: flex;
+    align-content: center;
     cursor: pointer;
+    font-size: 1.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    border-radius: 0.2rem;
+    margin-bottom: 0.8rem;
 }
 
 #newfile:hover {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    background: rgba(180,184,196,0.6);
+}
+
+#openfile label {
+    padding-right: 1rem;
 }
 
 #autosavebox {
@@ -47,6 +64,10 @@
     flex-direction: column;
     justify-content: flex-start;
     padding: 1em;
+}
+
+#autosavebox h4 {
+    padding-bottom: 1rem;
 }
 
 #autosaveentries {
@@ -332,7 +353,7 @@ header {
 
 header li {
     list-style-type: none;
-    background: rgba(0,0,0,0.1);
+    background: #ddd;
     border-radius: 0.2rem;
     padding-right: 1rem;
     cursor: pointer;
