@@ -703,6 +703,9 @@
                 button.classList.add('plusbutton');
                 button.append(editor.multiItem.makeIcon('#plusicon','20px'));
                 button.title = 'add new section';
+                button.setAttribute('aria-label','add new section');
+                button.setAttribute('aria-pressed','false');
+                button.setAttribute('role','button');
                 button.myItem = emptyel;
                 return button;
             },
@@ -723,16 +726,19 @@
                 killbutton.classList.add('multi-kill');
                 killbutton.append(editor.multiItem.makeIcon('#closeicon'));
                 killbutton.title = 'delete item';
+                killbutton.setAttribute('aria-label','delete item');
                 const upbutton = dom.makeEl('button');
                 upbutton.type = 'button';
                 upbutton.classList.add('multi-up');
                 upbutton.append(editor.multiItem.makeIcon('#upicon'));
                 upbutton.title = 'move up';
+                upbutton.setAttribute('aria-label','move up');
                 const downbutton = dom.makeEl('button');
                 downbutton.type = 'button';
                 downbutton.classList.add('multi-down');
                 downbutton.append(editor.multiItem.makeIcon('#downicon'));
                 downbutton.title = 'move down';
+                downbutton.setAttribute('aria-label','move down');
                 row.appendChild(upbutton);
                 row.appendChild(downbutton);
                 row.appendChild(killbutton);
