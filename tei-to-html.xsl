@@ -31,8 +31,8 @@
             <div id="topbar">
                 <div id="transbutton" title="change script">A</div>
                 <form>
-                    <button type="button" id="editbutton">Edit</button>
-                    <button type="button" id="saveas">Save As...</button>
+                    <button type="button" id="editbutton" title="edit record">edit</button>
+                    <button type="button" id="saveas" title="download TEI XML file">save as...</button>
                 </form>
             </div>
             <xsl:element name="article">

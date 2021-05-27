@@ -49,7 +49,7 @@
                 e.preventDefault();
                 file.saveAs();
                 return;
-            case 'saveas2':
+            case 'savedraft':
                 e.preventDefault();
                 autosaved.save(true);
                 return;
@@ -245,12 +245,12 @@
                 file.asyncLoad(state.xSheet,go);
             else go();
         },
-        saveAs(doc) {
+        saveAs(doc,suffix = '') {
             const serialized = xml.serialize(doc || state.xmlDoc);
             const file = new Blob([serialized], {type: 'text/xml;charset=utf-8'});
             const fileURL = state.filename.match(/^\[.+\]$/) ?
-                state.filename.replace(/^\[(.+)\]$/,'$1.xml').replace(/\s+/,'_') :
-                state.filename;
+                state.filename.replace(/^\[(.+)\]$/,'$1'+suffix+'.xml').replace(/\s+/,'_') :
+                state.filename.replace(/\.xml/,suffix+'.xml');
             FileSaver(file,fileURL);
         },
 
@@ -1284,7 +1284,7 @@
             }
         },
 
-        save(saveas = false) {
+        save(draft = false) {
             const docclone = state.xmlDoc.cloneNode(true);
             /*
             while(state.multiselect.length > 0) {
@@ -1325,7 +1325,7 @@
                 },1000);
             });
 
-            if(saveas) file.saveAs(docclone);
+            if(draft) file.saveAs(docclone,'_draft');
         },
         saveStr(str) {
             autosaved.setFilename(state.xmlDoc);
