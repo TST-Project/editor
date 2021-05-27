@@ -178,7 +178,7 @@
             tBoxDiv.append(toolText);
             tBoxDiv.myTarget = targ;
             tBox.appendChild(tBoxDiv);
-            targ.addEventListener('mouseleave',toolTip.remove,{once: true});
+            targ.addEventListener('mouseleave',toolTip.remove,{once: true, passive: true});
             window.getComputedStyle(tBox).opacity;
             tBox.style.opacity = 1;
         },
@@ -401,8 +401,8 @@
                 state.cmirror.push(cmWrapper.init(t));
 
             for(const t of heditor.querySelectorAll('[data-tip]')) {
-                t.addEventListener('focus',events.tipShow);
-                t.addEventListener('blur',events.tipRemove);
+                t.addEventListener('focus',events.tipShow,{passive: true});
+                t.addEventListener('blur',events.tipRemove,{passive: true});
             }
 
             heditor.querySelector('#hd_publisher').value = 'TST Project';
@@ -416,6 +416,8 @@
         
         toc() {
             const header = state.heditor.querySelector('header');
+            
+            // TODO: don't re-create the TOC every time
             while(header.firstChild)
                 header.firstChild.remove();
 
@@ -448,7 +450,7 @@
             }
             header.appendChild(ul);
             header.addEventListener('click',events.tocClick);
-            state.heditor.addEventListener('scroll',events.tocUpdate);
+            state.heditor.addEventListener('scroll',events.tocUpdate,{passive: true});
             state.toc = new Map(tocmap);
             state.headers = [...hs].reverse();
         },
@@ -1026,7 +1028,7 @@
                 const t = par || state.heditor;
                 const field = t.querySelectorAll(`[name=${sel}]`);
                 for(const f of field)
-                    f.addEventListener('blur',editor.selects.update.bind(null,sel));
+                    f.addEventListener('blur',editor.selects.update.bind(null,sel),{passive: true});
             },
             
             update(sel) {
