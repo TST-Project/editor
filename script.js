@@ -416,6 +416,9 @@
         
         toc() {
             const header = state.heditor.querySelector('header');
+            while(header.firstChild)
+                header.firstChild.remove();
+
             const hs = state.heditor.querySelectorAll('h1,h2,h3,h4');
             const ul = document.createElement('ul');
             
