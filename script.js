@@ -124,6 +124,7 @@
         },
         
         tocUpdate() {
+            
             const light = (id) => {
                 const el = state.toc.get(id);
                 if(!el.classList.contains('current')) {
@@ -138,15 +139,38 @@
                 }
             };
 
-            for(const h of state.headers) {
-                const scrollpos = window.innerHeight/2;
-                if(h.getBoundingClientRect().top <= scrollpos) {
-                    light(h.id);
-                    return;
+            const go = () => {
+                for(const h of state.headers) {
+                    const scrollpos = window.innerHeight/2;
+                    if(h.getBoundingClientRect().top <= scrollpos) {
+                        light(h.id);
+                        return;
+                    }
                 }
-            }
-            light('top');
+                light('top');
+            };
+
+            clearTimeout(state.scrollTimeout);
+            state.scrollTimeout = setTimeout(go,200);
         },
+        /*
+        tocUpdate(entries,observer) {
+            const light = (id) => {
+                const el = state.toc.get(id);
+                if(!el.classList.contains('current')) {
+                    const cur = (() => {
+                        for(const t of state.toc.values()) {
+                            if(t.classList.contains('current')) return t;
+                        }
+                        return null;
+                    })();
+                    if(cur) cur.classList.remove('current');
+                    el.classList.add('current');
+                }
+            };
+            light(entries[0].target.id);
+        },
+        */
     };
 
     const toolTip = {
@@ -451,8 +475,16 @@
             header.appendChild(ul);
             header.addEventListener('click',events.tocClick);
             state.heditor.addEventListener('scroll',events.tocUpdate,{passive: true});
+            /* 
+            state.tocObserver = new IntersectionObserver(events.tocUpdate, {
+                root: state.heditor,
+                rootMargin: '-50% 0% -50% 0%',
+                threshold: 0
+            });
+            */
             state.toc = new Map(tocmap);
             state.headers = [...hs].reverse();
+            //for(const h of state.headers) state.tocObserver.observe(h);
         },
 
         /*
