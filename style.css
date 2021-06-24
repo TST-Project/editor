@@ -344,7 +344,7 @@ span.gap {
     top: auto;
 }
 
-header {
+#headereditor header {
     position: sticky;
     float: right;
     right: 2rem;
@@ -352,7 +352,7 @@ header {
     z-index: 6;
 }
 
-header li {
+#headereditor header li {
     list-style-type: none;
     background: #ddd;
     border-radius: 0.2rem;
@@ -360,45 +360,46 @@ header li {
     cursor: pointer;
 }
 
-header li:hover {
+#headereditor header li:hover {
     background: rgb(255,153,0);
 }
 
-header li:hover a:link, header li:hover a:visited {
+#headereditor header li:hover a:link, header li:hover a:visited {
     color: rgba(255,255,248,0.8);
     filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.2));
 }
 
-header a:link, header a:visited {
+#headereditor header a:link, header a:visited {
     background: none;
     text-shadow: none;
     color: rgba(1,1,1,0.4);
 }
 
-header .current, .current:hover {
+#headereditor header .current, .current:hover {
     background: none;
 }
 
-header li.current a, header li.current:hover a, header li.current:hover a:visited {
+#headereditor header li.current a, header li.current:hover a, header li.current:hover a:visited {
     color: rgb(17,17,17);
     filter: none;
 }
 
-header .list1 {
+#headereditor header .list1 {
 }
 
-header .list2 {
+#headereditor header .list2 {
     padding-left: 0.5rem;
 }
 
-header .list3 {
+#headereditor header .list3 {
     padding-left: 1.5rem;
 }
 
-header .list4 {
+#headereditor header .list4 {
     padding-left: 2.5rem;
 }
-footer {
+
+#headereditor footer {
     position: fixed;
     bottom: 0;
     z-index: 6;
