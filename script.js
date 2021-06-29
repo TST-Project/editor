@@ -1356,7 +1356,7 @@
                 footer.style.opacity = 0;
                 window.getComputedStyle(footer).opacity;
                 footer.style.transition = 'opacity 1s ease-in';
-                footer.textContent = `Autosaved ${(new Date).toLocaleString()}.`;
+                footer.textContent = `Autosaved ${(new Date).toLocaleString()}`;
                 window.setTimeout(() => {
                     footer.style.opacity = 1;
                 },1000);
