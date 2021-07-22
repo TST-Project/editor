@@ -301,7 +301,7 @@
                     if(msDesc) {
                         const ns = state.xmlDoc.documentElement.namespaceURI;
                         const headEl = parsed.createElementNS(ns,'head');
-                        const head = parsed.querySelector('titleStmt');
+                        const head = parsed.querySelector('titleStmt > title');
                         if(head) {
                             headEl.innerHTML = xml.innerXML(head);
                         }
