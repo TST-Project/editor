@@ -53,7 +53,7 @@
             <xsl:variable name="start" select="x:facsimile/x:graphic/@facs"/>
             <xsl:attribute name="data-start">
                 <xsl:choose>
-                    <xsl:when test="$start"><xsl:value-of select="($start - 1)"/></xsl:when>
+                    <xsl:when test="$start"><xsl:value-of select="$start - 1"/></xsl:when>
                     <xsl:otherwise>0</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
