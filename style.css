@@ -104,6 +104,14 @@
 
 /* styles after file has been loaded */
 
+.record-editor {
+    position: relative;
+    padding-left: 12.5%;
+    width: 87.5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 h2.warning {
     background: red;
     color: white;
