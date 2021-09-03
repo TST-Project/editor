@@ -77,6 +77,7 @@
             <option value="Bodleian Library, University of Oxford">Bodleian Library, University of Oxford</option>
             <option value="Cambridge University Library">Cambridge University Library</option>
             <option value="Bibliothèque universitaire des langues et civilisations">Bibliothèque universitaire des langues et civilisations</option>
+            <option value="Private collection">Private collection</option>
         </select>
     </div>
     <div>
@@ -174,6 +175,7 @@
         <select autocomplete="off" name="extent_unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" required>
             <option value="folio" selected>folios</option>
             <option value="page">pages</option>
+            <option value="plates">plates</option>
         </select>
         <textarea autocomplete="off" rows="2" name="hd_extent" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-schema="descriptive_restricted" placeholder="X guard folios, XX numbered folios, X blank folios"></textarea>
         
