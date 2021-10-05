@@ -1037,8 +1037,13 @@
                     el.matches('title,author,rubric,incipit,explicit,finalRubric,colophon')
                 );
 
-                for(const el of els)
-                    el.setAttribute('xml:lang',lang2); 
+                for(const el of els) {
+                    const tamilchars = [...el.textContent.matchAll(/[\u0B80-\u0BFF]/g)];
+                    const langscript = (tamilchars.length / el.textContent.length > 0.5) ?
+                        lang2 + '-Taml' :
+                        lang2;
+                    el.setAttribute('xml:lang',langscript); 
+                }
 
                 const transcr = par.querySelector(`text[corresp="#${textid}"]`);
                 if(transcr) transcr.setAttribute('xml:lang',lang2);
