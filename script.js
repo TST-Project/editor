@@ -6,8 +6,10 @@
         filename: '',
         xmlDoc: null,
         xStyle: null,
+        xDefinitions: null,
         xSheet: 'tei-to-html.xsl',
         template: 'tst-template.xml',
+        definitions: '../lib/xslt/definitions.xs',
         toplevel: 'TEI',
         savedtext: new Map(),
         saveInterval: null,
@@ -390,6 +392,14 @@
     const editor = {
 
         init() {
+            if(!state.xDefinitions)
+                file.asyncLoad('../lib/xslt/definitions.xsl', (res) => {
+                    state.xDefinitions = res;
+                    editor.initgo();
+                });
+            else editor.initgo();
+        },
+        initgo() {
             document.getElementById('headerviewer').style.display = 'none';
 
             const heditor = document.getElementById('headereditor');
@@ -411,6 +421,8 @@
             editor.fill.all(heditor,unsanitize);
 
             const dependentsel = [...heditor.querySelectorAll('[data-from]')].map(el => el.dataset.from);
+
+
             editor.multiItem.hideEmpty();
 
             for(const s of new Set(dependentsel)) {
@@ -418,6 +430,9 @@
                 editor.selects.update(s);
             }
             
+            const topopulate = heditor.querySelectorAll('[data-list]');
+            editor.populate(topopulate);
+
             for(const m of heditor.querySelectorAll('.multiselect'))
                 editor.selects.make(m);
            
@@ -429,7 +444,7 @@
                 t.addEventListener('blur',events.tipRemove,{passive: true});
             }
 
-            heditor.querySelector('#hd_publisher').value = 'TST Project';
+            //heditor.querySelector('#hd_publisher').value = 'TST Project';
             heditor.querySelector('#hd_publish_date').value = new Date().getFullYear();
             
             editor.toc();
@@ -705,6 +720,9 @@
                     editor.multiItem.collapse(m);
                 }
 
+                const topopulate = ret.querySelectorAll('[data-list]');
+                editor.populate(topopulate,state.xDefinitions);
+
                 for(const m of ret.querySelectorAll('.multiselect'))
                     editor.selects.make(m);
                 
@@ -720,6 +738,7 @@
                     editor.selects.listen(s,ret);
                     editor.selects.update(s);
                 }
+
                 for(const f of ret.querySelectorAll('input[type="file"]'))
                     f.addEventListener('change',file.selectPart,false);
 
@@ -818,6 +837,32 @@
                     multiItem.parentNode.insertBefore(multiItem.nextElementSibling,multiItem);
                 editor.multiItem.updateButtonrows(multiItem.parentNode);
             },
+        },
+
+        populate(els) {    
+            const makeOption = function(e) {
+                const o = document.createElement('option');
+                o.value = e.getAttribute('key');
+                o.textContent = e.textContent;
+                if(e.getAttribute('selected') === 'true') o.selected = true;
+                return o;
+            };
+            for(const el of els) {
+                const list = el.dataset.list;
+                const entries = state.xDefinitions.querySelector(list).children;
+                for(const e of entries) {
+                    if(e.nodeName === 'tst:group') {
+                        const g = document.createElement('optgroup');
+                        g.label = e.getAttribute('label');
+                        for(const ee of e.children)
+                            g.appendChild(makeOption(ee));
+                        el.add(g,null);
+                    }
+                    else
+                        el.add(makeOption(e),null);
+                }
+
+            }
         },
 
         apply: {

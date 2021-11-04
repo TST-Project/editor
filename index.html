@@ -139,45 +139,22 @@
     <h3>Physical description</h3>
     <div>
         <label for="hd_MS_type">Type</label>
-        <select autocomplete="off" id="hd_MS_type" name="MS_type" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents" data-attr="class" required>
-            <option value="#STM" selected>single-text manuscript</option>
-            <option value="#MTM">multi-text manuscript</option>
-            <option value="#CM">composite manuscript</option>
-            <option value="#MVM">multi-volume manuscript</option>
-        </select>
+        <select autocomplete="off" id="hd_MS_type" name="MS_type" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents" data-attr="class" data-list="mstypes" required></select>
         <label for="hd_format">Format</label>
-        <select autocomplete="off" id="hd_format" name="format" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required>
-            <option value="codex">codex</option>
-            <option value="plate">plate</option>
-            <option value="pothi" selected>pothi</option>
-            <option value="roll">roll</option>
-        </select>
+        <select autocomplete="off" id="hd_format" name="format" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" data-list="format" required></select>
         <label for="hd_stringholes">Stringholes</label>
         <input autocomplete="off" type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
     </div>
     <div>
         <label for="hd_material">Material</label>
-        <select autocomplete="off" id="hd_material" name="material" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc" data-attr="material" required>
-            <option value="birch-bark">birch bark</option>
-            <option value="copper">copper</option>
-            <option value="palm-leaf" selected>palm leaf</option>
-            <option value="palm-leaf palmyra">palm leaf (palmyra)</option>
-            <option value="palm-leaf talipot">palm leaf (talipot)</option>
-            <option value="paper">paper</option>
-            <option value="paper handmade">paper (handmade)</option>
-            <option value="paper industrial">paper (industrial)</option>
-            <option value="paper laid">paper (laid)</option>
+        <select autocomplete="off" id="hd_material" name="material" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc" data-attr="material" data-list="materials" required>
         </select>
         <textarea autocomplete="off" rows="2" name="support_p" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > p" data-schema="descriptive" placeholder="Further details about the support material"></textarea> 
     </div>
     <div>
         <label for="hd_extent_quantity" title="Give the full extent, including blank folios. In the description, you may be more specific.">Extent</label>
         <input autocomplete="off" type="number" step="1" min="1" id="hd_extent_quantity" name="extent_quantity" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="quantity"  data-tip="Give the full extent, including blank folios." required>
-        <select autocomplete="off" name="extent_unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" required>
-            <option value="folio" selected>folios</option>
-            <option value="page">pages</option>
-            <option value="plate">plates</option>
-        </select>
+        <select autocomplete="off" name="extent_unit" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-attr="unit" data-list="extentunit" required></select>
         <textarea autocomplete="off" rows="2" name="hd_extent" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > extent > measure" data-schema="descriptive_restricted" placeholder="X guard folios, XX numbered folios, X blank folios"></textarea>
         
     </div>
@@ -292,10 +269,8 @@
     </div>
     <div>
         <label for="hd_layout_style">Style</label>
-        <select autocomplete="off" id="hd_layout_style" name="style" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="style">
+        <select autocomplete="off" id="hd_layout_style" name="style" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="style" data-list="style">
             <option value="" selected></option>
-            <option value="tripāṭha">Tripāṭha</option>
-            <option value="pañcpāṭha">Pañcapāṭha</option>
         </select>
         <label for="hd_streams" title="Number of textual streams per page">Streams</label>
         <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
@@ -349,13 +324,8 @@
                     <option value="minor">minor</option>
                 </select>
                 <label>Scribe</label>
-                <select autocomplete="off" name="handNote_scribeRef" data-subattr="scribeRef">
+                <select autocomplete="off" name="handNote_scribeRef" data-subattr="scribeRef" data-list="scribes">
                     <option value="" selected></option>
-                    <option value="#EdouardAriel">Edouard Ariel</option>
-                    <option value="#ArielTitleScribe">Ariel's title scribe</option>
-                    <option value="#PhEDucler">Philippe Étienne Ducler</option>
-                    <option value="#DuclerScribe">Ducler's scribe</option>
-                    <option value="#UmraosinghShergil">Umraosingh Sher-Gil</option>
                 </select>
             </div>
             <div>
@@ -376,46 +346,9 @@
                     <option value="tamil">Tamil</option>
                 </select>
                 <label>Features</label>
-                <select autocomplete="off" name="handNote_scriptRef" class="multiselect" data-subattr="scriptRef" multiple>
-                    <optgroup label="Tamil">
-                        <option value="#tamilPulliNone">no puḷḷi</option>
-                        <option value="#tamilPulliSporadic">sporadic puḷḷi</option>
-                        <option value="#tamilPulliRegular">regular puḷḷi</option>
-                        <option value="#tamilRa">closed kāl/modern ra</option>
-                        <option value="#tamilOE">long ō/ē (double-curled kompu)</option>
-                        <option value="#tamilMacron">disambiguating macron (-a vocalisation)</option>
-                    </optgroup>
-                    <optgroup label="Devanagari">
-                        <option value="#prsthamatra">pṛṣṭhamātrā</option>
-                        <option value="#vaba">no distinct ba</option>
-                        <option value="#sthascha">stha written as scha</option>
-                    </optgroup>
-                    <optgroup label="Bengali">
-                        <option value="#bengaliRaBarBelow">ra with bar below</option>
-                        <option value="#bengaliRaCrossbar">ra with cross-bar</option>
-                        <option value="#bengaliRa">ra with dot below</option>
-                        <option value="#bengaliYa">ya with dot below</option>
-                    </optgroup>
-                    <optgroup label="Telugu">
-                        <option value="#valapalagilaka">valapalagilaka</option>
-                    </optgroup>
-                    <optgroup label="Malayalam">
-                        <option value="#dotreph">dot reph</option>
-                    </optgroup>
-                </select>
+                <select autocomplete="off" name="handNote_scriptRef" class="multiselect" data-subattr="scriptRef" data-list="scriptRef" multiple></select>
                 <label>Medium</label>
-                <select autocomplete="off" name="handNote_medium" class="multiselect" data-subattr="medium" multiple>
-                    <option value="ink">ink</option>
-                    <optgroup label="colour">
-                        <option value="black">black</option>
-                        <option value="brown">brown</option>
-                        <option value="blue">blue</option>
-                        <option value="red">red</option>
-                    </optgroup>
-                    <option value="incised">incised</option>
-                    <option value="soot">soot</option>
-                    <option value="pencil">pencil</option>
-                </select>
+                <select autocomplete="off" name="handNote_medium" class="multiselect" data-subattr="medium" data-list="media" multiple></select>
             </div>
             <div>
                 <textarea autocomplete="off" name="handNote_desc" rows="4" data-subselect="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
@@ -434,42 +367,11 @@
             </div>
             <div>
                 <label>Type</label>
-                <select autocomplete="off" data-subattr="type" name="decoNote_type">
+                <select autocomplete="off" data-subattr="type" data-list="decotype" name="decoNote_type">
                     <option value="" selected disabled></option>
-                    <option value="coat-of-arms">coat of arms</option>
-                    <option value="decorative">decorative</option>
-                    <option value="diagram">diagram</option>
-                    <option value="doodle">doodle</option>
-                    <option value="drawing">drawing</option>
-                    <option value="monogram">monogram</option>
-                    <option value="painting">painting</option>
-                    <option value="paraph">paraph</option>
-                    <option value="royal-cypher">royal cypher</option>
-                    <option value="table">table</option>
                 </select>
                 <label>Placement</label>
-                <select autocomplete="off" data-subattr="subtype" name="decoNote_subtype" class="multiselect" multiple>
-                    <option value="back">back</option>
-                    <option value="beginning">beginning</option>
-                    <option value="cover">cover</option>
-                    <option value="detached">detached</option>
-                    <option value="end">end</option>
-                    <option value="flyleaf">flyleaf</option>
-                    <option value="front">front</option>
-                    <option value="guard-folio">guard folio</option>
-                    <option value="inserted">inserted</option>
-                    <option value="intertextual">intertextual</option>
-                    <option value="marginal">marginal</option>
-                    <option value="running">running</option>
-                    <option value="spine">spine</option>
-                    <option value="title-page">title page</option>
-                    <optgroup label="position">
-                        <option value="top">top</option>
-                        <option value="bottom">bottom</option>
-                        <option value="left">left</option>
-                        <option value="right">right</option>
-                    </optgroup>
-                </select>
+                <select autocomplete="off" data-subattr="subtype" data-list="subtype" name="decoNote_subtype" class="multiselect" multiple></select>
             </div>
             <div>
                 <textarea autocomplete="off" rows="4" name="decoNote_desc" data-subselect="desc" data-schema="descriptive" placeholder="Description of decoration"></textarea>
@@ -578,18 +480,7 @@
             </div>
             <div>
                 <label>Genre</label>
-                <select autocomplete="off" class="multiselect" name="msItem_genre" data-subattr="class" multiple>
-                    <option value="#cankam">Caṅkam</option>
-                    <option value="#kilkkanakku">Kīḻkkaṇakku</option>
-                    <option value="#illakkanam">Ilakkaṇam</option>
-                    <option value="#kappiyam">Kāppiyam/epics</option>
-                    <option value="#tirumurai">Tirumuṟai</option>
-                    <option value="#pirapantam">Pirapantam</option>
-                    <option value="#puranam">Purāṇam</option>
-                    <option value="#nikantu">Nikaṇṭu</option>
-                    <option value="#talapuranam">Talapurāṇam</option>
-                    <option value="#katai">Katai</option>
-                </select>
+                <select autocomplete="off" class="multiselect" name="msItem_genre" data-subattr="class" data-list="genres" multiple></select>
             </div>
             <div>
                 <label>Author</label>
@@ -597,36 +488,11 @@
             </div>
             <div>
                 <label>Main language</label>
-                <select autocomplete="off" data-subselect="textLang" data-subattr="mainLang">
+                <select autocomplete="off" data-subselect="textLang" data-subattr="mainLang" data-list="langs">
                     <option value="" selected disabled></option>
-                    <option value="ara">Arabic</option>
-                    <option value="eng">English</option>
-                    <option value="fra">French</option>
-                    <option value="deu">German</option>
-                    <option value="lat">Latin</option>
-                    <option value="pli">Pali</option>
-                    <option value="por">Portuguese</option>
-                    <option value="pra">Prakrit</option>
-                    <option value="san">Sanskrit</option>
-                    <option value="sin">Sinhalese</option>
-                    <option value="tam">Tamil</option>
-                    <option value="tel">Telugu</option>
                 </select>
                 <label>Other languages</label>
-                <select autocomplete="off" class="multiselect" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" multiple>
-                    <option value="ara">Arabic</option>
-                    <option value="eng">English</option>
-                    <option value="fra">French</option>
-                    <option value="deu">German</option>
-                    <option value="lat">Latin</option>
-                    <option value="pli">Pali</option>
-                    <option value="por">Portuguese</option>
-                    <option value="pra">Prakrit</option>
-                    <option value="san">Sanskrit</option>
-                    <option value="sin">Sinhalese</option>
-                    <option value="tam">Tamil</option>
-                    <option value="tel">Telugu</option>
-                </select>
+                <select autocomplete="off" class="multiselect" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" data-list="langs" multiple></select>
             </div>
             <div>
                 <label>Other manuscript testimonies</label>
