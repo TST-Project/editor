@@ -421,6 +421,9 @@
 
             editor.upgrade(state.xmlDoc);
 
+            const topopulate = heditor.querySelectorAll('[data-list]');
+            editor.populate(topopulate);
+
             editor.fill.all(heditor,unsanitize);
 
             const dependentsel = [...heditor.querySelectorAll('[data-from]')].map(el => el.dataset.from);
@@ -433,9 +436,6 @@
                 editor.selects.update(s);
             }
             
-            const topopulate = heditor.querySelectorAll('[data-list]');
-            editor.populate(topopulate);
-
             for(const m of heditor.querySelectorAll('.multiselect'))
                 editor.selects.make(m);
            
