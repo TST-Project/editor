@@ -426,7 +426,7 @@ span.gap {
 }
 
 #headereditor.fat footer {
-    width: calc(50% - 20 px);
+    width: calc(50% - 20px);
     padding-left: 0;
 }
 
@@ -798,7 +798,9 @@ h4 {
 #viewertoggle {
     display: none;
     height: 100vh;
-    background-color: rgb(240,202,121);
+    background-color: #ddd;
+    color: rgb(17,17,17);
+    border-radius: 0 0.3rem 0 0.3rem;
     align-items: center;
     font-weight: bold;
     font-family: et-book;
@@ -806,6 +808,292 @@ h4 {
 }
 
 #viewertoggle:hover {
+    color: #ddd;
+    background: #ff9900;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.3);
+}
+.trash:hover svg {
+    fill: #ff9900;
+}
+
+/* styles after file has been loaded */
+
+.record-editor {
+    position: relative;
+    padding-left: 12.5%;
+    width: 87.5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#headereditor.fat .record-editor {
+    padding-left: 0;
+}
+
+h2.warning {
+    background: red;
+    color: white;
+    text-align: center;
+    width: 55%;
+}
+
+hr {
+    border-color: grey;
+}
+
+#headeredit {
+    margin-top: 1em;
+}
+
+#headerviewer {
+    display: none;
+    overflow-y: visible;
+}
+
+.vsb-main {
+    margin-right: 0.7rem;
+    flex-grow: 1;
+}
+
+.vsb-main button {
+    font-size: 1.4rem;
+    font-family: brill, et-book, serif;
+}
+
+.vsb-main button:hover {
+    color: black;
+}
+
+.vsb-menu {
+    margin-left: 10px;
+    margin-top: -10px;
+    min-width: 100%;
+}
+
+.vsb-menu .multi li {
+    font-size: 1.2rem;
+}
+
+.vsb-menu .multi li.grouped-option {
+    font-size: 1.2rem;
+    padding-left: 1.5em;
+}
+
+.editbutton {
+    cursor: pointer;
+    float: right;
+    height: 2rem;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+
+.editbutton.offsetx {
+    margin-right: -80px;
+}
+
+.editbutton.offsety {
+    margin-top: -80px;
+}
+
+.editbutton:hover {
+    opacity: 1;
+}
+
+.buttoncontainer {
+    display: flex;
+    margin-left: 0;
+    width: 100%;
+}
+
+.row, #headereditor div.row {
+    justify-content: flex-end;
+}
+
+.justified-row {
+    justify-content: space-between;
+}
+
+.column {
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+button {
+    margin: 0.3em 0 0.3em 0.5em;
+    background-color: rgb(240,202,121);
+    border-color: rgb(240,202,121);
+    border-radius: 0.3rem;
+    color: black;
+}
+
+button:disabled {
+    background-color: #ddd;
+    border-color: #ddd;
+}
+
+button:hover {
+    background: rgb(255,153,0);
     color: rgba(255,255,248,0.8);
+}
+
+button:disabled:hover {
+    color: black;
+}
+
+
+.wider_editor {
+    margin-left: -80px;
+    margin-right: -80px;
+}
+
+#topbuttons {
+    display: none;
+    top: 0px;
+    height: 80px;
+    position: sticky;
+    z-index: 100;
+    padding-bottom: 1.5em;
+    background: linear-gradient(white 60%, rgba(255,255,255,0));
+}
+
+#topbuttons .menu_left {
+    display: flex;
+    align-items: flex-start;
+}
+
+#topmenu {
+    margin-bottom: 0;
+    position: absolute;
+}
+
+#scriptselect {
+    width: 150px;
+    margin: 0.3em 0 0.5em 0.5em;
+}
+
+.menubox {
+    cursor: pointer;
+}
+
+.menubox ul {
+    display: none;
+    list-style: none;
+    background: white;
+    border: 0.1rem solid #d1d1d1;
+    border-radius: .4rem;
+    padding: 0.5rem 0;
+}
+
+.menubox li {
+    padding-left: 0.5rem;
+}
+
+.menubox li:hover {
+    background: rgb(240,202,121);
+    color: white;
+}
+
+.menubox li.selected {
+    display: none;
+}
+
+#menu_width {
+    width: 100px;
+    position: relative;
+    top: 8px;
+}
+
+p:empty {
+    margin: 0;
+    padding: 0;
+}
+
+/* transcription rendering tags */
+/*
+del {
+    display: inline-block;
+    text-decoration-color: red;
+    color: grey;
+}
+
+ins {
+    display: inline-block;
+    color: red;
+    text-decoration: none;
+}
+
+span.gap {
+    background-color: rgba(132,132,10,0.3);
+    font-size: 85%;
+    color: rgb(84,84,84);
+}
+*/
+.right {
+    float: right;
+    clear: right;
+    position: relative;
+    margin-right: -80px;
+    width: 74px;
+    text-align: center;
+}
+
+.left {
+    float: left;
+    clear: left;
+    position: relative;
+    margin-left: -80px;
+    width: 74px;
+    text-align: center;
+}
+
+/* header editor stuff */
+
+#headereditor {
+    display: none;
+    flex-direction: column;
+    width: 60%;
+    font-size: 1.2rem;
+}
+
+#headereditor section {
+    width: 65%;
+}
+
+#headereditor.fat section {
+    width: 100%;
+}
+
+#topbar {
+    background: linear-gradient(rgb(255,255,248) 60%, rgba(255,255,255,0));
+    height: auto;
+    top: 0;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+#transbutton {
+    top: auto;
+}
+
+#headereditor header {
+    position: sticky;
+    float: right;
+    right: 2rem;
+    top: 2rem;
+    z-index: 6;
+}
+
+#headereditor header li {
+    list-style-type: none;
+    background: #ddd;
+    border-radius: 0.2rem;
+    padding-right: 1rem;
+    cursor: pointer;
+}
+
+#headereditor header li:hover {
     background: rgb(255,153,0);
 }
+
+#headereditor header li:hover a:link, header li:hover a:visited {
+    color: rgba(255,255,248,0.8);
+    filter: }
