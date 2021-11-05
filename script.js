@@ -493,6 +493,7 @@
             }
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
+            toggle.title = 'hide images';
             toggle.style.display = 'flex';
         },
 
@@ -507,8 +508,10 @@
             window.TSTViewer.killMirador(state.editorviewer);
             
             const toggle = document.getElementById('viewertoggle');
-            if(stayready)
+            if(stayready) {
                 toggle.textContent = '>';
+                toggle.title = 'show images';
+            }
             else
                 toggle.style.display = 'none';
         },
