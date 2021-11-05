@@ -112,6 +112,10 @@
     margin: 0 auto;
 }
 
+#headereditor.fat .record-editor {
+    padding-left: 0;
+}
+
 h2.warning {
     background: red;
     color: white;
@@ -341,6 +345,10 @@ span.gap {
     width: 65%;
 }
 
+#headereditor.fat section {
+    width: 100%;
+}
+
 #topbar {
     background: linear-gradient(rgb(255,255,248) 60%, rgba(255,255,255,0));
     height: auto;
@@ -415,6 +423,11 @@ span.gap {
     padding: 40px 50px 0 50px;
     margin-left: -50px;
     background: linear-gradient(rgba(255,255,255,0), rgba(255,255,248) 60%);
+}
+
+#headereditor.fat footer {
+    width: calc(50% - 20 px);
+    padding-left: 0;
 }
 
 .vsb-main:not(:last-child),
@@ -772,3 +785,27 @@ h4 {
     right: 0;
 }
 
+#editorviewer {
+    display: none;
+    position: relative;
+    flex: 50%;
+    min-width: 50vw;
+    max-width: 100vw;
+    height: 100vh;
+    border: 0;
+}
+
+#viewertoggle {
+    display: none;
+    height: 100vh;
+    background-color: rgb(240,202,121);
+    align-items: center;
+    font-weight: bold;
+    font-family: et-book;
+    cursor: pointer;
+}
+
+#viewertoggle:hover {
+    color: rgba(255,255,248,0.8);
+    background: rgb(255,153,0);
+}

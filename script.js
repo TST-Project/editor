@@ -21,6 +21,7 @@
     const FileSaver = window.FileSaver || null;
     const cmWrapper = window.cmWrapper || null;
     const he = window.he || null;
+    const Mirador = window.Mirador || null;
 
     const init = () => {
         lf.length().then(n => {if(n>0) autosaved.fill();});
@@ -236,6 +237,7 @@
             func(state.xmlDoc);
         },
         render(xstr) {
+            editor.killViewer();
             document.getElementById('headereditor').style.display = 'none';
             /*if(!state.xStyle)
                 state.xStyle = file.syncLoad(state.xSheet);*/
@@ -400,6 +402,7 @@
             else editor.initgo();
         },
         initgo() {
+            window.TSTViewer.killMirador();
             document.getElementById('headerviewer').style.display = 'none';
 
             const heditor = document.getElementById('headereditor');
@@ -448,11 +451,68 @@
             heditor.querySelector('#hd_publish_date').value = new Date().getFullYear();
             
             editor.toc();
-
+            editor.toggleViewer();
+            
+            heditor.querySelector('input[name="facsimile"]').addEventListener('blur',editor.toggleViewer);
+            document.getElementById('viewertoggle').addEventListener('click',editor.buttonToggleViewer);
             if(!state.saveInterval) 
                 state.saveInterval = window.setInterval(autosaved.save,300000);
         },
         
+        toggleViewer() {
+            const manif = state.heditor.querySelector('input[name="facsimile"]');
+            if(manif.value && manif.checkValidity())
+                editor.startViewer(manif.value);
+            else
+                editor.killViewer();
+        },
+
+        buttonToggleViewer(e) {
+            if(e.target.textContent === '<')
+                editor.killViewer(true);
+            else
+                editor.toggleViewer();
+        },
+
+        startViewer(manifest) {
+            const start = state.heditor.querySelector('input[name="facsimile_start"]').value || 1;
+            document.getElementById('editorviewer').style.display = 'block';
+            state.heditor.querySelector('header').style.display = 'none';
+            state.heditor.classList.add('fat');
+            if(!state.editorviewer)
+                state.editorviewer = window.TSTViewer.newMirador('editorviewer',manifest,start - 1);
+            else {
+                const act1 = Mirador.actions.fetchManifest(manifest);
+                state.editorviewer.store.dispatch(act1);
+                const act = Mirador.actions.addWindow( {
+                    id: 'win1',
+                    manifestId: manifest,
+                    canvasIndex: start -1
+                });
+                state.editorviewer.store.dispatch(act);
+            }
+            const toggle = document.getElementById('viewertoggle');
+            toggle.textContent = '<';
+            toggle.style.display = 'flex';
+        },
+
+        killViewer(stayready) {
+            if(!state.editorviewer) return;
+
+            const viewer = document.getElementById('editorviewer');
+            viewer.style.display = 'none';
+            state.heditor.querySelector('header').style.display = 'block';
+            state.heditor.classList.remove('fat');
+            const act = Mirador.actions.removeWindow('win1');
+            state.editorviewer.store.dispatch(act);
+            
+            const toggle = document.getElementById('viewertoggle');
+            if(stayready)
+                toggle.textContent = '>';
+            else
+                toggle.style.display = 'none';
+        },
+
         toc() {
             const header = state.heditor.querySelector('header');
             
