@@ -503,8 +503,8 @@
             viewer.style.display = 'none';
             state.heditor.querySelector('header').style.display = 'block';
             state.heditor.classList.remove('fat');
-            const act = Mirador.actions.removeWindow('win1');
-            state.editorviewer.store.dispatch(act);
+
+            window.TSTViewer.killMirador(state.editorviewer);
             
             const toggle = document.getElementById('viewertoggle');
             if(stayready)
