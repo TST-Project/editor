@@ -21,7 +21,6 @@
     const FileSaver = window.FileSaver || null;
     const cmWrapper = window.cmWrapper || null;
     const he = window.he || null;
-    const Mirador = window.Mirador || null;
 
     const init = () => {
         lf.length().then(n => {if(n>0) autosaved.fill();});
@@ -479,18 +478,12 @@
             document.getElementById('editorviewer').style.display = 'block';
             state.heditor.querySelector('header').style.display = 'none';
             state.heditor.classList.add('fat');
+
             if(!state.editorviewer)
                 state.editorviewer = window.TSTViewer.newMirador('editorviewer',manifest,start - 1);
-            else {
-                const act1 = Mirador.actions.fetchManifest(manifest);
-                state.editorviewer.store.dispatch(act1);
-                const act = Mirador.actions.addWindow( {
-                    id: 'win1',
-                    manifestId: manifest,
-                    canvasIndex: start -1
-                });
-                state.editorviewer.store.dispatch(act);
-            }
+            else
+                window.TSTViewer.refreshMirador(state.editorviewer,manifest,start-1);
+
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
             toggle.title = 'hide images';
