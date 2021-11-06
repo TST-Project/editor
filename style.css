@@ -774,7 +774,7 @@ h4 {
     border: 1px solid #ddd;
     resize: vertical;
     border-radius: 0.3rem;
-    font-family: brill, et-book, serif;
+    font-family: inherit;
     font-size: 1.4rem;
     width: 100%;
 }
