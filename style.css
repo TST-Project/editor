@@ -420,7 +420,7 @@ span.gap {
 }
 
 #headereditor footer {
-    position: fixed;
+    position: sticky;
     bottom: 0;
     z-index: 6;
     width: 900px;
@@ -430,8 +430,7 @@ span.gap {
 }
 
 #headereditor.fat footer {
-    width: calc(50% - 20px);
-    padding-left: 0;
+    width: 100%;
 }
 
 .vsb-main:not(:last-child),
