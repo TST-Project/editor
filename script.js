@@ -452,7 +452,7 @@
             editor.toc();
             editor.toggleViewer();
             
-            heditor.querySelector('input[name="facsimile"]').addEventListener('blur',editor.toggleViewer);
+            heditor.querySelector('input[name="facsimile"]').addEventListener('change',editor.toggleViewer);
             document.getElementById('viewertoggle').addEventListener('click',editor.buttonToggleViewer);
             if(!state.saveInterval) 
                 state.saveInterval = window.setInterval(autosaved.save,300000);
