@@ -1046,7 +1046,7 @@
                     toplevel.querySelector(selector) :
                     toplevel;
                 const attr = field.dataset.attr || field.dataset.subattr;
-                const prefix = field.dataset.prefix;
+                const prefix = field.dataset.prefix || '';
                 const valtrimmed = field.value.trim();
 
                 if(!valtrimmed) {
@@ -1077,12 +1077,11 @@
                     if(field.multiple) {
                         const selected = [];
                         for(const opt of field.querySelectorAll('option'))
-                            if(opt.selected) selected.push(opt.value);
+                            if(opt.selected) selected.push(prefix + opt.value);
                         val = selected.join(' ');
                     }
+                    else val = prefix + val;
 
-                    if(prefix) 
-                        val = prefix + val;
                     return val;
                 };
                 
