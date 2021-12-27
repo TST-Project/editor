@@ -1,3 +1,5 @@
+import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
+
 (function() {
     'use strict';
     const state = {
@@ -9,7 +11,6 @@
         xDefinitions: null,
         xSheet: 'tei-to-html.xsl',
         template: 'tst-template.xml',
-        definitions: '../lib/xslt/definitions.xs',
         toplevel: 'TEI',
         savedtext: new Map(),
         saveInterval: null,
@@ -18,7 +19,7 @@
 
     const lf = window.localforage || null;
     const vanillaSelectBox = window.vanillaSelectBox || null;
-    const FileSaver = window.FileSaver || null;
+//    const FileSaver = window.FileSaver || null;
     const cmWrapper = window.cmWrapper || null;
     const he = window.he || null;
 
@@ -272,13 +273,21 @@
                 file.asyncLoad(state.xSheet,go);
             else go();
         },
-        saveAs(doc,suffix = '') {
+        async saveAs(doc,suffix = '') {
             const serialized = xml.serialize(doc || state.xmlDoc);
             const file = new Blob([serialized], {type: 'text/xml;charset=utf-8'});
             const fileURL = state.filename.match(/^\[.+\]$/) ?
                 state.filename.replace(/^\[(.+)\]$/,'$1'+suffix+'.xml').replace(/\s+/,'_') :
                 state.filename.replace(/\.xml/,suffix+'.xml');
-            FileSaver(file,fileURL);
+            const fileHandle = await showSaveFilePicker({
+                _preferPolyfill: false,
+                suggestedName: fileURL,
+                types: [ {description: 'TEI XML', accept: {'text/xml': ['.xml']} } ],
+            });
+            const writer = await fileHandle.createWritable();
+            writer.write(file);
+            writer.close();
+            //FileSaver(file,fileURL);
         },
 
         select(e) {
