@@ -144,6 +144,7 @@ hr {
 .vsb-main button {
     font-size: 1.4rem;
     font-family: brill, et-book, serif;
+    border-radius: 0.3rem;
 }
 
 .vsb-main button:hover {
@@ -163,6 +164,14 @@ hr {
 .vsb-menu .multi li.grouped-option {
     font-size: 1.2rem;
     padding-left: 1.5em;
+}
+
+.vsb-menu li.grouped-option i {
+    display: none;
+}
+
+.vsb-menu li.grouped-option.open span {
+    margin-left: 5px;
 }
 
 .editbutton {

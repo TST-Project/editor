@@ -1,4 +1,5 @@
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
+import { TSTViewer } from '../lib/js/tst.js';
 
 (function() {
     'use strict';
@@ -266,7 +267,7 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
 
                 body.style.display = 'flex';
 
-                window.TSTViewer.init();
+                TSTViewer.init();
             };
 
             if(!state.xStyle)
@@ -410,7 +411,7 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
             else editor.initgo();
         },
         initgo() {
-            window.TSTViewer.killMirador();
+            TSTViewer.killMirador();
             document.getElementById('headerviewer').style.display = 'none';
 
             const heditor = document.getElementById('headereditor');
@@ -489,9 +490,9 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
             state.heditor.classList.add('fat');
 
             if(!state.editorviewer)
-                state.editorviewer = window.TSTViewer.newMirador('editorviewer',manifest,start - 1);
+                state.editorviewer = TSTViewer.newMirador('editorviewer',manifest,start - 1);
             else
-                window.TSTViewer.refreshMirador(state.editorviewer,manifest,start-1);
+                TSTViewer.refreshMirador(state.editorviewer,manifest,start-1);
 
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
@@ -507,7 +508,7 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
             state.heditor.querySelector('header').style.display = 'block';
             state.heditor.classList.remove('fat');
 
-            window.TSTViewer.killMirador(state.editorviewer);
+            TSTViewer.killMirador(state.editorviewer);
             
             const toggle = document.getElementById('viewertoggle');
             if(stayready) {
@@ -919,6 +920,7 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
                     if(e.nodeName === 'tst:group') {
                         const g = document.createElement('optgroup');
                         g.label = e.getAttribute('label');
+                        g.dataset.way = 'open';
                         for(const ee of e.children)
                             g.appendChild(makeOption(ee));
                         el.add(g,null);
@@ -1162,7 +1164,7 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
         selects: {
             make(el) {
                 el.id = 'box' + Math.random().toString(36).substr(2,9);
-                const mbox = new vanillaSelectBox(`#${el.id}`,{placeHolder: 'Choose...',disableSelectAll: true});
+                const mbox = new vanillaSelectBox(`#${el.id}`,{placeHolder: 'Choose...',search: true, disableSelectAll: true});
                 mbox.setValue(
                     [...el.querySelectorAll('option')].filter(o => o.selected).map(o => o.value)
                 );
