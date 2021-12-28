@@ -1,5 +1,6 @@
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
 import { TSTViewer } from '../lib/js/tst.mjs';
+import { init as cmWrapper } from './lib/codemirror/build/cmwrapper.js';
 
 (function() {
     'use strict';
@@ -21,7 +22,7 @@ import { TSTViewer } from '../lib/js/tst.mjs';
     const lf = window.localforage || null;
     const vanillaSelectBox = window.vanillaSelectBox || null;
 //    const FileSaver = window.FileSaver || null;
-    const cmWrapper = window.cmWrapper || null;
+//    const cmWrapper = window.cmWrapper || null;
     const he = window.he || null;
 
     const init = () => {
@@ -449,7 +450,7 @@ import { TSTViewer } from '../lib/js/tst.mjs';
                 editor.selects.make(m);
            
             for(const t of heditor.querySelectorAll('textarea:not(.noCodeMirror)'))
-                state.cmirror.push(cmWrapper.init(t));
+                state.cmirror.push(cmWrapper(t));
 
             for(const t of heditor.querySelectorAll('[data-tip]')) {
                 t.addEventListener('focus',events.tipShow,{passive: true});
@@ -793,7 +794,7 @@ import { TSTViewer } from '../lib/js/tst.mjs';
                     editor.selects.make(m);
                 
                 for(const t of ret.querySelectorAll('textarea:not(.noCodeMirror)'))
-                    state.cmirror.push(cmWrapper.init(t));
+                    state.cmirror.push(cmWrapper(t));
 
                 const dependentsel = new Set(
                     [...state.heditor.querySelectorAll('[data-from]')].map(
