@@ -1,5 +1,5 @@
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
-import { TSTViewer } from '../lib/js/tst.js';
+import { TSTViewer } from '../lib/js/tst.mjs';
 
 (function() {
     'use strict';
