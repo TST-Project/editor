@@ -1,7 +1,7 @@
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
 import { TSTViewer } from '../lib/js/tst.mjs';
 import { init as cmWrapper } from './lib/codemirror/build/cmwrapper.js';
-
+import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
 (function() {
     'use strict';
     const state = {
@@ -20,7 +20,7 @@ import { init as cmWrapper } from './lib/codemirror/build/cmwrapper.js';
     };
 
     const lf = window.localforage || null;
-    const vanillaSelectBox = window.vanillaSelectBox || null;
+//    const vanillaSelectBox = window.vanillaSelectBox || null;
 //    const FileSaver = window.FileSaver || null;
 //    const cmWrapper = window.cmWrapper || null;
     const he = window.he || null;
