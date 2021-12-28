@@ -1,0 +1,12 @@
+{
+  "name": "localforage",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "localforage": "^1.10.0"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  }
+}

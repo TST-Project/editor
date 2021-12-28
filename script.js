@@ -2,6 +2,9 @@ import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-sys
 import { TSTViewer } from '../lib/js/tst.mjs';
 import { init as cmWrapper } from './lib/codemirror/build/cmwrapper.js';
 import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
+import he from './lib/he.mjs';
+import lf from './lib/localforage.mjs';
+
 (function() {
     'use strict';
     const state = {
@@ -19,11 +22,11 @@ import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
         autosaveprefix: '',
     };
 
-    const lf = window.localforage || null;
+//    const lf = window.localforage || null;
 //    const vanillaSelectBox = window.vanillaSelectBox || null;
 //    const FileSaver = window.FileSaver || null;
 //    const cmWrapper = window.cmWrapper || null;
-    const he = window.he || null;
+//    const he = window.he || null;
 
     const init = () => {
         lf.length().then(n => {if(n>0) autosaved.fill();});
