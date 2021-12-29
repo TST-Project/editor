@@ -5,7 +5,7 @@ import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
 import he from './lib/he.mjs';
 import lf from './lib/localforage.mjs';
 
-(function() {
+const TSTEditor = (function() {
     'use strict';
     const state = {
         multiselect: [],
@@ -1501,5 +1501,9 @@ import lf from './lib/localforage.mjs';
         },
     };
 
-    window.addEventListener('load',init);
+    return {
+        init: init
+    };
 }());
+
+export { TSTEditor };
