@@ -1,6 +1,6 @@
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
 import { TSTViewer } from '../lib/js/tst.mjs';
-import { init as cmWrapper } from './lib/codemirror/build/cmwrapper.js';
+import { init as cmWrapper } from './lib/codemirror/cmwrapper.js';
 import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
 import he from './lib/he.mjs';
 import lf from './lib/localforage.mjs';
