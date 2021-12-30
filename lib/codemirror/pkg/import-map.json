@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "codemirror": "./codemirror.js",
-    "codemirror/addon/display/placeholder": "./codemirror/addon/display/placeholder.js",
-    "codemirror/addon/hint/show-hint": "./codemirror/addon/hint/show-hint.js",
-    "codemirror/addon/lint/lint": "./codemirror/addon/lint/lint.js",
-    "codemirror/mode/xml/xml.js": "./codemirror/mode/xml/xml.js"
-  }
-}
