@@ -1,12 +1,12 @@
-import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
+import lf from './lib/localforage.mjs';
 import { TSTViewer } from '../lib/js/tst.mjs';
 import { init as cmWrapper } from './lib/cmwrapper.mjs';
 import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
+import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
 import he from './lib/he.mjs';
-import lf from './lib/localforage.mjs';
+'use strict';
 
 const TSTEditor = (function() {
-    'use strict';
     const state = {
         multiselect: [],
         cmirror: [],
@@ -28,7 +28,7 @@ const TSTEditor = (function() {
 //    const cmWrapper = window.cmWrapper || null;
 //    const he = window.he || null;
 
-    const init = () => {
+    const init = function() {
         lf.length().then(n => {if(n>0) autosaved.fill();});
         document.getElementById('file').addEventListener('change',file.select,false);
         document.getElementById('newfile').addEventListener('click',file.startnew);
