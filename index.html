@@ -365,27 +365,7 @@
                 <select autocomplete="off" data-subattr="type" data-list="additiontype" name="addition_type" class="multiselect" multiple>
                 </select>
                 <label>Placement</label>
-                <select autocomplete="off" data-subattr="subtype" name="addition_subtype" class="multiselect" multiple>
-                    <option value="back">back</option>
-                    <option value="beginning">beginning</option>
-                    <option value="cover">cover</option>
-                    <option value="detached">detached</option>
-                    <option value="end">end</option>
-                    <option value="flyleaf">flyleaf</option>
-                    <option value="front">front</option>
-                    <option value="guard-folio">guard folio</option>
-                    <option value="inserted">inserted</option>
-                    <option value="intertextual">intertextual</option>
-                    <option value="marginal">marginal</option>
-                    <option value="spine">spine</option>
-                    <option value="title-page">title page</option>
-                    <optgroup label="position">
-                        <option value="top">top</option>
-                        <option value="bottom">bottom</option>
-                        <option value="left">left</option>
-                        <option value="right">right</option>
-                    </optgroup>
-                </select>
+                <select autocomplete="off" data-subattr="subtype" data-list="subtype" name="addition_subtype" class="multiselect" multiple></select>
             </div>
             <div>
                 <textarea autocomplete="off" name="additions_desc" rows="4" class="big" data-subselect=":scope" data-schema="transcription descriptive names" placeholder="Marginalia, running titles, satellite stanzas, etc."></textarea>
