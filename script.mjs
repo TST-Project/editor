@@ -789,9 +789,11 @@ const TSTEditor = (function() {
                     if(!m) continue;
                     editor.multiItem.collapse(m);
                 }
-
+                
+                /*
                 const topopulate = ret.querySelectorAll('[data-list]');
                 editor.populate(topopulate,state.xDefinitions);
+                */
 
                 for(const m of ret.querySelectorAll('.multiselect'))
                     editor.selects.make(m);
