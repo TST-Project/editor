@@ -300,21 +300,7 @@
             </div>
             <div>
                 <label>Script</label>
-                <select autocomplete="off" name="handNote_script" class="multiselect" data-subattr="script" multiple>
-                    <option value="arabic">Arabic</option>
-                    <option value="bengali">Bengali</option>
-                    <option value="devanagari">Devanagari</option>
-                    <option value="grantha">Grantha</option>
-                    <option value="latin">Latin</option>
-                    <option value="malayalam">Malayalam</option>
-                    <option value="modi">Modi</option>
-                    <option value="nandinagari">Nandinagari</option>
-                    <option value="newa">Newa</option>
-                    <option value="pala">Pala</option>
-                    <option value="sarada">Sarada</option>
-                    <option value="sinhalese">Sinhalese</option>
-                    <option value="telugu">Telugu</option>
-                    <option value="tamil">Tamil</option>
+                <select autocomplete="off" name="handNote_script" class="multiselect" data-subattr="script" data-list="script" multiple>
                 </select>
                 <label>Features</label>
                 <select autocomplete="off" name="handNote_scriptRef" class="multiselect" data-subattr="scriptRef" data-list="scriptRef" multiple></select>
@@ -327,6 +313,38 @@
         </div>
     </div>
 
+    <h4>Typography</h4>
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > typeDesc > typeNote">
+        <div class="multi-item">
+            <div>
+                <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
+                <select autocomplete="off" name="type_collation_id" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple></select>
+                <label>Scope</label>
+                <select autocomplete="off" name="typeNote_scope" data-subattr="scope"> 
+                    <option value="" selected disabled></option>
+                    <option value="sole">sole</option>
+                    <option value="major">major</option>
+                    <option value="minor">minor</option>
+                </select>
+                <label>Scribe</label>
+                <select autocomplete="off" name="typeNote_scribeRef" data-subattr="scribeRef" data-list="scribes">
+                    <option value="" selected></option>
+                </select>
+            </div>
+            <div>
+                <label>Script</label>
+                <select autocomplete="off" name="typeNote_script" class="multiselect" data-subattr="script" data-list="script" multiple>
+                </select>
+                <label>Features</label>
+                <select autocomplete="off" name="typeNote_scriptRef" class="multiselect" data-subattr="scriptRef" data-list="scriptRef" multiple></select>
+                <label>Medium</label>
+                <select autocomplete="off" name="typeNote_medium" class="multiselect" data-subattr="medium" data-list="typemedia" multiple></select>
+            </div>
+            <div>
+                <textarea autocomplete="off" name="handNote_desc" rows="4" data-subselect="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
+            </div>
+        </div>
+    </div>
     <h4>Decorations &amp; Illustrations</h4>
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > decoDesc > decoNote">
         <div class="multi-item">
