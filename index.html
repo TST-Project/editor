@@ -101,6 +101,16 @@
         <input autocomplete="off" type="number" step="1" min="0" id="hd_facsimile_start" name="facsimile_start" data-select="facsimile > graphic" data-attr="facs" data-tip="Number of the first image to display, starting from 1.">
     </div>
     <div>
+        <label for="hd_links">Links</label>
+        <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > idno[type='URI']">
+            <div class="multi-item">
+                <div>
+                    <input autocomplete="off" type="text" name="links" data-subselect=":scope" placeholder="https://...">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
         <label for="hd_summary">Summary</label>
         <textarea autocomplete="off" rows="10" id="hd_summary" name="summary" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents > summary" data-schema="descriptive names" placeholder="Summary description of the manuscript" required></textarea>
     </div>
