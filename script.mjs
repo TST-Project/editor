@@ -13,7 +13,7 @@ const TSTEditor = (function() {
         filename: '',
         xmlDoc: null,
         xStyle: null,
-        xDefinitions: null,
+        //xDefinitions: null,
         xSheet: 'tei-to-html.xsl',
         template: 'tst-template.xml',
         toplevel: 'TEI',
@@ -407,6 +407,7 @@ const TSTEditor = (function() {
     const editor = {
 
         init() {
+            /*
             if(!state.xDefinitions)
                 file.asyncLoad('../lib/xslt/definitions.xsl', (res) => {
                     state.xDefinitions = res;
@@ -415,6 +416,7 @@ const TSTEditor = (function() {
             else editor.initgo();
         },
         initgo() {
+            */
             TSTViewer.killMirador();
             document.getElementById('headerviewer').style.display = 'none';
 
@@ -433,10 +435,12 @@ const TSTEditor = (function() {
                 return false;})();
 
             editor.upgrade(state.xmlDoc);
-
+            
+            /* 
+             * this is now done with a build step
             const topopulate = heditor.querySelectorAll('[data-list]');
             editor.populate(topopulate);
-
+            */
             editor.fill.all(heditor,unsanitize);
 
             const dependentsel = [...heditor.querySelectorAll('[data-from]')].map(el => el.dataset.from);
@@ -487,6 +491,11 @@ const TSTEditor = (function() {
                 editor.toggleViewer();
         },
 
+        refreshCM() {
+            for(const cm of state.cmirror)
+                cm.refresh();
+        },
+        
         startViewer(manifest) {
             const start = state.heditor.querySelector('input[name="facsimile_start"]').value || 1;
             document.getElementById('editorviewer').style.display = 'block';
@@ -502,6 +511,7 @@ const TSTEditor = (function() {
             toggle.textContent = '<';
             toggle.title = 'hide images';
             toggle.style.display = 'flex';
+            editor.refreshCM();
         },
 
         killViewer(stayready) {
@@ -521,6 +531,7 @@ const TSTEditor = (function() {
             }
             else
                 toggle.style.display = 'none';
+            editor.refreshCM();
         },
 
         toc() {
@@ -910,7 +921,9 @@ const TSTEditor = (function() {
                 editor.multiItem.updateButtonrows(multiItem.parentNode);
             },
         },
-
+        
+        /* 
+         * this is now done with a build step
         populate(els) {    
             const makeOption = function(e) {
                 const o = document.createElement('option');
@@ -937,7 +950,7 @@ const TSTEditor = (function() {
 
             }
         },
-
+        */
         apply: {
             update() {
                 const invalid = editor.apply.checkInvalid();
