@@ -1,0 +1,13 @@
+{
+  "name": "editor",
+  "version": "1.0.0",
+  "description": "editor index file builder",
+  "main": "index.js",
+  "repository": "https://github.com/tst-project",
+  "author": "Charles Li",
+  "license": "GPLv3",
+  "dependencies": {
+    "jsdom": "^19.0.0",
+    "xpath": "^0.0.32"
+  }
+}
