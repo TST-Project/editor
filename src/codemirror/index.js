@@ -6,6 +6,7 @@ import './lib/htmlhint-custom.js';
 import 'codemirror/addon/lint/lint';
 import './lib/xml-lint.js';
 import 'codemirror/addon/display/placeholder';
+import definitions from './definitions.mjs';
 
 CodeMirror.defineOption('required', '', function(cm, val, old) {
     const prev = old && old != CodeMirror.Init;
@@ -211,8 +212,8 @@ const getSchema = function(s) {
         },
         g: {
             attrs: {
-                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#teti','#maatham','#varudam','#patru','#eduppu','#merpadi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#nna=m','#ya=m'],
-                rend: ['prereform']
+                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#teti','#maatham','#varudam','#patru','#eduppu','#merpadi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text'],
+                rend: definitions.entityrend,
             },
         },
         
@@ -282,7 +283,8 @@ const getSchema = function(s) {
         },
         seg: {
             attrs: {
-                'function': ['benediction','blessing','colophon','commenting-note','completion-statement','chapter-heading','correction','date','dedication','documenting-note','end-title','ex-libris','explicit','foliation','gloss','heading','incipit','intertitle','invocation','metre','note','ownership-statement','postface','preface','register','rubric','running-title','satellite-stanza','shelfmark','stage-directions','stamp','summary','title','table-of-contents','total-chapters','total-leaves','total-stanzas','verse-beginning','verse-numbering'],
+                //'function': ['benediction','blessing','colophon','commenting-note','completion-statement','chapter-heading','correction','date','dedication','documenting-note','end-title','ex-libris','explicit','foliation','gloss','heading','incipit','intertitle','invocation','metre','note','ownership-statement','postface','preface','register','rubric','running-title','satellite-stanza','shelfmark','stage-directions','stamp','summary','title','table-of-contents','total-chapters','total-leaves','total-stanzas','verse-beginning','verse-numbering'],
+                'function': ['incipit','explicit','completion-statement','colophon',...definitions.additiontype],
                 'rend': ['grantha'],
                 'type': ['root-text','commentary'],
                 'cert': ['low']
@@ -412,7 +414,7 @@ const getSchema = function(s) {
         persName: {
             attrs: {
                 'xml:lang': attrs.langs,
-                'role': ['author','binder','commentator','collector','commissioner','editor','owner','translator','scribe','signer'],
+                'role': definitions.persroles,
                 'cert': ['low'],
                 'key': null
             },
