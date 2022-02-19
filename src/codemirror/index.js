@@ -146,6 +146,13 @@ const init = (textarea) => {
     if(textarea.rows)
         cm.setSize(null,`${textarea.rows * 2.4}rem`);
     //cm.performLint();
+    cm.TSTshouldRefresh = false;
+    cm.on('focus', (cm) => {
+        if(cm.TSTshouldRefresh) {
+            cm.refresh();
+            cm.TSTshouldRefresh = false;
+        }
+    });
     return cm;
 };
 

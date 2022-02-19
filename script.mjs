@@ -493,7 +493,7 @@ const TSTEditor = (function() {
 
         refreshCM() {
             for(const cm of state.cmirror)
-                cm.refresh();
+                cm.TSTshouldRefresh = true;
         },
         
         startViewer(manifest) {
