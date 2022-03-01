@@ -64,9 +64,9 @@ const TSTEditor = (function() {
             default:
                 break;
             }
-            
-            if(e.target.closest('.plusbutton')) {
-                editor.multiItem.add(e.target);
+            const plusbutton = e.target.closest('.plusbutton'); 
+            if(plusbutton) {
+                editor.multiItem.add(plusbutton);
             }
             else if(e.target.closest('.multi-kill')) {
                 editor.multiItem.kill(e.target);
