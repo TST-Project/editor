@@ -20,6 +20,8 @@ const TSTEditor = (function() {
         savedtext: new Map(),
         saveInterval: null,
         autosaveprefix: '',
+        annoMaps: new Map(),
+        annos: new Map()
     };
 
 //    const lf = window.localforage || null;
@@ -258,6 +260,8 @@ const TSTEditor = (function() {
                         body.appendChild(facs);
                     else
                         viewer.dataset.manifest = facs.dataset.manifest;
+                    const annos = state.annoMaps.get(facs.dataset.manifest)
+                    if(annos) TSTViewer.setAnnotations(annos);
                 }
                 else {
                     if(viewer) viewer.remove();
@@ -469,7 +473,8 @@ const TSTEditor = (function() {
             
             editor.toc();
             editor.toggleViewer();
-            
+
+
             heditor.querySelector('input[name="facsimile"]').addEventListener('change',editor.toggleViewer);
             document.getElementById('viewertoggle').addEventListener('click',editor.buttonToggleViewer);
             if(!state.saveInterval) 
@@ -478,8 +483,9 @@ const TSTEditor = (function() {
         
         toggleViewer() {
             const manif = state.heditor.querySelector('input[name="facsimile"]');
-            if(manif.value && manif.checkValidity())
+            if(manif.value && manif.checkValidity()) {
                 editor.startViewer(manif.value);
+            }
             else
                 editor.killViewer();
         },
@@ -502,10 +508,23 @@ const TSTEditor = (function() {
             state.heditor.querySelector('header').style.display = 'none';
             state.heditor.classList.add('fat');
 
+            const annos = (() => {
+                if(state.annoMaps.has(manifest)) return state.annoMaps.get(manifest);
+
+                const xeno = state.xmlDoc.querySelector('xenoData[type="webannotation"]');
+                if(xeno) {
+                    const annoMap = new Map(JSON.parse(xeno.firstChild.data));
+                    state.annoMaps.set(manifest,annoMap);
+                    return annoMap;
+                }
+                
+                state.annoMaps.set(manifest,new Map());
+                return state.annoMaps.get(manifest);
+            })();
             if(!state.editorviewer)
-                state.editorviewer = TSTViewer.newMirador('editorviewer',manifest,start - 1);
+                state.editorviewer = TSTViewer.newMirador('editorviewer',manifest,start - 1,annos);
             else
-                TSTViewer.refreshMirador(state.editorviewer,manifest,start-1);
+                TSTViewer.refreshMirador(state.editorviewer,manifest,start-1,annos);
 
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
@@ -977,6 +996,8 @@ const TSTEditor = (function() {
                 const toplevel = editor.apply.fields(state.xmlDoc);
                 
                 editor.postProcess(toplevel);
+                
+                editor.writeAnnotations(toplevel);
 
                 // write to string to fix xml:lang attributes
                 const serialized = xml.serialize(state.xmlDoc);
@@ -985,7 +1006,7 @@ const TSTEditor = (function() {
                 
                 autosaved.saveStr(serialized);
             },
-        
+            
             checkInvalid() {
                 const allfields = state.heditor.querySelectorAll('input,select,textarea');
                 for(const field of allfields) {
@@ -1128,6 +1149,27 @@ const TSTEditor = (function() {
                 }
                 return true;
             },
+        },
+
+        writeAnnotations(toplevel) {
+            const manif = state.heditor.querySelector('input[name="facsimile"]');
+            if(!manif) return;
+           
+            const annos = state.annoMaps.get(manif.value);
+            if(!annos) return;
+            
+            const doc = toplevel.ownerDocument;
+            const ns = doc.documentElement.namespaceURI;
+
+            const listAnno = xml.makeElDeep('teiHeader > xenoData[type="webannotation"]',toplevel);
+            listAnno.innerHTML = '';
+            listAnno.appendChild( 
+                doc.createCDATASection(
+                    JSON.stringify(
+                        Array.from(annos.entries())
+                    )
+                ) 
+            );
         },
 
         postProcess(toplevel) {
@@ -1477,8 +1519,12 @@ const TSTEditor = (function() {
                     if(o) o.selected = true;
                 }
             }
-            editor.apply.fields(docclone,true);
+            
+            const toplevel = editor.apply.fields(docclone,true);
+            //editor.apply.fields(docclone,true);
           
+            editor.writeAnnotations(toplevel);
+
             autosaved.setFilename(docclone);
            
             docclone.insertBefore(
