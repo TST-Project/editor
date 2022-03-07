@@ -21,7 +21,7 @@ const TSTEditor = (function() {
         saveInterval: null,
         autosaveprefix: '',
         annoMaps: new Map(),
-        annos: new Map()
+        curImage: 0
     };
 
 //    const lf = window.localforage || null;
@@ -525,6 +525,8 @@ const TSTEditor = (function() {
                 state.editorviewer = TSTViewer.newMirador('editorviewer',manifest,start - 1,annos);
             else
                 TSTViewer.refreshMirador(state.editorviewer,manifest,start-1,annos);
+            
+            if(state.curImage) TSTViewer.jumpToId(state.editorviewer,state.curImage);
 
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
@@ -541,6 +543,7 @@ const TSTEditor = (function() {
             state.heditor.querySelector('header').style.display = 'block';
             state.heditor.classList.remove('fat');
 
+            state.curImage = TSTViewer.getMiradorCanvasId(state.editorviewer);
             TSTViewer.killMirador(state.editorviewer);
             
             const toggle = document.getElementById('viewertoggle');
