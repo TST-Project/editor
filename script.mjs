@@ -539,6 +539,8 @@ const TSTEditor = (function() {
             if(!state.editorviewer) return;
 
             const viewer = document.getElementById('editorviewer');
+            if(viewer.style.display === 'none') return;
+
             viewer.style.display = 'none';
             state.heditor.querySelector('header').style.display = 'block';
             state.heditor.classList.remove('fat');
