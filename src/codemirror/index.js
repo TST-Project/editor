@@ -158,7 +158,7 @@ const init = (textarea) => {
 
 const getSchema = function(s) {
     const schemae = {
-        transcription: ['milestone','lb','cb','pb','add','choice','del','seg','subst','supplied','surplus','hi','space','unclear','gap','damage','supplied','g'], 
+        transcription: ['milestone','lb','cb','pb','add','choice','del','seg','subst','supplied','surplus','hi','space','unclear','gap','damage','g'], 
         descriptive_restricted: ['term','note','emph','ex','expan','foreign','title','locus','material','ref','q','date','watermark','list','item','stamp'],
         names: ['persName','orgName','geogName','placeName'],
     };
@@ -167,7 +167,8 @@ const getSchema = function(s) {
     const attrs = {
         units: ['akṣara','character'],
         langs: ['ta','ta-Taml','en','fr','de','la','pt','pi','sa'],
-        bigunits: ['folio','page','column','left-margin','right-margin','main-text-area']
+        bigunits: ['folio','page','column','left-margin','right-margin','main-text-area'],
+        place: ['above','below','left','right','top','bottom','margin','foot']
     };
 
     const selected = s ? 
@@ -229,7 +230,7 @@ const getSchema = function(s) {
         add: {
             attrs: {
                 rend: ['caret','above','below'],
-                place: ['above','below','left','right','top','bottom','margin'],
+                place: attrs.place,
             },
             children: ['unclear'],
         },
@@ -257,7 +258,7 @@ const getSchema = function(s) {
         // Difficult or missing text
         unclear: {
             attrs: {
-                reason: ['blemish','rubbed','messy','lost','consonant_unclear','vowel_unclear','eccentric_ductus'],
+                reason: definitions.unclear
             }
         },
         damage: {
@@ -279,7 +280,7 @@ const getSchema = function(s) {
         // editorial
         supplied: {
             attrs: {
-                reason: ['illegible','lost','omitted'],
+                reason: ['lost','omitted'],
             },
         },
         surplus: {
@@ -357,6 +358,7 @@ const getSchema = function(s) {
         note: {
             attrs: {
                 'xml:lang': attrs.langs,
+                place: schemae.place,
             },
             children: ['locus','title','emph','term'],
         },
