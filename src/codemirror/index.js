@@ -358,7 +358,7 @@ const getSchema = function(s) {
         note: {
             attrs: {
                 'xml:lang': attrs.langs,
-                place: schemae.place,
+                place: attrs.place,
             },
             children: ['locus','title','emph','term'],
         },
