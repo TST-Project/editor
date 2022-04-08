@@ -9,5 +9,8 @@
   "dependencies": {
     "jsdom": "^19.0.0",
     "xpath": "^0.0.32"
+  },
+  "scripts": {
+      "build": "nodejs index.mjs"
   }
 }

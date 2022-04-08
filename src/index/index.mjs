@@ -9,7 +9,7 @@ const loadIndex = () => {
 
 const loadDefinitions = () => {
     const parser = new (new jsdom.JSDOM('')).window.DOMParser();
-    const str = fs.readFileSync('../../lib/xslt/definitions.xsl'); 
+    const str = fs.readFileSync('../../../lib/xslt/definitions.xsl'); 
     return parser.parseFromString(str, 'text/xml');
 };
 
@@ -46,7 +46,7 @@ const main = () => {
     const defs = loadDefinitions();
     const els = template.querySelectorAll('[data-list]');
     populateSelect(els,template,defs);
-    fs.writeFile('../index.html',template.documentElement.outerHTML,{encoding: 'utf8'},function(){return;});
+    fs.writeFile('../../index.html',template.documentElement.outerHTML,{encoding: 'utf8'},function(){return;});
 };
 
 main();
