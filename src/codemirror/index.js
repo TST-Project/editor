@@ -235,7 +235,7 @@ const getSchema = function(s) {
             children: ['unclear'],
         },
         choice: {
-            children: ['unclear']
+            children: ['unclear','sic','corr']
         },
         del: {
             attrs: {
