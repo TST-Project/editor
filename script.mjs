@@ -1187,6 +1187,12 @@ const TSTEditor = (function() {
                 const lastFoliation = supportDesc.querySelector('foliation:last-of-type');
                 if(condition && lastFoliation) lastFoliation.insertAdjacentElement('afterend',condition);
             }
+            
+            // normalize decomposed Unicode characters
+            const walker = toplevel.ownerDocument.createTreeWalker(toplevel,NodeFilter.SHOW_TEXT);
+            var curnode;
+            while(curnode = walker.nextNode())
+                curnode.data = curnode.data.normalize('NFC');
 
             // add xml:lang to rubric, incipit, etc.
             const msItems = par.querySelectorAll('msContents > msItem');
