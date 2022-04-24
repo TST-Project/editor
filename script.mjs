@@ -522,7 +522,7 @@ const TSTEditor = (function() {
                 return state.annoMaps.get(manifest);
             })();
             if(!state.editorviewer)
-                state.editorviewer = TSTViewer.newMirador('editorviewer',manifest,start - 1,annos);
+                state.editorviewer = TSTViewer.newMirador('editorviewer',manifest,start - 1,annos,true);
             else
                 TSTViewer.refreshMirador(state.editorviewer,manifest,start-1,annos);
             
