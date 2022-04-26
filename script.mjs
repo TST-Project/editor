@@ -1187,6 +1187,10 @@ const TSTEditor = (function() {
                 const lastFoliation = supportDesc.querySelector('foliation:last-of-type');
                 if(condition && lastFoliation) lastFoliation.insertAdjacentElement('afterend',condition);
             }
+
+            // revisionDesc should be at the end
+            const revisionDesc = par.querySelector('revisionDesc');
+            revisionDesc.parentNode.appendChild(revisionDesc);
             
             // normalize decomposed Unicode characters
             const walker = toplevel.ownerDocument.createTreeWalker(toplevel,NodeFilter.SHOW_TEXT);
