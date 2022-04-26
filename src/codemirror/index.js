@@ -158,11 +158,11 @@ const init = (textarea) => {
 
 const getSchema = function(s) {
     const schemae = {
-        transcription: ['milestone','lb','cb','pb','add','choice','del','seg','subst','supplied','surplus','hi','space','unclear','gap','damage','g'], 
+        transcription: ['milestone','lb','cb','pb','add','choice','del','seg','subst','supplied','surplus','hi','space','unclear','gap','damage','g','p'], 
         descriptive_restricted: ['term','note','emph','ex','expan','foreign','title','locus','material','ref','q','date','watermark','list','item','stamp'],
         names: ['persName','orgName','geogName','placeName'],
     };
-    schemae.descriptive = ['p','lg',...schemae.descriptive_restricted,'quote'];
+    schemae.descriptive = ['lg',...schemae.descriptive_restricted,'quote'];
     
     const attrs = {
         units: ['akṣara','character'],
