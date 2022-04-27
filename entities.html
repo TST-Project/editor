@@ -43,7 +43,7 @@
         <h2>Vowel signs</h2>
         <section>
             <p>Although normally, vowel signs are attached to a consonant, there are cases where you may want to input a vowel sign independent of a consonant. If you are transcribing in Tamil script, this can be achieved by typing அ + zero-width joiner (U+200D) + the vowel sign.</p>
-            <p>Alternatively, there are two named glyphs, for kāl and kompu, which can be entered as XML tags.</p>
+            <p>Alternatively, there are two named glyphs, for <i>kāl</i> and <i>kompu</i>, which can be entered as XML tags.</p>
             <table>
                 <tr><td><code class="language-xml">&lt;g ref="#ra_r_kal"/&gt;</code></td><td>→</td><td class="aalt">ஆ</td></tr>
                 <tr><td><code class="language-xml">&lt;g ref="#kompu"/&gt;</code></td><td>→</td><td class="aalt">எ</td></tr>
@@ -54,6 +54,8 @@
                 <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;ā&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">ā</ins></td><td><del class="aalt">எ</del>க<ins class="aalt add">ஆ</ins></td></tr>
                 <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;a&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">a</ins></td><td><del class="aalt">எ</del>க</td></tr>
             </table>
+            <p>You can further specify the place of addition with the @place. E.g. <code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;ā&lt;/add place="above"&gt;&lt;/subst&gt;</code></p>
+            
         </section>
         <h2>geminated consonants</h2>
         <section>
@@ -62,8 +64,9 @@
                 <tr><td><code class="language-xml">&lt;g rend="post-base"&gt;kka&lt;/g&gt;</code></td><td>→</td><td>kka</td><td class="hlig">க்க</td></tr>
             </table>
         </section>
-        <h2>fused vowels</h2>
+        <h2>fused vowels or fused <i>kāl</i>s</h2>
         <section>
+            <p>In the case of that glyph which can be read in two different ways, wrap your reading of the ambiguous letter as follows:</p>            
             <table>
                 <tr><td></td><td></td><th>Roman</th><th>Tamil</th></tr>
                 <tr><td><code class="language-xml">&lt;g ref="#double_kal"&gt;rā&lt;/g&gt;</code></td><td>→</td><td>rā</td><td class="hlig">ரா</td></tr>
@@ -102,7 +105,7 @@
         </section>
         <h2>Tamil oṃkāra</h2>
         <section>
-            <p>To differentiate the oṃkāra symbol from the o vowel with an anusvāra, you can transliterate it as <span class="quote">oṁ</span>.</p>
+            <p>To differentiate the <i>oṃkāra</i> symbol from the <i>o</i> vowel with an <i>anusvāra</i>, you can transliterate it as <span class="quote">oṁ</span>.</p>
             <table>
                 <tr><td>oṁ</td><td>→</td><td>ௐ</td></tr>
                 <tr><td>oṁ (in Grantha mode)</td><td>→</td><td>𑍐</td></tr>
