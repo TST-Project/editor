@@ -221,7 +221,7 @@ const getSchema = function(s) {
         },
         g: {
             attrs: {
-                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#teti','#maatham','#varuṣam','#patru','#eduppu','#merpadi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#latin_cross'],
+                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#tēti','#mācam','#varuṣam','#pattu','#nūṟu','#āyiram','#patru','#eduppu','#mēṟpaṭi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#latin_cross'],
                 rend: definitions.entityrend,
             },
         },
