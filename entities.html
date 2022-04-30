@@ -54,7 +54,8 @@
                 <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;ā&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">ā</ins></td><td><del class="aalt">எ</del>க<ins class="aalt add">ஆ</ins></td></tr>
                 <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;a&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">a</ins></td><td><del class="aalt">எ</del>க</td></tr>
             </table>
-            <p>You can further specify the place of addition with the @place. E.g. <code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;ā&lt;/add place="above"&gt;&lt;/subst&gt;</code></p>
+            <p>You can further specify the place of addition with the @place. For example:
+                <blockquote><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add place="above"&gt;ā&lt;/add&gt;&lt;/subst&gt;</code></blockquote></p>
             
         </section>
         <h2>geminated consonants</h2>
@@ -66,7 +67,7 @@
         </section>
         <h2>fused vowels or fused <i>kāl</i>s</h2>
         <section>
-            <p>In the case of that glyph which can be read in two different ways, wrap your reading of the ambiguous letter as follows:</p>            
+            <p>In the case of a glyph which can be read in two different ways, wrap your reading of the ambiguous character as follows:</p>            
             <table>
                 <tr><td></td><td></td><th>Roman</th><th>Tamil</th></tr>
                 <tr><td><code class="language-xml">&lt;g ref="#double_kal"&gt;rā&lt;/g&gt;</code></td><td>→</td><td>rā</td><td class="hlig">ரா</td></tr>
@@ -79,7 +80,7 @@
         	<p>When transcribing in Tamil script, this ligature can be produced by inserting a zero-width joiner (U+200D) between the consonant and the final <i>-m</i>. Alternatively, this can be transcribed using an XML tag.</p>
             <table>
                 <tr><td></td><td></td><th>Roman</th><th>Tamil</th></tr>
-                <tr><td><code class="language-xml">&lt;g rend="m_ligature"&gt;ṇaM&lt;/g&gt;</code></td><td>→</td><td>ṇaM</td><td class="hlig">ணம்</td></tr>ன
+                <tr><td><code class="language-xml">&lt;g rend="m_ligature"&gt;ṇaM&lt;/g&gt;</code></td><td>→</td><td>ṇaM</td><td class="hlig">ணம்</td></tr>
                 <tr><td><figure><img src="img/caranaM.png" height="50em"/> <figcaption><a href="https://tst-project.github.io/mss/Indien_0089.xml">BnF Indien 89</a></figcaption></figure></td><td>→</td><td>caṟaṇaM</td><td>சற<span class="hlig">ணம்</span></td></tr>
                 <tr><td><code class="language-xml">&lt;g rend="m_ligature"&gt;ṉaM&lt;/g&gt;</code></td><td>→</td><td>ṉaM</td><td class="hlig">னம்</td></tr>
                 <tr><td><code class="language-xml">&lt;g rend="m_ligature"&gt;yaM&lt;/g&gt;</code></td><td>→</td><td>yaM</td><td class="hlig">யம்</td></tr>
@@ -118,7 +119,7 @@
             <p>The Tamil and Tamil Supplement Unicode blocks offer a number of symbols that are difficult to type without resorting to Unicode code points. For convenience, they can be input as XML tags.</p>
             <table>
                 <tr><td></td><td></td><th>Roman</th><th>Tamil</th></tr>
-                <tr><td><code class="language-xml">&lt;g ref="#pcs"/&gt;</code></td><td>→</td><td></td>௳<td>௳</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#pcs"/&gt;</code></td><td>→</td><td>௳</td><td>௳</td></tr>
                 <tr><td><code class="language-xml">&lt;g ref="#pcl"/&gt;</code></td><td>→</td><td class="aalt">௳</td><td class="aalt">௳</td></tr>
                 <tr><td><code class="language-xml">&lt;g ref="#tēti"&gt;tēti&lt;/g&gt;</code></td><td>→</td><td>{tēti}</td><td>௳</td></tr>
                 <tr><td><code class="language-xml">&lt;g ref="#mācam"&gt;mācam&lt;/g&gt;</code></td><td>→</td><td>{mācam}</td><td>௴</td></tr>
