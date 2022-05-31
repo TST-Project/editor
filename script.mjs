@@ -477,6 +477,7 @@ const TSTEditor = (function() {
 
             heditor.querySelector('input[name="facsimile"]').addEventListener('change',editor.toggleViewer);
             document.getElementById('viewertoggle').addEventListener('click',editor.buttonToggleViewer);
+            document.getElementById('editortoggle').addEventListener('click',editor.buttonToggleEditor);
             if(!state.saveInterval) 
                 state.saveInterval = window.setInterval(autosaved.save,300000);
         },
@@ -495,6 +496,13 @@ const TSTEditor = (function() {
                 editor.killViewer(true);
             else
                 editor.toggleViewer();
+        },
+    
+        buttonToggleEditor(e) {
+            if(e.target.textContent === '>')
+                editor.hideEditor();
+            else
+                editor.showEditor();
         },
 
         refreshCM() {
@@ -532,6 +540,9 @@ const TSTEditor = (function() {
             toggle.textContent = '<';
             toggle.title = 'hide images';
             toggle.style.display = 'flex';
+            const othertoggle = document.getElementById('editortoggle');
+            othertoggle.style.display = 'flex';
+            othertoggle.title = 'hide editor';
             editor.refreshCM();
         },
 
@@ -549,12 +560,35 @@ const TSTEditor = (function() {
             TSTViewer.killMirador(state.editorviewer);
             
             const toggle = document.getElementById('viewertoggle');
+            const othertoggle = document.getElementById('editortoggle');
             if(stayready) {
                 toggle.textContent = '>';
                 toggle.title = 'show images';
+                othertoggle.style.display = 'none';
             }
             else
                 toggle.style.display = 'none';
+            editor.refreshCM();
+        },
+
+        hideEditor() {
+            state.heditor.style.display = 'none';
+
+            const toggle = document.getElementById('editortoggle');
+            const othertoggle = document.getElementById('viewertoggle');
+                toggle.textContent = '<';
+                toggle.title = 'show editor';
+                othertoggle.style.display = 'none';
+            editor.refreshCM();
+        },
+    
+        showEditor() {
+            state.heditor.style.display ='flex';
+            const toggle = document.getElementById('editortoggle');
+            const othertoggle = document.getElementById('viewertoggle');
+                toggle.textContent = '>';
+                toggle.title = 'hide editor';
+                othertoggle.style.display = 'flex';
             editor.refreshCM();
         },
 

@@ -807,27 +807,37 @@ h4 {
     border: 0;
 }
 
-#viewertoggle {
-    display: none;
+#togglers {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.toggle {
+    /*display: none;*/
+    flex-grow: 1;
     background-color: #ddd;
     color: rgba(1,1,1,0.4);
-    border-radius: 0 0.3rem 0 0.3rem;
+    border-radius: 0 0.3rem 0.3rem 0;
     align-items: center;
     font-weight: bold;
     font-family: et-book;
     cursor: pointer;
     padding-right: 2px;
+    -webkit-text-stroke: 1px rgba(1,1,1,0.2);
+    text-stroke: 1px rgba(1,1,1,0.2);
 }
 
-#viewertoggle:hover {
+.toggle:hover {
     color: #ddd;
     background: #ff9900;
     text-shadow: 2px 2px 1px rgba(0,0,0,0.3);
+    -webkit-text-stroke: unset;
+    text-stroke: unset;
 }
 
 @media (width < 600px) {
-    #viewertoggle {
+    #togglers {
         transform: rotate(180deg);
         writing-mode: vertical-lr;
         height: auto;

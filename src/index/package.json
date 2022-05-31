@@ -11,6 +11,6 @@
     "xpath": "^0.0.32"
   },
   "scripts": {
-      "build": "nodejs index.mjs"
+      "build": "node index.mjs"
   }
 }
