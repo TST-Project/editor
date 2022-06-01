@@ -3,7 +3,7 @@ import { TSTViewer } from '../lib/js/tst.mjs';
 import { init as cmWrapper } from './lib/cmwrapper.mjs';
 import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
-import he from './lib/he.mjs';
+import { xml, dom } from './lib/utils.mjs';
 'use strict';
 
 const TSTEditor = (function() {
@@ -23,12 +23,6 @@ const TSTEditor = (function() {
         annoMaps: new Map(),
         curImage: 0
     };
-
-//    const lf = window.localforage || null;
-//    const vanillaSelectBox = window.vanillaSelectBox || null;
-//    const FileSaver = window.FileSaver || null;
-//    const cmWrapper = window.cmWrapper || null;
-//    const he = window.he || null;
 
     const init = function() {
         lf.length().then(n => {if(n>0) autosaved.fill();});
@@ -296,7 +290,6 @@ const TSTEditor = (function() {
             const writer = await fileHandle.createWritable();
             writer.write(file);
             writer.close();
-            //FileSaver(file,fileURL);
         },
 
         select(e) {
@@ -304,7 +297,6 @@ const TSTEditor = (function() {
             const f = e.target.files[0];
             state.filename = f.name;
             const reader = new FileReader();
-            //reader.onload = file.parse.bind(null,editor.init.bind(null,false));
             reader.onload = file.parse.bind(null,editor.init);
             reader.readAsText(f);
         },
@@ -368,59 +360,23 @@ const TSTEditor = (function() {
         startnew() {
             document.getElementById('openform').style.display = 'none';
             state.filename = '[new file]';
-            //state.xmlDoc = file.syncLoad(state.template);
-            //file.render(state.xmlDoc);
-            //editor.init();
             file.asyncLoad(state.template,(f) => {
                 state.xmlDoc = f;
                 editor.init();
             });
         },
-        /*
-        syncLoad(fname,text = false) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET',fname,false);
-            xhr.send(null);
-            return text ? xhr.responseText : xhr.responseXML;
-        },
-        */
+
         asyncLoad(fname,func) {
             fetch(fname).then(resp => resp.text())
                 .then((str) => {
                     func(xml.parseString(str));
                 });
-            /*
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET',fname,true);
-            xhr.timeout = 2000;
-            xhr.onload = () => {
-                if(xhr.readyState === 4) {
-                    if(xhr.status === 200)
-                        func(xhr.responseXML);
-                    else
-                        alert(xhr.statusText);
-                }
-            };
-            xhr.ontimeout = () => {alert(`Unable to load ${fname}: timed out.`);};
-            xhr.onerror = () => {alert(xhr.statusText);};
-            xhr.send(null);
-            */
         },
     };
     
     const editor = {
 
         init() {
-            /*
-            if(!state.xDefinitions)
-                file.asyncLoad('../lib/xslt/definitions.xsl', (res) => {
-                    state.xDefinitions = res;
-                    editor.initgo();
-                });
-            else editor.initgo();
-        },
-        initgo() {
-            */
             TSTViewer.killMirador();
             document.getElementById('headerviewer').style.display = 'none';
 
@@ -468,7 +424,6 @@ const TSTEditor = (function() {
                 t.addEventListener('blur',events.tipRemove,{passive: true});
             }
 
-            //heditor.querySelector('#hd_publisher').value = 'TST Project';
             heditor.querySelector('#hd_publish_date').value = new Date().getFullYear();
             
             editor.toc();
@@ -1404,101 +1359,6 @@ const TSTEditor = (function() {
         },
     }; // end editor
 
-    const xml = {
-        parseString(str) {
-            const parser = new DOMParser();
-            const newd = parser.parseFromString(str,'text/xml');
-            if(newd.documentElement.nodeName === 'parsererror')
-                alert('XML errors');
-            else
-                return newd;
-        },
-        serialize(el) {
-            const s = new XMLSerializer();
-            return s.serializeToString(el);
-        },
-        innerXML(el) {
-            const empty = el.cloneNode();
-            empty.innerHTML = '\u{FFFFD}';
-            const str = xml.serialize(el);
-            const emptystr = xml.serialize(empty);
-            const [starttag,endtag] = emptystr.split('\u{FFFFD}');
-            return str.slice(starttag.length).slice(0,-endtag.length);
-        },
-        unsanitize(str,attr) {
-            return attr ?
-                he.unescape(str,{isAttributeValue: true}) :
-                he.unescape(str);
-        },
-        sanitize(str) {
-            return he.escape(str);
-        },
-        async XSLTransform(xslsheet,doc) {
-            // compile all xsl:imports to avoid browser incompatibilities
-            
-            for(const x of xslsheet.querySelectorAll('import')) {
-                const resp = await fetch(x.getAttribute('href'));
-                const i = xml.parseString(await resp.text());
-
-                while(i.documentElement.firstChild)
-                    x.before(i.documentElement.firstChild);
-                x.remove();
-            }
-            const xproc = new XSLTProcessor();
-            xproc.importStylesheet(xslsheet);
-            return xproc.transformToDocument(doc);
-        },
-    
-        /*removeEl: (path,toplevel) => {
-            const par = toplevel || state.xmlDoc;
-            const el = par.querySelector(path);
-            if(el) el.remove();
-        },*/
-
-        removeAllEls(path,toplevel) {
-            const els = toplevel.querySelectorAll(path);
-            for(const el of els)
-                el.remove();
-        },
-        makeEl(doc,name) {
-            const ns = doc.documentElement.namespaceURI;
-            return doc.createElementNS(ns,name);
-        },
-
-        makeElDeep(path,toplevel,duplicate) {
-            const thisdoc = toplevel.ownerDocument;
-            const ns = thisdoc.documentElement.namespaceURI;
-            const children = path.split(/\s*>\s*/g).filter(x => x);
-            const last = duplicate ?
-                children.pop() :
-                null;
-
-            const makeNewChild = (path,par) => {
-                const childsplit = path.split('[');
-                const new_child = thisdoc.createElementNS(ns,childsplit[0]);
-                par.appendChild(new_child);
-                if(childsplit.length > 1) { // add attribute
-                    const attrsplit = childsplit[1].split('=');
-                    const attr = attrsplit[0];
-                    const val = attrsplit[1].replace(/[\]''""]/g,'');
-                    new_child.setAttribute(attr,val);
-                }
-                return new_child;
-            };
-            
-            let par_el = toplevel;
-            for(const child of children) {
-                const child_el = par_el.querySelector(child);
-                if(!child_el) {
-                    par_el = makeNewChild(child,par_el);
-                }
-                else par_el = child_el;
-            }
-            return duplicate ?
-                makeNewChild(last,par_el) :
-                par_el;
-        },
-    }; // end xml
 
     const autosaved = {
         fill() {
@@ -1607,17 +1467,6 @@ const TSTEditor = (function() {
         },
     }; // end autosaved
     
-    const dom = {
-        clearEl(el) {
-            while(el.firstChild)
-                el.removeChild(el.firstChild);
-        },
-        makeEl(name,doc) {
-            const d = doc ? doc : document;
-            return d.createElement(name);
-        },
-    };
-
     return {
         init: init
     };
