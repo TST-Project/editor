@@ -542,8 +542,10 @@ const TSTEditor = (function() {
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
             toggle.title = 'hide images';
+            toggle.style.display = 'flex';
             const othertoggle = document.getElementById('editortoggle');
             othertoggle.title = 'hide editor';
+            othertoggle.style.display = 'flex';
             editor.refreshCM();
         },
 
@@ -551,7 +553,10 @@ const TSTEditor = (function() {
             if(!state.editorviewer) return;
 
             const viewer = document.getElementById('editorviewer');
-            if(viewer.style.display === 'none') return;
+            if(viewer.style.display === 'none') {
+                document.getElementById('togglers').style.display = 'none';
+                return;
+            }
 
             viewer.style.display = 'none';
             state.heditor.querySelector('header').style.display = 'block';
@@ -567,8 +572,9 @@ const TSTEditor = (function() {
                 toggle.title = 'show images';
                 othertoggle.style.display = 'none';
             }
-            else
-                toggle.style.display = 'none';
+            else {
+                document.getElementById('togglers').style.display = 'none';
+            }
             editor.refreshCM();
         },
 
