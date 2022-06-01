@@ -809,12 +809,12 @@ h4 {
 
 #togglers {
     height: 100vh;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
 .toggle {
-    /*display: none;*/
+    display: flex;
     flex-grow: 1;
     background-color: #ddd;
     color: rgba(1,1,1,0.4);

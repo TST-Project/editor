@@ -535,13 +535,14 @@ const TSTEditor = (function() {
                 TSTViewer.refreshMirador(state.editorviewer,manifest,start-1,annos);
             
             if(state.curImage) TSTViewer.jumpToId(state.editorviewer,state.curImage);
+            
+            const toggles = document.getElementById('togglers');
+            toggles.style.display = 'flex';
 
             const toggle = document.getElementById('viewertoggle');
             toggle.textContent = '<';
             toggle.title = 'hide images';
-            toggle.style.display = 'flex';
             const othertoggle = document.getElementById('editortoggle');
-            othertoggle.style.display = 'flex';
             othertoggle.title = 'hide editor';
             editor.refreshCM();
         },
