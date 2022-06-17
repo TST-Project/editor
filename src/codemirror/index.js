@@ -293,7 +293,7 @@ const getSchema = function(s) {
         seg: {
             attrs: {
                 //'function': ['benediction','blessing','colophon','commenting-note','completion-statement','chapter-heading','correction','date','dedication','documenting-note','end-title','ex-libris','explicit','foliation','gloss','heading','incipit','intertitle','invocation','metre','note','ownership-statement','postface','preface','register','rubric','running-title','satellite-stanza','shelfmark','stage-directions','stamp','summary','title','table-of-contents','total-chapters','total-leaves','total-stanzas','verse-beginning','verse-numbering'],
-                'function': ['incipit','explicit','completion-statement','colophon',...definitions.additiontype],
+                'function': [...definitions.segtype,...definitions.additiontype],
                 'rend': ['grantha'],
                 'type': ['root-text','commentary'],
                 'cert': ['low']

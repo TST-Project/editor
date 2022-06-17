@@ -49,7 +49,7 @@ const populateSelect = (els,doc,defs) => {
 
 };
 
-const props = ['entityrend','additiontype','persroles'];
+const props = ['entityrend','additiontype','segtype','persroles','unclear'];
 
 const main = () => {
     const defs = loadDefinitions();
