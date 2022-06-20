@@ -826,7 +826,7 @@ const TSTEditor = (function() {
                 editor.populate(topopulate,state.xDefinitions);
                 */
 
-                for(const m of ret.querySelectorAll('.multiselect'))
+                for(const m of ret.querySelectorAll('select[multiple]'))
                     editor.selects.make(m);
                 
                 for(const t of ret.querySelectorAll('textarea:not(.noCodeMirror)'))
