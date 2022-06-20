@@ -1293,7 +1293,8 @@ const TSTEditor = (function() {
                 {name: 'shelfmark', select: 'idno[type="cote"]'},
                 {name: 'old_shelfmark', select: 'idno[type="ancienne cote"]'},
                 {name: 'foliation', select: 'foliation[n]'},
-                {name: 'editor', select: 'editionStmt'}
+                {name: 'editor', select: 'editionStmt'},
+                {name: 'stringhole', select: 'support measure[unit="stringhole"]'}
             ];
             const funcs = {
                 shelfmark(doc) {
@@ -1342,6 +1343,14 @@ const TSTEditor = (function() {
                         tStmt.appendChild(e);
                     }
                     eStmt.remove();
+                },
+                stringhole(doc) {
+                    const measure = doc.querySelector('measure[unit="stringhole"]');
+                    const binding = doc.querySelector('binding');
+                    const decoNote = xml.makeEl(doc,'decoNote');
+                    decoNote.setAttribute('type','stringhole');
+                    decoNote.appendChild(measure);
+                    binding.appendChild(decoNote);
                 }
             };
             

@@ -122,11 +122,11 @@
     <h3>Physical description</h3>
     <div>
         <label for="hd_MS_type">Type</label>
-        <select autocomplete="off" id="hd_MS_type" name="MS_type" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents" data-attr="class" required=""><option value="#STM">Single-text</option><option value="#MTM">Multi-text</option><option value="#CM">Composite</option><option value="#MVM">Multi-volume</option><option value="#POSTER">Poster</option><option value="#SCRAPBOOK">Scrapbook</option></select>
+        <select autocomplete="off" id="hd_MS_type" name="MS_type" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msContents" data-attr="class" required=""><option value="#STM">Single-text</option><option value="#MTM">Multi-text</option><option value="#CM">Composite</option><option value="#MVM">Multi-volume</option></select>
         <label for="hd_format">Format</label>
-        <select autocomplete="off" id="hd_format" name="format" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required=""><option value="codex">codex</option><option value="loose-leaf">loose leaf</option><option value="plate">plate</option><option value="pothi">pothi</option><option value="roll">roll</option></select>
-        <label for="hd_stringholes">Stringholes</label>
-        <input autocomplete="off" type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > support > measure[unit='stringhole']" data-attr="quantity">
+        <select autocomplete="off" id="hd_format" name="format" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required=""><option value="codex">codex</option><option value="loose-leaf">loose leaf</option><option value="plate">plate</option><option value="poster">poster</option><option value="pothi">pothi</option><option value="roll">roll</option><option value="scrapbook">scrapbook</option></select>
+        <label for="hd_format">Technology</label>
+        <select autocomplete="off" id="hd_technology" name="technology" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="rend" required=""><option value="manuscript">manuscript</option><option value="movable-type">movable type</option><option value="xylography">xylography</option><option value="lithography">lithography</option><option value="photography">photography</option></select>
     </div>
     <div>
         <label for="hd_material">Material</label>
@@ -268,6 +268,8 @@
     <div>
         <label for="hd_binding">Binding</label>
         <textarea autocomplete="off" rows="2" id="hd_binding" name="binding" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > p" data-schema="descriptive" placeholder="Description of binding, cover, etc."></textarea>
+        <label for="hd_stringholes">Stringholes</label>
+        <input autocomplete="off" type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > decoNote[type='stringhole'] > measure[unit='stringhole']" data-attr="quantity">
     </div>
     
     <h4>Foliation</h4>
