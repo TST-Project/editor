@@ -126,7 +126,7 @@
         <label for="hd_format">Format</label>
         <select autocomplete="off" id="hd_format" name="format" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="form" required=""><option value="codex">codex</option><option value="loose-leaf">loose leaf</option><option value="plate">plate</option><option value="poster">poster</option><option value="pothi">pothi</option><option value="roll">roll</option><option value="scrapbook">scrapbook</option></select>
         <label for="hd_format">Technology</label>
-        <select autocomplete="off" id="hd_technology" name="technology" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="rend" required=""><option value="manuscript">manuscript</option><option value="movable-type">movable type</option><option value="xylography">xylography</option><option value="lithography">lithography</option><option value="photography">photography</option></select>
+        <select autocomplete="off" id="hd_technology" name="technology" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc" data-attr="rend" multiple=""><option value="manuscript">manuscript</option><option value="engraving">engraving</option><option value="squeeze">squeeze</option><option value="xylography">xylography</option><option value="lithography">lithography</option><option value="movable-type">movable type</option><option value="photography">photography</option></select>
     </div>
     <div>
         <label for="hd_material">Material</label>
@@ -299,7 +299,7 @@
         <div class="multi-item">
             <div>
                 <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
-                <select autocomplete="off" name="hand_collation_id" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple=""></select>
+                <select autocomplete="off" name="hand_collation_id" data-subattr="synch" data-from="collation_id" data-prefix="#" multiple=""></select>
                 <!--input type="text" data-subattr="n" placeholder="U1 U2"-->
                 <label>Scope</label>
                 <select autocomplete="off" name="handNote_scope" data-subattr="scope"> 
@@ -315,12 +315,12 @@
             </div>
             <div>
                 <label>Script</label>
-                <select autocomplete="off" name="handNote_script" class="multiselect" data-subattr="script" multiple="">
+                <select autocomplete="off" name="handNote_script" data-subattr="script" multiple="">
                 <option value="arabic">Arabic</option><option value="bengali">Bengali</option><option value="devanagari">Devanagari</option><option value="grantha">Grantha</option><option value="latin">Latin</option><option value="malayalam">Malayalam</option><option value="modi">Modi</option><option value="nandinagari">Nandinagari</option><option value="newa">Newa</option><option value="pala">Pala</option><option value="sarada">Sarada</option><option value="sinhalese">Sinhalese</option><option value="telugu">Telugu</option><option value="tamil">Tamil</option></select>
                 <label>Features</label>
-                <select autocomplete="off" name="handNote_scriptRef" class="multiselect" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
+                <select autocomplete="off" name="handNote_scriptRef" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
                 <label>Medium</label>
-                <select autocomplete="off" name="handNote_medium" class="multiselect" data-subattr="medium" multiple=""><option value="ink">ink</option><optgroup label="colour" data-way="open"><option value="black">black</option><option value="brown">brown</option><option value="blue">blue</option><option value="red">red</option></optgroup><option value="incised">incised</option><option value="soot">soot</option><option value="pencil">pencil</option></select>
+                <select autocomplete="off" name="handNote_medium" data-subattr="medium" multiple=""><option value="ink">ink</option><optgroup label="colour" data-way="open"><option value="black">black</option><option value="brown">brown</option><option value="blue">blue</option><option value="red">red</option></optgroup><option value="incised">incised</option><option value="soot">soot</option><option value="pencil">pencil</option></select>
             </div>
             <div>
                 <textarea autocomplete="off" name="handNote_desc" rows="4" data-subselect="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
@@ -333,7 +333,7 @@
         <div class="multi-item">
             <div>
                 <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
-                <select autocomplete="off" name="type_collation_id" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple=""></select>
+                <select autocomplete="off" name="type_collation_id" data-subattr="synch" data-from="collation_id" data-prefix="#" multiple=""></select>
                 <label>Scope</label>
                 <select autocomplete="off" name="typeNote_scope" data-subattr="scope"> 
                     <option value="" selected="" disabled=""></option>
@@ -348,12 +348,12 @@
             </div>
             <div>
                 <label>Script</label>
-                <select autocomplete="off" name="typeNote_script" class="multiselect" data-subattr="script" multiple="">
+                <select autocomplete="off" name="typeNote_script" data-subattr="script" multiple="">
                 <option value="arabic">Arabic</option><option value="bengali">Bengali</option><option value="devanagari">Devanagari</option><option value="grantha">Grantha</option><option value="latin">Latin</option><option value="malayalam">Malayalam</option><option value="modi">Modi</option><option value="nandinagari">Nandinagari</option><option value="newa">Newa</option><option value="pala">Pala</option><option value="sarada">Sarada</option><option value="sinhalese">Sinhalese</option><option value="telugu">Telugu</option><option value="tamil">Tamil</option></select>
                 <label>Features</label>
-                <select autocomplete="off" name="typeNote_scriptRef" class="multiselect" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
+                <select autocomplete="off" name="typeNote_scriptRef" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
                 <label>Medium</label>
-                <select autocomplete="off" name="typeNote_medium" class="multiselect" data-subattr="medium" multiple=""><option value="ink">ink</option><optgroup label="colour" data-way="open"><option value="black">black</option><option value="brown">brown</option><option value="blue">blue</option><option value="red">red</option></optgroup></select>
+                <select autocomplete="off" name="typeNote_medium" data-subattr="medium" multiple=""><option value="ink">ink</option><optgroup label="colour" data-way="open"><option value="black">black</option><option value="brown">brown</option><option value="blue">blue</option><option value="red">red</option></optgroup></select>
             </div>
             <div>
                 <textarea autocomplete="off" name="handNote_desc" rows="4" data-subselect="desc" data-schema="descriptive names" placeholder="Description of hand"></textarea>
@@ -365,7 +365,7 @@
         <div class="multi-item">
             <div>
                 <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
-                <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple=""></select>
+                <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" multiple=""></select>
                 <label title="As defined in the 'Contents' section">Textual unit</label>
                 <select autocomplete="off" data-subattr="corresp" name="text_corresp" data-from="text_id" data-prefix="#"></select>
             </div>
@@ -375,7 +375,7 @@
                     <option value="" selected="" disabled=""></option>
                 <option value="coat-of-arms">coat of arms</option><option value="decorative">decorative</option><option value="diagram">diagram</option><option value="doodle">doodle</option><option value="drawing">drawing</option><option value="emblem">emblem</option><option value="initial">initial</option><option value="monogram">monogram</option><option value="painting">painting</option><option value="paraph">paraph</option><option value="royal-cypher">royal cypher</option><option value="table">table</option></select>
                 <label>Placement</label>
-                <select autocomplete="off" data-subattr="subtype" name="decoNote_subtype" class="multiselect" multiple=""><option value="back">back</option><option value="beginning">beginning</option><option value="cover">cover</option><option value="detached">detached</option><option value="end">end</option><option value="flyleaf">flyleaf</option><option value="front">front</option><option value="guard-folio">guard folio</option><option value="inserted">inserted</option><option value="interlineal">interlineal</option><option value="intertextual">intertextual</option><option value="marginal">marginal</option><option value="running">running</option><option value="spine">spine</option><option value="title-page">title page</option><optgroup label="position" data-way="open"><option value="top">top</option><option value="bottom">bottom</option><option value="left">left</option><option value="right">right</option></optgroup></select>
+                <select autocomplete="off" data-subattr="subtype" name="decoNote_subtype" multiple=""><option value="back">back</option><option value="beginning">beginning</option><option value="cover">cover</option><option value="detached">detached</option><option value="end">end</option><option value="flyleaf">flyleaf</option><option value="front">front</option><option value="guard-folio">guard folio</option><option value="inserted">inserted</option><option value="interlineal">interlineal</option><option value="intertextual">intertextual</option><option value="marginal">marginal</option><option value="running">running</option><option value="spine">spine</option><option value="title-page">title page</option><optgroup label="position" data-way="open"><option value="top">top</option><option value="bottom">bottom</option><option value="left">left</option><option value="right">right</option></optgroup></select>
             </div>
             <div>
                 <textarea autocomplete="off" rows="4" name="decoNote_desc" data-subselect="desc" data-schema="descriptive" placeholder="Description of decoration"></textarea>
@@ -389,16 +389,16 @@
         <div class="multi-item">
             <div>
                 <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
-                <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple=""></select>
+                <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" multiple=""></select>
                 <label title="As defined in the 'Contents' section">Textual unit</label>
                 <select autocomplete="off" data-subattr="corresp" name="text_corresp" data-from="text_id" data-prefix="#"></select>
             </div>
             <div>
                 <label>Type</label>
-                <select autocomplete="off" data-subattr="type" name="addition_type" class="multiselect" multiple="">
+                <select autocomplete="off" data-subattr="type" name="addition_type" multiple="">
                 <optgroup label="structuring" data-way="open"><option value="catchword">catchword</option><option value="foliation">foliation</option><option value="header">header</option><option value="intertitle">intertitle</option><option value="register">register</option><option value="table-of-contents">table of contents</option><option value="title">title</option><option value="verse-beginning">verse beginning</option><option value="verse-numbering">verse numbering</option></optgroup><optgroup label="commenting" data-way="open"><option value="correction">correction</option><option value="gloss">gloss/commentary</option><option value="label">label</option><option value="metre">metre</option><option value="commenting-note">commenting note</option></optgroup><optgroup label="documenting" data-way="open"><option value="benediction">benediction (prose)</option><option value="blessing">blessing (formulaic)</option><option value="copy-statement">copy statement</option><option value="date">date</option><option value="dedication">dedication</option><option value="ex-libris">ex-libris</option><option value="invocation">invocation (metrical)</option><option value="ownership-statement">ownership statement</option><option value="postface">postface</option><option value="preface">preface</option><option value="recitation-statement">recitation statement</option><option value="satellite-stanza">satellite stanza</option><option value="seal">seal</option><option value="shelfmark">shelfmark</option><option value="stamp">stamp</option><option value="summary">summary</option><option value="total-chapters">total chapters</option><option value="total-leaves">total leaves</option><option value="total-stanzas">total stanzas</option><option value="total-works">total works</option><option value="documenting-note">documenting note</option><option value="user-related-note">user-related note</option></optgroup></select>
                 <label>Placement</label>
-                <select autocomplete="off" data-subattr="subtype" name="addition_subtype" class="multiselect" multiple=""><option value="back">back</option><option value="beginning">beginning</option><option value="cover">cover</option><option value="detached">detached</option><option value="end">end</option><option value="flyleaf">flyleaf</option><option value="front">front</option><option value="guard-folio">guard folio</option><option value="inserted">inserted</option><option value="interlineal">interlineal</option><option value="intertextual">intertextual</option><option value="marginal">marginal</option><option value="running">running</option><option value="spine">spine</option><option value="title-page">title page</option><optgroup label="position" data-way="open"><option value="top">top</option><option value="bottom">bottom</option><option value="left">left</option><option value="right">right</option></optgroup></select>
+                <select autocomplete="off" data-subattr="subtype" name="addition_subtype" multiple=""><option value="back">back</option><option value="beginning">beginning</option><option value="cover">cover</option><option value="detached">detached</option><option value="end">end</option><option value="flyleaf">flyleaf</option><option value="front">front</option><option value="guard-folio">guard folio</option><option value="inserted">inserted</option><option value="interlineal">interlineal</option><option value="intertextual">intertextual</option><option value="marginal">marginal</option><option value="running">running</option><option value="spine">spine</option><option value="title-page">title page</option><optgroup label="position" data-way="open"><option value="top">top</option><option value="bottom">bottom</option><option value="left">left</option><option value="right">right</option></optgroup></select>
             </div>
             <div>
                 <textarea autocomplete="off" name="additions_desc" rows="4" class="big" data-subselect=":scope" data-schema="transcription descriptive names" placeholder="Marginalia, running titles, satellite stanzas, etc."></textarea>
@@ -413,7 +413,7 @@
             <div>
                 <div>
                     <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
-                    <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" class="multiselect" multiple=""></select>
+                    <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#" multiple=""></select>
                 </div>
                 <div>
                 <label title="A unique identifier. No spaces.">Text ID</label>
@@ -434,7 +434,7 @@
             </div>
             <div>
                 <label>Genre</label>
-                <select autocomplete="off" class="multiselect" name="msItem_genre" data-subattr="class" multiple=""><option value="#ammanai">Ammāṉai</option><option value="#illakkanam">Ilakkaṇam</option><option value="#katai">Katai</option><option value="#kappiyam">Kāppiyam/epics</option><option value="#kilkkanakku">Kīḻkkaṇakku</option><option value="#cankam">Caṅkam</option><option value="#talapuranam">Talapurāṇam</option><option value="#tirumurai">Tirumuṟai</option><option value="#nikantu">Nikaṇṭu</option><option value="#natakam">Nāṭakam</option><option value="#pirapantam">Pirapantam</option><option value="#puranam">Purāṇam</option></select>
+                <select autocomplete="off" name="msItem_genre" data-subattr="class" multiple=""><option value="#ammanai">Ammāṉai</option><option value="#illakkanam">Ilakkaṇam</option><option value="#katai">Katai</option><option value="#kappiyam">Kāppiyam/epics</option><option value="#kilkkanakku">Kīḻkkaṇakku</option><option value="#cankam">Caṅkam</option><option value="#talapuranam">Talapurāṇam</option><option value="#tirumurai">Tirumuṟai</option><option value="#nikantu">Nikaṇṭu</option><option value="#natakam">Nāṭakam</option><option value="#pirapantam">Pirapantam</option><option value="#puranam">Purāṇam</option></select>
             </div>
             <div>
                 <label>Author</label>
@@ -446,7 +446,7 @@
                     <option value="" selected="" disabled=""></option>
                 <option value="ara">Arabic</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pal">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="tam">Tamil</option><option value="tel">Telugu</option></select>
                 <label>Other languages</label>
-                <select autocomplete="off" class="multiselect" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" multiple=""><option value="ara">Arabic</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pal">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="tam">Tamil</option><option value="tel">Telugu</option></select>
+                <select autocomplete="off" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" multiple=""><option value="ara">Arabic</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pal">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="tam">Tamil</option><option value="tel">Telugu</option></select>
             </div>
             <div>
                 <label>Other manuscript testimonies</label>
@@ -579,7 +579,7 @@
             <div>
                 <div>
                     <label title="As defined in the 'Collation' section.">Codicological unit(s)</label>
-                    <select autocomplete="off" class="multiselect" data-subattr="synch" name="transcr_n" data-from="collation_id" data-prefix="#" multiple=""></select>
+                    <select autocomplete="off" data-subattr="synch" name="transcr_n" data-from="collation_id" data-prefix="#" multiple=""></select>
                 </div>
                 <div>
                     <label title="As defined in the 'Contents' section">Textual unit</label>

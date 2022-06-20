@@ -141,6 +141,10 @@ hr {
     flex-grow: 1;
 }
 
+.vsb-main .title {
+    padding-right: 2px;
+}
+
 .vsb-main button {
     font-size: 1.4rem;
     font-family: brill, et-book, serif;
@@ -794,7 +798,7 @@ h4 {
 .CodeMirror-required { outline: 1px dashed red; }
 
 .caret {
-    right: 0;
+    right: 0 !important;
 }
 
 #editorviewer {

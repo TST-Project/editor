@@ -413,7 +413,7 @@ const TSTEditor = (function() {
                 editor.selects.update(s);
             }
             
-            for(const m of heditor.querySelectorAll('.multiselect'))
+            for(const m of heditor.querySelectorAll('select[multiple]'))
                 editor.selects.make(m);
            
             for(const t of heditor.querySelectorAll('textarea:not(.noCodeMirror)'))
