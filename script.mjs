@@ -1294,7 +1294,8 @@ const TSTEditor = (function() {
                 {name: 'old_shelfmark', select: 'idno[type="ancienne cote"]'},
                 {name: 'foliation', select: 'foliation[n]'},
                 {name: 'editor', select: 'editionStmt'},
-                {name: 'stringhole', select: 'support measure[unit="stringhole"]'}
+                {name: 'stringholes', select: 'support measure[unit="stringhole"]'},
+                {name: 'scribe_name', select: '[scribeRef]'},
             ];
             const funcs = {
                 shelfmark(doc) {
@@ -1344,13 +1345,35 @@ const TSTEditor = (function() {
                     }
                     eStmt.remove();
                 },
-                stringhole(doc) {
+                stringholes(doc) {
                     const measure = doc.querySelector('measure[unit="stringhole"]');
                     const binding = doc.querySelector('binding');
                     const decoNote = xml.makeEl(doc,'decoNote');
                     decoNote.setAttribute('type','stringhole');
                     decoNote.appendChild(measure);
                     binding.appendChild(decoNote);
+                },
+                scribe_name(doc) {
+                    const scribes = new Map([
+                        ['#ArielTitleScribe','Ariel\'s title scribe'],
+                        ['#EdouardAriel','Edouard Ariel'],
+                        ['#PhEDucler','Philippe Étienne Ducler'],
+                        ['#DuclerScribe','Ducler\'s scribe']
+                    ]);
+
+                    const handNotes = doc.querySelectorAll('[scribeRef]');
+                    for(const handNote of handNotes) {
+                        const desc = handNote.querySelector('desc') || (() => {
+                            const el = xml.makeEl('desc');
+                            handNote.appendChild(el);
+                            return el;
+                        })();
+                        const scribe = `<persName role="scribe">${scribes.get(handNote.getAttribute('scribeRef'))}</persName>`;
+                        desc.innerHTML = desc.innerHTML ? 
+                            desc.innerHTML + ` ${scribe}.` : 
+                            `${scribe}.`;
+                        handNote.removeAttribute('scribeRef');
+                    }
                 }
             };
             
@@ -1360,7 +1383,7 @@ const TSTEditor = (function() {
                 if(el) found.push(test.name);
             }
             if(found.length > 0) {
-                const fs = found.join(', ');
+                const fs = found.join(', ').replace('_',' ');
                 alert('This file was created with an older version of the editor. The following elements will be updated:\r\n' + fs);
                 for(const f of found)
                     funcs[f](doc);
