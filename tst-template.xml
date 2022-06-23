@@ -40,7 +40,6 @@
                   <objectDesc form="">
                      <supportDesc material="">
                         <support>
-                           <measure unit="stringhole" quantity=""/>
                            <p></p>
                         </support>
                         <extent>
@@ -64,7 +63,12 @@
                   <additions>
                   </additions>
                   <bindingDesc>
-                     <binding><p></p></binding>
+                     <binding>
+                        <p></p>
+                        <decoNote type="stringhole">
+                           <measure unit="stringhole" quantity=""/>
+                        </decoNote>
+                    </binding>
                   </bindingDesc>
                </physDesc>
                <history>
