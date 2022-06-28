@@ -1363,6 +1363,7 @@ const TSTEditor = (function() {
 
                     const handNotes = doc.querySelectorAll('[scribeRef]');
                     for(const handNote of handNotes) {
+                        if(!handNote) continue;
                         const desc = handNote.querySelector('desc') || (() => {
                             const el = xml.makeEl('desc');
                             handNote.appendChild(el);
