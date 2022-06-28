@@ -1347,7 +1347,20 @@ const TSTEditor = (function() {
                 },
                 stringholes(doc) {
                     const measure = doc.querySelector('measure[unit="stringhole"]');
-                    const binding = doc.querySelector('binding');
+                    const binding = (() => {
+                        const exists = doc.querySelector('binding');
+                        if(exists) return exists;
+                        const newel = xml.makeEl(doc,'binding');
+                        const bDesc = doc.querySelector('bindingDesc');
+                        if(bDesc)
+                            bDesc.appendChild(newel);
+                        else {
+                            const newbDesc = xml.makeEl(doc,'bindingDesc');
+                            doc.querySelector('physDesc').appendChild(newbDesc);
+                            newbDesc.appendChild(newel);
+                        }
+                        return newel;
+                    })();
                     const decoNote = xml.makeEl(doc,'decoNote');
                     decoNote.setAttribute('type','stringhole');
                     decoNote.appendChild(measure);
@@ -1365,7 +1378,7 @@ const TSTEditor = (function() {
                     for(const handNote of handNotes) {
                         if(!handNote) continue;
                         const desc = handNote.querySelector('desc') || (() => {
-                            const el = xml.makeEl('desc');
+                            const el = xml.makeEl(doc,'desc');
                             handNote.appendChild(el);
                             return el;
                         })();
