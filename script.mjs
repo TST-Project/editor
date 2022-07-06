@@ -987,7 +987,7 @@ const TSTEditor = (function() {
                         const txt = invalid.textContent;
                         const quoted = txt.trim() != '' ?
                             `: '${txt}'` : '';
-                        alert(`XML error${quoted}`);
+                        alert(`XML error ${quoted}`);
                     }
                     return;
                 }
@@ -1158,6 +1158,8 @@ const TSTEditor = (function() {
            
             const annos = state.annoMaps.get(manif.value);
             if(!annos) return;
+            const entries = Array.from(annos.entries());
+            if(entries.length === 0) return;
             
             const doc = toplevel.ownerDocument;
             const ns = doc.documentElement.namespaceURI;
@@ -1166,24 +1168,46 @@ const TSTEditor = (function() {
             listAnno.innerHTML = '';
             listAnno.appendChild( 
                 doc.createCDATASection(
-                    JSON.stringify(
-                        Array.from(annos.entries())
-                    )
+                    JSON.stringify(entries)
                 ) 
             );
         },
 
         postProcess(toplevel) {
             const par = toplevel || state.xmlDoc;
+            
+            const toRemove = ['collation','foliation','condition','binding','bindingDesc','decoDesc','provenance','acquisition'];
+            for(const name of toRemove) {
+                const els = par.querySelectorAll(name);
+                for(const el of els) {
+                    if(el.childNodes.length === 0)
+                        el.remove();
+                }
+            }
 
             const supportDescs = par.querySelectorAll('supportDesc');
             for(const supportDesc of supportDescs) {
-                // condition after last foliation
+                // order is: foliation, collation, condition
+                const foliations = supportDesc.querySelectorAll('foliation');
+                const collations = supportDesc.querySelectorAll('collation');
                 const condition = supportDesc.querySelector('condition');
-                const lastFoliation = supportDesc.querySelector('foliation:last-of-type');
-                if(condition && lastFoliation) lastFoliation.insertAdjacentElement('afterend',condition);
+                const allels = [...foliations,...collations,condition].filter(el => el);
+                for(const el of allels)
+                    supportDesc.appendChild(el);
             }
-
+            
+            const physDescs = par.querySelectorAll('physDesc');
+            for(const physDesc of physDescs) {
+                // order is: objectDesc handDesc typeDesc decoDesc additions bindingDesc
+                const handDesc = physDesc.querySelector('handDesc');
+                const typeDesc = physDesc.querySelector('typeDesc');
+                const decoDesc = physDesc.querySelector('decoDesc');
+                const additions = physDesc.querySelector('additions');
+                const bindingDesc = physDesc.querySelector('bindingDesc');
+                const allels = [handDesc,typeDesc,decoDesc,additions,bindingDesc].filter(el => el);
+                for(const el of allels)
+                    physDesc.appendChild(el);
+            }
             // revisionDesc should be at the end
             const revisionDesc = par.querySelector('revisionDesc');
             revisionDesc.parentNode.appendChild(revisionDesc);
@@ -1211,7 +1235,8 @@ const TSTEditor = (function() {
                     ['deu','de'],
                     ['pli','pi'],
                     ['por','pt'],
-                    ['lat','la']
+                    ['lat','la'],
+                    ['bod','bo']
                 ]);
 
                 const lang2 = langmap.get(lang) || lang;
