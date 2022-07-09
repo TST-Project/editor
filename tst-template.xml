@@ -44,13 +44,21 @@
                         </support>
                         <extent>
                            <measure unit="folio" quantity=""></measure>
+                           <dimensions type="object" unit="mm">
+                              <width quantity=""/>
+                              <height quantity=""/>
+                           </dimensions>
                            <dimensions type="leaf" unit="mm">
                               <width quantity=""/>
                               <height quantity=""/>
                            </dimensions>
+                           <dimensions type="written" unit="mm">
+                              <width quantity=""/>
+                              <height quantity=""/>
+                           </dimensions>
                         </extent>
-                        <collation></collation>
                         <foliation></foliation>
+                        <collation></collation>
                         <condition></condition>
                      </supportDesc>
                      <layoutDesc>
@@ -58,8 +66,7 @@
                      </layoutDesc>
                   </objectDesc>
                   <handDesc><handNote scope="" script=""><desc></desc></handNote></handDesc>
-                  <decoDesc><decoNote type=""><desc></desc></decoNote>
-                  </decoDesc>
+                  <decoDesc><decoNote type=""><desc></desc></decoNote></decoDesc>
                   <additions>
                   </additions>
                   <bindingDesc>
@@ -87,12 +94,8 @@
             </msDesc>
          </sourceDesc>
       </fileDesc>
-      <encodingDesc>
-         <p></p>
-      </encodingDesc>
-      <revisionDesc>
-         <change when=""></change>
-      </revisionDesc>
+      <encodingDesc><p></p></encodingDesc>
+      <revisionDesc><change when=""></change></revisionDesc>
    </teiHeader>
    <facsimile>
    </facsimile>
