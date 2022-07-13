@@ -185,6 +185,7 @@ const getSchema = function(s) {
             attrs: {
                 n: null,
                 facs: null,
+                break: ['no'],
                 '/': null,
             }
         },
