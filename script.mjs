@@ -1236,7 +1236,8 @@ const TSTEditor = (function() {
                     ['pli','pi'],
                     ['por','pt'],
                     ['lat','la'],
-                    ['bod','bo']
+                    ['bod','bo'],
+                    ['mar','mr']
                 ]);
 
                 const lang2 = langmap.get(lang) || lang;
