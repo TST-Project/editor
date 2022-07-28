@@ -169,7 +169,7 @@ const getSchema = function(s) {
         units: ['akṣara','character'],
         langs: ['ta','ta-Taml','en','fr','de','la','pt','pi','sa'],
         bigunits: ['folio','page','column','left-margin','right-margin','main-text-area'],
-        place: ['above','below','left','right','top','bottom','margin','foot']
+        place: ['in-place','above','below','left','right','top','bottom','margin','foot']
     };
 
     const selected = s ? 
@@ -241,7 +241,7 @@ const getSchema = function(s) {
         },
         del: {
             attrs: {
-                rend: ['overstrike','understrike','strikeout','scribble','line above', 'two lines above'],
+                rend: ['implied','overline','overwritten','strikethrough','scribble','underline'],
             },
             children: ['gap','unclear']
         },
