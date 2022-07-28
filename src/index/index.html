@@ -259,11 +259,12 @@
         <input autocomplete="off" type="text" id="hd_streams" name="streams" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-attr="streams" placeholder="1" pattern="\d+\s*\d*" size="8" data-tip="Number of textual streams per page. For example, a tripāṭha manuscript, with mūla and commentary, has two streams.">
     </div>
     <div>
-        <label for="hd_layout">Layout</label>
-        <textarea autocomplete="off" rows="2" id="hd_layout" name="layout" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-schema="descriptive" placeholder="Further notes on the layout of the manuscript"></textarea>
-    </div><div>
         <label for="hd_condition">Condition</label>
         <textarea autocomplete="off" rows="2" id="hd_condition" name="condition" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > condition" data-schema="descriptive" placeholder="Very good state of preservation, in spite of bore holes caused by insects."></textarea>
+    </div>
+    <div>
+        <label for="hd_layout">Layout</label>
+        <textarea autocomplete="off" rows="2" id="hd_layout" name="layout" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > layoutDesc > layout" data-schema="descriptive" placeholder="Further notes on the layout of the manuscript"></textarea>
     </div>
     <div>
         <label for="hd_binding">Binding</label>
