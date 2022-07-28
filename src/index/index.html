@@ -272,15 +272,6 @@
         <input autocomplete="off" type="number" step="1" min="0" id="hd_stringholes" name="stringholes" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > bindingDesc > binding > decoNote[type='stringhole'] > measure[unit='stringhole']" data-attr="quantity">
     </div>
     
-    <h4>Foliation</h4>
-    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > foliation">
-        <div class="multi-item">
-            <div>
-            <textarea autocomplete="off" rows="4" name="foliation" data-subselect=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
-            </div>
-        </div>
-    </div>
-
     <h4>Collation (Codicological units)</h4>
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > collation > desc">
         <div class="multi-item">
@@ -290,6 +281,15 @@
             </div>
             <div>
             <textarea autocomplete="off" rows="4" name="collation" data-subselect=":scope" data-schema="descriptive" placeholder="Description of how the leaves are arranged."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <h4>Foliation</h4>
+    <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > foliation">
+        <div class="multi-item">
+            <div>
+            <textarea autocomplete="off" rows="4" name="foliation" data-subselect=":scope" data-schema="descriptive" placeholder="E.g., Tamil letter-numerals, left margin."></textarea>
             </div>
         </div>
     </div>
