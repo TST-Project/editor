@@ -4,6 +4,7 @@
                 xmlns:tst="https://github.com/tst-project"
                 exclude-result-prefixes="x tst">
 
+<xsl:import href="../lib/xslt/copy.xsl"/>
 <xsl:import href="../lib/xslt/functions.xsl"/>
 <xsl:import href="../lib/xslt/definitions.xsl"/>
 <xsl:import href="../lib/xslt/common.xsl"/>
