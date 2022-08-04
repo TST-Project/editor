@@ -158,7 +158,7 @@ const init = (textarea) => {
 
 const getSchema = function(s) {
     const schemae = {
-        transcription_restricted: ['milestone','lb','cb','pb','add','choice','del','seg','subst','supplied','surplus','hi','space','unclear','gap','damage','g'], 
+        transcription_restricted: ['milestone','lb','cb','pb','add','choice','del','seg','subst','supplied','surplus','hi','space','unclear','gap','damage','g','num'], 
         descriptive_restricted: ['term','note','emph','ex','expan','foreign','title','locus','material','ref','q','date','watermark','list','item','stamp'],
         names: ['persName','orgName','geogName','placeName'],
     };
@@ -280,6 +280,12 @@ const getSchema = function(s) {
         },
         
         // editorial
+
+        num: {
+            attrs: {
+                rend: ['traditional']
+            }
+        },
         supplied: {
             attrs: {
                 reason: ['lost','omitted'],
@@ -293,7 +299,6 @@ const getSchema = function(s) {
         },
         seg: {
             attrs: {
-                //'function': ['benediction','blessing','colophon','commenting-note','completion-statement','chapter-heading','correction','date','dedication','documenting-note','end-title','ex-libris','explicit','foliation','gloss','heading','incipit','intertitle','invocation','metre','note','ownership-statement','postface','preface','register','rubric','running-title','satellite-stanza','shelfmark','stage-directions','stamp','summary','title','table-of-contents','total-chapters','total-leaves','total-stanzas','verse-beginning','verse-numbering'],
                 'function': [...definitions.segtype,...definitions.additiontype],
                 'rend': ['grantha'],
                 'type': ['root-text','commentary'],
