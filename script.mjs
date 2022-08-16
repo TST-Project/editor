@@ -1238,6 +1238,7 @@ const TSTEditor = (function() {
                     ['lat','la'],
                     ['bod','bo'],
                     ['mar','mr']
+                    ['hin','hi']
                 ]);
 
                 const lang2 = langmap.get(lang) || lang;
@@ -1247,10 +1248,20 @@ const TSTEditor = (function() {
                 );
 
                 for(const el of els) {
-                    const tamilchars = [...el.textContent.matchAll(/[\u0B80-\u0BFF]/g)];
-                    const langscript = (tamilchars.length / el.textContent.length > 0.5) ?
-                        lang2 + '-Taml' :
-                        lang2;
+                    const langscript = () => {
+                        if(lang2 === 'ta') {
+                            const tamilchars = [...el.textContent.matchAll(/[\u0B80-\u0BFF]/g)];
+                            if(tamilchars.length / el.textContent.length > 0.5)
+                                return 'ta-Taml';
+                            else return 'ta';
+                        }
+                        if(lang2 === 'hi' || lang2 === 'mr') {
+                            const devachars = [...el.textContent.matchAll(/[\u0900-\u097F]/g)];
+                            if(devachars.length / el.textContent.length > 0.5)
+                                return `${lang2}-Deva`;
+                            else return lang2;
+                        }
+                    })();
                     el.setAttribute('xml:lang',langscript); 
                 }
 
@@ -1262,7 +1273,13 @@ const TSTEditor = (function() {
         selects: {
             make(el) {
                 el.id = 'box' + Math.random().toString(36).substr(2,9);
-                const mbox = new vanillaSelectBox(`#${el.id}`,{placeHolder: 'Choose...',search: true, disableSelectAll: true});
+                const mbox = new vanillaSelectBox(`#${el.id}`, {
+                    placeHolder: 'Choose...',
+                    search: true, 
+                    disableSelectAll: true,
+                    itemsSeparator: ', ',
+                    maxWidth: Infinity
+                });
                 mbox.setValue(
                     [...el.querySelectorAll('option')].filter(o => o.selected).map(o => o.value)
                 );
