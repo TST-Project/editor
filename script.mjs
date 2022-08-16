@@ -1237,7 +1237,7 @@ const TSTEditor = (function() {
                     ['por','pt'],
                     ['lat','la'],
                     ['bod','bo'],
-                    ['mar','mr']
+                    ['mar','mr'],
                     ['hin','hi']
                 ]);
 
@@ -1248,7 +1248,7 @@ const TSTEditor = (function() {
                 );
 
                 for(const el of els) {
-                    const langscript = () => {
+                    const langscript = (() => {
                         if(lang2 === 'ta') {
                             const tamilchars = [...el.textContent.matchAll(/[\u0B80-\u0BFF]/g)];
                             if(tamilchars.length / el.textContent.length > 0.5)
