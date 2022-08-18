@@ -1253,14 +1253,15 @@ const TSTEditor = (function() {
                             const tamilchars = [...el.textContent.matchAll(/[\u0B80-\u0BFF]/g)];
                             if(tamilchars.length / el.textContent.length > 0.5)
                                 return 'ta-Taml';
-                            else return 'ta';
+                            //else return 'ta';
                         }
-                        if(lang2 === 'hi' || lang2 === 'mr') {
+                        else if(lang2 === 'hi' || lang2 === 'mr') {
                             const devachars = [...el.textContent.matchAll(/[\u0900-\u097F]/g)];
                             if(devachars.length / el.textContent.length > 0.5)
                                 return `${lang2}-Deva`;
-                            else return lang2;
+                            //else return lang2;
                         }
+                        else return lang2;
                     })();
                     el.setAttribute('xml:lang',langscript); 
                 }
