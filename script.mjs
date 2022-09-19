@@ -1172,6 +1172,17 @@ const TSTEditor = (function() {
                 ) 
             );
         },
+        
+        reorder(par, topel, childels) {
+            const kids = par.querySelectorAll(topel);
+            for(const kid of kids) {
+                const allels = childels.map(str => [...kid.querySelectorAll(str)])
+                                       .flat()
+                                       .filter(el => el);
+                for(const el of allels)
+                    kid.appendChild(el);
+            }
+        },
 
         postProcess(toplevel) {
             const par = toplevel || state.xmlDoc;
@@ -1184,7 +1195,11 @@ const TSTEditor = (function() {
                         el.remove();
                 }
             }
-
+            
+            editor.reorder(par,'supportDesc',['foliation','collation','condition']);
+            editor.reorder(par,'physDesc',['objectDesc','handDesc','typeDesc','decoDesc','additions','bindingDesc']);
+            editor.reorder(par,'history',['origin','provenance','acquisition']);
+            /*
             const supportDescs = par.querySelectorAll('supportDesc');
             for(const supportDesc of supportDescs) {
                 // order is: foliation, collation, condition
@@ -1208,6 +1223,17 @@ const TSTEditor = (function() {
                 for(const el of allels)
                     physDesc.appendChild(el);
             }
+            const histories = par.querySelectorAll('history');
+            for(const history of histories) {
+                // order is: origin provenance acquisition
+                const origins = history.querySelectorAll('origin');
+                const provenances = history.querySelectorAll('provenance');
+                const acquisitions = history.querySelectorAll('acquisition');
+                const allels = [...origins,...provenances,...acquisitions].filter(el => el);
+                for(const el of allels)
+                    history.appendChild(el);
+            }
+            */
             // revisionDesc should be at the end
             const revisionDesc = par.querySelector('revisionDesc');
             revisionDesc.parentNode.appendChild(revisionDesc);
