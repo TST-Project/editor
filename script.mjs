@@ -1246,7 +1246,6 @@ const TSTEditor = (function() {
                 const els = [...msItem.children].filter(el => 
                     el.matches('title,author,rubric,incipit,explicit,finalRubric,colophon')
                 );
-
                 for(const el of els) {
                     const langscript = (() => {
                         if(lang2 === 'ta') {
@@ -1261,7 +1260,7 @@ const TSTEditor = (function() {
                                 return `${lang2}-Deva`;
                             //else return lang2;
                         }
-                        else return lang2;
+                        return lang2;
                     })();
                     el.setAttribute('xml:lang',langscript); 
                 }
