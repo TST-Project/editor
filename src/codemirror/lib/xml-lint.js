@@ -29,7 +29,8 @@ const { HTMLHint, HTMLParser } = require ('./htmlhint-custom.js');
         'id-unique': false,
         'src-not-empty': false,
         'attr-no-duplication': true,
-        'attr-unsafe-chars': true
+        'attr-unsafe-chars': true,
+        'attr-name-unsafe-chars': true
     };
 
     CodeMirror.registerHelper('lint', 'xml', function(text, options) {

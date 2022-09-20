@@ -15,6 +15,7 @@ var HTMLHint = function(e) {
         "attr-lowercase": !0,
         "attr-no-namespaces": !0,
         "attr-unsafe-chars": !0,
+        "attr-name-unsafe-chars": !0,
         "attr-value-double-quotes": !0,
         "doctype-first": !0,
         "tag-pair": !0,
@@ -265,18 +266,19 @@ var HTMLParser = function(e) {
 }), HTMLHint.addRule({
     id: "attr-unsafe-chars",
     description: "Attribute values cannot contain unsafe chars.",
-    /*
     init: function(e, t) {
         var a = this;
         e.addListener("tagstart", function(e) {
             for (var n, r, i = e.attrs, s = e.col + e.tagName.length + 1, o = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]|&(?!(?:#[xX][0-9a-fA-F]+|#\d+|[lg]t|amp|apos|quot);)/, l = 0, u = i.length; u > l; l++)
                 if (n = i[l], r = n.value.match(o), null !== r) {
                     var d = escape(r[0]).replace(/%u/, "\\u").replace(/%/, "\\x");
-                    t.warn("The value of attribute [ " + n.name + " ] cannot contain an unsafe char [ " + d + " ].", e.line, s + n.index, a, n.raw)
+                    t.error("The value of attribute [ " + n.name + " ] cannot contain an unsafe char [ " + d + " ].", e.line, s + n.index, a, n.raw)
                 }
         })
     }
-    */
+}), HTMLHint.addRule({
+    id: "attr-name-unsafe-chars",
+    description: "Attribute names cannot contain unsafe chars.",
     init: function(e, t, a) {
         var n = this,
             r = Array.isArray(a) ? a : [];
