@@ -277,8 +277,8 @@
     <div class="multiple" data-select="teiHeader > fileDesc > sourceDesc > msDesc > physDesc > objectDesc > supportDesc > collation > desc">
         <div class="multi-item">
             <div>
-                <label title="A unique identifier. No spaces.">Unit ID</label>
-                <input autocomplete="off" type="text" name="collation_id" data-subattr="xml:id" placeholder="U1" pattern="[^\s]+" data-tip="A unique identifier. No spaces."></input>
+                <label title="A unique identifier, starting with a letter. No spaces or special characters.">Unit ID</label>
+                <input autocomplete="off" type="text" name="collation_id" data-subattr="xml:id" placeholder="U1" pattern="^[a-zA-Z_][\w.-]*$" data-tip="A unique identifier, starting with a letter. No spaces or special characters."></input>
             </div>
             <div>
             <textarea autocomplete="off" rows="4" name="collation" data-subselect=":scope" data-schema="descriptive" placeholder="Description of how the leaves are arranged."></textarea>
@@ -409,8 +409,8 @@
                     <select autocomplete="off" data-subattr="synch" data-from="collation_id" data-prefix="#"  multiple></select>
                 </div>
                 <div>
-                <label title="A unique identifier. No spaces.">Text ID</label>
-                <input autocomplete="off" type="text" name="text_id" data-subattr="xml:id" placeholder="T1" pattern="[^\s]+" data-tip="A unique identifier. No spaces.">
+                <label title="A unique identifier, starting with a letter. No spaces or special characters.">Text ID</label>
+                <input autocomplete="off" type="text" name="text_id" data-subattr="xml:id" placeholder="T1" pattern="^[a-zA-Z_][\w.-]*$" data-tip="A unique identifier, starting with a letter. No spaces or special characters.">
                 </div>
                 <select autocomplete="off" data-subattr="defective" style="flex-grow: 0.5" required>
                     <option value="false">complete</option>
