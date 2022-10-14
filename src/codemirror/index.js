@@ -163,11 +163,11 @@ const getSchema = function(s) {
         names: ['persName','orgName','geogName','placeName'],
     };
     schemae.transcription = ['p',...schemae.transcription_restricted];
-    schemae.descriptive = ['lg',...schemae.descriptive_restricted,'quote'];
+    schemae.descriptive = ['p','lg',...schemae.descriptive_restricted,'quote'];
     
     const attrs = {
         units: ['akṣara','character'],
-        langs: ['ta','ta-Taml','en','fr','de','la','pt','pi','sa'],
+        langs: ['ta','ta-Taml','en','fr','bra','de','gu','la','mr','pt','pi','raj','sa'],
         bigunits: ['folio','page','column','left-margin','right-margin','main-text-area'],
         place: ['in-place','above','below','left','right','top','bottom','margin','foot']
     };
@@ -222,7 +222,7 @@ const getSchema = function(s) {
         },
         g: {
             attrs: {
-                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#tēti','#mācam','#varuṣam','#pattu','#nūṟu','#āyiram','#patru','#eduppu','#mēṟpaṭi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#latin_cross'],
+                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#tēti','#mācam','#varuṣam','#pattu','#nūṟu','#āyiram','#patru','#eduppu','#mēṟpaṭi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#latin_cross','#bhale_with_hook','#mindu','#jain_omkara'],
                 rend: definitions.entityrend,
             },
         },
