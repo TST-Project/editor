@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>TST: Sanskrit transcription</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="stylesheet" href="../lib/css/tufte.css">
+<link rel="stylesheet" href="../lib/css/transcription.css">
+<link rel="stylesheet" href="../lib/css/fonts.css">
+<link rel="stylesheet" href="../lib/css/tst.css">
+<link rel="stylesheet" href="../lib/css/prism.css">
+
+<style type="text/css">
+    body {
+        display: inherit;
+        padding-left: 12.5%;
+        margin: auto;
+        width: unset;
+        height: unset;
+        max-width: unset;
+    }
+
+    th {
+        text-align: left;
+    }
+    figure {
+    	margin: revert;
+    }
+    figcaption {
+    	float: initial;
+    	clear: initial;
+    	max-width: initial;
+    }
+
+</style>
+</head>
+
+<body lang="en">
+    <article>
+        <h1>Sanskrit transcription</h1>
+        <h2>Vowel signs</h2>
+        <section>
+            <p>Although normally, vowel signs are attached to a consonant, there are cases where you may want to input a vowel sign independent of a consonant. If you are transcribing in Devanāgarī script, this can be achieved by typing ऽ + zero-width joiner (U+200D) + the vowel sign.This can also be done in other scripts by using the corresponding avagraha character, e.g., 𑇁 in Śāradā, ഽ in Malayālam, etc.</p>
+            <table>
+                <tr><td><code class="language-xml">ऽ + zero-width joiner (U+200D) + ा</code></td><td>→</td><td class="aalt">ऽ‍ा</td></tr>
+                <tr><td><code class="language-xml">ঽ + zero-width joiner (U+200D) + ৈ  <code></td><td>→</td><td class="aalt">ঐ</td></tr>
+                </table>
+            <p>When you are transcribing in Roman transliteration, and wish to indicate that a vowel sign has been added or deleted, you can use the following pattern:</p>
+            <table>
+                <tr><td></td><td></td><th>Roman</th><th>Devanāgarī</th></tr>
+                <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;i&lt;/del&gt;&lt;add&gt;ā&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">ā</ins></td><td><del class="aalt">इ</del>क<ins class="aalt add">आ</ins></td></tr>
+                <tr><td></td><td></td><th>Roman</th><th>Malayālam</th></tr>
+                <tr><td><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add&gt;a&lt;/add&gt;&lt;/subst&gt;</code></td><td>→</td><td>k<del>e</del><ins class="add">a</ins></td><td><del class="aalt">എ</del>ക</td></tr>
+            </table>
+            <p>You can further specify the place of addition with the @place. For example:
+                <blockquote><code class="language-xml">&lt;subst&gt;k&lt;del&gt;e&lt;/del&gt;&lt;add place="above"&gt;ā&lt;/add&gt;&lt;/subst&gt;</code></blockquote></p>
+            
+        </section>
+        <h2>Devanāgarī</h2>
+        <section>
+            <p>A number of Jain symbols can be inserted by means of the <code class="language-xml">g</code> tag. The Jaina oṃkāra sign is already included in Unicode, while the bhale symbols are part of a <a href="https://www.unicode.org/L2/L2021/21102-devanagari-bhale-mindu.pdf">proposal</a> and are here included provisionally.</p>
+            <table>
+                <tr><td></td><td></td><th>Devanāgarī</th></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#jain_omkara"/&gt;</code></td><td>→</td><td>ꣽ</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#headmark"/&gt;</code></td><td>→</td><td>𑬀</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#headmark_with_headstroke"/&gt;</code></td><td>→</td><td>𑬁</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#bhale"/&gt;</code></td><td>→</td><td>𑬂</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#bhale_hook"/&gt;</code></td><td>→</td><td>𑬃</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#bhale_five"/&gt;</code></td><td>→</td><td>𑬆</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#bhale_nine"/&gt;</code></td><td>→</td><td>𑬇</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#bhale_nine_reversed"/&gt;</code></td><td>→</td><td>𑬈</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#mindu"/&gt;</code></td><td>→</td><td>𑬉</td></tr>
+            </table>
+        </section>
+        <h2>Newa (Nepālākṣara)</h2>
+        <section>
+            <p>A number of symbols, found in older and newer Nepalese manuscripts, are available via the <code class="language-xml">g</code> tag. They are included in Unicode, with the exception of the "old"-style gap filler, which is here rendered as a font variant for the gap filler character.</p>
+            <table>
+                <tr><td></td><td></td><th>Newa</th></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#newa-siddhi"/&gt;</code></td><td>→</td><td>𑑊</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#newa-gap-filler"/&gt;</code></td><td>→</td><td>𑑎</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#newa-old-gap-filler"/&gt;</code></td><td>→</td><td class="trad">𑑎</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#newa-abbreviation"/&gt;</code></td><td>→</td><td>𑑏</td></tr>
+            </table>
+        </section>
+        <h2>Śāradā</h2>
+        <section>
+            <p>Two auspicious symbols, included in Unicode, are available via the <code class="language-xml">g</code> tag.</p>
+            <table>
+                <tr><td></td><td></td><th>Śāradā</th></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#sarada-ekam"/&gt;</code></td><td>→</td><td>𑇚</td></tr>
+                <tr><td><code class="language-xml">&lt;g ref="#sarada-siddhi"/&gt;</code></td><td>→</td><td>𑇛</td></tr>
+            </table>
+        </section>
+    <script src="../lib/js/prism.js"></script>
+</body>
+</html>
