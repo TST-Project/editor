@@ -222,7 +222,7 @@ const getSchema = function(s) {
         },
         g: {
             attrs: {
-                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#tēti','#mācam','#varuṣam','#pattu','#nūṟu','#āyiram','#patru','#eduppu','#mēṟpaṭi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#latin_cross','#bhale_hook','#mindu','#jain_omkara'],
+                ref: ['#pcl','#pcs','#ra_r_kal','#kompu','#tēti','#mācam','#varuṣam','#pattu','#nūṟu','#āyiram','#patru','#eduppu','#mēṟpaṭi','#rupai','#niluvai','#vasam','#muthal','#muthaliya','#vakaiyaraa','#end_of_text','#latin_cross','#headmark','#headmark_with_headstroke','#bhale','#bhale_hook','#bhale_five','#bhale_nine','#bhale_nine_reversed','#mindu','#jain_omkara'],
                 rend: definitions.entityrend,
             },
         },
