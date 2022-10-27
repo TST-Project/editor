@@ -42,17 +42,16 @@
     </div>
     <div>
         <label for="hd_repository">Repository</label>
-        <select required="" autocomplete="off" type="text" id="hd_repository" name="repository" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName">
-            <option value="Bibliothèque nationale de France. Département des Manuscrits" selected="">Bibliothèque nationale de France. Département des Manuscrits</option>
-            <option value="Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky">Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky</option>
-            <option value="Biblioteca Apostolica Vaticana">Biblioteca Apostolica Vaticana</option>
-            <option value="Bibliothèque nationale et universitaire de Strasbourg">Bibliothèque nationale et universitaire de Strasbourg</option>
-            <option value="Bodleian Library, University of Oxford">Bodleian Library, University of Oxford</option>
-            <option value="Bibliothèque universitaire des langues et civilisations">Bibliothèque universitaire des langues et civilisations</option>
-            <option value="Cambridge University Library">Cambridge University Library</option>
-            <option value="Shri Lal Bahadur Shastri National Sanskrit University">Shri Lal Bahadur Shastri National Sanskrit University</option>
-            <option value="Private collection">Private collection</option>
-        </select>
+        <input autocomplete="off" type="text" list="hd_repository_list" id="hd_repository" name="repository" data-select="teiHeader > fileDesc > sourceDesc > msDesc > msIdentifier > repository > orgName">
+	<datalist id="hd_repository_list">
+            <option value="Bibliothèque nationale de France. Département des Manuscrits" selected="true">
+            </option><option value="Staats- und UniversitätsBibliothek Hamburg Carl von Ossietzky">
+            </option><option value="Bibliothèque nationale et universitaire de Strasbourg">
+            </option><option value="Bodleian Library, University of Oxford">
+            </option><option value="Bibliothèque universitaire des langues et civilisations">
+            </option><option value="Cambridge University Library">
+            </option><option value="Private collection">
+        </option></datalist>
     </div>
     <div>
         <label for="hd_other_identifiers">Other identifiers</label>
