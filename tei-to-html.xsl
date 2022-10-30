@@ -10,9 +10,10 @@
 <xsl:import href="../lib/xslt/common.xsl"/>
 <xsl:import href="../lib/xslt/teiheader.xsl"/>
 <xsl:import href="../lib/xslt/transcription.xsl"/>
+<xsl:import href="../lib/xslt/apparatus.xsl"/>
 <!--xsl:import href="../lib/xslt/tei-to-html.xsl"/-->
 
-<!-- these imports are compiled by Javascript, since WebKit's XSLTProcessor() don't play well with it -->
+<!-- these imports are compiled by Javascript, since WebKit's XSLTProcessor() doesn't play well with it -->
 
 <xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes"/>
 <xsl:template match="x:TEI">
