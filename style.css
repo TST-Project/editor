@@ -224,6 +224,11 @@ button {
     border-radius: 0.3rem;
     color: black;
 }
+
+button:hover {
+    background: #eeee99;
+    border-color: #eeee99;
+}
 /*
 button:disabled {
     background-color: #ddd;
