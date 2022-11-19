@@ -30,6 +30,14 @@ const TSTEditor = (function() {
         document.getElementById('newfile').addEventListener('click',file.startnew);
         document.body.addEventListener('click',events.bodyClick);
         document.getElementById('headerviewer').addEventListener('mouseover',events.bodyMouseover);
+        fetch('https://api.github.com/repos/tst-project/editor/commits')
+            .then((res) => res.json())
+            .then((data) => {
+                const date = new Date(data[0].commit.committer.date);
+                document.getElementById('lastupdate').append(
+                    `Last updated: ${date.toDateString()}`
+                    );
+            });
     };
     
     const events = {
