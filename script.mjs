@@ -31,7 +31,8 @@ const TSTEditor = (function() {
         document.getElementById('file').addEventListener('change',file.select,false);
         document.getElementById('newfile').addEventListener('click',file.startnew);
         document.body.addEventListener('click',events.bodyClick);
-        document.getElementById('headerviewer').addEventListener('mouseover',events.bodyMouseover);
+        // handled by TSTViewer now
+        //document.getElementById('headerviewer').addEventListener('mouseover',events.bodyMouseover);
         fetch('https://api.github.com/repos/tst-project/editor/commits')
             .then((res) => res.json())
             .then((data) => {
@@ -84,6 +85,8 @@ const TSTEditor = (function() {
                 editor.multiItem.down(e.target);
             }
         },
+        /*
+        // handled by TSTViewer now
         bodyMouseover(e) {
             var targ = e.target.closest('[data-anno]');
             while(targ && targ.hasAttribute('data-anno')) {
@@ -91,6 +94,7 @@ const TSTEditor = (function() {
                 targ = targ.parentNode;
             }
         },
+        */
         tipShow(e) {
             const el = e.target;
             const tiptxt = el.dataset.tip;
@@ -186,7 +190,7 @@ const TSTEditor = (function() {
         },
         */
     };
-
+/*
     const toolTip = {
         make(e,targ) {
             const toolText = targ.dataset.anno;
@@ -207,7 +211,7 @@ const TSTEditor = (function() {
                 tBox.id = 'tooltip';
                 tBox.style.top = (e.clientY + 10) + 'px';
                 tBox.style.left = e.clientX + 'px';
-                tBox.style.opacity = 0;
+                //tBox.style.opacity = 0;
                 //tBox.style.transition = 'opacity 0.2s ease-in';
                 document.body.appendChild(tBox);
                 tBoxDiv.myTarget = targ;
@@ -245,7 +249,7 @@ const TSTEditor = (function() {
             }
         },
     };
-
+*/
     const file = {
         parse(func,e) {
             state.xmlDoc = xml.parseString(e.target.result);
