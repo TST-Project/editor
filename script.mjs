@@ -2,11 +2,13 @@ import lf from './lib/localforage.mjs';
 import { TSTViewer } from '../lib/js/tst.mjs';
 import { init as cmWrapper } from './lib/cmwrapper.mjs';
 import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
-import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js'
+import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js';
 import { xml, dom } from './lib/utils.mjs';
-'use strict';
 
 const TSTEditor = (function() {
+
+    'use strict';
+
     const state = {
         multiselect: [],
         cmirror: [],
@@ -206,7 +208,7 @@ const TSTEditor = (function() {
                 tBox.style.top = (e.clientY + 10) + 'px';
                 tBox.style.left = e.clientX + 'px';
                 tBox.style.opacity = 0;
-                tBox.style.transition = 'opacity 0.2s ease-in';
+                //tBox.style.transition = 'opacity 0.2s ease-in';
                 document.body.appendChild(tBox);
                 tBoxDiv.myTarget = targ;
             }
@@ -215,8 +217,12 @@ const TSTEditor = (function() {
             tBoxDiv.myTarget = targ;
             tBox.appendChild(tBoxDiv);
             targ.addEventListener('mouseleave',toolTip.remove,{once: true, passive: true});
-            window.getComputedStyle(tBox).opacity;
-            tBox.style.opacity = 1;
+            //window.getComputedStyle(tBox).opacity;
+            //tBox.style.opacity = 1;
+            tBox.animate([
+                {opacity: 0 },
+                {opacity: 1, easing: 'ease-in'}
+                ], 200);
         },
         remove(e) {
             const tBox = document.getElementById('tooltip');
@@ -262,7 +268,7 @@ const TSTEditor = (function() {
                         body.appendChild(facs);
                     else
                         viewer.dataset.manifest = facs.dataset.manifest;
-                    const annos = state.annoMaps.get(facs.dataset.manifest)
+                    const annos = state.annoMaps.get(facs.dataset.manifest);
                     if(annos) TSTViewer.setAnnotations(annos);
                 }
                 else {
@@ -1152,9 +1158,8 @@ const TSTEditor = (function() {
                     xmlEl.setAttribute(attr,value);
                 }
                 else {
-                    tosanitize ? 
-                        xmlEl.innerHTML = xml.sanitize(value) : 
-                        xmlEl.innerHTML = value;
+                    if(tosanitize) xmlEl.innerHTML = xml.sanitize(value);
+                    else xmlEl.innerHTML = value;
                 }
                 return true;
             },
@@ -1207,50 +1212,17 @@ const TSTEditor = (function() {
             editor.reorder(par,'supportDesc',['foliation','collation','condition']);
             editor.reorder(par,'physDesc',['objectDesc','handDesc','typeDesc','decoDesc','additions','bindingDesc']);
             editor.reorder(par,'history',['origin','provenance','acquisition']);
-            /*
-            const supportDescs = par.querySelectorAll('supportDesc');
-            for(const supportDesc of supportDescs) {
-                // order is: foliation, collation, condition
-                const foliations = supportDesc.querySelectorAll('foliation');
-                const collations = supportDesc.querySelectorAll('collation');
-                const condition = supportDesc.querySelector('condition');
-                const allels = [...foliations,...collations,condition].filter(el => el);
-                for(const el of allels)
-                    supportDesc.appendChild(el);
-            }
-            
-            const physDescs = par.querySelectorAll('physDesc');
-            for(const physDesc of physDescs) {
-                // order is: objectDesc handDesc typeDesc decoDesc additions bindingDesc
-                const handDesc = physDesc.querySelector('handDesc');
-                const typeDesc = physDesc.querySelector('typeDesc');
-                const decoDesc = physDesc.querySelector('decoDesc');
-                const additions = physDesc.querySelector('additions');
-                const bindingDesc = physDesc.querySelector('bindingDesc');
-                const allels = [handDesc,typeDesc,decoDesc,additions,bindingDesc].filter(el => el);
-                for(const el of allels)
-                    physDesc.appendChild(el);
-            }
-            const histories = par.querySelectorAll('history');
-            for(const history of histories) {
-                // order is: origin provenance acquisition
-                const origins = history.querySelectorAll('origin');
-                const provenances = history.querySelectorAll('provenance');
-                const acquisitions = history.querySelectorAll('acquisition');
-                const allels = [...origins,...provenances,...acquisitions].filter(el => el);
-                for(const el of allels)
-                    history.appendChild(el);
-            }
-            */
             // revisionDesc should be at the end
             const revisionDesc = par.querySelector('revisionDesc');
-            revisionDesc.parentNode.appendChild(revisionDesc);
+            if(revisionDesc) revisionDesc.parentNode.appendChild(revisionDesc);
             
             // normalize decomposed Unicode characters
             const walker = toplevel.ownerDocument.createTreeWalker(toplevel,NodeFilter.SHOW_TEXT);
-            var curnode;
-            while(curnode = walker.nextNode())
+            var curnode = walker.nextNode();
+            while(curnode) {
                 curnode.data = curnode.data.normalize('NFC');
+                curnode = walker.nextNode();
+            }
 
             // add xml:lang to rubric, incipit, etc.
             const msItems = par.querySelectorAll('msContents > msItem');
@@ -1453,13 +1425,19 @@ const TSTEditor = (function() {
                     ]);
 
                     const handNotes = doc.querySelectorAll('[scribeRef]');
+                    const makeDesc = (par) => {
+                        const el = xml.makeEl(doc,'desc');
+                        par.appendChild(el);
+                        return el;
+                    };
                     for(const handNote of handNotes) {
                         if(!handNote) continue;
-                        const desc = handNote.querySelector('desc') || (() => {
+                        const desc = handNote.querySelector('desc') || makeDesc(handNote);
+                        /*(() => {
                             const el = xml.makeEl(doc,'desc');
                             handNote.appendChild(el);
                             return el;
-                        })();
+                        })();*/
                         const scribe = `<persName role="scribe">${scribes.get(handNote.getAttribute('scribeRef'))}</persName>`;
                         desc.innerHTML = desc.innerHTML ? 
                             desc.innerHTML + ` ${scribe}.` : 
@@ -1573,14 +1551,22 @@ const TSTEditor = (function() {
 
             lf.setItem(state.autosaveprefix+state.filename,xml.serialize(docclone)).then( () => {
                 const footer = document.getElementById('footermessage');
+                /*
                 footer.style.transition = 'unset';
                 footer.style.opacity = 0;
                 window.getComputedStyle(footer).opacity;
                 footer.style.transition = 'opacity 1s ease-in';
-                footer.textContent = `Autosaved ${(new Date).toLocaleString()}`;
+                */
+                footer.textContent = `Autosaved ${(new Date()).toLocaleString()}`;
+                footer.animate([
+                    {opacity: 0 },
+                    {opacity: 1, easing: 'ease-in'}
+                    ], 1000);
+                /*
                 window.setTimeout(() => {
                     footer.style.opacity = 1;
                 },1000);
+                */
             });
 
             if(draft) file.saveAs(docclone,'_draft');
