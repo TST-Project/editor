@@ -99,7 +99,7 @@
     </div>
     <div>
         <label for="hd_facsimile">IIIF manifest</label>
-        <input autocomplete="off" type="url" id="hd_facsimile" name="facsimile" data-select="facsimile > graphic" data-attr="url" data-tip="URL of the IIIF manifest for the digital images." placeholder="https://..." pattern="https://((api\.nakala\.fr/data/.*)|.*(\.json|/manifest))">
+        <input autocomplete="off" type="url" id="hd_facsimile" name="facsimile" data-select="facsimile > graphic" data-attr="url" data-tip="URL of the IIIF manifest for the digital images." placeholder="https://..." pattern="https://((api\.nakala\.fr/data/[^ ]*)|[^ ]*(\.json|/manifest))">
         <label for="hd_facsimile_start">Start image</label>
         <input autocomplete="off" type="number" step="1" min="0" id="hd_facsimile_start" name="facsimile_start" data-select="facsimile > graphic" data-attr="facs" data-tip="Number of the first image to display, starting from 1.">
     </div>
