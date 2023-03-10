@@ -1213,7 +1213,7 @@ const TSTEditor = (function() {
                 }
             }
             
-            editor.reorder(par,'supportDesc',['foliation','collation','condition']);
+            editor.reorder(par,'supportDesc',['support','foliation','collation','condition']);
             editor.reorder(par,'physDesc',['objectDesc','handDesc','typeDesc','decoDesc','additions','bindingDesc']);
             editor.reorder(par,'history',['origin','provenance','acquisition']);
             // revisionDesc should be at the end
