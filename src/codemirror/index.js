@@ -162,7 +162,7 @@ const getSchema = function(s) {
         descriptive_restricted: ['term','note','emph','ex','expan','foreign','title','locus','material','ref','q','date','watermark','list','item','stamp'],
         names: ['persName','orgName','geogName','placeName'],
     };
-    schemae.transcription = ['p',...schemae.transcription_restricted];
+    schemae.transcription = ['p','ab','fw',...schemae.transcription_restricted];
     schemae.descriptive = ['p','lg',...schemae.descriptive_restricted,'quote'];
     
     const attrs = {
@@ -181,6 +181,20 @@ const getSchema = function(s) {
         },
 
         // Text division & Page layout
+        
+        ab: {
+            attrs: {
+                'xml:lang': attrs.langs,
+            },
+            children: [...schemae.transcription,...schemae.descriptive,...schemae.names],
+        },
+        fw: {
+            attrs: {
+                place: ['top-margin','left-margin','bottom-margin','right-margin'],
+                'xml:lang': attrs.langs,
+            },
+            children: [...schemae.transcription,...schemae.descriptive,...schemae.names],
+        },
         pb: {
             attrs: {
                 n: null,
