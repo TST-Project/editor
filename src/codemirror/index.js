@@ -418,7 +418,7 @@ const getSchema = function(s) {
             attrs: {
                 'xml:lang': attrs.langs,
             },
-            children: ['emph','persName']
+            children: [...schemae.transcription,...schemae.names],
         },
 
         quote: {
@@ -426,7 +426,7 @@ const getSchema = function(s) {
                 'xml:lang': attrs.langs,
                 'rend': ['block']
             },
-            children: ['lg','emph','unclear',...schemae.names]
+            children: [...schemae.transcription,...schemae.names],
         },
         stamp : {
             attrs: {
