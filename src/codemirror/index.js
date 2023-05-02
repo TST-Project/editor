@@ -381,7 +381,12 @@ const getSchema = function(s) {
                 'xml:lang': attrs.langs,
                 place: attrs.place,
             },
-            children: ['locus','title','emph','term'],
+            children: ['c','locus','title','emph','term','lb','q'],
+        },
+        c: {
+            attrs: {
+                type: ['anchor']
+            }
         },
         title: {
             attrs: {
