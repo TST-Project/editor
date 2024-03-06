@@ -167,7 +167,7 @@ const getSchema = function(s) {
     
     const attrs = {
         units: ['akṣara','character'],
-        langs: ['ta','ta-Taml','en','fr','bra','de','gu','la','mr','pt','pi','raj','sa'],
+        langs: ['ta','ta-Taml','en','fr','bra','de','gu','la','ml','mr','pt','pi','raj','sa'],
         bigunits: ['folio','page','column','left-margin','right-margin','main-text-area'],
         place: ['in-place','above','below','left','right','top','bottom','margin','foot']
     };
