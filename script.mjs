@@ -1247,6 +1247,7 @@ const TSTEditor = (function() {
                     ['por','pt'],
                     ['lat','la'],
                     ['bod','bo'],
+                    ['mal','ml'],
                     ['mar','mr'],
                     ['hin','hi'],
                     ['guj','gu']
@@ -1276,8 +1277,8 @@ const TSTEditor = (function() {
                     el.setAttribute('xml:lang',langscript); 
                 }
 
-                const transcr = par.querySelector(`text[corresp="#${textid}"]`);
-                if(transcr) transcr.setAttribute('xml:lang',lang2);
+                const teitexts = par.querySelectorAll(`text[corresp="#${textid}"]`);
+                for(const teitext of teitexts) teitext.setAttribute('xml:lang',lang2);
             }
         },
 
