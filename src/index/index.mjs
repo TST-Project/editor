@@ -3,8 +3,12 @@ import xpath from 'xpath';
 import jsdom from 'jsdom';
 
 const loadIndex = () => {
-    const str = fs.readFileSync('index.html',{encoding:'utf-8'});
-    return (new jsdom.JSDOM(str)).window.document;
+    const str = fs.readFileSync('index.html',{encoding:'utf-8'}).trim(); // there's a non-breaking space for some reason
+    const dom = new jsdom.JSDOM(str);
+    return dom;
+    //const parser = new (new jsdom.JSDOM('')).window.DOMParser();
+    //return parser.parseFromString(str, 'text/html');
+    //return (new jsdom.JSDOM(str)).window.document;
 };
 
 const loadDefinitions = () => {
@@ -44,9 +48,9 @@ const populateSelect = (els,doc,defs) => {
 const main = () => {
     const template = loadIndex();
     const defs = loadDefinitions();
-    const els = template.querySelectorAll('[data-list]');
-    populateSelect(els,template,defs);
-    fs.writeFile('../../index.html',template.documentElement.outerHTML,{encoding: 'utf8'},function(){return;});
+    const els = template.window.document.querySelectorAll('[data-list]');
+    populateSelect(els,template.window.document,defs);
+    fs.writeFile('../../index.html',template.serialize(),{encoding: 'utf8'},function(){return;});
 };
 
 main();

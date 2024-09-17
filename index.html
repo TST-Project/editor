@@ -1,6 +1,4 @@
-<html lang="en"><head></head><body lang="en">﻿
-
-
+<!DOCTYPE html><html lang="en"><head>
 <title>TST Editor</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,9 +17,9 @@
 <link rel="stylesheet" href="../lib/css/apparatus.css">
 <link rel="stylesheet" href="style.css">
 
+</head>
 
-
-
+<body lang="en">
 <div id="assets" style="position: absolute; visibility: hidden">
 <svg id="plusicon" height="32px" width="32px" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px" viewBox="0 0 100 100"><g transform="translate(0,-952.36218)"><path d="m 50,978.36217 c -2.7615,0 -5,2.2386 -5,5 l 0,14 -14,0 c -2.7614,0 -5,2.2385 -5,5.00003 0,2.7615 2.2386,5 5,5 l 14,0 0,14 c 0,2.7614 2.2385,5 5,5 2.7615,0 5,-2.2386 5,-5 l 0,-14 14,0 c 2.7614,0 5,-2.2385 5,-5 0,-2.76153 -2.2386,-5.00003 -5,-5.00003 l -14,0 0,-14 c 0,-2.7614 -2.2385,-5 -5,-5 z" style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;enable-background:accumulate;" fill-opacity="1" stroke="none" marker="none" display="inline" overflow="visible"></path></g></svg>
 <svg id="closeicon" height="32px" width="32px" fill="#333333" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;" viewBox="0 0 847 847" x="0px" y="0px" fill-rule="evenodd" clip-rule="evenodd">
@@ -101,7 +99,7 @@
     </div>
     <div>
         <label for="hd_facsimile">IIIF manifest</label>
-        <input autocomplete="off" type="url" id="hd_facsimile" name="facsimile" data-select="facsimile > graphic" data-attr="url" data-tip="URL of the IIIF manifest for the digital images." placeholder="https://..." pattern="https://((api\.nakala\.fr/data/[^ ]*)|[^ ]*(\.json|/manifest))">
+        <input autocomplete="off" type="url" id="hd_facsimile" name="facsimile" data-select="facsimile > graphic" data-attr="url" data-tip="URL of the IIIF manifest for the digital images." placeholder="https://..." pattern="https://((api\.nakala\.fr/data/[^ ]*)|(cudl.lib.cam.ac.uk/iiif/[^ ]*)|[^ ]*(\.json|/manifest))">
         <label for="hd_facsimile_start">Start image</label>
         <input autocomplete="off" type="number" step="1" min="0" id="hd_facsimile_start" name="facsimile_start" data-select="facsimile > graphic" data-attr="facs" data-tip="Number of the first image to display, starting from 1.">
     </div>
@@ -344,7 +342,7 @@
             <div>
                 <label>Script</label>
                 <select autocomplete="off" name="typeNote_script" data-subattr="script" multiple="">
-                <option value="arabic">arabic</option><option value="bengali">bengali</option><option value="bhujimol">bhujimol</option><option value="devanagari">devanagari</option><option value="grantha">grantha</option><option value="latin">latin</option><option value="malayalam">malayalam</option><option value="modi">modi</option><option value="nandinagari">nandinagari</option><option value="newa">newa</option><option value="pala">pala</option><option value="sarada">sarada</option><option value="sinhalese">sinhalese</option><option value="telugu">telugu</option><option value="tamil">tamil</option><option value="dbucan">uchen</option><option value="dbumed">ume</option></select>
+                <option value="arabic">arabic</option><option value="bengali">bengali</option><option value="bhujimol">bhujimol</option><option value="devanagari">devanagari</option><option value="grantha">grantha</option><option value="latin">latin</option><option value="malayalam">malayalam</option><option value="modi">modi</option><option value="nandinagari">nandinagari</option><option value="newa">newa</option><option value="pala">pala</option><option value="sarada">sarada</option><option value="sinhala">sinhala</option><option value="telugu">telugu</option><option value="tamil">tamil</option><option value="dbucan">uchen</option><option value="dbumed">ume</option></select>
                 <label>Features</label>
                 <select autocomplete="off" name="typeNote_scriptRef" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option><option value="#jainaNagari">Jaina nāgarī</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
                 <label>Medium</label>
@@ -626,5 +624,4 @@
     TSTEditor.init();
     //window.addEventListener('load',TSTEditor.init);
 </script>
-
 </body></html>
