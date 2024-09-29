@@ -31,7 +31,19 @@
             </xsl:choose>
             <!--xsl:attribute name="class">record-fat</xsl:attribute-->
             <div id="topbar">
-                <div id="transbutton" title="change script">A</div>
+                <div id="buttoncontainer">
+                    <xsl:element name="div">
+                        <xsl:attribute name="id">transbutton</xsl:attribute>
+                        <xsl:attribute name="title">change script</xsl:attribute>
+                        <xsl:text>A</xsl:text>
+                    </xsl:element>
+                    <xsl:element name="div">
+                        <xsl:attribute name="id">apparatusbutton</xsl:attribute>
+                        <xsl:attribute name="data-anno">apparatus of variants</xsl:attribute>
+<svg id="apparatussvg" width="22" height="21" fill="#000000" version="1.1" viewBox="0 0 381.66 415.46" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m10.395 208.37c2.6785-185.49 346.77-166.49 346.77-166.49" stroke-width="20.48px"/><path d="m10.239 206.9c2.6785 185.49 346.77 166.49 346.77 166.49" stroke-width="20.48px"/><path d="m14.182 210.85 315.07 0.84841" stroke-width="20.581px"/><g stroke-width="21.098px"><path d="m287.4 179.06 54.215 32.066-51.981 34.443"/><path d="m307.59 9.0797 54.215 32.066-51.981 34.443"/><path d="m305.3 340.15 54.215 32.066-51.981 34.443"/></g></g></svg>
+<svg id="translationsvg" width="22" height="21" fill="#000000" version="1.1" viewBox="0 0 381.66 415.46" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000" stroke-width="22.641px"><path d="m-0.58397 41.896h381.87"/><path d="m-0.58397 205.74h381.87"/><path d="m-0.58397 369.58h381.87"/></g></svg>
+                        </xsl:element>
+                    </div>
                 <form>
                     <button type="button" id="editbutton" title="edit record">edit</button>
                     <button type="button" id="saveas" title="download TEI XML file">save as...</button>
