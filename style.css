@@ -579,9 +579,13 @@ span.gap {
     padding-right: 0.2em;
     visibility: hidden;
 }
-
 .multi-item:hover .buttonrow {
     visibility: visible;
+}
+@media (hover: none) {
+    .buttonrow {
+        visibility: visible;
+    }
 }
 
 .buttonrow button {
