@@ -17,6 +17,7 @@
     padding: 1em;
     border-radius: 0.3rem;
     background-color: #fffff8;
+    max-height: 100vh;
 }
 
 /*
@@ -634,6 +635,10 @@ span.gap {
     border-radius: 0.3rem;
     font-weight: bold;
     font-family: et-book;
+    flex-grow: 1;
+}
+.multi-item div.plusbutton {
+    width: unset;
 }
 .multiple div.plusbutton svg {
     fill: rgba(1,1,1,0.4);
@@ -849,11 +854,40 @@ h4 {
     text-stroke: unset;
 }
 
+@media (width < 900px) {
+    header {
+        display: none;
+    }
+    .record-editor {
+        padding-left: 0.5rem;
+        width: unset;
+    }
+    .multi-item, .plusbutton {
+        margin-left: 2rem;
+    }
+    .buttoncontainer {
+        width: 100vw;
+    }
+}
+
 @media (width < 600px) {
     #togglers {
         transform: rotate(180deg);
         writing-mode: vertical-lr;
         height: auto;
         width: 100vw;
+    }
+}
+@media (width < 450px) {
+    #headereditor {
+        width: 100vw;
+        overflow-x: scroll;
+    }
+    #headereditor section {
+        width: 100%;
+    }
+    .record-editor {
+        width: 100%;
+        padding: 0;
     }
 }
