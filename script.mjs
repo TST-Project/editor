@@ -527,12 +527,9 @@ const TSTEditor = (function() {
             if(!state.viewer) return;
             
             const viewer = document.getElementById('viewer');
-            /*
-            if(viewer.style.display === 'none') {
-                document.getElementById('togglers').style.display = 'none';
-                return;
-            }
-            */
+            if(viewer.style.display === 'none') return; // is this needed?
+
+            document.getElementById('togglers').style.display = 'none';
             viewer.style.display = 'none';
             state.heditor.querySelector('header').style.display = 'block';
             state.heditor.classList.remove('fat');
