@@ -118,6 +118,9 @@
     overflow-y: visible;
 }
 
+#headereditor.fat {
+    width: 100%;
+}
 #headereditor.fat .record-editor {
     padding-left: 0;
 }
