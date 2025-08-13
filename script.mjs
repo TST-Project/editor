@@ -27,7 +27,7 @@ const TSTEditor = (function() {
         curImage: 0
     };
 
-    const init = function() {
+    const init = () => {
         lf.length().then(n => {if(n>0) autosaved.fill();});
         document.getElementById('file').addEventListener('change',file.select,false);
         document.getElementById('newfile').addEventListener('click',file.startnew);
