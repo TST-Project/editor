@@ -32,8 +32,8 @@
 
 <div id="headereditor" class="recordcontainer">
 <div class="record-editor">
-<header></header>
 <article>
+<header></header>
 <section>
     <div>
         <label for="hd_shelfmark">Shelfmark</label>
@@ -278,7 +278,7 @@
         <div class="multi-item">
             <div>
                 <label title="A unique identifier, starting with a letter. No spaces or special characters.">Unit ID</label>
-                <input autocomplete="off" type="text" name="collation_id" data-subattr="xml:id" placeholder="U1" pattern="^[a-zA-ZāĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_][a-zA-Z0-9āĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_.-]*$" data-tip="A unique identifier, starting with a letter. No spaces or special characters.">
+                <input autocomplete="off" type="text" name="collation_id" data-subattr="xml:id" placeholder="U1" pattern="^[a-zA-ZāĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_][a-zA-Z0-9āĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_.\-]*$" data-tip="A unique identifier, starting with a letter. No spaces or special characters.">
             </div>
             <div>
             <textarea autocomplete="off" rows="4" name="collation" data-subselect=":scope" data-schema="descriptive" placeholder="Description of how the leaves are arranged."></textarea>
@@ -410,7 +410,7 @@
                 </div>
                 <div>
                 <label title="A unique identifier, starting with a letter. No spaces or special characters.">Text ID</label>
-                <input autocomplete="off" type="text" name="text_id" data-subattr="xml:id" placeholder="T1" pattern="^[a-zA-ZāĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_][a-zA-Z0-9āĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_.-]*$" data-tip="A unique identifier, starting with a letter. No spaces or special characters.">
+                <input autocomplete="off" type="text" name="text_id" data-subattr="xml:id" placeholder="T1" pattern="^[a-zA-ZāĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_][a-zA-Z0-9āĀīĪūŪṛṚṝṜḷḶḹḸōŌēĒṅṄñÑṭṬḍḌṇṆṟṞṉṈśŚṣṢḻḺṃḥẖḵḴ_.\-]*$" data-tip="A unique identifier, starting with a letter. No spaces or special characters.">
                 </div>
                 <select autocomplete="off" data-subattr="defective" style="flex-grow: 0.5" required="">
                     <option value="false">complete</option>
@@ -599,10 +599,11 @@
 </div><!-- .record-editor -->
 </div><!-- #headereditor -->
 <div id="togglers">
-<div id="editortoggle" class="toggle" title="hide editor">&gt;</div>
+<div id="recordtoggle" class="toggle" title="hide editor">&gt;</div>
+<div id="rotator" title="rotate">↺</div>
 <div id="viewertoggle" class="toggle" title="hide images">&lt;</div>
 </div>
-<div id="editorviewer"></div>
+<div id="viewer"></div>
 
 <form id="openform">
     <div style="font-size: 1.2rem">

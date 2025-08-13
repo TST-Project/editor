@@ -371,7 +371,7 @@ span.gap {
 #headereditor.fat section > p {
     width: 87.5%;
 }
-
+/*
 #topbar {
     background: linear-gradient(rgb(255,255,248) 60%, rgba(255,255,255,0));
     height: auto;
@@ -385,6 +385,10 @@ span.gap {
 
 #transbutton {
     top: auto;
+}
+*/
+#transbutton {
+    display: block;
 }
 
 #headereditor header {
@@ -819,7 +823,7 @@ h4 {
     right: 0 !important;
 }
 
-#editorviewer {
+#viewer {
     display: none;
     position: relative;
     flex: 50%;

@@ -23,10 +23,10 @@
         <xsl:element name="div">
             <xsl:choose>
                 <xsl:when test="x:facsimile/x:graphic/@url">
-                    <xsl:attribute name="class">record-thin</xsl:attribute>
+                    <xsl:attribute name="class">record thin</xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="class">record-fat</xsl:attribute>
+                    <xsl:attribute name="class">record fat</xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
             <!--xsl:attribute name="class">record-fat</xsl:attribute-->
