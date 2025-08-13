@@ -204,7 +204,9 @@ hr {
     margin-left: 0;
     width: 100%;
 }
-
+#buttoncontainer {
+    top: auto;
+}
 .row, #headereditor div.row {
     justify-content: flex-end;
 }
