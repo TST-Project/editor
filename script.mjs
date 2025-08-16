@@ -503,8 +503,10 @@ const TSTEditor = (function() {
                 state.annoMaps.set(manifest,new Map());
                 return state.annoMaps.get(manifest);
             })();
-            if(!state.viewer)
+            if(!state.viewer) {
                 state.viewer = TSTViewer.newMirador('viewer',manifest,start - 1,annos,true);
+                TSTViewer.setMirador(state.viewer,manifest);
+            }
             else
                 TSTViewer.refreshMirador(state.viewer,manifest,start-1,annos);
             
