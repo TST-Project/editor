@@ -1,8 +1,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
                 xmlns:exsl="http://exslt.org/common"
+                xmlns:str="http://exslt.org/strings"
                 xmlns:x="http://www.tei-c.org/ns/1.0"
                 xmlns:tst="https://github.com/tst-project"
-                exclude-result-prefixes="x tst">
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                exclude-result-prefixes="x tst exsl xhtml str">
 
 <xsl:import href="../lib/xslt/copy.xsl"/>
 <xsl:import href="../lib/xslt/functions.xsl"/>
