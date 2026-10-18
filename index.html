@@ -32,8 +32,8 @@
 
 <div id="headereditor" class="recordcontainer">
 <div class="record-editor">
-<article>
 <header></header>
+<article>
 <section>
     <div>
         <label for="hd_shelfmark">Shelfmark</label>
@@ -47,7 +47,7 @@
             </option><option value="Staats- und Universitätsbibliothek Hamburg Carl von Ossietzky">
             </option><option value="Bibliothèque de l'Académie nationale de médecine, Paris">
             </option><option value="Bibliothèque nationale et universitaire de Strasbourg">
-            <option value="Bibliothèque municipale de Dole">
+	</option><option value="Bibliothèque municipale de Dole">
             </option><option value="Bodleian Library, University of Oxford">
             </option><option value="Bibliothèque universitaire des langues et civilisations">
             </option><option value="Cambridge University Library">
@@ -74,29 +74,30 @@
         <div class="multiple" data-select="teiHeader > fileDesc > titleStmt > editor">
             <div class="multi-item">
                 <div>
+                    <label>Role</label>
+                    <select autocomplete="off" name="researcher_role" data-subattr="role">
+                      <option value="cataloguer">cataloguer</option>
+                      <option value="">editor</option>
+                      <option value="translator">translator</option>
+                      <option value="transcriber">transcriber</option>
+                    </select>
+                </div>
+                <div>
                     <label>Name</label>
                     <input autocomplete="name" type="text" name="researcher_name" data-subselect="persName" required="">
                 </div>
                 <div>
                     <label>Affiliation</label>
-                    <input autocomplete="organization" type="text" name="researcher_affiliation" data-subselect="orgName" required="">
+                    <input autocomplete="organization" type="text" name="researcher_affiliation" data-subselect="orgName">
                 </div>
             </div>
         </div>
     </div>
-    <!--div>
-        <label for="hd_editionStmt_persName">Researcher name</label>
-        <input autocomplete="name" type="text" id="hd_editionStmt_persName" name="editionStmt_persName" data-select="teiHeader > fileDesc > editionStmt > p > persName" required>
-    </div>
-    <div>
-        <label for="hd_editionStmt_orgName">Researcher affiliation</label>
-        <input autocomplete="organization" type="text" id="hd_editionStmt_orgName" name="editionStmt_orgName" data-select="teiHeader > fileDesc > editionStmt > p > orgName" required>
-    </div-->
     <div>
         <label for="hd_publisher">Publisher</label>
         <input autocomplete="off" type="text" id="hd_publisher" name="publisher" data-select="teiHeader > fileDesc > publicationStmt > publisher" value="TST Project">
         <label for="hd_publish_date">Publication date</label>
-        <input autocomplete="off" type="text" id="hd_publish_date" name="publish_date" data-select="teiHeader > fileDesc > publicationStmt > date" value="2025" readonly>
+        <input autocomplete="off" type="text" id="hd_publish_date" name="publish_date" data-select="teiHeader > fileDesc > publicationStmt > date" value="2026" readonly="">
     </div>
     <div>
         <label for="hd_facsimile">IIIF manifest</label>
@@ -314,7 +315,7 @@
             <div>
                 <label>Script</label>
                 <select autocomplete="off" name="handNote_script" data-subattr="script" multiple="">
-                <option value="arabic">arabic</option><option value="bengali">bengali</option><option value="bhujimol">bhujimol</option><option value="devanagari">devanagari</option><option value="grantha">grantha</option><option value="latin">latin</option><option value="malayalam">malayalam</option><option value="modi">modi</option><option value="nandinagari">nandinagari</option><option value="newa">newa</option><option value="pala">pala</option><option value="sarada">sarada</option><option value="sinhala">sinhala</option><option value="telugu">telugu</option><option value="tamil">tamil</option><option value="dbucan">uchen</option><option value="dbumed">ume</option></select>
+                <option value="arabic">arabic</option><option value="bengali">bengali</option><option value="bhujimol">bhujimol</option><option value="devanagari">devanagari</option><option value="grantha">grantha</option><option value="latin">latin</option><option value="malayalam">malayalam</option><option value="modi">modi</option><option value="nandinagari">nandinagari</option><option value="newa">newa</option><option value="pala">pala</option><option value="sarada">sarada</option><option value="sinhala">sinhala</option><option value="burmese">burmese</option><option value="telugu">telugu</option><option value="tamil">tamil</option><option value="dbucan">uchen</option><option value="dbumed">ume</option></select>
                 <label>Features</label>
                 <select autocomplete="off" name="handNote_scriptRef" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option><option value="#jainaNagari">Jaina nāgarī</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
                 <label>Medium</label>
@@ -343,7 +344,7 @@
             <div>
                 <label>Script</label>
                 <select autocomplete="off" name="typeNote_script" data-subattr="script" multiple="">
-                <option value="arabic">arabic</option><option value="bengali">bengali</option><option value="bhujimol">bhujimol</option><option value="devanagari">devanagari</option><option value="grantha">grantha</option><option value="latin">latin</option><option value="malayalam">malayalam</option><option value="modi">modi</option><option value="nandinagari">nandinagari</option><option value="newa">newa</option><option value="pala">pala</option><option value="sarada">sarada</option><option value="sinhala">sinhala</option><option value="telugu">telugu</option><option value="tamil">tamil</option><option value="dbucan">uchen</option><option value="dbumed">ume</option></select>
+                <option value="arabic">arabic</option><option value="bengali">bengali</option><option value="bhujimol">bhujimol</option><option value="devanagari">devanagari</option><option value="grantha">grantha</option><option value="latin">latin</option><option value="malayalam">malayalam</option><option value="modi">modi</option><option value="nandinagari">nandinagari</option><option value="newa">newa</option><option value="pala">pala</option><option value="sarada">sarada</option><option value="sinhala">sinhala</option><option value="burmese">burmese</option><option value="telugu">telugu</option><option value="tamil">tamil</option><option value="dbucan">uchen</option><option value="dbumed">ume</option></select>
                 <label>Features</label>
                 <select autocomplete="off" name="typeNote_scriptRef" data-subattr="scriptRef" multiple=""><optgroup label="Tamil" data-way="open"><option value="#tamilPulliNone">no puḷḷi</option><option value="#tamilPulliSporadic">sporadic puḷḷi</option><option value="#tamilPulliRegular">regular puḷḷi</option><option value="#tamilRa">closed kāl/modern ra</option><option value="#tamilPreReform">pre-reform ligatures</option><option value="#tamilMacron">disambiguating macron (-a vocalisation)</option><option value="#tamilOE">long ō/ē (double-curled kompu)</option></optgroup><optgroup label="Bengali" data-way="open"><option value="#bengaliRaBarBelow">ra with bar below</option><option value="#bengaliRaCrossbar">ra with cross-bar</option><option value="#bengaliRa">ra with dot below</option><option value="#bengaliYa">ya with dot below</option></optgroup><optgroup label="Devanāgarī" data-way="open"><option value="#prsthamatra">pṛṣṭhamātrā</option><option value="#vaba">ba not distinguished</option><option value="#sthascha">stha written as scha</option><option value="#jainaNagari">Jaina nāgarī</option></optgroup><optgroup label="Malayalam" data-way="open"><option value="#dotReph">dot reph</option></optgroup><optgroup label="Telugu" data-way="open"><option value="#valapalagilaka">valapalagilaka</option></optgroup></select>
                 <label>Medium</label>
@@ -438,9 +439,9 @@
                 <label>Main language</label>
                 <select autocomplete="off" data-subselect="textLang" data-subattr="mainLang">
                     <option value="" selected="" disabled=""></option>
-                <option value="ara">Arabic</option><option value="bra">Brajbhasa</option><option value="zho">Chinese</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="guj">Gujarati</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pli">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="raj">Rajasthani</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="tam">Tamil</option><option value="tel">Telugu</option><option value="bod">Tibetan</option></select>
+                <option value="ara">Arabic</option><option value="bra">Brajbhasa</option><option value="zho">Chinese</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="guj">Gujarati</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pli">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="raj">Rajasthani</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="mya">Burmese</option><option value="tam">Tamil</option><option value="tel">Telugu</option><option value="bod">Tibetan</option></select>
                 <label>Other languages</label>
-                <select autocomplete="off" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" multiple=""><option value="ara">Arabic</option><option value="bra">Brajbhasa</option><option value="zho">Chinese</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="guj">Gujarati</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pli">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="raj">Rajasthani</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="tam">Tamil</option><option value="tel">Telugu</option><option value="bod">Tibetan</option></select>
+                <select autocomplete="off" name="msItem_otherLangs" data-subselect="textLang" data-subattr="otherLangs" multiple=""><option value="ara">Arabic</option><option value="bra">Brajbhasa</option><option value="zho">Chinese</option><option value="eng">English</option><option value="fra">French</option><option value="deu">German</option><option value="guj">Gujarati</option><option value="hin">Hindi</option><option value="lat">Latin</option><option value="mal">Malayalam</option><option value="mar">Marathi</option><option value="pli">Pali</option><option value="por">Portuguese</option><option value="pra">Prakrit</option><option value="raj">Rajasthani</option><option value="san">Sanskrit</option><option value="sin">Sinhalese</option><option value="mya">Burmese</option><option value="tam">Tamil</option><option value="tel">Telugu</option><option value="bod">Tibetan</option></select>
             </div>
             <div>
                 <label>Manuscript filiation</label>
@@ -600,11 +601,10 @@
 </div><!-- .record-editor -->
 </div><!-- #headereditor -->
 <div id="togglers">
-<div id="recordtoggle" class="toggle" title="hide editor">&gt;</div>
-<div id="rotator" title="rotate">↺</div>
+<div id="editortoggle" class="toggle" title="hide editor">&gt;</div>
 <div id="viewertoggle" class="toggle" title="hide images">&lt;</div>
 </div>
-<div id="viewer"></div>
+<div id="editorviewer"></div>
 
 <form id="openform">
     <div style="font-size: 1.2rem">
@@ -620,7 +620,7 @@
         <div id="lastupdate"></div>
     </div>
 </form>
-<script src="../lib/js/xslt-polyfill.min.js"></script>
+
 <script type="module">
     import { TSTEditor } from './script.mjs';
     TSTEditor.init();
