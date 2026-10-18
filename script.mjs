@@ -28,6 +28,18 @@ const TSTEditor = (function() {
         curImage: 0
     };
 
+  const detectScript = (el, lang) => {
+      const scripts = langscripts.get(lang);
+      if(!scripts) return lang;
+      for(const script of scripts) {
+        const range = new RegExp(scriptranges.get(script).source, 'gu');
+        const scriptchars = [...el.textContent.matchAll(range)];
+        if(scriptchars.length / el.textContent.length > 0.5)
+          return `${lang}-${script}`;
+      }
+      return lang;
+    };
+
     const init = () => {
         lf.length().then(n => {if(n>0) autosaved.fill();});
         document.getElementById('file').addEventListener('change',file.select,false);
@@ -1244,23 +1256,12 @@ const TSTEditor = (function() {
                 const els = [...msItem.children].filter(el => 
                     el.matches('title,author,rubric,incipit,explicit,finalRubric,colophon')
                 );
-                for(const el of els) {
-                  const langscript = (() => {
-                      const scripts = langscripts.get(lang2);
-                      if(!scripts) return lang2;
-                      for(const script of scripts) {
-                        const range = new RegExp(scriptranges.get(script).source, 'gu');
-                        const scriptchars = [...el.textContent.matchAll(range)];
-                        if(scriptchars.length / el.textContent.length > 0.5)
-                          return `${lang2}-${script}`;
-                      }
-                      return lang2;
-                    })();
-                    el.setAttribute('xml:lang',langscript); 
-                }
+                for(const el of els)
+                  el.setAttribute('xml:lang',detectScript(el,lang2));
 
                 const teitexts = par.querySelectorAll(`text[corresp="#${textid}"]`);
-                for(const teitext of teitexts) teitext.setAttribute('xml:lang',lang2);
+                for(const teitext of teitexts)
+                  teitext.setAttribute('xml:lang',detectScript(teitext,lang2));
             }
         },
         selects: {
