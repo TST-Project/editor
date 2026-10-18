@@ -1237,7 +1237,7 @@ const TSTEditor = (function() {
                 const textid = msItem.getAttribute('xml:id');
                 const lang = textlang && textlang.getAttribute('mainLang');
                 if(!lang) continue;
-                
+
                 const langmap = new Map([
                     ['tam','ta'],
                     ['san','sa'],
@@ -1252,7 +1252,11 @@ const TSTEditor = (function() {
                     ['mal','ml'],
                     ['mar','mr'],
                     ['hin','hi'],
-                    ['guj','gu']
+                    ['guj','gu'],
+                    ['sin','si'],
+                    ['mya','my'],
+                    ['tel','te'],
+                    ['kan','kn']
                 ]);
 
                 const lang2 = langmap.get(lang) || lang;
