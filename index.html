@@ -601,10 +601,11 @@
 </div><!-- .record-editor -->
 </div><!-- #headereditor -->
 <div id="togglers">
-<div id="editortoggle" class="toggle" title="hide editor">&gt;</div>
+<div id="recordtoggle" class="toggle" title="hide editor">&gt;</div>
+<div id="rotator" title="rotate">↺</div>
 <div id="viewertoggle" class="toggle" title="hide images">&lt;</div>
 </div>
-<div id="editorviewer"></div>
+<div id="viewer"></div>
 
 <form id="openform">
     <div style="font-size: 1.2rem">
@@ -620,7 +621,7 @@
         <div id="lastupdate"></div>
     </div>
 </form>
-
+<script src="../lib/js/xslt-polyfill.min.js"></script>
 <script type="module">
     import { TSTEditor } from './script.mjs';
     TSTEditor.init();
