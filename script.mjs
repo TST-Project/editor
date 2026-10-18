@@ -5,6 +5,7 @@ import { vanillaSelectBox } from './lib/vanillaSelectBox.mjs';
 import { showSaveFilePicker } from 'https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js';
 import { xml, dom } from './lib/utils.mjs';
 import './togglers.mjs';
+import {iso1to3, langscripts, scriptranges} from '../lib/js/langutils.mjs';
 
 const TSTEditor = (function() {
 
@@ -1238,47 +1239,21 @@ const TSTEditor = (function() {
                 const lang = textlang && textlang.getAttribute('mainLang');
                 if(!lang) continue;
 
-                const langmap = new Map([
-                    ['tam','ta'],
-                    ['san','sa'],
-                    ['fra','fr'],
-                    ['eng','en'],
-                    ['ara','ar'],
-                    ['deu','de'],
-                    ['pli','pi'],
-                    ['por','pt'],
-                    ['lat','la'],
-                    ['bod','bo'],
-                    ['mal','ml'],
-                    ['mar','mr'],
-                    ['hin','hi'],
-                    ['guj','gu'],
-                    ['sin','si'],
-                    ['mya','my'],
-                    ['tel','te'],
-                    ['kan','kn']
-                ]);
-
-                const lang2 = langmap.get(lang) || lang;
+                const lang2 = iso1to3.get(lang) || lang;
 
                 const els = [...msItem.children].filter(el => 
                     el.matches('title,author,rubric,incipit,explicit,finalRubric,colophon')
                 );
                 for(const el of els) {
-                    const langscript = (() => {
-                        if(lang2 === 'ta') {
-                            const tamilchars = [...el.textContent.matchAll(/[\u0B80-\u0BFF]/g)];
-                            if(tamilchars.length / el.textContent.length > 0.5)
-                                return 'ta-Taml';
-                            //else return 'ta';
-                        }
-                        else if(lang2 === 'hi' || lang2 === 'mr') {
-                            const devachars = [...el.textContent.matchAll(/[\u0900-\u097F]/g)];
-                            if(devachars.length / el.textContent.length > 0.5)
-                                return `${lang2}-Deva`;
-                            //else return lang2;
-                        }
-                        return lang2;
+                  const langscript = (() => {
+                      const scripts = langscripts.get(lang2);
+                      for(const script of scripts) {
+                        const range = new RegExp(scriptranges.get(script).source, 'gu');
+                        const scriptchars = [...el.textContent.matchAll(range)];
+                        if(scriptchars.length / el.textContent.length > 0.5)
+                          return `${lang2}-${script}`;
+                      }
+                      return lang2;
                     })();
                     el.setAttribute('xml:lang',langscript); 
                 }
@@ -1287,7 +1262,6 @@ const TSTEditor = (function() {
                 for(const teitext of teitexts) teitext.setAttribute('xml:lang',lang2);
             }
         },
-
         selects: {
             make(el) {
                 el.id = 'box' + Math.random().toString(36).substr(2,9);
