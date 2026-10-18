@@ -1247,6 +1247,7 @@ const TSTEditor = (function() {
                 for(const el of els) {
                   const langscript = (() => {
                       const scripts = langscripts.get(lang2);
+                      if(!scripts) return lang2;
                       for(const script of scripts) {
                         const range = new RegExp(scriptranges.get(script).source, 'gu');
                         const scriptchars = [...el.textContent.matchAll(range)];
