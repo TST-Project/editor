@@ -657,7 +657,6 @@ const TSTEditor = (function() {
 
                 const fields = par.querySelectorAll('[data-select]');
                 const toplevel = state.xmlDoc.querySelector(state.toplevel);
-                
                 for(const field of fields) {
                     if(field.classList.contains('multiple')) {
                         editor.fill.multiField(field,toplevel,unsanitize);
@@ -708,6 +707,7 @@ const TSTEditor = (function() {
             simpleField(field,toplevel,unsanitize) {
                 const tounsanitize = unsanitize || field.tagName !== 'TEXTAREA';
                 const selector = field.dataset.select || field.dataset.subselect;
+    
                 const xmlEl = (selector && selector !== ':scope') ?
                     toplevel.querySelector(selector) :
                     toplevel;
